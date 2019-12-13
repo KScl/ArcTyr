@@ -1,0 +1,17 @@
+# Ignore all regular data directories.
+/data*/
+
+# Ignore ArcTyr data, temporarily.
+/arcdata/
+
+# Ignore local shell scripts.
+*.sh
+!lower-script.sh
+
+# Ignore binaries.
+opentyrian
+*.exe
+/obj/
+
+# Ignore other local work in progress things.
+/scraps/
