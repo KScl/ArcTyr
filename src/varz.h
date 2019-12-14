@@ -306,7 +306,6 @@ static const int hud_sidekickX[2] = {   1, 293 };
 static const int hud_sidekickY[2] = {  69,  88 };
 
 void JE_getShipInfo( void );
-JE_word JE_SGr( JE_word ship, Sprite2_array **ptr );
 
 void JE_updateOption( Player *this_player, uint i );
 void JE_updateAllOptions( void );

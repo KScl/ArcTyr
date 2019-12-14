@@ -19,7 +19,6 @@
 
 #include "arcade.h"
 #include "config.h"
-#include "editship.h"
 #include "episodes.h"
 #include "fonthand.h"
 #include "lds_play.h"
@@ -224,46 +223,20 @@ JE_boolean pacifistJokeActive[2];
 
 void JE_getShipInfo( void )
 {
-	JE_boolean extraShip, extraShip2;
-
 	shipGrPtr = &shapes9;
 	shipGr2ptr = &shapes9;
 
-	extraShip = player[0].items.ship > 90;
-	if (extraShip)
-	{
-		JE_byte base = (player[0].items.ship - 91) * 15;
-		shipGr = JE_SGr(player[0].items.ship - 90, &shipGrPtr);
-		player[0].armor = extraShips[base + 7];
-	}
-	else
-	{
-		shipGr = ships[player[0].items.ship].shipgraphic;
-		player[0].armor = ships[player[0].items.ship].dmg;
-	}
+	shipGr = ships[player[0].items.ship].shipgraphic;
+	player[0].armor = ships[player[0].items.ship].dmg;
 
-	extraShip2 = player[1].items.ship > 90;
-	if (extraShip2)
-	{
-		JE_byte base2 = (player[1].items.ship - 91) * 15;
-		shipGr2 = JE_SGr(player[1].items.ship - 90, &shipGr2ptr);
-		player[1].armor = extraShips[base2 + 7]; /* bug? */
-	}
-	else
-	{
-		shipGr2 = ships[player[1].items.ship].shipgraphic;
-		player[1].armor = ships[player[1].items.ship].dmg;
-	}
+	shipGr2 = ships[player[1].items.ship].shipgraphic;
+	player[1].armor = ships[player[1].items.ship].dmg;
 
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].initial_armor = player[i].armor;
 
-
-		uint temp = ((i == 0 && extraShip) ||
-		             (i == 1 && extraShip2)) ? 2 : ships[player[i].items.ship].ani;
-
-		if (temp == 0)
+		if (ships[player[i].items.ship].ani == 0)
 		{
 			player[i].shot_hit_area_x = 12;
 			player[i].shot_hit_area_y = 10;
@@ -274,17 +247,6 @@ void JE_getShipInfo( void )
 			player[i].shot_hit_area_y = 14;
 		}
 	}
-}
-
-JE_word JE_SGr( JE_word ship, Sprite2_array **ptr )
-{
-	const JE_word GR[15] /* [1..15] */ = {233, 157, 195, 271, 81, 0, 119, 5, 43, 81, 119, 157, 195, 233, 271};
-
-	JE_word tempW = extraShips[(ship - 1) * 15];
-	if (tempW > 7)
-		*ptr = extraShapes;
-
-	return GR[tempW-1];
 }
 
 void JE_updateOption( Player *this_player, uint i )

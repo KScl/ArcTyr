@@ -14,7 +14,6 @@
 #include "arcserv.h"
 #include "config.h"
 #include "devextra.h"
-#include "editship.h"
 #include "episodes.h"
 #include "file.h"
 #include "font.h"
@@ -360,8 +359,6 @@ int main( int argc, char *argv[] )
 		ARC_IdentifyPrint("");
 		ARC_IdentifyPrint("Demo recording active.");
 	}
-
-	JE_loadExtraShapes();  /*Editship*/
 
 	JE_loadHelpText();
 	/*debuginfo("Help text complete");*/

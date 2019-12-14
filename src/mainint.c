@@ -20,7 +20,6 @@
 #include "arcade.h"
 #include "backgrnd.h"
 #include "config.h"
-#include "editship.h"
 #include "episodes.h"
 #include "file.h"
 #include "fonthand.h"
@@ -1382,85 +1381,6 @@ void JE_mainKeyboardInput( void )
 	JE_gammaCheck();
 
 	/* { Network Request Commands } */
-
-	/*
-	if (!isNetworkGame)
-	{
-		// { Edited Ships } for Player 1
-		if (extraAvail && keysactive[SDLK_TAB] && !isNetworkGame && !superTyrian)
-		{
-			for (x = SDLK_0; x <= SDLK_9; x++)
-			{
-				if (keysactive[x])
-				{
-					int z = x == SDLK_0 ? 10 : x - SDLK_0;
-					player[0].items.ship = 90 + z; // Ships
-					z = (z - 1) * 15;
-					player[0].items.weapon[FRONT_WEAPON].id = extraShips[z + 1];
-					player[0].items.weapon[REAR_WEAPON].id = extraShips[z + 2];
-					player[0].items.special = extraShips[z + 3];
-					player[0].items.sidekick[LEFT_SIDEKICK] = extraShips[z + 4];
-					player[0].items.sidekick[RIGHT_SIDEKICK] = extraShips[z + 5];
-					player[0].items.generator = extraShips[z + 6];
-					// Armor
-					player[0].items.shield = extraShips[z + 8];
-					memset(player[0].shot_multi_pos, 0, sizeof(player[0].shot_multi_pos));
-
-					tempW = player[0].armor;
-					JE_getShipInfo();
-					if (player[0].armor > tempW && editShip1)
-						player[0].armor = tempW;
-					else
-						editShip1 = true;
-
-					JE_drawArmor();
-					JE_drawShield();
-					JE_updateOption(&player[0], 0);
-					JE_updateOption(&player[0], 1);
-
-					keysactive[x] = false;
-				}
-			}
-		}
-
-		// for Player 2
-		if (extraAvail && keysactive[SDLK_CAPSLOCK] && !isNetworkGame && !superTyrian)
-		{
-			for (x = SDLK_0; x <= SDLK_9; x++)
-			{
-				if (keysactive[x])
-				{
-					int z = x == SDLK_0 ? 10 : x - SDLK_0;
-					player[1].items.ship = 90 + z;
-					z = (z - 1) * 15;
-					player[1].items.weapon[FRONT_WEAPON].id = extraShips[z + 1];
-					player[1].items.weapon[REAR_WEAPON].id = extraShips[z + 2];
-					player[1].items.special = extraShips[z + 3];
-					player[1].items.sidekick[LEFT_SIDEKICK] = extraShips[z + 4];
-					player[1].items.sidekick[RIGHT_SIDEKICK] = extraShips[z + 5];
-					player[1].items.generator = extraShips[z + 6];
-					// Armor
-					player[1].items.shield = extraShips[z + 8];
-					memset(player[1].shot_multi_pos, 0, sizeof(player[1].shot_multi_pos));
-
-					tempW = player[1].armor;
-					JE_getShipInfo();
-					if (player[1].armor > tempW && editShip2)
-						player[1].armor = tempW;
-					else
-						editShip2 = true;
-
-					JE_drawArmor();
-					JE_drawShield();
-					JE_updateOption(&player[1], 0);
-					JE_updateOption(&player[1], 1);
-
-					keysactive[x] = false;
-				}
-			}
-		}
-	}
-	*/
 
 	// Debug / Cheating
 	if (debug)
