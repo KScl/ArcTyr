@@ -18,7 +18,6 @@
  */
 #include "file.h"
 #include "input.h"
-#include "keyboard.h"
 #include "nortvars.h"
 #include "opentyr.h"
 #include "vga256d.h"
@@ -31,12 +30,8 @@ JE_boolean inputDetected;
 
 JE_boolean JE_anyButton( void )
 {
+	STUB();
 	return I_anyButton();
-/*
-	poll_joysticks();
-	service_SDL_events(true);
-	return newkey || mousedown || joydown;
-*/
 }
 
 void JE_dBar3( SDL_Surface *surface, JE_integer x,  JE_integer y,  JE_integer num,  JE_integer col )

@@ -16,7 +16,6 @@
 #include "../fonthand.h"
 #include "../input.h"
 #include "../jukebox.h"
-#include "../keyboard.h"
 #include "../nortsong.h"
 #include "../nortvars.h"
 #include "../opentyr.h"

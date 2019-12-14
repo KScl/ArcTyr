@@ -8,8 +8,6 @@ else
     TYRIAN_DIR = $(gamesdir)/tyrian
 endif
 
-WITH_NETWORK := true
-
 ################################################################################
 
 # see https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
@@ -48,10 +46,6 @@ DEPS := $(SRCS:src/%.c=obj/%.d)
 
 ###
 
-ifeq ($(WITH_NETWORK), true)
-    EXTRA_CPPFLAGS += -DWITH_NETWORK
-endif
-
 HG_REV := $(shell hg id -ib 2>/dev/null && \
                   touch src/hg_revision.h)
 ifneq ($(HG_REV), )
@@ -71,9 +65,6 @@ LDLIBS :=
 SDL_CPPFLAGS := $(shell $(PKG_CONFIG) sdl --cflags)
 SDL_LDFLAGS := $(shell $(PKG_CONFIG) sdl --libs-only-L --libs-only-other)
 SDL_LDLIBS := $(shell $(PKG_CONFIG) sdl --libs-only-l)
-ifeq ($(WITH_NETWORK), true)
-    SDL_LDLIBS += -lSDL_net
-endif
 
 ALL_CPPFLAGS = -DTARGET_$(PLATFORM) \
                -DTYRIAN_DIR='"$(TYRIAN_DIR)"' \

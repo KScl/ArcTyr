@@ -19,7 +19,6 @@
 #include "font.h"
 #include "input.h"
 #include "jukebox.h"
-#include "keyboard.h"
 #include "lds_play.h"
 #include "loudness.h"
 #include "mtrand.h"

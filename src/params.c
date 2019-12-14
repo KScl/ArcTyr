@@ -20,7 +20,6 @@
 #include "file.h"
 #include "input.h"
 #include "loudness.h"
-#include "network.h"
 #include "opentyr.h"
 #include "params.h"
 #include "xmas.h"
@@ -52,10 +51,7 @@ void JE_paramCheck( int argc, char *argv[] )
 		{ 't', 't', "data",              true },
 		
 		{ 'n', 'n', "net",               true },
-		{ 256, 0,   "net-player-name",   true }, // TODO: no short codes because there should
-		{ 257, 0,   "net-player-number", true }, //       be a menu for entering these in the future
-		{ 'p', 'p', "net-port",          true },
-		{ 'd', 'd', "net-delay",         true },
+		{ 'N', 'N', "net-server",        true },
 		
 		{ 'X', 'X', "xmas",              false },
 		{ 'c', 'c', "constant",          false },
@@ -118,73 +114,11 @@ void JE_paramCheck( int argc, char *argv[] )
 			break;
 			
 		case 'n':
-			isNetworkGame = true;
-			
-			intptr_t temp = (intptr_t)strchr(option.arg, ':');
-			if (temp)
-			{
-				temp -= (intptr_t)option.arg;
-				
-				int temp_port = atoi(&option.arg[temp + 1]);
-				if (temp_port > 0 && temp_port < 49152)
-					network_opponent_port = temp_port;
-				else
-				{
-					fprintf(stderr, "%s: error: invalid network port number\n", argv[0]);
-					exit(EXIT_FAILURE);
-				}
-				
-				network_opponent_host = malloc(temp + 1);
-				SDL_strlcpy(network_opponent_host, option.arg, temp + 1);
-			}
-			else
-			{
-				network_opponent_host = malloc(strlen(option.arg) + 1);
-				strcpy(network_opponent_host, option.arg);
-			}
+		case 'N':
+			fprintf(stderr, "%s: error: netplay currently unsupported\n", argv[0]);
+			exit(EXIT_FAILURE);
 			break;
 			
-		case 256: // --net-player-name
-			network_player_name = malloc(strlen(option.arg) + 1);
-			strcpy(network_player_name, option.arg);
-			break;
-			
-		case 257: // --net-player-number
-		{
-			int temp = atoi(option.arg);
-			if (temp >= 1 && temp <= 2)
-				thisPlayerNum = temp;
-			else
-			{
-				fprintf(stderr, "%s: error: invalid network player number\n", argv[0]);
-				exit(EXIT_FAILURE);
-			}
-			break;
-		}
-		case 'p':
-		{
-			int temp = atoi(option.arg);
-			if (temp > 0 && temp < 49152)
-				network_player_port = temp;
-			else
-			{
-				fprintf(stderr, "%s: error: invalid network port number\n", argv[0]);
-				exit(EXIT_FAILURE);
-			}
-			break;
-		}
-		case 'd':
-		{
-			int temp;
-			if (sscanf(option.arg, "%d", &temp) == 1)
-				network_delay = 1 + temp;
-			else
-			{
-				fprintf(stderr, "%s: error: invalid network delay value\n", argv[0]);
-				exit(EXIT_FAILURE);
-			}
-			break;
-		}
 		case 'X':
 			xmas = true;
 			break;

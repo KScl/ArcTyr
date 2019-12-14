@@ -18,8 +18,7 @@
  */
 #include "animlib.h"
 #include "file.h"
-#include "keyboard.h"
-#include "network.h"
+#include "input.h"
 #include "nortsong.h"
 #include "palette.h"
 #include "sizebuf.h"
@@ -208,14 +207,10 @@ void JE_playAnim( const char *animfile, JE_byte startingframe, JE_byte speed )
 
 
 		/* Return early if user presses a key */
-		service_SDL_events(true);
-		if (newkey)
-		{
+		if (I_anyButton())
 			break;
-		}
 
 		/* Wait until we need the next frame */
-		NETWORK_KEEP_ALIVE();
 		wait_delay();
     }
 

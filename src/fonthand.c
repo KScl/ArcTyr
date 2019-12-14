@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include "fonthand.h"
-#include "network.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
@@ -331,8 +330,6 @@ void JE_drawTextGlow( SDL_Surface * screen )
 				frameCountMax = 0;
 			}
 
-			NETWORK_KEEP_ALIVE();
-
 			JE_showVGA();
 
 			wait_delay();
@@ -349,8 +346,6 @@ void JE_drawTextGlow( SDL_Surface * screen )
 		{
 			frameCountMax = 0;
 		}
-
-		NETWORK_KEEP_ALIVE();
 
 		JE_showVGA();
 

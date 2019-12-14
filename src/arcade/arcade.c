@@ -14,7 +14,6 @@
 #include "../config.h"
 #include "../fonthand.h"
 #include "../input.h"
-#include "../keyboard.h"
 #include "../mainint.h"
 #include "../nortsong.h"
 #include "../opentyr.h"

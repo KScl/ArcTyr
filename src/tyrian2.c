@@ -25,7 +25,6 @@
 #include "font.h"
 #include "fonthand.h"
 #include "input.h"
-#include "keyboard.h"
 #include "lds_play.h"
 #include "loudness.h"
 #include "lvllib.h"
@@ -33,7 +32,6 @@
 #include "mainint.h"
 #include "mouse.h"
 #include "mtrand.h"
-#include "network.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
@@ -781,7 +779,7 @@ start_level:
 
 		fade_black(10);
 
-		wait_noinput(true, true, true);
+		//wait_noinput(true, true, true);
 	}
 
 	difficultyLevel = oldDifficultyLevel;   /*Return difficulty to normal*/
@@ -934,8 +932,6 @@ start_level_first:
 	globalFlare = 0;
 	globalFlareFilter = -99;
 
-	newkey = newmouse = false;
-
 	// Reset level adjusted rank
 	ARC_RankLevelAdjusts(0);
 
@@ -1028,16 +1024,6 @@ start_level_first:
 
 	/* --- MAIN LOOP --- */
 
-	newkey = false;
-
-#ifdef WITH_NETWORK
-	if (isNetworkGame)
-	{
-		JE_clearSpecialRequests();
-		mt_srand(32402394);
-	}
-#endif
-
 	initialize_starfield();
 
 	JE_setNewGameSpeed();
@@ -1069,19 +1055,12 @@ start_level_first:
 
 	init_saweapon_bag();
 
-	yourInGameMenuRequest = false;
-
 	constantLastX = -1;
 
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].exploding_ticks = 0;
 		pacifistJokeActive[i] = (player[i].player_status == STATUS_INGAME);
-	}
-
-	if (isNetworkGame)
-	{
-		JE_loadItemDat();
 	}
 
 	memset(enemyAvail,       1, sizeof(enemyAvail));
@@ -1219,28 +1198,15 @@ level_loop:
 
 	//tempScreenSeg = game_screen; /* side-effect of game_screen */
 
-	if (isNetworkGame)
-	{
-		smoothies[9-1] = false;
-		smoothies[6-1] = false;
-	} else {
-		starShowVGASpecialCode = smoothies[9-1] + (smoothies[6-1] << 1);
-	}
+	starShowVGASpecialCode = smoothies[9-1] + (smoothies[6-1] << 1);
 
 	/*Background Wrapping*/
 	if (mapYPos <= BKwrap1)
-	{
 		mapYPos = BKwrap1to;
-	}
 	if (mapY2Pos <= BKwrap2)
-	{
 		mapY2Pos = BKwrap2to;
-	}
 	if (mapY3Pos <= BKwrap3)
-	{
 		mapY3Pos = BKwrap3to;
-	}
-
 
 	allPlayersGone = all_players_dead() && (player[0].exploding_ticks == 0 && player[1].exploding_ticks == 0);
 
@@ -1354,10 +1320,6 @@ level_loop:
 	/*---------------------------EVENTS-------------------------*/
 	while (eventRec[eventLoc-1].eventtime <= curLoc && eventLoc <= maxEvent)
 		JE_eventSystem();
-
-	//if (isNetworkGame && reallyEndLevel)
-	//	goto start_level;
-
 
 	/* SMOOTHIES! */
 	JE_checkSmoothies();
@@ -2224,9 +2186,10 @@ draw_player_shot_loop_end:
 
 	/*-------      DEbug      ---------*/
 	debugTime = SDL_GetTicks();
-	tempW = lastmouse_but;
-	tempX = mouse_x;
-	tempY = mouse_y;
+	//tempW = lastmouse_but;
+	//tempX = mouse_x;
+	//tempY = mouse_y;
+	tempW = tempX = tempY = -1;
 
 	if (debug)
 	{
@@ -2297,107 +2260,22 @@ draw_player_shot_loop_end:
 	{
 		skipStarShowVGA = false;
 		JE_mainKeyboardInput();
-		newkey = false;
 		if (skipStarShowVGA)
 			goto level_loop;
 
 		if (pause_pressed)
 		{
 			pause_pressed = false;
-
-			if (isNetworkGame)
-				pauseRequest = true;
-			else
-				JE_pauseGame();
+			JE_pauseGame();
 		}
 
 		if (ingamemenu_pressed)
 		{
 			ingamemenu_pressed = false;
-
-			if (isNetworkGame)
-			{
-				inGameMenuRequest = true;
-			}
-			else
-			{
-				yourInGameMenuRequest = true;
-				JE_doInGameSetup();
-				skipStarShowVGA = true;
-			}
+			JE_doInGameSetup();
+			skipStarShowVGA = true;
 		}
 	}
-
-	/*Network Update*/
-#ifdef WITH_NETWORK
-	if (isNetworkGame)
-	{
-		if (!reallyEndLevel)
-		{
-			Uint16 requests = (pauseRequest == true) |
-			                  (inGameMenuRequest == true) << 1 |
-			                  (skipLevelRequest == true) << 2 |
-			                  (nortShipRequest == true) << 3;
-			SDLNet_Write16(requests,        &packet_state_out[0]->data[14]);
-
-			SDLNet_Write16(difficultyLevel, &packet_state_out[0]->data[16]);
-			SDLNet_Write16(player[0].x,     &packet_state_out[0]->data[18]);
-			SDLNet_Write16(player[1].x,     &packet_state_out[0]->data[20]);
-			SDLNet_Write16(player[0].y,     &packet_state_out[0]->data[22]);
-			SDLNet_Write16(player[1].y,     &packet_state_out[0]->data[24]);
-			SDLNet_Write16(curLoc,          &packet_state_out[0]->data[26]);
-
-			network_state_send();
-
-			if (network_state_update())
-			{
-				assert(SDLNet_Read16(&packet_state_in[0]->data[26]) == SDLNet_Read16(&packet_state_out[network_delay]->data[26]));
-
-				requests = SDLNet_Read16(&packet_state_in[0]->data[14]) ^ SDLNet_Read16(&packet_state_out[network_delay]->data[14]);
-				if (requests & 1)
-				{
-					JE_pauseGame();
-				}
-				if (requests & 2)
-				{
-					yourInGameMenuRequest = SDLNet_Read16(&packet_state_out[network_delay]->data[14]) & 2;
-					JE_doInGameSetup();
-					yourInGameMenuRequest = false;
-					if (haltGame)
-						reallyEndLevel = true;
-				}
-				if (requests & 4)
-				{
-					levelTimer = true;
-					levelTimerCountdown = 0;
-					endLevel = true;
-					levelEnd = 40;
-				}
-				if (requests & 8) // nortship
-				{
-					player[0].items.ship = 12;                     // Nort Ship
-					player[0].items.special = 13;                  // Astral Zone
-					player[0].items.weapon[FRONT_WEAPON].id = 36;  // NortShip Super Pulse
-					player[0].items.weapon[REAR_WEAPON].id = 37;   // NortShip Spreader
-					shipGr = 1;
-				}
-
-				for (int i = 0; i < 2; i++)
-				{
-					if (SDLNet_Read16(&packet_state_in[0]->data[18 + i * 2]) != SDLNet_Read16(&packet_state_out[network_delay]->data[18 + i * 2]) || SDLNet_Read16(&packet_state_in[0]->data[20 + i * 2]) != SDLNet_Read16(&packet_state_out[network_delay]->data[20 + i * 2]))
-					{
-						char temp[64];
-						sprintf(temp, "Player %d is unsynchronized!", i + 1);
-
-						JE_textShade(game_screen, 40, 110 + i * 10, temp, 9, 2, FULL_SHADE);
-					}
-				}
-			}
-		}
-
-		JE_clearSpecialRequests();
-	}
-#endif
 
 	/** Test **/
 	JE_drawSP();
@@ -2520,7 +2398,6 @@ void JE_loadMap( void )
 new_game:
 	useLastBank = false;
 	extraGame   = false;
-	haltGame = false;
 
 	gameLoaded = false;
 
@@ -2551,8 +2428,6 @@ new_game:
 			}
 
 			printf("on section number %d\n", x);
-
-			ESCPressed = false;
 
 			do
 			{
@@ -2750,7 +2625,6 @@ new_game:
 						break;
 
 					case 'Q':
-						ESCPressed = false;
 						temp = secretHint + (mt_rand() % 3) * 3;
 
 						JE_byte plrs = PL_WhosInGame();
@@ -2820,8 +2694,6 @@ new_game:
 							{
 								do
 								{
-									NETWORK_KEEP_ALIVE();
-
 									SDL_Delay(16);
 								} while (!JE_anyButton());
 							}
@@ -2865,11 +2737,11 @@ new_game:
 							JE_loadPic(VGAScreen, tempX, false);
 							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
 
-							service_SDL_events(true);
+							I_checkButtons();
 
 							for (int z = 0; z <= 199; z++)
 							{
-								if (!newkey)
+								if (true /* !newkey */)
 								{
 									vga = VGAScreen->pixels;
 									vga2 = VGAScreen2->pixels;
@@ -2893,12 +2765,6 @@ new_game:
 									}
 
 									JE_showVGA();
-
-									if (isNetworkGame)
-									{
-										/* TODO: NETWORK */
-									}
-
 									service_wait_delay();
 								}
 							}
@@ -2918,10 +2784,10 @@ new_game:
 							JE_loadPic(VGAScreen, tempX, false);
 							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
 
-							service_SDL_events(true);
+							I_checkButtons();
 							for (int z = 0; z <= 199; z++)
 							{
-								if (!newkey)
+								if (true /* !newkey */)
 								{
 									vga = VGAScreen->pixels;
 									vga2 = VGAScreen2->pixels;
@@ -2945,12 +2811,6 @@ new_game:
 									}
 
 									JE_showVGA();
-
-									if (isNetworkGame)
-									{
-										/* TODO: NETWORK */
-									}
-
 									service_wait_delay();
 								}
 							}
@@ -2970,11 +2830,11 @@ new_game:
 							JE_loadPic(VGAScreen, tempX, false);
 							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
 
-							service_SDL_events(true);
+							I_checkButtons();
 
 							for (int z = 0; z <= 318; z++)
 							{
-								if (!newkey)
+								if (true /* !newkey */)
 								{
 									vga = VGAScreen->pixels;
 									vga2 = VGAScreen2->pixels;
@@ -2993,12 +2853,6 @@ new_game:
 									}
 
 									JE_showVGA();
-
-									if (isNetworkGame)
-									{
-										/* TODO: NETWORK */
-									}
-
 									service_wait_delay();
 								}
 							}
@@ -3008,10 +2862,7 @@ new_game:
 						break;
 
 					case 'C':
-						if (!isNetworkGame)
-						{
-							fade_black(10);
-						}
+						fade_black(10);
 						JE_clr256(VGAScreen);
 						JE_showVGA();
 						memcpy(colors, palettes[7], sizeof(colors));
@@ -3019,17 +2870,11 @@ new_game:
 						break;
 
 					case 'B':
-						if (!isNetworkGame)
-						{
-							fade_black(10);
-						}
+						fade_black(10);
 						break;
 					case 'F':
-						if (!isNetworkGame)
-						{
-							fade_white(100);
-							fade_black(30);
-						}
+						fade_white(100);
+						fade_black(30);
 						JE_clr256(VGAScreen);
 						JE_showVGA();
 						break;
@@ -3037,7 +2882,7 @@ new_game:
 					case 'W':
 						if (!constantPlay)
 						{
-							if (!ESCPressed)
+							if (true /* !ESCPressed */)
 							{
 								JE_wipeKey();
 								warningCol = 14 * 16 + 5;
@@ -3063,7 +2908,6 @@ new_game:
 								while (!(s[0] == '#'));
 
 								JE_displayText();
-								newkey = false;
 							}
 						}
 						break;
@@ -3084,14 +2928,10 @@ new_game:
 						break;
 
 					case 'S':
-						if (isNetworkGame)
-						{
-							JE_readTextSync();
-						}
+						/* no-op: net only */
 						break;
 
 					case 'n':
-						ESCPressed = false;
 						break;
 
 					case 'M':
@@ -3102,7 +2942,6 @@ new_game:
 				}
 
 			} while (!(loadLevelOk || jumpSection));
-
 
 			fclose(ep_f);
 
@@ -3355,14 +3194,9 @@ void JE_displayText( void )
 	}
 	for (temp = 0; temp < levelWarningLines; temp++)
 	{
-		if (!ESCPressed)
+		if (true /* !ESCPressed */)
 		{
 			JE_outCharGlow(10, tempY, levelWarningText[temp]);
-
-			if (haltGame)
-			{
-				JE_tyrianHalt(5);
-			}
 
 			tempY += 10;
 		}
@@ -3392,11 +3226,9 @@ void JE_displayText( void )
 
 		setjasondelay(1);
 
-		NETWORK_KEEP_ALIVE();
-
 		wait_delay();
 
-	} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1) || ESCPressed));
+	} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1)));
 	levelWarningDisplay = false;
 }
 
@@ -4979,8 +4811,7 @@ void JE_whoa( unsigned int timer )
 	memset(TempScreen1, 0, screenSize);
 	memcpy(TempScreen2, VGAScreenSeg->pixels, VGAScreenSeg->h * VGAScreenSeg->pitch);
 
-
-	service_SDL_events(true);
+	I_checkButtons();
 
 	// timer = 300; /* About 300 rounds is enough to make the screen mostly black */
 

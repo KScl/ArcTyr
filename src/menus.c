@@ -22,7 +22,6 @@
 #include "file.h"
 #include "font.h"
 #include "fonthand.h"
-#include "keyboard.h"
 #include "input.h"
 #include "mainint.h"
 #include "menus.h"
@@ -348,7 +347,6 @@ void select_episode( void )
 		wait_delay();
 
 		I_checkButtons();
-		//service_SDL_events(true);
 
 		// Timer expired?
 		if (!nTimer)

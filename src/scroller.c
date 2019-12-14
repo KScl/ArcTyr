@@ -18,7 +18,6 @@
  */
 #include "font.h"
 #include "jukebox.h"
-#include "keyboard.h"
 #include "loudness.h"
 #include "mtrand.h"
 #include "nortsong.h"
@@ -140,7 +139,7 @@ void scroller_sine( const struct about_text_type text[] )
 
 	fade_black(10);
 
-	wait_noinput(true, true, true);
+	//wait_noinput(true, true, true);
 
 	play_song(40); // BEER
 

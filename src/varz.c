@@ -26,7 +26,6 @@
 #include "mainint.h"
 #include "mouse.h"
 #include "mtrand.h"
-#include "network.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"

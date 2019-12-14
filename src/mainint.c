@@ -26,14 +26,12 @@
 #include "helptext.h"
 #include "helptext.h"
 #include "input.h"
-#include "keyboard.h"
 #include "lds_play.h"
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
 #include "mouse.h"
 #include "mtrand.h"
-#include "network.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
@@ -197,11 +195,9 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 
 		for (loc = 0; (unsigned)loc < strlen(s) + 28; loc++)
 		{
-			if (!ESCPressed)
+			if (true /* !ESCPressed */)
 			{
 				setjasondelay(frameCountMax);
-
-				NETWORK_KEEP_ALIVE();
 
 				int sprite_id = -1;
 
@@ -234,7 +230,7 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 
 					SDL_Delay(16);
 				}
-				while (!(delaycount() == 0 || ESCPressed));
+				while (!(delaycount() == 0));
 
 				JE_showVGA();
 			}
@@ -353,119 +349,12 @@ JE_boolean JE_gammaCheck( void )
 
 void JE_doInGameSetup( void )
 {
-	haltGame = false;
-
-#ifdef WITH_NETWORK
-	if (isNetworkGame)
+	if (JE_inGameSetup())
 	{
-		network_prepare(PACKET_GAME_MENU);
-		network_send(4);  // PACKET_GAME_MENU
-
-		while (true)
-		{
-			service_SDL_events(false);
-
-			if (packet_in[0] && SDLNet_Read16(&packet_in[0]->data[0]) == PACKET_GAME_MENU)
-			{
-				network_update();
-				break;
-			}
-
-			network_update();
-			network_check();
-
-			SDL_Delay(16);
-		}
+		reallyEndLevel = true;
+		playerEndLevel = true;
 	}
-#endif
-
-	if (yourInGameMenuRequest)
-	{
-		if (JE_inGameSetup())
-		{
-			reallyEndLevel = true;
-			playerEndLevel = true;
-		}
-		quitRequested = false;
-
-		keysactive[SDLK_ESCAPE] = false;
-
-#ifdef WITH_NETWORK
-		if (isNetworkGame)
-		{
-			if (!playerEndLevel)
-			{
-				network_prepare(PACKET_WAITING);
-				network_send(4);  // PACKET_WAITING
-			} else {
-				network_prepare(PACKET_GAME_QUIT);
-				network_send(4);  // PACKET_GAMEQUIT
-			}
-		}
-#endif
-	}
-
-#ifdef WITH_NETWORK
-	if (isNetworkGame)
-	{
-		SDL_Surface *temp_surface = VGAScreen;
-		VGAScreen = VGAScreenSeg; /* side-effect of game_screen */
-
-		if (!yourInGameMenuRequest)
-		{
-			JE_barShade(VGAScreen, 3, 60, 257, 80); /*Help Box*/
-			JE_barShade(VGAScreen, 5, 62, 255, 78);
-			JE_dString(VGAScreen, 10, 65, "Other player in options menu.", SMALL_FONT_SHAPES);
-			JE_showVGA();
-
-			while (true)
-			{
-				service_SDL_events(false);
-				JE_showVGA();
-
-				if (packet_in[0])
-				{
-					if (SDLNet_Read16(&packet_in[0]->data[0]) == PACKET_WAITING)
-					{
-						network_check();
-						break;
-					} else if (SDLNet_Read16(&packet_in[0]->data[0]) == PACKET_GAME_QUIT) {
-						reallyEndLevel = true;
-						playerEndLevel = true;
-
-						network_check();
-						break;
-					}
-				}
-
-				network_update();
-				network_check();
-
-				SDL_Delay(16);
-			}
-		} else {
-			/*
-			JE_barShade(3, 160, 257, 180); /-*Help Box*-/
-			JE_barShade(5, 162, 255, 178);
-			tempScreenSeg = VGAScreen;
-			JE_dString(VGAScreen, 10, 165, "Waiting for other player.", SMALL_FONT_SHAPES);
-			JE_showVGA();
-			*/
-		}
-
-		while (!network_is_sync())
-		{
-			service_SDL_events(false);
-
-			network_check();
-			SDL_Delay(16);
-		}
-
-		VGAScreen = temp_surface; /* side-effect of game_screen */
-	}
-#endif
-
-	yourInGameMenuRequest = false;
+	quitRequested = false;
 
 	//skipStarShowVGA = true;
 }
@@ -517,7 +406,7 @@ JE_boolean JE_inGameSetup( void )
 		if (first)
 		{
 			first = false;
-			wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
+			//wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
 		}
 
 		tempW = 0;
@@ -548,15 +437,7 @@ JE_boolean JE_inGameSetup( void )
 						returnvalue = true;
 						quit = true;
 						if (constantPlay)
-						{
 							JE_tyrianHalt(0);
-						}
-
-						if (isNetworkGame)
-						{ /*Tell other computer to exit*/
-							haltGame = true;
-							playerEndLevel = true;
-						}
 						break;
 				}
 				break;
@@ -655,7 +536,7 @@ JE_boolean JE_inGameSetup( void )
 //				JE_playSampleNum(S_SPRING);
 //				break;
 
-	} while (!(quit || haltGame));
+	} while (!quit);
 
 	VGAScreen = temp_surface; /* side-effect of game_screen */
 
@@ -987,8 +868,6 @@ void JE_playCredits( void )
 			play_song(9);
 		}
 		
-		NETWORK_KEEP_ALIVE();
-
 		// Credits runs at 70fps; only handle input half the time
 		if (!(ticks & 1))
 		{
@@ -1216,8 +1095,6 @@ void JE_endLevelAni( void )
 
 			for (temp = 1; temp <= cubeMax; temp++)
 			{
-				NETWORK_KEEP_ALIVE();
-
 				JE_playSampleNum(S_ITEM);
 				x = 20 + 30 * temp;
 				y = 135;
@@ -1275,8 +1152,6 @@ void JE_endLevelAni( void )
 		do
 		{
 			setjasondelay(1);
-
-			NETWORK_KEEP_ALIVE();
 
 			wait_delay();
 		} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1)));
@@ -1461,7 +1336,7 @@ void JE_pauseGame( void )
 
 	set_volume(tyrMusicVolume / 2, fxVolume);
 
-	wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
+	//wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
 
 	do
 	{
@@ -1483,14 +1358,6 @@ void JE_playerMovement( Player *this_player,
 {
 	JE_integer mouseXC, mouseYC;
 	JE_integer accelXC, accelYC;
-
-#ifdef WITH_NETWORK
-	if (isNetworkGame && thisPlayerNum == playerNum_)
-	{
-		network_state_prepare();
-		memset(&packet_state_out[0]->data[4], 0, 10);
-	}
-#endif
 
 	// Always update input
 	if (play_demo) // Demo input
@@ -2391,16 +2258,6 @@ void JE_mainGamePlayerFunctions( void )
 	}
 }
 
-const char *JE_getName( JE_byte pnum )
-{
-	if (pnum == thisPlayerNum && network_player_name[0] != '\0')
-		return network_player_name;
-	else if (network_opponent_name[0] != '\0')
-		return network_opponent_name;
-
-	return miscText[47 + pnum];
-}
-
 void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 {
 	// Dragonwing doesn't collide with anything when linked
@@ -2471,143 +2328,6 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						soundQueue[7] = S_POWERUP;
 						enemyAvail[z] = 1;
 					}
-/*
-					else if (evalue > 32100)
-					{
-						// Award special
-						this_player->cash += 250;
-						this_player->items.special = evalue - 32100;
-						this_player->shot_multi_pos[SHOT_SPECIAL] = 0;
-						this_player->shot_multi_pos[SHOT_SPECIAL2] = 0;
-						this_player->shot_repeat[SHOT_SPECIAL] = 10;
-						this_player->shot_repeat[SHOT_SPECIAL2] = 0;
-
-						if (isNetworkGame)
-							sprintf(tempStr, "%s %s %s", JE_getName(1), miscTextB[4-1], special[evalue - 32100].name);
-						else if (twoPlayerMode)
-							sprintf(tempStr, "%s %s", miscText[43-1], special[evalue - 32100].name);
-						else
-							sprintf(tempStr, "%s %s", miscText[64-1], special[evalue - 32100].name);
-						JE_drawTextWindow(tempStr);
-						soundQueue[7] = S_POWERUP;
-						enemyAvail[z] = 1;
-					}
-					else if (evalue > 32000)
-					{
-						if (playerNum_ == 2)
-						{
-							enemyAvail[z] = 1;
-							if (isNetworkGame)
-								sprintf(tempStr, "%s %s %s", JE_getName(2), miscTextB[4-1], options[evalue - 32000].name);
-							else
-								sprintf(tempStr, "%s %s", miscText[44-1], options[evalue - 32000].name);
-							JE_drawTextWindow(tempStr);
-
-							// if picked up a different sidekick than player already has, then reset sidekicks to least powerful, else power them up
-							if (evalue - 32000u != player[1].items.sidekick_series)
-							{
-								player[1].items.sidekick_series = evalue - 32000;
-								player[1].items.sidekick_level = 101;
-							}
-							else if (player[1].items.sidekick_level < 103)
-							{
-								++player[1].items.sidekick_level;
-							}
-
-							uint temp = player[1].items.sidekick_level - 100 - 1;
-							for (uint i = 0; i < COUNTOF(player[1].items.sidekick); ++i)
-								player[1].items.sidekick[i] = optionSelect[player[1].items.sidekick_series][temp][i];
-
-							this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK] = 0;
-							this_player->shot_multi_pos[SHOT_RIGHT_SIDEKICK] = 0;
-							JE_updateOption(this_player, 0);
-							JE_updateOption(this_player, 1);
-							soundQueue[7] = S_POWERUP;
-						}
-						else if (onePlayerAction)
-						{
-							enemyAvail[z] = 1;
-							sprintf(tempStr, "%s %s", miscText[64-1], options[evalue - 32000].name);
-							JE_drawTextWindow(tempStr);
-
-							for (uint i = 0; i < COUNTOF(player[0].items.sidekick); ++i)
-								player[0].items.sidekick[i] = evalue - 32000;
-							this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK] = 0;
-							this_player->shot_multi_pos[SHOT_RIGHT_SIDEKICK] = 0;
-
-							JE_updateOption(this_player, 0);
-							JE_updateOption(this_player, 1);
-							soundQueue[7] = S_POWERUP;
-						}
-						if (enemyAvail[z] == 1)
-							this_player->cash += 250;
-					}
-					else if (evalue > 31000)
-					{
-						this_player->cash += 250;
-						if (playerNum_ == 2)
-						{
-							if (isNetworkGame)
-								sprintf(tempStr, "%s %s %s", JE_getName(2), miscTextB[4-1], weaponPort[evalue - 31000].name);
-							else
-								sprintf(tempStr, "%s %s", miscText[44-1], weaponPort[evalue - 31000].name);
-							JE_drawTextWindow(tempStr);
-							player[1].items.weapon[REAR_WEAPON].id = evalue - 31000;
-							this_player->shot_multi_pos[SHOT_AIMED] = 0;
-							enemyAvail[z] = 1;
-							soundQueue[7] = S_POWERUP;
-						}
-						else if (onePlayerAction)
-						{
-							sprintf(tempStr, "%s %s", miscText[64-1], weaponPort[evalue - 31000].name);
-							JE_drawTextWindow(tempStr);
-							player[0].items.weapon[REAR_WEAPON].id = evalue - 31000;
-							this_player->shot_multi_pos[SHOT_AIMED] = 0;
-							enemyAvail[z] = 1;
-							soundQueue[7] = S_POWERUP;
-
-							if (player[0].items.weapon[REAR_WEAPON].power == 0)  // does this ever happen?
-								player[0].items.weapon[REAR_WEAPON].power = 1;
-						}
-					}
-					else if (evalue > 30000)
-					{
-						if (playerNum_ == 1 && twoPlayerMode)
-						{
-							if (isNetworkGame)
-								sprintf(tempStr, "%s %s %s", JE_getName(1), miscTextB[4-1], weaponPort[evalue - 30000].name);
-							else
-								sprintf(tempStr, "%s %s", miscText[43-1], weaponPort[evalue - 30000].name);
-							JE_drawTextWindow(tempStr);
-							player[0].items.weapon[FRONT_WEAPON].id = evalue - 30000;
-							this_player->shot_multi_pos[SHOT_NORMAL] = 0;
-							enemyAvail[z] = 1;
-							soundQueue[7] = S_POWERUP;
-						}
-						else if (onePlayerAction)
-						{
-							sprintf(tempStr, "%s %s", miscText[64-1], weaponPort[evalue - 30000].name);
-							JE_drawTextWindow(tempStr);
-							player[0].items.weapon[FRONT_WEAPON].id = evalue - 30000;
-							this_player->shot_multi_pos[SHOT_NORMAL] = 0;
-							enemyAvail[z] = 1;
-							soundQueue[7] = S_POWERUP;
-						}
-
-						if (enemyAvail[z] == 1)
-						{
-							player[0].items.special = specialArcadeWeapon[evalue - 30000-1];
-							if (player[0].items.special > 0)
-							{
-								this_player->shot_multi_pos[SHOT_SPECIAL] = 0;
-								this_player->shot_multi_pos[SHOT_SPECIAL2] = 0;
-								this_player->shot_repeat[SHOT_SPECIAL] = 0;
-								this_player->shot_repeat[SHOT_SPECIAL2] = 0;
-							}
-							this_player->cash += 250;
-						}
-
-					} */
 				}
 				else if (evalue > 20000)
 				{

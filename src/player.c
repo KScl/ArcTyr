@@ -18,7 +18,6 @@
  */
 #include "arcade.h"
 #include "episodes.h"
-#include "keyboard.h"
 #include "mainint.h"
 #include "nortsong.h"
 #include "player.h"

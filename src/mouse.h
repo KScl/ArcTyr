@@ -21,23 +21,7 @@
 
 #include "opentyr.h"
 
-#include "SDL.h"
-
-extern bool has_mouse;
-extern bool mouse_has_three_buttons;
-
-extern JE_word lastMouseX, lastMouseY;
-extern JE_byte mouseCursor;
-extern JE_word mouseX, mouseY, mouseButton;
-extern JE_word mouseXB, mouseYB;
-
-extern JE_byte mouseGrabShape[24 * 28];
-
-void JE_drawShapeTypeOne( JE_word x, JE_word y, JE_byte *shape );
-void JE_grabShapeTypeOne( JE_word x, JE_word y, JE_byte *shape );
-
-void JE_mouseStart( void );
-void JE_mouseReplace( void );
+extern JE_word mouseX, mouseY;
 
 #endif /* MOUSE_H */
 

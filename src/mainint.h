@@ -64,7 +64,6 @@ void JE_pauseGame( void );
 
 void JE_playerMovement( Player *this_player, JE_byte playerNum, JE_word shipGr, Sprite2_array *shapes9ptr_, JE_word *mouseX, JE_word *mouseY );
 void JE_mainGamePlayerFunctions( void );
-const char *JE_getName( JE_byte pnum );
 
 void JE_playerCollide( Player *this_player, JE_byte playerNum );
 

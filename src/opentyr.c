@@ -20,13 +20,11 @@
 #include "hg_revision.h"
 #include "input.h"
 #include "jukebox.h"
-#include "keyboard.h"
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
 #include "mtrand.h"
 #include "musmast.h"
-#include "network.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "params.h"
@@ -143,7 +141,7 @@ void opentyrian_menu( void )
 		{
 			fade_in = false;
 			fade_palette(colors, 20, 0, 255);
-			wait_noinput(true, false, false);
+			//wait_noinput(true, false, false);
 		}
 
 		tempW = 0;
@@ -366,19 +364,6 @@ int main( int argc, char *argv[] )
 
 	JE_loadHelpText();
 	/*debuginfo("Help text complete");*/
-
-	if (isNetworkGame)
-	{
-#ifdef WITH_NETWORK
-		if (network_init())
-		{
-			network_tyrian_halt(3, false);
-		}
-#else
-		fprintf(stderr, "OpenTyrian was compiled without networking support.\n");
-		JE_tyrianHalt(5);
-#endif
-	}
 
 	ADTA_loadItems();
 

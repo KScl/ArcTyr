@@ -4,7 +4,6 @@
 #include "input.h"
 #include "nortsong.h"
 #include "player.h"
-#include "keyboard.h"
 #include "video.h"
 #include "video/scaler.h"
 

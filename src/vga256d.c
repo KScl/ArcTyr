@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include "config.h" // For fullscreen stuff
-#include "keyboard.h"
 #include "opentyr.h"
 #include "palette.h"
 #include "vga256d.h"
