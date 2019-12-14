@@ -47,12 +47,12 @@ void JE_weaponViewFrame( void )
 	// create shots in weapon simulator
 	if (PL_ShotRepeat(&player[0], FRONT_WEAPON))
 	{
-		b = player_shot_create(1, FRONT_WEAPON, player[0].x, player[0].y, player[0].x, player[0].y, 1, 1);
+		player_shot_create(1, FRONT_WEAPON, player[0].x, player[0].y, player[0].x, player[0].y, 1, 1);
 	}
 
 	simulate_player_shots();
 
-	//blit_sprite(VGAScreenSeg, 0, 0, OPTION_SHAPES, 12); // upgrade interface
+	blit_sprite(VGAScreenSeg, 0, 0, OPTION_SHAPES, 12); // upgrade interface
 
 	//JE_waitFrameCount();  TODO: didn't do anything?
 }

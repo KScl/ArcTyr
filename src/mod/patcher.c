@@ -10,26 +10,9 @@
 /// \file  mod/patcher.c
 /// \brief Level and episode patchers
 
-#include "../arcade.h"
-#include "../config.h"
-#include "../fonthand.h"
-#include "../input.h"
-#include "../keyboard.h"
 #include "../mainint.h"
-#include "../nortsong.h"
 #include "../opentyr.h"
-#include "../palette.h"
-#include "../picload.h"
-#include "../player.h"
-#include "../sndmast.h"
 #include "../tyrian2.h"
-#include "../video.h"
-
-//
-//
-//
-//
-
 #include "../varz.h"
 
 typedef struct {
@@ -150,7 +133,7 @@ static const Patches _P4_NOSE_DRIP[] = {
 
 static const Patches *curPatches = NULL;
 
-void ARC_PatcherInit( JE_byte episode, JE_byte level )
+void MOD_PatcherInit( JE_byte episode, JE_byte level )
 {
 	curPatches = NULL;
 	switch (episode)
@@ -184,7 +167,7 @@ void ARC_PatcherInit( JE_byte episode, JE_byte level )
 	}
 }
 
-bool ARC_Patcher( struct JE_EventRecType *allEvs, JE_word *ev )
+bool MOD_Patcher( struct JE_EventRecType *allEvs, JE_word *ev )
 {
 	if (curPatches == NULL || curPatches->ev_num == 0)
 		return false;
@@ -203,7 +186,7 @@ bool ARC_Patcher( struct JE_EventRecType *allEvs, JE_word *ev )
 	return false;
 }
 
-void ARC_PatcherClose( void )
+void MOD_PatcherClose( void )
 {
 	// currently a no-op
 }

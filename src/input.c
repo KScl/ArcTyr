@@ -6,7 +6,7 @@
 #include "player.h"
 #include "keyboard.h"
 #include "video.h"
-#include "video_scale.h"
+#include "video/scaler.h"
 
 #include "SDL.h"
 

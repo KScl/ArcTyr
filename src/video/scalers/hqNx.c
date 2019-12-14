@@ -1,27 +1,24 @@
-/* 
- * OpenTyrian: A modern cross-platform port of Tyrian
- * Copyright (C) 2007-2010  The OpenTyrian Development Team
- * 
+/** OpenTyrian - Arcade Version
+ *
+ * Copyright          (C) 2007-2019  The OpenTyrian Development Team
+ * Portions copyright (C) 2019       Kaito Sinclaire
+ *
  * hq2x, hq3x, hq4x
- * Copyright (C) 2003 MaxSt ( maxst@hiend3d.com )
+ * Copyright          (C) 2003       MaxSt ( maxst@hiend3d.com )
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * This program is free software distributed under the
+ * terms of the GNU General Public License, version 2.
+ * See the 'COPYING' file for further details.
  */
+/// \file  video/scalers/hqNx.c
+/// \brief Video scaler for fast, hi-res scaling
 
-#include "palette.h"
-#include "video.h"
+#include "../scaler.h"
+
+#ifdef ENABLE_HQNX_SCALER
+
+#include "../../palette.h"
+#include "../../video.h"
 
 void interp1(Uint32 *pc, Uint32 c1, Uint32 c2);
 void interp2(Uint32 *pc, Uint32 c1, Uint32 c2, Uint32 c3);
@@ -11894,3 +11891,5 @@ void hq4x_32( SDL_Surface *src_surface, SDL_Surface *dst_surface )
 }
 
 // kate: tab-width 4; vim: set noet:
+
+#endif

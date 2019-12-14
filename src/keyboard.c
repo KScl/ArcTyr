@@ -22,7 +22,7 @@
 #include "network.h"
 #include "opentyr.h"
 #include "video.h"
-#include "video_scale.h"
+#include "video/scaler.h"
 
 #include "SDL.h"
 #include <stdio.h>

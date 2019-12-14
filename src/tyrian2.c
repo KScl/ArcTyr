@@ -48,6 +48,8 @@
 #include "vga256d.h"
 #include "video.h"
 
+#include "mod/patcher.h"
+
 #include <assert.h>
 #include <ctype.h>
 #include <math.h>
@@ -3120,7 +3122,7 @@ new_game:
 	FILE *level_f = dir_fopen_die(data_dir(), levelFile, "rb");
 
 	printf("num: %d, location: $%x\n", lvlFileNum, lvlPos[(lvlFileNum-1) * 2]);
-	ARC_PatcherInit(episodeNum, lvlFileNum);
+	MOD_PatcherInit(episodeNum, lvlFileNum);
 
 	fseek(level_f, lvlPos[(lvlFileNum-1) * 2], SEEK_SET);
 
@@ -3139,7 +3141,7 @@ new_game:
 	efread(&maxEvent, sizeof(JE_word), 1, level_f);
 	for (x = 0; x < maxEvent; x++)
 	{
-		if (ARC_Patcher(eventRec, &x))
+		if (MOD_Patcher(eventRec, &x))
 		{
 			// skip event (overridden)
 			fseek(level_f, 11, SEEK_CUR);

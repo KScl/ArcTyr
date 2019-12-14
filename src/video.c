@@ -21,7 +21,7 @@
 #include "opentyr.h"
 #include "palette.h"
 #include "video.h"
-#include "video_scale.h"
+#include "video/scaler.h"
 
 #include <assert.h>
 #include <stdbool.h>

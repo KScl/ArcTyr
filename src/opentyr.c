@@ -39,7 +39,7 @@
 #include "varz.h"
 #include "vga256d.h"
 #include "video.h"
-#include "video_scale.h"
+#include "video/scaler.h"
 
 #include "SDL.h"
 

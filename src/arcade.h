@@ -109,14 +109,4 @@ void ARC_RankIncrease( void );
 void ARC_RankCut( void );
 void ARC_RankLevelAdjusts( JE_integer adjust );
 
-//
-//
-//
-
-#include "varz.h"
-
-void ARC_PatcherInit( JE_byte episode, JE_byte level );
-bool ARC_Patcher( struct JE_EventRecType *allEvs, JE_word *ev );
-void ARC_PatcherClose( void );
-
 #endif

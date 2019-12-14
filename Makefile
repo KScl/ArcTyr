@@ -42,7 +42,7 @@ gamesdir ?= $(datadir)/games
 
 TARGET := opentyrian
 
-SRCS := $(wildcard src/*.c) $(wildcard src/*/*.c)
+SRCS := $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c)
 OBJS := $(SRCS:src/%.c=obj/%.o)
 DEPS := $(SRCS:src/%.c=obj/%.d)
 

@@ -28,6 +28,7 @@
 #include "../player.h"
 #include "../shots.h"
 #include "../sndmast.h"
+#include "../varz.h"
 #include "../video.h"
 #include "../vga256d.h"
 
