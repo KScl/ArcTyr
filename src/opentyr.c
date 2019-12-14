@@ -13,7 +13,6 @@
 #include "arcade.h"
 #include "arcserv.h"
 #include "config.h"
-#include "devextra.h"
 #include "episodes.h"
 #include "file.h"
 #include "font.h"
@@ -40,6 +39,11 @@
 #include "vga256d.h"
 #include "video.h"
 #include "video/scaler.h"
+
+#ifdef ENABLE_DEVTOOLS
+#include "dev/demo.h"
+#include "dev/weapon.h"
+#endif
 
 #include "SDL.h"
 
@@ -371,7 +375,7 @@ int main( int argc, char *argv[] )
 			network_tyrian_halt(3, false);
 		}
 #else
-		fprintf(stderr, "OpenTyrian was compiled without networking support.");
+		fprintf(stderr, "OpenTyrian was compiled without networking support.\n");
 		JE_tyrianHalt(5);
 #endif
 	}
@@ -383,8 +387,13 @@ int main( int argc, char *argv[] )
 
 	if (goToWeaponCreator)
 	{
+#ifdef ENABLE_DEVTOOLS
 		ARC_IdentifyPrint("Entering the weapon creator.");
 		DEV_WeaponCreator(goToWeaponCreator);
+#else
+		fprintf(stderr, "OpenTyrian was compiled without devtools.\n");
+		JE_tyrianHalt(5);
+#endif
 	}
 
 	inServiceMenu = false;
@@ -395,11 +404,16 @@ int main( int argc, char *argv[] )
 
 	while (record_demo)
 	{
+#ifdef ENABLE_DEVTOOLS
 		isInGame = false;
 		DEV_RecordDemoInit();
 		isInGame = true;
 		JE_main();
 		// Never returns
+#else
+		fprintf(stderr, "OpenTyrian was compiled without devtools.\n");
+		JE_tyrianHalt(5);
+#endif
 	}	
 
 	for (; ; )

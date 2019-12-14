@@ -436,6 +436,8 @@ void JE_titleScreen( void )
 	int tyrY = 62, t2kY = 41;
 
 	//const int menunum = 7;
+	skip_header_draw = false;
+	skip_header_undraw = false;
 
 	//unsigned int arcade_code_i[SA_ENGAGE] = { 0 };
 

@@ -10,6 +10,10 @@
 /// \file  devextra.c
 /// \brief Extra menus and functions to aide in development
 
+#include "../opentyr.h"
+
+#ifdef ENABLE_DEVTOOLS
+
 #include "../arcade.h"
 #include "../arcserv.h"
 #include "../backgrnd.h"
@@ -22,7 +26,6 @@
 #include "../loudness.h"
 #include "../mainint.h"
 #include "../nortsong.h"
-#include "../opentyr.h"
 #include "../palette.h"
 #include "../picload.h"
 #include "../player.h"
@@ -528,3 +531,5 @@ void DEV_RecordDemoEnd( void )
 	fclose(demo_file);
 	printf("Demo closed.\n");
 }
+
+#endif /* ENABLE_DEVTOOLS */

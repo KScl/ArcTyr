@@ -20,7 +20,6 @@
 #include "animlib.h"
 #include "arcade.h"
 #include "backgrnd.h"
-#include "devextra.h"
 #include "episodes.h"
 #include "file.h"
 #include "font.h"
@@ -48,6 +47,7 @@
 #include "vga256d.h"
 #include "video.h"
 
+#include "dev/demo.h"
 #include "mod/patcher.h"
 
 #include <assert.h>

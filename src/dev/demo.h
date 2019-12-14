@@ -7,19 +7,24 @@
  * terms of the GNU General Public License, version 2.
  * See the 'COPYING' file for further details.
  */
-/// \file  devextra.c
-/// \brief Extra menus and functions to aide in development
+/// \file  dev/demo.h
+/// \brief Demo recorder devtool
 
-#ifndef DEVEXTRA_H
-#define DEVEXTRA_H
+#ifndef DEV_DEMO_H
+#define DEV_DEMO_H
 
-#include "opentyr.h"
+#include "../opentyr.h"
 
-void DEV_WeaponCreator( uint start_weap );
-
+#ifdef ENABLE_DEVTOOLS
 void DEV_RecordDemoInit( void );
 void DEV_RecordDemoStart( void );
 void DEV_RecordDemoInput( void );
 void DEV_RecordDemoEnd( void );
-
+#else
+#define DEV_RecordDemoInit() (void)false
+#define DEV_RecordDemoStart() (void)false
+#define DEV_RecordDemoInput() (void)false
+#define DEV_RecordDemoEnd() (void)false
 #endif
+
+#endif /* DEV_DEMO_H */

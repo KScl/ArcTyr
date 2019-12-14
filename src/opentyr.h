@@ -19,6 +19,7 @@
 #ifndef OPENTYR_H
 #define OPENTYR_H
 
+#define ENABLE_DEVTOOLS
 #undef WITH_NETWORK
 
 // snprintf truncation is intended; ignore warnings about it occurring
