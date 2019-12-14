@@ -21,8 +21,9 @@
 #include "input.h"
 #include "nortsong.h"
 #include "palette.h"
-#include "sizebuf.h"
 #include "video.h"
+
+#include "lib/sizebuf.h"
 
 #include <assert.h>
 

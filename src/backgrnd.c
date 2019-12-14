@@ -20,9 +20,10 @@
 #include "backgrnd.h"
 
 #include "config.h"
-#include "mtrand.h"
 #include "varz.h"
 #include "video.h"
+
+#include "lib/mtrand.h"
 
 #include <assert.h>
 

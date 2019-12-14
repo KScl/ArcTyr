@@ -1,4 +1,4 @@
-/* 
+/*
  * OpenTyrian: A modern cross-platform port of Tyrian
  * Copyright (C) 2007-2009  The OpenTyrian Development Team
  *
@@ -16,22 +16,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#ifndef STD_SUPPORT_H
-#define STD_SUPPORT_H
 
-/*!
- * \file std_support.h
- * \brief Standard library support functions
- */
+#ifndef LIB_MTRAND_H
+#define LIB_MTRAND_H
 
-/*!
- * \brief Locate a character in a a string.
- * 
- * \param[in] s the string
- * \param[in] c the character
- * \return the pointer to the first occurrence of \p c in \p s if there is an occurrences;
- *         otherwise the pointer to the terminating null character of \p s
- */
-char *ot_strchrnul( const char *s, int c );
+#define MT_RAND_MAX 0xffffffffUL
 
-#endif // STD_SUPPORT_H
+void mt_srand( unsigned long s );
+unsigned long mt_rand( void );
+float mt_rand_1( void );
+float mt_rand_lt1( void );
+
+#endif /* LIB_MTRAND_H */
+

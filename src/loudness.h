@@ -20,7 +20,8 @@
 #define LOUDNESS_H
 
 #include "opentyr.h"
-#include "opl.h"
+
+#include "lib/opl.h"
 
 #include "SDL.h"
 

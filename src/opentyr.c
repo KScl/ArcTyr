@@ -21,7 +21,6 @@
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
-#include "mtrand.h"
 #include "musmast.h"
 #include "nortsong.h"
 #include "opentyr.h"
@@ -34,6 +33,8 @@
 #include "vga256d.h"
 #include "video.h"
 #include "video/scaler.h"
+
+#include "lib/mtrand.h"
 
 #include "arcade/service.h"
 

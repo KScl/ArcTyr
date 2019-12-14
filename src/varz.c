@@ -25,7 +25,6 @@
 #include "loudness.h"
 #include "mainint.h"
 #include "mouse.h"
-#include "mtrand.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
@@ -34,6 +33,8 @@
 #include "varz.h"
 #include "vga256d.h"
 #include "video.h"
+
+#include "lib/mtrand.h"
 
 JE_integer tempDat, tempDat2, tempDat3;
 

@@ -23,7 +23,6 @@
 #include "file.h"
 #include "input.h"
 #include "loudness.h"
-#include "mtrand.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "player.h"
@@ -31,6 +30,8 @@
 #include "vga256d.h"
 #include "video.h"
 #include "video/scaler.h"
+
+#include "lib/mtrand.h"
 
 #include <sys/stat.h>
 

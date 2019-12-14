@@ -17,10 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SIZEBUF_H
-#define SIZEBUF_H
+#ifndef LIB_SIZEBUF_H
+#define LIB_SIZEBUF_H
 
-#include "opentyr.h"
+#include "../opentyr.h"
 
 typedef struct sizebuf_s
 {
@@ -47,4 +47,4 @@ unsigned int MSG_ReadByte  ( sizebuf_t * );
 unsigned int MSG_ReadWord  ( sizebuf_t * );
 unsigned int MSG_ReadDWord ( sizebuf_t * );
 
-#endif
+#endif /* LIB_SIZEBUF_H */

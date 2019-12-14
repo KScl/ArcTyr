@@ -36,9 +36,10 @@
  */
 
 #include "sizebuf.h"
-#include <assert.h>
 
 #include "SDL_endian.h"
+
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 

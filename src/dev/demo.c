@@ -36,7 +36,7 @@
 #include "../video.h"
 #include "../vga256d.h"
 
-#include "../mtrand.h"
+#include "../lib/mtrand.h"
 
 #include <time.h>
 

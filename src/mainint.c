@@ -31,7 +31,6 @@
 #include "mainint.h"
 #include "menus.h"
 #include "mouse.h"
-#include "mtrand.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
@@ -46,6 +45,8 @@
 #include "varz.h"
 #include "vga256d.h"
 #include "video.h"
+
+#include "lib/mtrand.h"
 
 #include <assert.h>
 #include <ctype.h>
