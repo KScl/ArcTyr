@@ -220,7 +220,7 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 				if (sprite_id != -1 && --z < maxloc)
 					blit_sprite_dark(VGAScreen, textloc[z] + 1, y + 1, TINY_FONT, sprite_id, true);
 
-				if (JE_anyButton())
+				if (I_anyButton())
 					frameCountMax = 0;
 
 				do
@@ -880,7 +880,7 @@ void JE_playCredits( void )
 		
 		wait_delay();
 		
-		if (PL_NumPotentialPlayers() == 0 && JE_anyButton())
+		if (PL_NumPotentialPlayers() == 0 && I_anyButton())
 			break;
 	}
 	
@@ -942,7 +942,6 @@ void JE_endLevelAni( void )
 	player[0].last_items = player[0].items;
 	strcpy(lastLevelName, levelName);
 
-	JE_wipeKey();
 	frameCountMax = 4;
 	textGlowFont = SMALL_FONT_SHAPES;
 
@@ -1107,7 +1106,7 @@ void JE_endLevelAni( void )
 
 					blit_sprite_hv(VGAScreenSeg, x, y, OPTION_SHAPES, 25, 0x9, i);
 
-					if (JE_anyButton())
+					if (I_anyButton())
 						frameCountMax = 0;
 
 					JE_showVGA();
@@ -1120,7 +1119,7 @@ void JE_endLevelAni( void )
 
 					blit_sprite_hv(VGAScreenSeg, x, y, OPTION_SHAPES, 25, 0x9, i);
 
-					if (JE_anyButton())
+					if (I_anyButton())
 						frameCountMax = 0;
 
 					JE_showVGA();
@@ -1154,7 +1153,7 @@ void JE_endLevelAni( void )
 			setjasondelay(1);
 
 			wait_delay();
-		} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1)));
+		} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
 	}
 
 	fade_black(15);

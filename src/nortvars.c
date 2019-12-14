@@ -26,14 +26,6 @@
 #include <assert.h>
 #include <ctype.h>
 
-JE_boolean inputDetected;
-
-JE_boolean JE_anyButton( void )
-{
-	STUB();
-	return I_anyButton();
-}
-
 void JE_dBar3( SDL_Surface *surface, JE_integer x,  JE_integer y,  JE_integer num,  JE_integer col )
 {
 	JE_byte z;
@@ -77,9 +69,3 @@ void JE_barDrawShadow( SDL_Surface *surface, JE_word x, JE_word y, JE_word res, 
 		fill_rectangle_xy(surface, x,y, x+xsize, y+ysize, col+(12 / res * amt));
 	}
 }
-
-void JE_wipeKey( void )
-{
-	// /!\ Doesn't seems to affect anything.
-}
-

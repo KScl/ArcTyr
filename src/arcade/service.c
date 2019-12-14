@@ -10,12 +10,13 @@
 /// \file  arcade/service.c
 /// \brief Arcade service menu functions
 
+#include "service.h"
+#include "jukebox.h"
+
 #include "../arcade.h"
-#include "../arcserv.h"
 #include "../config.h"
 #include "../fonthand.h"
 #include "../input.h"
-#include "../jukebox.h"
 #include "../nortsong.h"
 #include "../nortvars.h"
 #include "../opentyr.h"
@@ -26,6 +27,7 @@
 #include "../tyrian2.h"
 #include "../varz.h"
 #include "../video.h"
+
 
 JE_boolean inServiceMenu = false;
 

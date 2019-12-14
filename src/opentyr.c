@@ -11,7 +11,6 @@
 /// \brief Main loop, other source-wide important variables
 
 #include "arcade.h"
-#include "arcserv.h"
 #include "config.h"
 #include "episodes.h"
 #include "file.h"
@@ -19,7 +18,6 @@
 #include "helptext.h"
 #include "hg_revision.h"
 #include "input.h"
-#include "jukebox.h"
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
@@ -29,7 +27,6 @@
 #include "opentyr.h"
 #include "params.h"
 #include "picload.h"
-#include "scroller.h"
 #include "sprite.h"
 #include "tyrian2.h"
 #include "xmas.h"
@@ -37,6 +34,8 @@
 #include "vga256d.h"
 #include "video.h"
 #include "video/scaler.h"
+
+#include "arcade/service.h"
 
 #ifdef ENABLE_DEVTOOLS
 #include "dev/demo.h"

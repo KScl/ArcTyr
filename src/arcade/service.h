@@ -7,13 +7,13 @@
  * terms of the GNU General Public License, version 2.
  * See the 'COPYING' file for further details.
  */
-/// \file  arcserv.h
+/// \file  arcade/service.h
 /// \brief Arcade service menu functions
 
-#ifndef ARCSERV_H
-#define ARCSERV_H
+#ifndef ARCADE_SERVICE_H
+#define ARCADE_SERVICE_H
 
-#include "opentyr.h"
+#include "../opentyr.h"
 
 #include <setjmp.h>
 

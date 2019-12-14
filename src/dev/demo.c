@@ -14,8 +14,9 @@
 
 #ifdef ENABLE_DEVTOOLS
 
+#include "../arcade/service.h"
+
 #include "../arcade.h"
-#include "../arcserv.h"
 #include "../backgrnd.h"
 #include "../config.h"
 #include "../episodes.h"

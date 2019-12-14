@@ -33,7 +33,6 @@
 #include "mouse.h"
 #include "mtrand.h"
 #include "nortsong.h"
-#include "nortvars.h"
 #include "opentyr.h"
 #include "params.h"
 #include "pcxload.h"
@@ -2657,7 +2656,6 @@ new_game:
 						while (s[0] != '#');
 						levelWarningLines--;
 
-						JE_wipeKey();
 						frameCountMax = 4;
 						if (!constantPlay)
 							JE_displayText();
@@ -2689,13 +2687,12 @@ new_game:
 							JE_showVGA();
 							fade_palette(colors, 15, 0, 255);
 
-							JE_wipeKey();
 							if (!constantPlay)
 							{
 								do
 								{
 									SDL_Delay(16);
-								} while (!JE_anyButton());
+								} while (!I_anyButton());
 							}
 
 							fade_black(15);
@@ -2884,7 +2881,6 @@ new_game:
 						{
 							if (true /* !ESCPressed */)
 							{
-								JE_wipeKey();
 								warningCol = 14 * 16 + 5;
 								warningColChange = 1;
 								warningSoundDelay = 0;
@@ -3228,7 +3224,7 @@ void JE_displayText( void )
 
 		wait_delay();
 
-	} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1)));
+	} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
 	levelWarningDisplay = false;
 }
 
@@ -3766,7 +3762,6 @@ void JE_eventSystem( void )
 					{
 						assert(newEnemyShapeTables[i] <= COUNTOF(shapeFile));
 						JE_loadCompShapes(&eShapes[i], shapeFile[newEnemyShapeTables[i] - 1]);
-						printf("%c", shapeFile[newEnemyShapeTables[i] - 1]);
 					}
 					else
 						free_sprite2s(&eShapes[i]);
@@ -4847,7 +4842,7 @@ void JE_whoa( unsigned int timer )
 		TempScreen1    = TempScreen2;
 		TempScreen2    = TempScreenSwap;
 
-	} while (!(timer == 0 || JE_anyButton()));
+	} while (!(timer == 0 || I_anyButton()));
 
 	levelWarningLines = 4;
 }

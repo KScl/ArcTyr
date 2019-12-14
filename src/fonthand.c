@@ -16,9 +16,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
 #include "fonthand.h"
+#include "input.h"
 #include "nortsong.h"
-#include "nortvars.h"
 #include "opentyr.h"
 #include "params.h"
 #include "sprite.h"
@@ -325,10 +326,8 @@ void JE_drawTextGlow( SDL_Surface * screen )
 			for (int n = 0; n < num_tg_data; ++n)
 				JE_outTextAdjust(screen, tg_data[n].x, tg_data[n].y, tg_data[n].buf, c, z - 10, textGlowFont, false);
 
-			if (JE_anyButton())
-			{
+			if (I_anyButton())
 				frameCountMax = 0;
-			}
 
 			JE_showVGA();
 
@@ -342,10 +341,8 @@ void JE_drawTextGlow( SDL_Surface * screen )
 		for (int n = 0; n < num_tg_data; ++n)
 			JE_outTextAdjust(screen, tg_data[n].x, tg_data[n].y, tg_data[n].buf, c, z - 10, textGlowFont, false);
 
-		if (JE_anyButton())
-		{
+		if (I_anyButton())
 			frameCountMax = 0;
-		}
 
 		JE_showVGA();
 

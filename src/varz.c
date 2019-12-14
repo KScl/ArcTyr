@@ -566,7 +566,6 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 	if (temp > 0 && this_player->shot_repeat[SHOT_TWIDDLE] == 0
 		&& this_player->specials.flare_time == 0 && !globalFlare)
 	{
-		printf("successful twiddle %d\n", temp);
 		temp2 = special[temp].pwr;
 
 		bool can_afford = true;
@@ -607,8 +606,6 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 
 		if (can_afford)
 			JE_specialComplete(playerNum, temp, SHOT_TWIDDLE);
-		else
-			printf(" ... but couldn't afford\n");
 		SFExecuted[playerNum-1] = 0;
 
 		JE_drawShield();

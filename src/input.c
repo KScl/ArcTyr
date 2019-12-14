@@ -1,11 +1,25 @@
+/** OpenTyrian - Arcade Version
+ *
+ * Copyright          (C) 2007-2019  The OpenTyrian Development Team
+ * Portions copyright (C) 2019       Kaito Sinclaire
+ *
+ * This program is free software distributed under the
+ * terms of the GNU General Public License, version 2.
+ * See the 'COPYING' file for further details.
+ */
+/// \file  input.c
+/// \brief Revised input mechanisms
+
 #include "arcade.h"
-#include "arcserv.h"
 #include "opentyr.h"
 #include "input.h"
 #include "nortsong.h"
 #include "player.h"
 #include "video.h"
+
 #include "video/scaler.h"
+
+#include "arcade/service.h"
 
 #include "SDL.h"
 
