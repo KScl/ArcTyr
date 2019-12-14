@@ -56,9 +56,6 @@ JE_longint episode1DataLoc;
 /* Tells the game whether the level currently loaded is a bonus level. */
 JE_boolean bonusLevel;
 
-/* Tells if the game jumped back to Episode 1 */
-JE_boolean jumpBackToEpisode1;
-
 //
 // Arcade data
 //
@@ -512,25 +509,30 @@ unsigned int JE_findNextEpisode( void )
 {
 	unsigned int newEpisode = episodeNum;
 	
-	jumpBackToEpisode1 = false;
-	
 	while (true)
 	{
-		newEpisode++;
-		
-		if (newEpisode > EPISODE_MAX)
-		{
-			newEpisode = 1;
-			jumpBackToEpisode1 = true;
-			gameHasRepeated = true;
-		}
-		
+		if (++newEpisode > EPISODE_MAX)
+			return 1;
+
 		if (episodeAvail[newEpisode-1] || newEpisode == episodeNum)
-		{
 			break;
-		}
 	}
 	
 	return newEpisode;
+}
+
+
+bool JE_nextEpisode( void )
+{
+	strcpy(lastLevelName, "Completed");
+
+	unsigned int newEpisode = JE_findNextEpisode();
+
+	if (newEpisode == 1)
+		return false;
+
+	if (newEpisode != episodeNum)
+		JE_initEpisode(newEpisode);
+	return true;
 }
 

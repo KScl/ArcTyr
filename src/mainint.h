@@ -33,6 +33,8 @@ extern JE_boolean performSave;
 extern JE_boolean jumpSection;
 extern JE_boolean useLastBank;
 
+extern int cameraXFocus;
+
 extern bool pause_pressed, ingamemenu_pressed;
 
 void JE_drawTextWindow( const char *text );
@@ -41,7 +43,7 @@ void JE_gammaCorrect_func( JE_byte *col, JE_real r );
 void JE_gammaCorrect( Palette *colorBuffer, JE_byte gamma );
 JE_boolean JE_gammaCheck( void );
 void JE_loadOrderingInfo( void );
-void JE_nextEpisode( void );
+bool JE_nextEpisode( void );
 void JE_doInGameSetup( void );
 JE_boolean JE_inGameSetup( void );
 

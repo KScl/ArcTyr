@@ -751,8 +751,6 @@ void JE_main( void )
 
 start_level:
 
-	JE_clearKeyboard();
-
 	free_sprite2s(&eShapes[0]);
 	free_sprite2s(&eShapes[1]);
 	free_sprite2s(&eShapes[2]);
@@ -895,6 +893,8 @@ start_level_first:
 	map1YDelayMax = 1;
 	map2YDelay = 1;
 	map2YDelayMax = 1;
+
+	cameraXFocus = -1;
 
 	musicFade = false;
 
@@ -2788,39 +2788,43 @@ new_game:
 
 						fade_black(15);
 
-						JE_nextEpisode();
-
-						if (/*ALT_ARCADE*/true && jumpBackToEpisode1)
+						// If out of episodes, play the credits and leave.
+						if (!JE_nextEpisode())
 						{
 							mainLevel = 0;
+
+							JE_playCredits();
 							return;
 						}
-
-						if (jumpBackToEpisode1 && !twoPlayerMode)
+						else
 						{
-							JE_loadPic(VGAScreen, 1, false); // huh?
+							gameLoaded = true;
+							mainLevel = FIRST_LEVEL;
+							saveLevel = FIRST_LEVEL;
+
+							play_song(26);
+
 							JE_clr256(VGAScreen);
+							memcpy(colors, palettes[6-1], sizeof(colors));
 
-							if (superTyrian)
+							JE_dString(VGAScreen, JE_fontCenter(episode_name[episodeNum], SMALL_FONT_SHAPES), 130, episode_name[episodeNum], SMALL_FONT_SHAPES);
+							JE_dString(VGAScreen, JE_fontCenter(miscText[5-1], SMALL_FONT_SHAPES), 185, miscText[5-1], SMALL_FONT_SHAPES);
+
+							JE_showVGA();
+							fade_palette(colors, 15, 0, 255);
+
+							JE_wipeKey();
+							if (!constantPlay)
 							{
-								// if completed Zinglon's Revenge, show SuperTyrian and Destruct codes
-								// if completed SuperTyrian, show Nort-Ship Z code
-								superArcadeMode = (initialDifficulty == 8) ? 8 : 1;
+								do
+								{
+									NETWORK_KEEP_ALIVE();
+
+									SDL_Delay(16);
+								} while (!JE_anyButton());
 							}
 
-							jumpSection = true;
-
-							if (isNetworkGame)
-								JE_readTextSync();
-
-							if (superTyrian)
-							{
-								fade_black(10);
-
-								// back to titlescreen
-								mainLevel = 0;
-								return;
-							}
+							fade_black(15);
 						}
 						break;
 

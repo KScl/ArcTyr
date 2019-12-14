@@ -188,7 +188,6 @@ extern char episode_file[13], cube_file[13];
 
 extern JE_longint episode1DataLoc;
 extern JE_boolean bonusLevel;
-extern JE_boolean jumpBackToEpisode1;
 
 void ADTA_loadItems( void );
 

@@ -187,6 +187,12 @@ static inline Player *PL_OtherPlayer( Player *player )
 	return ((player == &player[0]) ? &player[1] : &player[0]);
 }
 
+// Players that are in an action that has some possible gameplay relevance, including name entry, etc
+static inline JE_byte PL_NumPotentialPlayers( void )
+{
+	return (player[0].player_status > STATUS_NONE) + (player[1].player_status > STATUS_NONE);
+}
+
 static inline JE_byte PL_NumPlayers( void )
 {
 	return (player[0].player_status == STATUS_INGAME) + (player[1].player_status == STATUS_INGAME);

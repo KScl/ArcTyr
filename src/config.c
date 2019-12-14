@@ -67,9 +67,6 @@ JE_byte starShowVGASpecialCode;
 JE_word lastCubeMax, cubeMax;
 JE_word cubeList[4]; /* [1..4] */
 
-/* High-Score Stuff */
-JE_boolean gameHasRepeated;  // can only get highscore on first play-through
-
 /* Difficulty */
 JE_shortint difficultyLevel, oldDifficultyLevel,
             initialDifficulty;  // can only get highscore on initial episode
@@ -102,7 +99,6 @@ JE_byte secretHint;
 JE_byte background3over;
 JE_byte background2over;
 JE_byte gammaCorrection;
-JE_boolean superPause = false;
 JE_boolean explosionTransparent,
            youAreCheating,
            displayScore,

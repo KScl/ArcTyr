@@ -7,26 +7,26 @@
  * terms of the GNU General Public License, version 2.
  * See the 'COPYING' file for further details.
  */
-/// \file  arcserv.c
+/// \file  arcade/service.c
 /// \brief Arcade service menu functions
 
-#include "arcade.h"
-#include "arcserv.h"
-#include "config.h"
-#include "fonthand.h"
-#include "input.h"
-#include "jukebox.h"
-#include "keyboard.h"
-#include "nortsong.h"
-#include "nortvars.h"
-#include "opentyr.h"
-#include "palette.h"
-#include "params.h"
-#include "picload.h"
-#include "sndmast.h"
-#include "tyrian2.h"
-#include "varz.h"
-#include "video.h"
+#include "../arcade.h"
+#include "../arcserv.h"
+#include "../config.h"
+#include "../fonthand.h"
+#include "../input.h"
+#include "../jukebox.h"
+#include "../keyboard.h"
+#include "../nortsong.h"
+#include "../nortvars.h"
+#include "../opentyr.h"
+#include "../palette.h"
+#include "../params.h"
+#include "../picload.h"
+#include "../sndmast.h"
+#include "../tyrian2.h"
+#include "../varz.h"
+#include "../video.h"
 
 JE_boolean inServiceMenu = false;
 
@@ -576,7 +576,7 @@ void ARC_Service( void )
 	menuOption = &ourOptions[0];
 
 	ourFadeIn = true;
-	while (menuNest[menuDeepness])
+	while (menuDeepness != 0xFF)
 	{
 		setjasondelay(2);
 

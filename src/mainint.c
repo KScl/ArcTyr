@@ -66,6 +66,8 @@ JE_boolean performSave;
 JE_boolean jumpSection;
 JE_boolean useLastBank; /* See if I want to use the last 16 colors for DisplayText */
 
+int cameraXFocus;
+
 bool pause_pressed = false, ingamemenu_pressed = false;
 
 /* Draws a message at the bottom text window on the playing screen */
@@ -259,50 +261,6 @@ void JE_drawPortConfigButtons( void ) // rear weapon pattern indicator
 	}
 }
 
-void JE_nextEpisode( void )
-{
-	strcpy(lastLevelName, "Completed");
-
-	unsigned int newEpisode = JE_findNextEpisode();
-
-	if (jumpBackToEpisode1)
-	{
-		JE_playCredits();
-		return;
-	}
-
-	if (newEpisode != episodeNum)
-		JE_initEpisode(newEpisode);
-
-	gameLoaded = true;
-	mainLevel = FIRST_LEVEL;
-	saveLevel = FIRST_LEVEL;
-
-	play_song(26);
-
-	JE_clr256(VGAScreen);
-	memcpy(colors, palettes[6-1], sizeof(colors));
-
-	JE_dString(VGAScreen, JE_fontCenter(episode_name[episodeNum], SMALL_FONT_SHAPES), 130, episode_name[episodeNum], SMALL_FONT_SHAPES);
-	JE_dString(VGAScreen, JE_fontCenter(miscText[5-1], SMALL_FONT_SHAPES), 185, miscText[5-1], SMALL_FONT_SHAPES);
-
-	JE_showVGA();
-	fade_palette(colors, 15, 0, 255);
-
-	JE_wipeKey();
-	if (!constantPlay)
-	{
-		do
-		{
-			NETWORK_KEEP_ALIVE();
-
-			SDL_Delay(16);
-		} while (!JE_anyButton());
-	}
-
-	fade_black(15);
-}
-
 void JE_initPlayerData( void )
 {
 	player[0].player_status = STATUS_NONE;
@@ -334,8 +292,6 @@ void JE_initPlayerData( void )
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
 	player[1].last_opt_given = player[1].last_opt_fired = 0;
 
-	gameHasRepeated = false;
-	onePlayerAction = false;
 	superArcadeMode = SA_NONE;
 	superTyrian = false;
 	twoPlayerMode = false;
@@ -751,6 +707,7 @@ bool load_next_demo( void )
 	player[0].weapon_mode             = fgetc(demo_file);
 	player[0].cur_weapon              = fgetc(demo_file);
 	player[0].items.weapon[0].power   = fgetc(demo_file);
+	player[0].cash                    = 0;
 
 	if (temp & 1)
 	{
@@ -768,6 +725,7 @@ bool load_next_demo( void )
 	player[1].weapon_mode             = fgetc(demo_file);
 	player[1].cur_weapon              = fgetc(demo_file);
 	player[1].items.weapon[0].power   = fgetc(demo_file);
+	player[1].cash                    = 0;
 
 	if (temp & 2)
 	{
@@ -1044,8 +1002,8 @@ void JE_playCredits( void )
 		
 		wait_delay();
 		
-		//if (JE_anyButton())
-		//	break;
+		if (PL_NumPotentialPlayers() == 0 && JE_anyButton())
+			break;
 	}
 	
 	playingCredits = false;
@@ -1310,7 +1268,8 @@ void JE_endLevelAni( void )
 	} else {
 		temp = 0;
 	}
-	JE_outTextGlow(VGAScreenSeg, JE_fontCenter("Press Fire", SMALL_FONT_SHAPES), 160, "Press Fire");
+	JE_outTextGlow(VGAScreenSeg, JE_fontCenter("Press Fire...--", SMALL_FONT_SHAPES), 160, "Press Fire...");
+
 
 	if (!constantPlay)
 	{
@@ -1323,8 +1282,6 @@ void JE_endLevelAni( void )
 			wait_delay();
 		} while (!(JE_anyButton() || (frameCountMax == 0 && temp == 1)));
 	}
-
-	wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
 
 	fade_black(15);
 	JE_clr256(VGAScreen);
@@ -1540,62 +1497,40 @@ void JE_mainKeyboardInput( void )
 	ingamemenu_pressed = ingamemenu_pressed || I_KEY_pressed(SDLK_ESCAPE);
 
 /*
-	if (keysactive[SDLK_o])
+	if (debug)
 	{
-		// toggle screenshot pause
-		if (keysactive[SDLK_NUMLOCK])
-		{
-			superPause = !superPause;
-		}
-
 		// {SMOOTHIES}
-		if (keysactive[SDLK_F12])
+		if (I_KEY_pressed(SDLK_F12))
 		{
 			for (temp = SDLK_2; temp <= SDLK_9; temp++)
 			{
-				if (keysactive[temp])
-				{
+				if (I_KEY_pressed(temp))
 					smoothies[temp-SDLK_2] = !smoothies[temp-SDLK_2];
-				}
 			}
-			if (keysactive[SDLK_0])
-			{
+			if (I_KEY_pressed(SDLK_0))
 				smoothies[8] = !smoothies[8];
-			}
-		} else
+		}
 
 		// {CYCLE THROUGH FILTER COLORS}
-		if (keysactive[SDLK_MINUS])
+		if (I_KEY_pressed(SDLK_MINUS))
 		{
 			if (levelFilter == -99)
-			{
 				levelFilter = 0;
-			} else {
-				levelFilter++;
-				if (levelFilter == 16)
-				{
-					levelFilter = -99;
-				}
-			}
-		} else
+			else if (++levelFilter == 16)
+				levelFilter = -99;
+		}
 
 		// {HYPER-SPEED}
-		if (keysactive[SDLK_1])
+		if (I_KEY_pressed(SDLK_1))
 		{
-			fastPlay++;
-			if (fastPlay > 2)
-			{
+			if (++fastPlay > 2)
 				fastPlay = 0;
-			}
-			keysactive[SDLK_1] = false;
 			JE_setNewGameSpeed();
 		}
 
 		// {IN-GAME RANDOM MUSIC SELECTION}
-		if (keysactive[SDLK_SCROLLOCK])
-		{
+		if (I_KEY_pressed(SDLK_SCROLLOCK))
 			play_song(mt_rand() % MUSIC_NUM);
-		}
 	}
 */
 }
@@ -1603,13 +1538,6 @@ void JE_mainKeyboardInput( void )
 void JE_pauseGame( void )
 {
 	//tempScreenSeg = VGAScreenSeg; // sega000
-/*	if (!superPause)
-	{
-		JE_dString(VGAScreenSeg, 120, 90, miscText[22], FONT_SHAPES);
-
-		VGAScreen = VGAScreenSeg;
-		JE_showVGA();
-	} */
 
 	set_volume(tyrMusicVolume / 2, fxVolume);
 
@@ -2468,6 +2396,7 @@ redo:
 void JE_mainGamePlayerFunctions( void )
 {
 	/*PLAYER MOVEMENT/MOUSE ROUTINES*/
+	int cameraXFocusTarget = 160;
 
 	if (endLevel && levelEnd > 0)
 	{
@@ -2498,22 +2427,29 @@ void JE_mainGamePlayerFunctions( void )
 
 	/* == Parallax Map Scrolling == */
 	if (PL_NumPlayers() == 2)
-		tempX = (player[0].x + player[1].x) / 2;
+		cameraXFocusTarget = (player[0].x + player[1].x) / 2;
 	else if (player[0].player_status == STATUS_INGAME)
-		tempX = player[0].x;
+		cameraXFocusTarget = player[0].x;
 	else if (player[1].player_status == STATUS_INGAME)
-		tempX = player[1].x;
-	else
-		tempX = 160;
+		cameraXFocusTarget = player[1].x;
 
 	// Smooth out sudden jumps
-/*	if (lastTempX + 10 < tempX)
-		tempX = lastTempX + 10;
-	else if (lastTempX - 10 > tempX)
-		tempX = lastTempX - 10;
-	lastTempX = tempX; */
+	if (cameraXFocus == -1) // First gameplay frame -- jump to focus target
+		cameraXFocus = cameraXFocusTarget;
+	else if (cameraXFocus + 8 < cameraXFocusTarget)
+	{
+		printf("camera playing catchup: %d to %d\n", cameraXFocus, cameraXFocusTarget);
+		cameraXFocus += 8;
+	}
+	else if (cameraXFocus - 8 > cameraXFocusTarget)
+	{
+		printf("camera playing catchup: %d to %d\n", cameraXFocus, cameraXFocusTarget);
+		cameraXFocus -= 8;
+	}
+	else
+		cameraXFocus = cameraXFocusTarget;
 
-	tempW = floorf((260.0f - (tempX - 36.0f)) / (260.0f - 36.0f) * (24.0f * 3.0f) - 1.0f);
+	tempW = floorf((260.0f - (cameraXFocus - 36.0f)) / (260.0f - 36.0f) * (24.0f * 3.0f) - 1.0f);
 	mapX3Ofs   = tempW;
 	mapX3Pos   = mapX3Ofs % 24;
 	mapX3bpPos = 1 - (mapX3Ofs / 24);

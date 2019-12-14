@@ -41,103 +41,12 @@ Uint16 mouse_x, mouse_y;
 
 Uint8 keysactive[SDLK_LAST];
 
-#ifdef NDEBUG
-bool input_grab_enabled = true;
-#else
-bool input_grab_enabled = false;
-#endif
-
-
-void flush_events_buffer( void )
-{
-	SDL_Event ev;
-
-	while (SDL_PollEvent(&ev));
-}
-
-void wait_input( JE_boolean keyboard, JE_boolean mouse, JE_boolean joystick )
-{
-	STUB();
-	(void)keyboard;
-	(void)mouse;
-	(void)joystick;
-/*
-	service_SDL_events(false);
-	while (!((keyboard && keydown) || (mouse && mousedown) || (joystick && joydown)))
-	{
-		SDL_Delay(SDL_POLL_INTERVAL);
-		service_SDL_events(false);
-		
-#ifdef WITH_NETWORK
-		if (isNetworkGame)
-			network_check();
-#endif
-	}
-*/
-}
-
 void wait_noinput( JE_boolean keyboard, JE_boolean mouse, JE_boolean joystick )
 {
 	STUB();
 	(void)keyboard;
 	(void)mouse;
 	(void)joystick;
-/*
-	service_SDL_events(false);
-	while ((keyboard && keydown) || (mouse && mousedown) || (joystick && joydown))
-	{
-		SDL_Delay(SDL_POLL_INTERVAL);
-		poll_joysticks();
-		service_SDL_events(false);
-		
-#ifdef WITH_NETWORK
-		if (isNetworkGame)
-			network_check();
-#endif
-	}
-*/
-}
-
-void init_keyboard( void )
-{
-	SDL_EnableKeyRepeat(500, 60);
-
-	newkey = newmouse = false;
-	keydown = mousedown = false;
-}
-
-void input_grab( bool enable )
-{
-#if defined(TARGET_GP2X) || defined(TARGET_DINGUX)
-	enable = true;
-#endif
-
-	enable = false;
-	
-	input_grab_enabled = enable || fullscreen_enabled;
-	
-	SDL_ShowCursor(input_grab_enabled ? SDL_DISABLE : SDL_ENABLE);
-#ifdef NDEBUG
-	SDL_WM_GrabInput(input_grab_enabled ? SDL_GRAB_ON : SDL_GRAB_OFF);
-#endif
-}
-
-JE_word JE_mousePosition( JE_word *mouseX, JE_word *mouseY )
-{
-	service_SDL_events(false);
-	*mouseX = mouse_x;
-	*mouseY = mouse_y;
-	return mousedown ? lastmouse_but : 0;
-}
-
-void set_mouse_position( int x, int y )
-{
-	if (input_grab_enabled)
-	{
-		SDL_WarpMouse(x * scalers[scaler].width / vga_width, y * scalers[scaler].height / vga_height);
-		mouse_x = x;
-		mouse_y = y;
-	}
 }
 
 void service_SDL_events( JE_boolean clear_new )
@@ -259,9 +168,3 @@ void service_SDL_events( JE_boolean clear_new )
 		}
 	} */
 }
-
-void JE_clearKeyboard( void )
-{
-	// /!\ Doesn't seems important. I think. D:
-}
-
