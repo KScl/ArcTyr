@@ -937,7 +937,9 @@ void JE_endLevelAni( void )
 		}
 	}
 
-	if (!normalBonusLevelCurrent || !bonusLevelCurrent)
+	if (allPlayersGone)
+		play_song(SONG_GAMEOVER);
+	else //if (!normalBonusLevelCurrent || !bonusLevelCurrent)
 		ARC_RankIncrease();	
 
 	player[0].last_items = player[0].items;
@@ -963,10 +965,8 @@ void JE_endLevelAni( void )
 	else if (!allPlayersGone)
 		sprintf(tempStr, "%s %s", miscText[27-1], levelName); // "Completed"
 	else
-	{
 		sprintf(tempStr, "%s %s", miscText[62-1], levelName); // "Exiting"
-		play_song(SONG_GAMEOVER);
-	}
+
 	JE_outTextGlow(VGAScreenSeg, 48, 20, tempStr);
 
 	// ---
@@ -2223,15 +2223,10 @@ void JE_mainGamePlayerFunctions( void )
 	// Smooth out sudden jumps
 	if (cameraXFocus == -1) // First gameplay frame -- jump to focus target
 		cameraXFocus = cameraXFocusTarget;
-	else if (cameraXFocus + 8 < cameraXFocusTarget)
+	else if (abs(cameraXFocus - cameraXFocusTarget) > 8)
 	{
 		printf("camera playing catchup: %d to %d\n", cameraXFocus, cameraXFocusTarget);
-		cameraXFocus += 8;
-	}
-	else if (cameraXFocus - 8 > cameraXFocusTarget)
-	{
-		printf("camera playing catchup: %d to %d\n", cameraXFocus, cameraXFocusTarget);
-		cameraXFocus -= 8;
+		cameraXFocus = (cameraXFocus + cameraXFocusTarget) / 2;
 	}
 	else
 		cameraXFocus = cameraXFocusTarget;

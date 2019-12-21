@@ -62,8 +62,8 @@ static const Assignment default_assignments[NUM_ASSIGNMENTS][4] = {
 	{ {IT_KEY, SDLK_t}, {IT_JBTN, 1, 1} }, // INPUT_P2_SKICK,
 	{ {IT_KEY, SDLK_y}, {IT_JBTN, 2, 1} }, // INPUT_P2_MODE,
 
-	{ {IT_KEY, SDLK_F7}, {IT_JBTN, 4, 0} }, // INPUT_P1_COIN,
-	{ {IT_KEY, SDLK_F8}, {IT_JBTN, 4, 1} }, // INPUT_P2_COIN,
+	{ {IT_KEY, SDLK_F7}, {IT_JBTN, 4, 0} }, // INPUT_P1_COIN, (SDLK_F7 hardcoded)
+	{ {IT_KEY, SDLK_F8}, {IT_JBTN, 4, 1} }, // INPUT_P2_COIN, (SDLK_F8 hardcoded)
 
 	{ {IT_KEY, SDLK_F9 } }, // INPUT_SERVICE_COIN,  (SDLK_F9 hardcoded)
 	{ {IT_KEY, SDLK_F10} }, // INPUT_SERVICE_ENTER, (SDLK_F10 hardcoded)
@@ -205,7 +205,10 @@ bool I_loadConfigAssignments( Config *config )
 		}
 	}
 
-	// F9 and F10 are hardcoded
+	// F7-F10 are hardcoded
+	button_assignments[INPUT_P1_COIN][0].type = button_assignments[INPUT_P2_COIN][0].type = IT_KEY;
+	button_assignments[INPUT_P1_COIN][0].value = SDLK_F7;
+	button_assignments[INPUT_P2_COIN][0].value = SDLK_F8;
 	button_assignments[INPUT_SERVICE_COIN][0].type = button_assignments[INPUT_SERVICE_ENTER][0].type = IT_KEY;
 	button_assignments[INPUT_SERVICE_COIN][0].value = SDLK_F9;
 	button_assignments[INPUT_SERVICE_ENTER][0].value = SDLK_F10;
@@ -343,7 +346,6 @@ static void I_KEY_events( void )
 					SDL_ShowCursor((fullscreen_enabled) ? SDL_DISABLE : SDL_ENABLE);
 					break;
 				}
-
 				keys_active[ev.key.keysym.sym] = 1;
 				keys_active_this_time[ev.key.keysym.sym] = 1;
 				break;
@@ -484,6 +486,58 @@ bool I_anyButton( void )
 	// ... what this actually means: a fire button
 	I_checkButtons();
 	return ((button_time_held[INPUT_P1_FIRE] == 1) || (button_time_held[INPUT_P2_FIRE] == 1));
+}
+
+// ----------------
+// Remapping inputs
+// ----------------
+
+static bool I_RemapInput( uint assignment, uint i, JE_byte type, uint value )
+{
+	if (type == IT_NONE)
+	{
+		if (i < 3)
+			memmove(&button_assignments[assignment][i], &button_assignments[assignment][i+1], sizeof(Assignment)*(3-i));
+		button_assignments[assignment][3].type = IT_NONE;
+		return true;
+	}
+	if (type == IT_KEY && value >= SDLK_F7 && value <= SDLK_F10)
+		return false;
+
+	button_assignments[assignment][i].type = type;
+	button_assignments[assignment][i].value = value;
+	button_time_held[i] = 1;
+	return true;
+}
+
+bool I_PromptToRemapButton( uint assignment, uint input )
+{
+	JE_byte type = IT_NONE;
+	uint value = 0;
+
+	int i;
+
+	while (true)
+	{
+		I_KEY_events();
+		SDL_JoystickUpdate();
+
+		// Check all keyboard keys.
+		for (i = 0; i < SDLK_LAST && !keys_active_this_time[i]; ++i);
+		if (i < SDLK_LAST)
+		{
+			type = IT_KEY;
+			value = i;
+			break;
+		}
+
+		JE_showVGA();
+		wait_delay();
+		setjasondelay(2);
+	}
+	if (type == button_assignments[assignment][input].type && value == button_assignments[assignment][input].value)
+		return I_RemapInput(assignment, input, IT_NONE, 0);
+	return I_RemapInput(assignment, input, type, value);
 }
 
 

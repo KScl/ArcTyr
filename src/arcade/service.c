@@ -381,6 +381,88 @@ void SRV_Settings( void )
 // ======================
 
 JE_byte buttonsPlayerNum = 0;
+JE_byte curAssignmentNum = 0;
+char curAssignmentName[32] = "";
+
+static void SRV_ButtonAssignmentSubMenu( void )
+{
+	const char *c;
+	char *p = tmpBuf.l;
+	bool lockOut = false;
+
+	if (selectionType == __DISPLAY)
+	{
+		if (curAssignmentNum == 16 || curAssignmentNum == 17)
+			SRVH_DispHeader("Service Buttons");
+		else
+		{
+			sprintf(tmpBuf.l, "Player %s Buttons", buttonsPlayerNum == 0 ? "One" : "Two");
+			SRVH_DispHeader(tmpBuf.l);
+		}
+	}
+
+	optionY += 24;
+
+	// Display what we're modifying and the results to it in realtime
+	strcpy(tmpBuf.l, "--- No inputs ---");
+	for (int i = 0; i < 4; ++i)
+	{
+		c = I_printableButtonCode(curAssignmentNum, i);
+		if (selectionType == __DISPLAY && c[0] != '(')
+		{
+			if (i > 0)
+			{
+				*(p++) = ',';
+				*(p++) = ' ';
+			}
+			sprintf(p, "%s", c); // strings aren't long enough to exceed tmpBuf.l[127]
+			p += strlen(p);
+		}
+
+		// Actual input options (we just set them while making the big string)
+		sprintf(tmpBuf.s, "Input %d", i + 1);
+		if (lockOut || (i == 0 && curAssignmentNum >= INPUT_P1_COIN))
+		{
+			if (selectionType == __DISPLAY)
+			{
+				JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(c, SMALL_FONT_SHAPES), optionY, c, 15, -7, 
+					SMALL_FONT_SHAPES, true);
+				JE_outTextAdjust(VGAScreen, 50, optionY, tmpBuf.s, 15, -7, 
+					SMALL_FONT_SHAPES, true);
+				optionY += 16;
+			}
+			continue;
+		}
+		else
+		{
+			if (selectionType == __SELECT && *menuOption == numOptions)
+			{
+				strcpy(tmpBuf.l, "Press any button to map it to this control.");
+				JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 140, tmpBuf.l, 15, 0, FULL_SHADE);
+				strcpy(tmpBuf.l, "To unset this mapping, press the button already mapped.");
+				JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 148, tmpBuf.l, 15, 0, FULL_SHADE);
+				JE_playSampleNum(I_PromptToRemapButton(curAssignmentNum, i) ? S_SELECT : S_CLINK);
+				return;
+			}
+			SRVH_DispValue(c);
+			SRVH_DispLabel(tmpBuf.s);			
+		}
+
+		++numOptions;
+		if (c[0] == '(')
+			lockOut = true;
+	}
+
+	if (selectionType == __DISPLAY)
+	{
+		optionY = 36;
+		JE_textShade(VGAScreen, 280 - JE_textWidth(tmpBuf.l, TINY_FONT), optionY, tmpBuf.l, 15, 4, FULL_SHADE);
+		JE_textShade(VGAScreen, 40, optionY, curAssignmentName, 15, 5, FULL_SHADE);
+	}
+
+	optionY = 176;
+	SRVH_Back("Back");	
+}
 
 static void SRVH_PlayerButtonSubMenu( const char *name , void (*newFunc)( void ) , JE_byte num )
 {
@@ -400,6 +482,7 @@ static void SRVH_ButtonAssignmentOption( const char *name , uint assignmentNum )
 		const char *c;
 		char *p = tmpBuf.l;
 
+		strcpy(tmpBuf.l, "--- No inputs ---");
 		for (int i = 0; i < 4; ++i)
 		{
 			c = I_printableButtonCode(assignmentNum, i);
@@ -420,8 +503,9 @@ static void SRVH_ButtonAssignmentOption( const char *name , uint assignmentNum )
 	}
 	else if (selectionType == __SELECT && *menuOption == numOptions)
 	{
-		// NOTE: This is a loop
-
+		curAssignmentNum = assignmentNum;
+		strncpy(curAssignmentName, name, 31);
+		menuNest[++menuDeepness] = SRV_ButtonAssignmentSubMenu;
 	}
 	++numOptions;
 }

@@ -76,6 +76,8 @@ bool I_loadConfigAssignments( Config *config );
 bool I_saveConfigAssignments( Config *config );
 void I_resetConfigAssignments( void );
 
+bool I_PromptToRemapButton( uint assignment, uint input );
+
 // Demo recording / playback
 extern bool play_demo, record_demo;
 extern Uint8 demo_num;
