@@ -45,7 +45,12 @@ enum {
 	DIR_DOWN  = SDL_HAT_DOWN,
 	DIR_LEFT  = SDL_HAT_LEFT,
 	DIR_RIGHT = SDL_HAT_RIGHT,
+	DIR_NEG   = 0,
+	DIR_POS   = 15,
 };
+
+// At what point we consider an axis "pressed" or "held"
+#define AXIS_BOUNDARY 24576
 
 typedef struct {
 	JE_byte type; // see IT_ above

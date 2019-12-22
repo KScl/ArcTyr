@@ -76,7 +76,7 @@ JE_byte button_pressed[NUM_ASSIGNMENTS];
 uint button_time_held[NUM_ASSIGNMENTS];
 
 // Used for saving/displaying button assignments
-static const char *hataxis_dirs[16] = {"", "Up", "Rgt", "", "Dwn", "", "", "", "Lft", "", "", "", "", "", "", ""};
+static const char *hataxis_dirs[16] = {"Neg", "Up", "Rgt", "", "Dwn", "", "", "", "Lft", "", "", "", "", "", "", "Pos"};
 
 // Used for loading config files
 void I_readButtonCode( uint assignment, uint i, const char *code )
@@ -111,6 +111,8 @@ void I_readButtonCode( uint assignment, uint i, const char *code )
 				case 'D': a->dir = DIR_DOWN; break;
 				case 'L': a->dir = DIR_LEFT; break;
 				case 'R': a->dir = DIR_RIGHT; break;
+				case 'P': a->dir = DIR_POS; break;
+				case 'N': a->dir = DIR_NEG; break;
 				default: return; // invalid
 			}
 			a->type = (code[3] == 'A') ? IT_JAXIS : IT_JHAT;
@@ -413,6 +415,14 @@ void I_checkButtons( void )
 					}
 					break;
 				case IT_JAXIS:
+					if (a->jNum >= num_joysticks || !joy_handles[a->jNum])
+						break;
+					if ((a->dir == DIR_POS && SDL_JoystickGetAxis(joy_handles[a->jNum], a->value) >=  AXIS_BOUNDARY)
+					 || (a->dir == DIR_NEG && SDL_JoystickGetAxis(joy_handles[a->jNum], a->value) <= -AXIS_BOUNDARY))
+					{
+						pressed = true;
+						goto end_assignment;
+					}
 					break;
 				default:
 					goto end_assignment;
@@ -492,52 +502,110 @@ bool I_anyButton( void )
 // Remapping inputs
 // ----------------
 
-static bool I_RemapInput( uint assignment, uint i, JE_byte type, uint value )
+static bool I_RemapInput( uint inputNum, uint subInput, Assignment *map )
 {
-	if (type == IT_NONE)
+	if (map->type == IT_NONE)
 	{
-		if (i < 3)
-			memmove(&button_assignments[assignment][i], &button_assignments[assignment][i+1], sizeof(Assignment)*(3-i));
-		button_assignments[assignment][3].type = IT_NONE;
+		if (subInput < 3)
+			memmove(&button_assignments[inputNum][subInput], &button_assignments[inputNum][subInput+1], sizeof(Assignment)*(3-subInput));
+		button_assignments[inputNum][3].type = IT_NONE;
 		return true;
 	}
-	if (type == IT_KEY && value >= SDLK_F7 && value <= SDLK_F10)
+	if (map->type == IT_KEY && map->value >= SDLK_F7 && map->value <= SDLK_F10)
 		return false;
 
-	button_assignments[assignment][i].type = type;
-	button_assignments[assignment][i].value = value;
-	button_time_held[i] = 1;
+	button_assignments[inputNum][subInput].type = map->type;
+	button_assignments[inputNum][subInput].value = map->value;
+	button_assignments[inputNum][subInput].jNum = map->jNum;
+	button_assignments[inputNum][subInput].dir = map->dir;
+	button_time_held[subInput] = 1;
 	return true;
 }
 
-bool I_PromptToRemapButton( uint assignment, uint input )
+bool I_PromptToRemapButton( uint inputNum, uint subInput )
 {
-	JE_byte type = IT_NONE;
-	uint value = 0;
+	SDL_Event ev;
+	static Assignment newMap = {IT_NONE};
 
-	int i;
+	// Make sure all events up to this point are handled.
+	I_KEY_events();
+	SDL_JoystickUpdate();
 
+	// Temporarily allow joystick events.
+	SDL_JoystickEventState(SDL_ENABLE);
+
+	newMap.type = IT_NONE;
+	newMap.value = newMap.dir = newMap.jNum = 0;
 	while (true)
 	{
-		I_KEY_events();
-		SDL_JoystickUpdate();
-
-		// Check all keyboard keys.
-		for (i = 0; i < SDLK_LAST && !keys_active_this_time[i]; ++i);
-		if (i < SDLK_LAST)
+		while (SDL_PollEvent(&ev))
 		{
-			type = IT_KEY;
-			value = i;
-			break;
+			switch (ev.type)
+			{
+				case SDL_QUIT:
+					// Halt requested by SDL
+					JE_tyrianHalt(0);
+					break;
+				case SDL_KEYUP:
+					// Still need this to make sure the button that was pressed to get into
+					// input assignment mode is correctly considered released
+					keys_active[ev.key.keysym.sym] = 0;
+					break;
+
+				case SDL_KEYDOWN:
+					newMap.type = IT_KEY;
+					newMap.value = ev.key.keysym.sym;
+					goto exitloop;
+				case SDL_JOYBUTTONDOWN:
+					newMap.type = IT_JBTN;
+					newMap.jNum = ev.jbutton.which;
+					newMap.value = ev.jbutton.button;
+					goto exitloop;
+				case SDL_JOYHATMOTION:
+					// Only assign if we get exactly one direction
+					if (ev.jhat.value == SDL_HAT_UP)
+						newMap.dir = DIR_UP;
+					else if (ev.jhat.value == SDL_HAT_RIGHT)
+						newMap.dir = DIR_RIGHT;
+					else if (ev.jhat.value == SDL_HAT_DOWN)
+						newMap.dir = DIR_DOWN;
+					else if (ev.jhat.value == SDL_HAT_LEFT)
+						newMap.dir = DIR_LEFT;
+					else break;
+					newMap.type = IT_JHAT;
+					newMap.jNum = ev.jhat.which;
+					newMap.value = ev.jhat.hat;
+					goto exitloop;
+				case SDL_JOYAXISMOTION:
+					if (ev.jaxis.value >= AXIS_BOUNDARY)
+						newMap.dir = DIR_POS;
+					else if (ev.jaxis.value <= -AXIS_BOUNDARY)
+						newMap.dir = DIR_NEG;
+					else break;
+					newMap.type = IT_JAXIS;
+					newMap.jNum = ev.jaxis.which;
+					newMap.value = ev.jaxis.axis;
+					goto exitloop;
+				default:
+					break;
+			}
 		}
 
 		JE_showVGA();
 		wait_delay();
 		setjasondelay(2);
 	}
-	if (type == button_assignments[assignment][input].type && value == button_assignments[assignment][input].value)
-		return I_RemapInput(assignment, input, IT_NONE, 0);
-	return I_RemapInput(assignment, input, type, value);
+
+	exitloop:
+	// Disallow joystick events upon exiting.
+	SDL_JoystickEventState(SDL_IGNORE);
+
+	if (newMap.type == button_assignments[inputNum][subInput].type && newMap.value == button_assignments[inputNum][subInput].value
+	 && newMap.jNum == button_assignments[inputNum][subInput].jNum && newMap.dir == button_assignments[inputNum][subInput].dir)
+	{
+		newMap.type = IT_NONE;
+	}
+	return I_RemapInput(inputNum, subInput, &newMap);
 }
 
 
