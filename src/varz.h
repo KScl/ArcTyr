@@ -119,6 +119,7 @@ struct JE_SingleEnemyType
 
 	// ARC extras (not in data files)
 	JE_byte     armoreffectiveness; // 1: normal damage, 2: half damage
+	JE_byte     playertotarget; // In two-player games, who to target
 };
 
 typedef struct JE_SingleEnemyType JE_MultiEnemyType[125]; /* [1..125] */
@@ -233,7 +234,6 @@ extern JE_boolean endLevel, reallyEndLevel, waitToEndLevel, playerEndLevel, norm
 extern JE_byte newPL[10];
 extern JE_word returnLoc;
 extern JE_boolean returnActive;
-extern JE_word galagaShotFreq;
 extern JE_boolean debug;
 extern Uint32 debugTime, lastDebugTime;
 extern JE_longint debugHistCount;
@@ -310,7 +310,7 @@ void JE_getShipInfo( void );
 void JE_updateOption( Player *this_player, uint i );
 void JE_updateAllOptions( void );
 
-void JE_specialComplete( JE_byte playernum, JE_byte specialType, uint shot_i );
+void JE_specialComplete( JE_byte playernum, JE_byte specialType, uint shot_i, JE_byte twiddlePower );
 void JE_doSpecialShot( JE_byte playernum, uint *armor, uint *shield );
 
 void JE_setupExplosion( signed int x, signed int y, signed int delta_y, unsigned int type, bool fixed_position, bool follow_player );
@@ -325,8 +325,6 @@ void JE_drawSP( void );
 
 extern JE_byte globalFlare;
 extern JE_shortint globalFlareFilter;
-
-extern JE_boolean pacifistJokeActive[2];
 
 #endif /* VARZ_H */
 

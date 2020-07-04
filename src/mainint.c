@@ -740,6 +740,8 @@ void JE_playCredits( void )
 	for (lines = 0; !feof(f) && lines < lines_max; ++lines)
 	{
 		read_encrypted_pascal_string(credstr[lines], sizeof(credstr[lines]), f);
+		if (!strncmp(credstr[lines]+1, "Tim Sweeney", 11))
+			strncpy(credstr[lines]+1, "Hatsune Miku", line_max_length-1);
 	}
 	if (lines == lines_max)
 		--lines;
@@ -1053,30 +1055,6 @@ void JE_endLevelAni( void )
 
 		JE_drawTextGlow(VGAScreenSeg);
 	}
-	else if (pacifistJokeActive[0] || pacifistJokeActive[1])
-	{
-		strcpy(tempStr, "Pacifist bonus.");
-		JE_saveTextGlow(JE_fontCenter(tempStr, SMALL_FONT_SHAPES), 120, tempStr);
-		if (pacifistJokeActive[0])
-		{
-			JE_saveTextGlow(50, 135, "1");
-			player[0].cash += 1;
-			ARC_ScoreLife(&player[0]);
-		}
-		if (pacifistJokeActive[1])
-		{
-			JE_saveTextGlow(270 - JE_textWidth("1", SMALL_FONT_SHAPES), 135, "1");
-			player[1].cash += 1;
-			ARC_ScoreLife(&player[1]);
-		}
-
-		if (soundQueue[6])
-			JE_playSampleNumOnChannel(soundQueue[6], 6);
-		if (soundQueue[7])
-			JE_playSampleNumOnChannel(soundQueue[7], 7);
-
-		JE_drawTextGlow(VGAScreenSeg);
-	}
 
 	// ---
 
@@ -1268,8 +1246,6 @@ void JE_mainKeyboardInput( void )
 			levelTimerCountdown = 0;
 			endLevel = true;
 			levelEnd = 40;
-
-			pacifistJokeActive[0] = pacifistJokeActive[1] = false;
 		}
 	}
 
@@ -1408,8 +1384,6 @@ redo:
 		}
 		else
 		{
-			pacifistJokeActive[playerNum_ - 1] = false;
-
 			// finished exploding: check for lives now
 			if (normalBonusLevelCurrent || bonusLevelCurrent)
 			{
@@ -1730,7 +1704,7 @@ redo:
 	}
 	else  /*twoPlayerLinked*/
 	{
-		Player *other_player = (this_player == &player[1]) ? &player[0] : &player[1];
+		Player *other_player = PL_OtherPlayer(this_player);
 
 		this_player->x = other_player->x - ((shipGr_ == 0) ? 1 : 0);
 		this_player->y = other_player->y + 8;
@@ -2268,14 +2242,18 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 			if (abs(this_player->x - enemy_screen_x) < 12 && abs(this_player->y - enemy[z].ey) < 14)
 			{   /*Collide*/
 				int evalue = enemy[z].evalue;
-				if (evalue > 29999)
+
+				if (evalue >= 30000)
 				{
-					if (evalue == 30000 || evalue > 30005)
+					JE_boolean awardPoints = true;
+
+					if (evalue >= 30011 && evalue <= 30015)
 					{
-						// formerly Purple Ball / Galaga DragonWing
-						soundQueue[7] = S_POWERUP;
+						// Death-dropped powerup, don't award score
+						evalue -= 10;
+						awardPoints = false;
 					}
-					else if (evalue > 30000 && evalue <= 30005)
+					if (evalue >= 30001 && evalue <= 30005)
 					{
 						// Powerups aren't contactable until they start falling,
 						// so death-sprayed powerups don't get accidentally stolen
@@ -2298,10 +2276,14 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 							else
 								tmpBuf.s[0] = 0;
 
-							if (power_up_weapon(this_player, FRONT_WEAPON))
+							if (PL_PowerUpWeapon(this_player, FRONT_WEAPON))
 								sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "powered up");
 							else
+							{
+								if (awardPoints)
+									this_player->cash += 750;
 								sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "power is maxed!");
+							}
 						}
 						else
 						{
@@ -2316,12 +2298,19 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 								sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, color, wName);
 						}
 						JE_drawTextWindowColorful(tmpBuf.l);
-						this_player->cash += 250;
+						if (awardPoints)
+							this_player->cash += 250;
 
 						this_player->cur_weapon = pw;
 						this_player->items.weapon[FRONT_WEAPON].id = tempW;
 						soundQueue[7] = S_POWERUP;
 						enemyAvail[z] = 1;
+					}
+					else
+					{
+						// uncaught powerup
+						// formerly Purple Ball / Galaga DragonWing
+						soundQueue[7] = S_POWERUP;						
 					}
 				}
 				else if (evalue > 20000)

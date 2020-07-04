@@ -307,8 +307,6 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 	if (portNum > num_ports || wpNum <= 0 || wpNum > num_pWeapons)
 		return MAX_PWEAPON;
 
-	pacifistJokeActive[playerNum - 1] = false;
-
 	const JE_WeaponType* weapon = &pWeapons[wpNum];
 
 	if (weapon->sound > 0)

@@ -92,7 +92,7 @@ JE_boolean PL_ShotRepeat( Player *this_player, uint port )
 }
 
 
-bool power_up_weapon( Player *this_player, uint port )
+bool PL_PowerUpWeapon( Player *this_player, uint port )
 {
 	const bool can_power_up = this_player->items.weapon[port].id != 0 &&  // not None
 	                          this_player->items.weapon[port].power < 11; // not at max power
@@ -101,11 +101,6 @@ bool power_up_weapon( Player *this_player, uint port )
 		++this_player->items.weapon[port].power;
 		this_player->shot_multi_pos[port] = 0;
 	}
-	else  // cash consolation prize
-	{
-		this_player->cash += 1000;
-	}
-	
 	return can_power_up;
 }
 

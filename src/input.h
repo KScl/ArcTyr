@@ -73,15 +73,15 @@ bool I_inputForMenu( uint *i, uint stop );
 bool I_waitOnInputForMenu( uint start, uint stop, uint wait );
 bool I_anyButton( void );
 
-void I_readButtonCode( uint assignment, uint i, const char *code );
-const char *I_getButtonCode( uint assignment, uint i );
-const char *I_printableButtonCode( uint assignment, uint i );
+void I_readButtonCode( uint inputNum, uint subInput, const char *code );
+const char *I_getButtonCode( uint inputNum, uint subInput );
+const char *I_printableButtonCode( uint inputNum, uint subInput );
 
 bool I_loadConfigAssignments( Config *config );
 bool I_saveConfigAssignments( Config *config );
 void I_resetConfigAssignments( void );
 
-bool I_PromptToRemapButton( uint assignment, uint input );
+bool I_PromptToRemapButton( uint inputNum, uint subInput );
 
 // Demo recording / playback
 extern bool play_demo, record_demo;

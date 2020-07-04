@@ -283,7 +283,7 @@ void JE_drawEnemy( int enemyOffset ) // actually does a whole lot more than just
 
 			if (enemy[i].xaccel && enemy[i].xaccel - 89u > mt_rand() % 11)
 			{
-				if (player[0].x > enemy[i].ex)
+				if (player[enemy[i].playertotarget].x > enemy[i].ex)
 				{
 					if (enemy[i].exc < enemy[i].xaccel - 89)
 						enemy[i].exc++;
@@ -297,7 +297,7 @@ void JE_drawEnemy( int enemyOffset ) // actually does a whole lot more than just
 
 			if (enemy[i].yaccel && enemy[i].yaccel - 89u > mt_rand() % 11)
 			{
-				if (player[0].y > enemy[i].ey)
+				if (player[enemy[i].playertotarget].y > enemy[i].ey)
 				{
 					if (enemy[i].eyc < enemy[i].yaccel - 89)
 						enemy[i].eyc++;
@@ -486,7 +486,8 @@ enemy_still_exists:
 								enemy[i].eshotwait[j-1] = (enemy[i].eshotwait[j-1] / 2) + 1;
 						}
 
-						//if (galagaMode && (enemy[i].eyc == 0 || (mt_rand() % 400) >= galagaShotFreq))
+						// formerly galaga:
+						//if (galagaMode && (enemy[i].eyc == 0 || (mt_rand() % 400) >= galagaRandomShotChance))
 						//	goto draw_enemy_end;
 
 						switch (temp3)
@@ -547,11 +548,7 @@ enemy_still_exists:
 							break;
 						default:
 							// all bullets fired in one round all aim for the same target
-							target_p = PL_WhosAlive();
-							if (target_p == 3)
-								target_p = mt_rand() & 1;
-							else if (target_p > 0)
-								--target_p;
+							target_p = PL_RandomPlayer();
 
 						/*Rot*/
 							const JE_WeaponType *ewpn = &eWeapons[temp3];
@@ -661,7 +658,7 @@ enemy_still_exists:
 					if (enemy[i].launchspecial != 0)
 					{
 						/*Type  1 : Must be inline with player*/
-						if (abs(enemy[i].ey - player[0].y) > 5)
+						if (abs(enemy[i].ey - player[enemy[i].playertotarget].y) > 5)
 							goto draw_enemy_end;
 					}
 
@@ -694,10 +691,10 @@ enemy_still_exists:
 							}
 							else
 							{
-								int target_x = (player[0].x + 25) - tempX - tempMapXOfs - 4;
+								int target_x = (player[e->playertotarget].x + 25) - tempX - tempMapXOfs - 4;
 								if (target_x == 0)
 									target_x = 1;
-								int tempI5 = player[0].y - tempY;
+								int tempI5 = player[e->playertotarget].y - tempY;
 								if (tempI5 == 0)
 									tempI5 = 1;
 								const int longest_side = MAX(abs(target_x), abs(tempI5));
@@ -1030,7 +1027,6 @@ start_level_first:
 	JE_setNewGameSpeed();
 
 	/* JE_setVol(tyrMusicVolume, fxPlayVol >> 2); NOTE: MXD killed this because it was broken */
-
 	if (!play_demo && record_demo)
 		DEV_RecordDemoStart();
 	else if (play_demo)
@@ -1061,7 +1057,6 @@ start_level_first:
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].exploding_ticks = 0;
-		pacifistJokeActive[i] = (player[i].player_status == STATUS_INGAME);
 	}
 
 	memset(enemyAvail,       1, sizeof(enemyAvail));
@@ -1103,8 +1098,6 @@ start_level_first:
 	memset(superpixels, 0, sizeof(superpixels));
 
 	returnActive = false;
-
-	galagaShotFreq = 0;
 
 	// keeps map from scrolling past the top
 	BKwrap1 = BKwrap1to = &megaData1.mainmap[1][0];
@@ -2539,12 +2532,14 @@ new_game:
 						break;
 
 					case 'w':  // Stalker 21.126 section jump
-						temp = atoi(s + 3);   /*Allowed to go to Time War?*/
+						printf("21.126 jump hit (always false)\n");
+/*
+						temp = atoi(s + 3); // Allowed to go to Time War?
 						if (player[0].items.ship == 13)
 						{
 							mainLevel = temp;
 							jumpSection = true;
-						}
+						} */
 						break;
 
 					case 't':
@@ -2582,7 +2577,7 @@ new_game:
 						songBuy = temp - 1;
 						break;
 
-					case 'I': /*Load Items Available Information*/
+					case 'I': // Load Items Available Information
 						// Item screen is skipped now
 						// However we go through the loading motions
 						// to read off the same amount of data
@@ -2626,6 +2621,14 @@ new_game:
 						break;
 
 					case 'Q':
+						play_song(18);
+
+						fade_black(15);
+						JE_clr256(VGAScreen);
+						memcpy(colors, palettes[6-1], sizeof(colors));
+						fade_palette(colors, 15, 0, 255);
+						JE_loadPCX(arcdata_dir(), "select.pcx");
+
 						temp = secretHint + (mt_rand() % 3) * 3;
 
 						JE_byte plrs = PL_WhosInGame();
@@ -2879,6 +2882,7 @@ new_game:
 						break;
 
 					case 'W':
+						skip_header_draw = true;
 						if (!constantPlay)
 						{
 							if (true /* !ESCPressed */)
@@ -2908,6 +2912,7 @@ new_game:
 								JE_displayText();
 							}
 						}
+						skip_header_draw = false;
 						break;
 
 					case 'H':
@@ -3535,6 +3540,8 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 	{
 		totalEnemy++;  /*Destruction ratio*/
 	}
+
+	enemy->playertotarget = PL_RandomPlayer();
 
 	/* indicates what to set ENEMYAVAIL to */
 	return avail;
@@ -4638,8 +4645,7 @@ void JE_eventSystem( void )
 
 	case 78:
 		event_name("galaga_shot_freq");
-		if (galagaShotFreq < 10)
-			galagaShotFreq++;
+		// Event dummied out
 		break;
 
 	case 79:

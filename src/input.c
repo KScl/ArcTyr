@@ -79,9 +79,9 @@ uint button_time_held[NUM_ASSIGNMENTS];
 static const char *hataxis_dirs[16] = {"Neg", "Up", "Rgt", "", "Dwn", "", "", "", "Lft", "", "", "", "", "", "", "Pos"};
 
 // Used for loading config files
-void I_readButtonCode( uint assignment, uint i, const char *code )
+void I_readButtonCode( uint inputNum, uint subInput, const char *code )
 {
-	Assignment *a = &button_assignments[assignment][i];
+	Assignment *a = &button_assignments[inputNum][subInput];
 	memset(a, 0, sizeof(Assignment));
 
 	switch (code[0])
@@ -129,14 +129,14 @@ void I_readButtonCode( uint assignment, uint i, const char *code )
 }
 
 // Used for saving config files
-const char *I_getButtonCode( uint assignment, uint i )
+const char *I_getButtonCode( uint inputNum, uint subInput )
 {
 	static char bcbuf[16] = "";
 
-	if (assignment >= NUM_ASSIGNMENTS || i >= 4)
+	if (inputNum >= NUM_ASSIGNMENTS || subInput >= 4)
 		return "";
 
-	Assignment *a = &button_assignments[assignment][i];
+	Assignment *a = &button_assignments[inputNum][subInput];
 	switch (a->type)
 	{
 		case IT_KEY:
@@ -156,14 +156,14 @@ const char *I_getButtonCode( uint assignment, uint i )
 }
 
 // Used for the service menu
-const char *I_printableButtonCode( uint assignment, uint i )
+const char *I_printableButtonCode( uint inputNum, uint subInput )
 {
 	static char pcbuf[32] = "";
 
-	if (assignment >= NUM_ASSIGNMENTS || i >= 4)
+	if (inputNum >= NUM_ASSIGNMENTS || subInput >= 4)
 		return "";
 
-	Assignment *a = &button_assignments[assignment][i];
+	Assignment *a = &button_assignments[inputNum][subInput];
 	switch (a->type)
 	{
 		case IT_KEY:
@@ -518,7 +518,7 @@ static bool I_RemapInput( uint inputNum, uint subInput, Assignment *map )
 	button_assignments[inputNum][subInput].value = map->value;
 	button_assignments[inputNum][subInput].jNum = map->jNum;
 	button_assignments[inputNum][subInput].dir = map->dir;
-	button_time_held[subInput] = 1;
+	button_time_held[inputNum] = 1;
 	return true;
 }
 

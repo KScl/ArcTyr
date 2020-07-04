@@ -159,11 +159,7 @@ JE_word ARC_GetCoins( void )
 //
 // High Scores
 //
-static struct {
-	char name[10];
-	uint cash;
-	JE_boolean new;
-} highScores[20] = {
+HighScoreEntry highScores[20] = {
 	{"Trent    ", 100000, false},
 	{"Dougan   ",  90000, false},
 	{"Transon  ",  80000, false},
@@ -191,15 +187,29 @@ JE_boolean ARC_HS_IsLeading( uint cash )
 	return (cash >= highScores[0].cash);
 }
 
-int ARC_HS_FindPosition( uint cash )
+JE_boolean ARC_HS_InsertName( Player *pl )
 {
-	int i;
-	for (i = 0; i < 20; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
-		if (cash >= highScores[i].cash)
-			return i + 1;
+		if (pl->cash >= highScores[i].cash)
+		{
+			// Shift down high scores if necessary
+			if (i < 19)
+				memmove(&highScores[i+1], &highScores[i], sizeof(HighScoreEntry) * (19 - i));
+			snprintf(highScores[i].name, sizeof(highScores[i].name), "Unknown");
+			highScores[i].cash = pl->cash;
+			highScores[i].new = true;
+
+			pl->arc.hsPos = i;
+			{
+				Player *otherPl = PL_OtherPlayer(pl);
+				if (otherPl->arc.hsPos >= i)
+					++otherPl->arc.hsPos;
+			}
+			return true;
+		}
 	}
-	return -1;
+	return false;
 }
 
 //
@@ -293,17 +303,19 @@ void ARC_DISP_InGameDisplay( uint pNum )
 void ARC_DISP_HighScoreEntry( uint pNum )
 {
 	Sint8 vBright = -4;
-	int hsPosition = ARC_HS_FindPosition(player[pNum - 1].cash);
+	JE_byte position = player[pNum - 1].arc.hsPos + 1;
 
 	x = 58;
-	if (hsPosition == 1)
+	if (position == 1)
 		strcpy(tmpBuf.s, "1st");
-	else if (hsPosition == 2)
+	else if (position == 2)
 		strcpy(tmpBuf.s, "2nd");
-	else if (hsPosition == 3)
+	else if (position == 3)
 		strcpy(tmpBuf.s, "3rd");
+	else if (position == 0 || position > 20)
+		strcpy(tmpBuf.s, "21st");
 	else
-		snprintf(tmpBuf.s, 5, "%dth", hsPosition);
+		snprintf(tmpBuf.s, 5, "%dth", position);
 	JE_textShade(VGAScreen, x, 4, tmpBuf.s, 15, 4, FULL_SHADE);
 
 	x = 80;
@@ -315,12 +327,12 @@ void ARC_DISP_HighScoreEntry( uint pNum )
 			vBright = -3;
 	}
 
-	JE_outTextAdjust(VGAScreen, x, 4, player[pNum - 1].arc.plName, 15, vBright, SMALL_FONT_SHAPES, true);
+	JE_outTextAdjust(VGAScreen, x, 4, player[pNum - 1].arc.hsName, 15, vBright, SMALL_FONT_SHAPES, true);
 
 	if (player[pNum - 1].arc.timer >= 65465)
 		return;
 
-	x += JE_textWidth(player[pNum - 1].arc.plName, SMALL_FONT_SHAPES);
+	x += JE_textWidth(player[pNum - 1].arc.hsName, SMALL_FONT_SHAPES);
 	vBright = (player[pNum - 1].arc.timer % 35 > 17) ? -2 : -3;
 	switch (arcHighScoreAlphabet[player[pNum - 1].arc.cursor])
 	{
@@ -395,6 +407,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 {
 	pl->arc.timer = 0;
 	pl->arc.timerFrac = 0;
+	pl->arc.hsPos = -1;
 
 	// Special handling needed?
 	switch (status)
@@ -404,7 +417,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 	//
 	case STATUS_GAMEOVER:
 		// Erase stored name
-		pl->arc.plName[0] = '\0';
+		pl->arc.hsName[0] = '\0';
 		break;
 
 	//
@@ -446,7 +459,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 			return;
 		}
 		// Failed to enter high scores -- skip name entry?
-		if (ARC_HS_FindPosition(pl->cash) == -1)
+		if (!ARC_HS_InsertName(pl))
 		{
 			pl->arc.timer = 10;
 			pl->player_status = (playingCredits) ? STATUS_GAMEOVER : STATUS_CONTINUE;
@@ -456,7 +469,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 		pl->arc.timerFrac = 35 * 15;
 
 		// If the player has a name already, default to END, otherwise A
-		pl->arc.cursor = (pl->arc.plName[0]) ? 41 : 0;
+		pl->arc.cursor = (pl->arc.hsName[0]) ? 41 : 0;
 		break;
 
 	//
@@ -506,6 +519,9 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				break;
 			else if (pl->arc.timer > 60000)
 			{
+				// Assign name to score
+				if (pl->arc.hsPos >= 0 && pl->arc.hsPos < 20)
+					memcpy(highScores[pl->arc.hsPos].name, pl->arc.hsName, sizeof(pl->arc.hsName));
 				ARC_SetPlayerStatus(pl, STATUS_CONTINUE);
 				break;
 			}
@@ -517,11 +533,11 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
 
 				// Only allow RUB/END if string full
-				if (pl->arc.plName[8] && arcHighScoreAlphabet[pl->arc.cursor] > 0x1F)
+				if (pl->arc.hsName[8] && arcHighScoreAlphabet[pl->arc.cursor] > 0x1F)
 					pl->arc.cursor += 2;
 
 				// Skip RUB if string empty
-				else if (!pl->arc.plName[0] && arcHighScoreAlphabet[pl->arc.cursor] == 0x1E)
+				else if (!pl->arc.hsName[0] && arcHighScoreAlphabet[pl->arc.cursor] == 0x1E)
 					--pl->arc.cursor;
 			}
 			else if (buttons[BUTTON_RIGHT])
@@ -531,11 +547,11 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
 
 				// Only allow RUB/END if string full
-				if (pl->arc.plName[8] && arcHighScoreAlphabet[pl->arc.cursor] > 0x1F)
+				if (pl->arc.hsName[8] && arcHighScoreAlphabet[pl->arc.cursor] > 0x1F)
 					pl->arc.cursor -= 2;
 
 				// Skip RUB if string empty
-				else if (!pl->arc.plName[0] && arcHighScoreAlphabet[pl->arc.cursor] == 0x1E)
+				else if (!pl->arc.hsName[0] && arcHighScoreAlphabet[pl->arc.cursor] == 0x1E)
 					++pl->arc.cursor;
 			}
 			else if (buttons[BUTTON_UP] || buttons[BUTTON_DOWN])
@@ -552,10 +568,10 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				if (arcHighScoreAlphabet[pl->arc.cursor] == 0x1E) // RUB
 				{
 					JE_playSampleNumOnChannel(S_SPRING, SFXPRIORITY+7);
-					if (pl->arc.plName[0]) // Don't RUB nothing
+					if (pl->arc.hsName[0]) // Don't RUB nothing
 					{
-						pl->arc.plName[strlen(pl->arc.plName) - 1] = 0;
-						if (!pl->arc.plName[0]) // If the string's empty now
+						pl->arc.hsName[strlen(pl->arc.hsName) - 1] = 0;
+						if (!pl->arc.hsName[0]) // If the string's empty now
 							++pl->arc.cursor; // Move off RUB
 					}
 					break;
@@ -568,19 +584,19 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 					break;
 				}
 
-				if (!pl->arc.plName[8]) // Don't overflow the string (this should never happen but sanity checking)
-					pl->arc.plName[strlen(pl->arc.plName)] = arcHighScoreAlphabet[pl->arc.cursor];
+				if (!pl->arc.hsName[8]) // Don't overflow the string (this should never happen but sanity checking)
+					pl->arc.hsName[strlen(pl->arc.hsName)] = arcHighScoreAlphabet[pl->arc.cursor];
 
-				if (pl->arc.plName[8]) // If the string is now full
+				if (pl->arc.hsName[8]) // If the string is now full
 					pl->arc.cursor = 41; // Move the cursor to END
 			}
 			else if (buttons[BUTTON_MODE] || buttons[BUTTON_SKICK])
 			{
 				JE_playSampleNumOnChannel(S_SPRING, SFXPRIORITY+7);
-				if (pl->arc.plName[0]) // Don't RUB nothing
+				if (pl->arc.hsName[0]) // Don't RUB nothing
 				{
-					pl->arc.plName[strlen(pl->arc.plName) - 1] = 0;
-					if (!pl->arc.plName[0]) // If the string's empty now
+					pl->arc.hsName[strlen(pl->arc.hsName) - 1] = 0;
+					if (!pl->arc.hsName[0]) // If the string's empty now
 						++pl->arc.cursor; // Move off RUB
 				}
 				break;
@@ -663,6 +679,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 
 				JE_drawShield();
 				JE_drawArmor();
+				JE_drawPortConfigButtons();
 			}
 			else if (buttons[BUTTON_LEFT])
 			{
@@ -673,7 +690,6 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 					pl->items.ship = shiporder[pl->arc.cursor];
 				}
 				while (otherPl->player_status > STATUS_NONE && player[0].items.ship == player[1].items.ship);
-				
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
 			}
 			else if (buttons[BUTTON_RIGHT])
@@ -852,14 +868,14 @@ void ARC_DeathSprayWeapons( Player *this_player )
 	// Any death that matters cuts rank
 	ARC_RankCut();
 
-	powerItemNo = 30001 + this_player->cur_weapon;
+	powerItemNo = 30011 + this_player->cur_weapon;
 
 	for (i = 0; i < spray; ++i)
 	{
 		b = JE_newEnemy(100, 603, 0);
 		if (b == 0)
 			return;
-		enemy[b-1].egr[1-1] = 5 + (powerItemNo - 30000) * 2;
+		enemy[b-1].egr[1-1] = 7 + (this_player->cur_weapon * 2);
 		enemy[b-1].evalue = powerItemNo;
 		enemy[b-1].scoreitem = true;
 		enemy[b-1].ex = this_player->x - 32;

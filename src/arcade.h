@@ -53,6 +53,12 @@ JE_word ARC_GetCoins( void );
 
 //
 
+typedef struct {
+	char name[10];
+	uint cash;
+	JE_boolean new;
+} HighScoreEntry;
+
 JE_boolean ARC_HS_IsLeading( uint cash );
 int ARC_HS_FindPosition( uint cash );
 
@@ -89,7 +95,7 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x );
 
 #define SHIPORDER_MAX      9
 #define SHIPORDER_NOSECRET 8
-static const JE_byte shiporder[SHIPORDER_MAX] = {6, 7, 4, 1, 3, 5, 2, 9, 8};
+static const JE_byte shiporder[SHIPORDER_MAX] = {6, 7, 4, 1, 3, 5, 2, 9, 0};
 
 JE_word hurryUpTimer;
 JE_word hurryUpLevelLoc;

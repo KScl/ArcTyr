@@ -465,11 +465,11 @@ void blit_sprite_dark( SDL_Surface *surface, int x, int y, unsigned int table, u
 	}
 }
 
-void loadCompShapesArc( Sprite2_array *sprite2s, uint id )
+void loadCompShapesArc( Sprite2_array *sprite2s, const char *filename )
 {
-	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "arc%02u.shp", id);
+	//snprintf(tmpBuf.s, sizeof(tmpBuf.s), "arc%02u.shp", id);
 
-	FILE *f = dir_fopen_die(arcdata_dir(), tmpBuf.s, "rb");
+	FILE *f = dir_fopen_die(arcdata_dir(), filename, "rb");
 
 	sprite2s->size = ftell_eof(f);
 	
@@ -714,22 +714,22 @@ void JE_loadMainShapeTables( const char *shpfile )
 	}
 	
 	// player shot sprites
-	loadCompShapesArc(&shapesC1, 90);
+	loadCompShapesArc(&shapesC1, "a_shots1.shp");
 	// skip shapes in shpfile
 	i++;
 	
 	// player ship sprites
-	loadCompShapesArc(&shapes9, 99);
+	loadCompShapesArc(&shapes9, "a_ships.shp");
+	// skip shapes in shpfile
+	i++;
+
+	// power-up sprites
+	loadCompShapesArc(&eShapes[5], "a_icons.shp");
 	// skip shapes in shpfile
 	i++;
 
 	fseek(f, shpPos[i], SEEK_SET);
 
-	// power-up sprites
-	eShapes[5].size = shpPos[i + 1] - shpPos[i];
-	JE_loadCompShapesB(&eShapes[5], f);
-	i++;
-	
 	// coins, datacubes, etc sprites
 	eShapes[4].size = shpPos[i + 1] - shpPos[i];
 	JE_loadCompShapesB(&eShapes[4], f);

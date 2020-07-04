@@ -22,6 +22,8 @@
 #include "config.h"
 #include "opentyr.h"
 
+#include "lib/mtrand.h"
+
 enum
 {
 	FRONT_WEAPON = 0,
@@ -95,7 +97,8 @@ typedef struct
 	struct {
 		JE_word timer, timerFrac;
 		JE_byte cursor;
-		char plName[10];		
+		char hsName[10];
+		Sint8 hsPos;
 	} arc;
 
 	ulong cash;
@@ -182,9 +185,9 @@ Player;
 
 extern Player player[2];
 
-static inline Player *PL_OtherPlayer( Player *player )
+static inline Player *PL_OtherPlayer( Player *us )
 {
-	return ((player == &player[0]) ? &player[1] : &player[0]);
+	return &player[us == &player[0] ? 1 : 0];
 }
 
 // Players that are in an action that has some possible gameplay relevance, including name entry, etc
@@ -218,6 +221,16 @@ static inline JE_byte PL_WhosAlive( void )
 	return (PL_Alive(0) + (PL_Alive(1) * 2));
 }
 
+static inline JE_byte PL_RandomPlayer( void )
+{
+	switch (PL_WhosAlive())
+	{
+		case 3: return (mt_rand() & 1);
+		case 2: return 1;
+		default: return 0;
+	}
+}
+
 static inline bool all_players_dead( void )  { return (!PL_Alive(0) && !PL_Alive(1)); }
 
 static inline bool all_players_alive( void )
@@ -230,7 +243,7 @@ void PL_Init( Player *this_player, uint ship, bool continuing );
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port );
 
-bool power_up_weapon( Player *, uint port );
+bool PL_PowerUpWeapon( Player *, uint port );
 
 JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt );
 
