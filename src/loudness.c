@@ -28,6 +28,8 @@ float music_volume = 0, sample_volume = 0;
 static float real_music_volume = 0;
 static unsigned int music_fade_tic = 0;
 
+static bool music_force_no_loop = false;
+
 bool music_stopped = true;
 unsigned int song_playing = 0;
 
@@ -137,7 +139,12 @@ void audio_cb( void *user_data, unsigned char *sdl_buffer, int howmuch )
 			ct -= (long)(REFRESH * i);
 		}
 
-		if (music_fade_tic)
+		if (music_force_no_loop && songlooped)
+		{
+			music_volume = 0;
+			music_stopped = true;
+		}
+		else if (music_fade_tic)
 		{
 			if (SDL_GetTicks() > music_fade_tic)
 			{
@@ -249,6 +256,16 @@ void load_song( unsigned int song_num )
 	SDL_UnlockAudio();
 }
 
+void play_song_once( unsigned int song_num )
+{
+	// primarily for the title screen -- won't restart the song
+	if (song_num == song_playing)
+		return;
+
+	play_song(song_num);
+	music_force_no_loop = true;
+}
+
 void play_song( unsigned int song_num )
 {
 	if (song_num != song_playing)
@@ -260,6 +277,7 @@ void play_song( unsigned int song_num )
 	music_volume = real_music_volume;
 	music_stopped = false;
 	music_fade_tic = 0;
+	music_force_no_loop = false;
 }
 
 void restart_song( void )

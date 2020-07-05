@@ -46,6 +46,13 @@ static const JE_shortint shipXpos[] = {
 };
 static const JE_byte pcolor[] = {96+48, 96+16};
 
+static inline void outTextMirrorX( SDL_Surface * screen, int x, int y, const char *s, unsigned int filter, int brightness, unsigned int font, JE_boolean shadow, JE_byte p )
+{
+	JE_outTextAdjust(screen, 
+		(p == 0) ? x : (320 - x) - JE_textWidth(s, SMALL_FONT_SHAPES), y, 
+		s, filter, brightness, font, shadow);
+}
+
 static void draw_shipGraphic( int x, int y, uint sGr, int facing )
 {
 	if (sGr == 0) // Dragonwing
@@ -63,6 +70,34 @@ static void draw_shipGraphic( int x, int y, uint sGr, int facing )
 	}
 	else
 		blit_sprite2x2(VGAScreen, x - 12, y, shapes9, sGr + (facing * 2));
+}
+
+static void draw_PlayerStatusText( JE_byte p )
+{
+	JE_word cF = 1, cP = 0xFFFF;
+	if (player[p].player_status == STATUS_SELECT)
+	{
+		outTextMirrorX(VGAScreen, 12, 136, "Wait For", 15, -4, SMALL_FONT_SHAPES, true, p);
+		outTextMirrorX(VGAScreen, 12, 152, "Other Player", 15, -4, SMALL_FONT_SHAPES, true, p);
+		return;
+	}
+
+	ARC_GetCredits(&cF, &cP, NULL);
+	if (!cF)
+		strcpy(tmpBuf.s, "Insert Coin");
+	else
+		strcpy(tmpBuf.s, "Press Fire");
+
+	outTextMirrorX(VGAScreen, 12, 136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
+
+	if (cP == 0xFFFF)
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Free Play");
+	else if (!cP)
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", cF);
+	else
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu %hu/%hu", cF, cP, (JE_word)DIP.coinsPerGame);
+
+	outTextMirrorX(VGAScreen, 12, 152, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
 }
 
 void select_gameplay( void )
@@ -103,20 +138,9 @@ void select_gameplay( void )
 
 		for (int p = 0; p < 2; ++p)
 		{
-			if (player[p].player_status == STATUS_INGAME)
+			if (player[p].player_status != STATUS_SELECT && player[p].player_status != STATUS_INGAME)
 			{
-
-			}
-			else if (player[p].player_status != STATUS_SELECT)
-			{
-				JE_outTextAdjust(VGAScreen, 
-					(p == 0) ? 12 : 308 - JE_textWidth("Press Fire", SMALL_FONT_SHAPES), 136, 
-					"Press Fire", 15, -4, 
-					SMALL_FONT_SHAPES, true);
-				JE_outTextAdjust(VGAScreen, 
-					(p == 0) ? 12 : 308 - JE_textWidth("To Join", SMALL_FONT_SHAPES), 152, 
-					"To Join", 15, -4, 
-					SMALL_FONT_SHAPES, true);
+				draw_PlayerStatusText(p);
 				continue;
 			}
 
@@ -137,15 +161,15 @@ void select_gameplay( void )
 			else
 				JE_textShade(VGAScreen, x + 30, y + 34, "2P", pcolor[p]/16, 6, FULL_SHADE);
 
-			JE_outTextAdjust(VGAScreen, 
-				(p == 0) ? 12 : 308 - JE_textWidth(tmpBuf.l, SMALL_FONT_SHAPES), 136, 
-				tmpBuf.l, 15, -4, 
-				SMALL_FONT_SHAPES, true);
+			outTextMirrorX(VGAScreen, 12, 136, tmpBuf.l, 15, -4, SMALL_FONT_SHAPES, true, p);
 
 			if (p == 0)
 				draw_shipGraphic(50  + shipXpos[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, shipAngle);
 			else
 				draw_shipGraphic(270 - shipXpos[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, -shipAngle);
+
+			if (player[p].player_status == STATUS_INGAME)
+				outTextMirrorX(VGAScreen, 136, 182, "OK", 15, -4, SMALL_FONT_SHAPES, true, p);
 		}
 		for (int i = 1; i <= SHIPORDER_NOSECRET; ++i)
 		{
@@ -291,6 +315,9 @@ void select_episode( void )
 	JE_byte in_control = (player[0].player_status == STATUS_SELECT) ? 1 : 2;
 	uint nTimer, tTimer = SDL_GetTicks() + 20999;
 
+	// In case music was stopped.
+	play_song(SONG_TITLE);
+
 	JE_loadPCX(arcdata_dir(), "select.pcx");
 	JE_dString(VGAScreen, JE_fontCenter(episode_name[0], FONT_SHAPES), 20, episode_name[0], FONT_SHAPES);
 
@@ -311,8 +338,9 @@ void select_episode( void )
 
 		for (int p = 0; p < 2; ++p)
 		{
-			if (player[p].player_status != STATUS_SELECT)
+			if (player[p].player_status != STATUS_SELECT || (p + 1) != in_control)
 			{
+				draw_PlayerStatusText(p);
 				continue;
 			}
 		}
@@ -457,7 +485,7 @@ void JE_titleScreen( void )
 	set_volume(tyrMusicVolume, fxVolume);
 
 	// ARCADE TITLE SCREEN STARTUP
-	play_song(SONG_TITLE);
+	play_song_once(SONG_TITLE);
 	arcTextTimer = 0;
 
 	JE_loadPic(VGAScreen, 4, false);

@@ -48,6 +48,7 @@ bool init_audio( void );
 void deinit_audio( void );
 
 void load_music( void );
+void play_song_once( unsigned int song_num );
 void play_song( unsigned int song_num );
 void restart_song( void );
 void stop_song( void );
