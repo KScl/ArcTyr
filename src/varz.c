@@ -38,48 +38,7 @@
 
 JE_integer tempDat, tempDat2, tempDat3;
 
-const JE_byte specialArcadeWeapon[PORT_NUM] /* [1..Portnum] */ =
-{
-	17,17,18,0,0,0,10,0,0,0,0,0,44,0,10,0,19,0,0,-0,0,0,0,0,0,0,
-	-0,0,0,0,45,0,0,0,0,0,0,0,0,0,0,0
-};
-
-const JE_byte optionSelect[16][3][2] /* [0..15, 1..3, 1..2] */ =
-{	/*  MAIN    OPT    FRONT */
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ { 1, 1},{16,16},{30,30} },  /*Single Shot*/
-	{ { 2, 2},{29,29},{29,20} },  /*Dual Shot*/
-	{ { 3, 3},{21,21},{12, 0} },  /*Charge Cannon*/
-	{ { 4, 4},{18,18},{16,23} },  /*Vulcan*/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ { 6, 6},{29,16},{ 0,22} },  /*Super Missile*/
-	{ { 7, 7},{19,19},{19,28} },  /*Atom Bomb*/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ {10,10},{21,21},{21,27} },  /*Mini Missile*/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ {13,13},{17,17},{13,26} },  /*MicroBomb*/
-	{ { 0, 0},{ 0, 0},{ 0, 0} },  /**/
-	{ {15,15},{15,16},{15,16} }   /*Post-It*/
-};
-
-const JE_word PGR[21] /* [1..21] */ =
-{
-	4,
-	1,2,3,
-	41-21,57-21,73-21,89-21,105-21,
-	121-21,137-21,153-21,
-	151,151,151,151,73-21,73-21,1,2,4
-	/*151,151,151*/
-};
-const JE_byte PAni[21] /* [1..21] */ = {1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1};
-
-
 const JE_byte randomEnemyLaunchSounds[3] /* [1..3] */ = {13,6,26};
-
-  /*!! SUPER Tyrian !!*/
-const JE_byte superTyrianSpecials[4] /* [1..4] */ = {1,2,4,5};
 
 /*Street-Fighter Commands*/
 JE_byte SFCurrentCode[2][21]; /* [1..2, 1..21] */
@@ -95,7 +54,7 @@ JE_word deathExplodeSfxWait;
 JE_shortint levelEndWarp;
 JE_boolean endLevel, reallyEndLevel, waitToEndLevel, playerEndLevel,
            normalBonusLevelCurrent, bonusLevelCurrent,
-           smallEnemyAdjust, readyToEndLevel, quitRequested;
+           smallEnemyAdjust, readyToEndLevel;
 
 JE_byte newPL[10]; /* [0..9] */ /*Eventsys event 75 parameter*/
 JE_word returnLoc;
@@ -122,7 +81,7 @@ struct JE_MegaDataType3 megaData3;
 /* Secret Level Display */
 JE_byte flash;
 JE_shortint flashChange;
-JE_byte displayTime;
+JE_byte secretLevelDisplayTime;
 
 /* Sound Effects Queue */
 JE_byte soundQueue[STANDARD_SFX_CHANNELS]; /* [0..7] */
@@ -142,8 +101,6 @@ JE_word    levelTimerCountdown;
 JE_word    levelTimerJumpTo;
 JE_boolean randomExplosions;
 
-JE_boolean editShip1, editShip2;
-
 JE_boolean globalFlags[10]; /* [1..10] */
 JE_byte levelSong;
 
@@ -152,7 +109,6 @@ JE_word mapOrigin, mapPNum;
 JE_byte mapPlanet[5], mapSection[5]; /* [1..5] */
 
 /* Interface Constants */
-JE_boolean moveTyrianLogoUp;
 JE_boolean skipStarShowVGA;
 
 /*EnemyData*/
@@ -174,18 +130,10 @@ JE_byte     astralDuration;
 JE_byte     globalFlare; // Locks other specials during use
 JE_shortint globalFlareFilter;
 
-JE_byte     doIced;
-JE_boolean  infiniteShot;
-
 /*PlayerData*/
 JE_boolean allPlayersGone; /*Both players dead and finished exploding*/
 
 const uint shadowYDist = 10;
-
-JE_real optionSatelliteRotate;
-
-JE_integer optionAttachmentMove;
-JE_boolean optionAttachmentLinked, optionAttachmentReturn;
 
 
 JE_byte chargeWait, chargeLevel, chargeGr, chargeGrWait;

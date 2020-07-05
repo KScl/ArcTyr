@@ -97,6 +97,7 @@ typedef struct
 	struct {
 		JE_word timer, timerFrac;
 		JE_byte cursor;
+
 		char hsName[10];
 		Sint8 hsPos;
 	} arc;
@@ -149,6 +150,7 @@ typedef struct
 	
 	int x, y;
 	int old_x[20], old_y[20];
+	bool moved;
 	
 	int x_velocity, y_velocity;
 	uint x_friction_ticks, y_friction_ticks;  // ticks until friction is applied
@@ -177,6 +179,10 @@ typedef struct
 		uint charge_ticks;
 	}
 	sidekick[2];
+
+	JE_real satRotate;
+	JE_integer attachMove;
+	JE_boolean attachLinked, attachReturn;
 	
 	JE_byte buttons[NUM_BUTTONS]; // buttons pressed / held this frame
 	JE_byte last_buttons[NUM_BUTTONS]; // buttons held last frame

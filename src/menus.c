@@ -495,7 +495,6 @@ void JE_titleScreen( void )
 			tyrY -= 2;
 			++t2kY;
 		}
-		moveTyrianLogoUp = false;
 	}
 
 	oldCoins = ARC_GetCoins();
@@ -576,9 +575,7 @@ void JE_titleScreen( void )
 			currentRank = 0;
 			difficultyLevel = DIP.startingDifficulty;
 			// Start special mode!
-			twoPlayerMode = false;
 			onePlayerAction = true;
-			superArcadeMode = 1;
 			gameLoaded = true;
 			initialDifficulty = difficultyLevel;
 

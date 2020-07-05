@@ -21,9 +21,7 @@
 
 #include "opentyr.h"
 
-extern JE_boolean constantPlay;
 extern JE_byte shutdownCode;
-
 extern JE_word goToWeaponCreator;
 
 void JE_paramCheck( int argc, char *argv[] );

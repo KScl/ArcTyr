@@ -87,8 +87,7 @@ JE_boolean gameJustLoaded;
 
 JE_boolean extraGame;
 
-JE_boolean twoPlayerMode, twoPlayerLinked, onePlayerAction, superTyrian;
-JE_byte    superArcadeMode;
+JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
 
 JE_byte    SAPowerupBag[5];
 JE_byte    superArcadePowerUp;
@@ -114,9 +113,6 @@ JE_boolean pentiumMode;
 /* Savegame files */
 JE_byte    gameSpeed;
 JE_byte    processorType;  /* 1=386 2=486 3=Pentium Hyper */
-
-JE_SaveFilesType saveFiles; /*array[1..saveLevelnum] of savefiletype;*/
-JE_SaveGameTemp saveTemp;
 
 Config opentyrian_config;  // implicitly initialized
 Config tav_config;
@@ -387,134 +383,6 @@ void JE_setNewGameSpeed( void )
   JE_setTimerInt();
 }
 
-void JE_encryptSaveTemp( void )
-{
-	STUB();
-/*
-	JE_SaveGameTemp s3;
-	JE_word x;
-	JE_byte y;
-
-	memcpy(&s3, &saveTemp, sizeof(s3));
-
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y += s3[x];
-	}
-	saveTemp[SAVE_FILE_SIZE] = y;
-
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y -= s3[x];
-	}
-	saveTemp[SAVE_FILE_SIZE+1] = y;
-
-	y = 1;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y = (y * s3[x]) + 1;
-	}
-	saveTemp[SAVE_FILE_SIZE+2] = y;
-
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y = y ^ s3[x];
-	}
-	saveTemp[SAVE_FILE_SIZE+3] = y;
-
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		saveTemp[x] = saveTemp[x] ^ cryptKey[(x+1) % 10];
-		if (x > 0)
-		{
-			saveTemp[x] = saveTemp[x] ^ saveTemp[x - 1];
-		}
-	}
-*/
-}
-
-void JE_decryptSaveTemp( void )
-{
-	STUB();
-/*
-	JE_boolean correct = true;
-	JE_SaveGameTemp s2;
-	int x;
-	JE_byte y;
-
-	// Decrypt save game file
-	for (x = (SAVE_FILE_SIZE - 1); x >= 0; x--)
-	{
-		s2[x] = (JE_byte)saveTemp[x] ^ (JE_byte)(cryptKey[(x+1) % 10]);
-		if (x > 0)
-		{
-			s2[x] ^= (JE_byte)saveTemp[x - 1];
-		}
-
-	}
-
-	for (x = 0; x < SAVE_FILE_SIZE; x++) printf("%c", s2[x]);
-
-	// Check save file for correctitude
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y += s2[x];
-	}
-	if (saveTemp[SAVE_FILE_SIZE] != y)
-	{
-		correct = false;
-		printf("Failed additive checksum: %d vs %d\n", saveTemp[SAVE_FILE_SIZE], y);
-	}
-
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y -= s2[x];
-	}
-	if (saveTemp[SAVE_FILE_SIZE+1] != y)
-	{
-		correct = false;
-		printf("Failed subtractive checksum: %d vs %d\n", saveTemp[SAVE_FILE_SIZE+1], y);
-	}
-
-	y = 1;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y = (y * s2[x]) + 1;
-	}
-	if (saveTemp[SAVE_FILE_SIZE+2] != y)
-	{
-		correct = false;
-		printf("Failed multiplicative checksum: %d vs %d\n", saveTemp[SAVE_FILE_SIZE+2], y);
-	}
-
-	y = 0;
-	for (x = 0; x < SAVE_FILE_SIZE; x++)
-	{
-		y = y ^ s2[x];
-	}
-	if (saveTemp[SAVE_FILE_SIZE+3] != y)
-	{
-		correct = false;
-		printf("Failed XOR'd checksum: %d vs %d\n", saveTemp[SAVE_FILE_SIZE+3], y);
-	}
-
-	// Barf and die if save file doesn't validate
-	if (!correct)
-	{
-		fprintf(stderr, "Error reading save file!\n");
-		exit(255);
-	}
-
-	// Keep decrypted version plz
-	memcpy(&saveTemp, &s2, sizeof(s2));
-*/
-}
-
 const char *get_user_directory( void )
 {
 	static char user_dir[500] = "";
@@ -613,114 +481,6 @@ void JE_loadConfiguration( void )
 
 	(void)p;
 */
-/*
-	fi = dir_fopen_warn(get_user_directory(), "tyrian.sav", "rb");
-	if (fi)
-	{
-
-		fseek(fi, 0, SEEK_SET);
-		efread(saveTemp, 1, sizeof(saveTemp), fi);
-		JE_decryptSaveTemp();
-
-		// SYN: The original mostly blasted the save file into raw memory. However, our lives are not so
-		// easy, because the C struct is necessarily a different size. So instead we have to loop
-		// through each record and load fields manually. *emo tear* :'( 
-
-		p = saveTemp;
-		for (z = 0; z < SAVE_FILES_NUM; z++)
-		{
-			memcpy(&saveFiles[z].encode, p, sizeof(JE_word)); p += 2;
-			saveFiles[z].encode = SDL_SwapLE16(saveFiles[z].encode);
-			
-			memcpy(&saveFiles[z].level, p, sizeof(JE_word)); p += 2;
-			saveFiles[z].level = SDL_SwapLE16(saveFiles[z].level);
-			
-			memcpy(&saveFiles[z].items, p, sizeof(JE_PItemsType)); p += sizeof(JE_PItemsType);
-			
-			memcpy(&saveFiles[z].score, p, sizeof(JE_longint)); p += 4;
-			saveFiles[z].score = SDL_SwapLE32(saveFiles[z].score);
-			
-			memcpy(&saveFiles[z].score2, p, sizeof(JE_longint)); p += 4;
-			saveFiles[z].score2 = SDL_SwapLE32(saveFiles[z].score2);
-			
-			// SYN: Pascal strings are prefixed by a byte holding the length!
-			memset(&saveFiles[z].levelName, 0, sizeof(saveFiles[z].levelName));
-			memcpy(&saveFiles[z].levelName, &p[1], *p);
-			p += 10;
-			
-			// This was a BYTE array, not a STRING, in the original. Go fig.
-			memcpy(&saveFiles[z].name, p, 14);
-			p += 14;
-			
-			memcpy(&saveFiles[z].cubes, p, sizeof(JE_byte)); p++;
-			memcpy(&saveFiles[z].power, p, sizeof(JE_byte) * 2); p += 2;
-			memcpy(&saveFiles[z].episode, p, sizeof(JE_byte)); p++;
-			memcpy(&saveFiles[z].lastItems, p, sizeof(JE_PItemsType)); p += sizeof(JE_PItemsType);
-			memcpy(&saveFiles[z].difficulty, p, sizeof(JE_byte)); p++;
-			memcpy(&saveFiles[z].secretHint, p, sizeof(JE_byte)); p++;
-			memcpy(&saveFiles[z].input1, p, sizeof(JE_byte)); p++;
-			memcpy(&saveFiles[z].input2, p, sizeof(JE_byte)); p++;
-			
-			// booleans were 1 byte in pascal -- working around it
-			Uint8 temp;
-			memcpy(&temp, p, 1); p++;
-			saveFiles[z].gameHasRepeated = temp != 0;
-			
-			memcpy(&saveFiles[z].initialDifficulty, p, sizeof(JE_byte)); p++;
-			
-			memcpy(&saveFiles[z].highScore1, p, sizeof(JE_longint)); p += 4;
-			saveFiles[z].highScore1 = SDL_SwapLE32(saveFiles[z].highScore1);
-			
-			memcpy(&saveFiles[z].highScore2, p, sizeof(JE_longint)); p += 4;
-			saveFiles[z].highScore2 = SDL_SwapLE32(saveFiles[z].highScore2);
-			
-			memset(&saveFiles[z].highScoreName, 0, sizeof(saveFiles[z].highScoreName));
-			memcpy(&saveFiles[z].highScoreName, &p[1], *p);
-			p += 30;
-			
-			memcpy(&saveFiles[z].highScoreDiff, p, sizeof(JE_byte)); p++;
-		}
-
-		// SYN: This is truncating to bytes. I have no idea what this is doing or why.
-		// TODO: Figure out what this is about and make sure it isn't broked.
-		editorLevel = (saveTemp[SIZEOF_SAVEGAMETEMP - 5] << 8) | saveTemp[SIZEOF_SAVEGAMETEMP - 6];
-
-		fclose(fi);
-	}
-	else */ 
-/*
-	{
-		// We didn't have a save file! Let's make up random stuff!
-		editorLevel = 800;
-
-		for (z = 0; z < 100; z++)
-		{
-			saveTemp[SAVE_FILES_SIZE + z] = initialItemAvail[z];
-		}
-
-		for (z = 0; z < SAVE_FILES_NUM; z++)
-		{
-			saveFiles[z].level = 0;
-
-			for (y = 0; y < 14; y++)
-			{
-				saveFiles[z].name[y] = ' ';
-			}
-			saveFiles[z].name[14] = 0;
-
-			saveFiles[z].highScore1 = ((mt_rand() % 20) + 1) * 1000;
-
-			if (z % 6 > 2)
-			{
-				saveFiles[z].highScore2 = ((mt_rand() % 20) + 1) * 1000;
-				strcpy(saveFiles[z].highScoreName, defaultTeamNames[mt_rand() % 22]);
-			} else {
-				strcpy(saveFiles[z].highScoreName, defaultHighScoreNames[mt_rand() % 34]);
-			}
-		}
-	}
-	*/
-	//JE_initProcessorType();
 }
 
 void JE_saveConfiguration( void )
@@ -733,85 +493,6 @@ void JE_saveConfiguration( void )
 
 	(void)p;
 	(void)z;
-*/
-/*
-	p = saveTemp;
-	for (z = 0; z < SAVE_FILES_NUM; z++)
-	{
-		JE_SaveFileType tempSaveFile;
-		memcpy(&tempSaveFile, &saveFiles[z], sizeof(tempSaveFile));
-		
-		tempSaveFile.encode = SDL_SwapLE16(tempSaveFile.encode);
-		memcpy(p, &tempSaveFile.encode, sizeof(JE_word)); p += 2;
-		
-		tempSaveFile.level = SDL_SwapLE16(tempSaveFile.level);
-		memcpy(p, &tempSaveFile.level, sizeof(JE_word)); p += 2;
-		
-		memcpy(p, &tempSaveFile.items, sizeof(JE_PItemsType)); p += sizeof(JE_PItemsType);
-		
-		tempSaveFile.score = SDL_SwapLE32(tempSaveFile.score);
-		memcpy(p, &tempSaveFile.score, sizeof(JE_longint)); p += 4;
-		
-		tempSaveFile.score2 = SDL_SwapLE32(tempSaveFile.score2);
-		memcpy(p, &tempSaveFile.score2, sizeof(JE_longint)); p += 4;
-		
-		// SYN: Pascal strings are prefixed by a byte holding the length!
-		memset(p, 0, sizeof(tempSaveFile.levelName));
-		*p = strlen(tempSaveFile.levelName);
-		memcpy(&p[1], &tempSaveFile.levelName, *p);
-		p += 10;
-		
-		// This was a BYTE array, not a STRING, in the original. Go fig.
-		memcpy(p, &tempSaveFile.name, 14);
-		p += 14;
-		
-		memcpy(p, &tempSaveFile.cubes, sizeof(JE_byte)); p++;
-		memcpy(p, &tempSaveFile.power, sizeof(JE_byte) * 2); p += 2;
-		memcpy(p, &tempSaveFile.episode, sizeof(JE_byte)); p++;
-		memcpy(p, &tempSaveFile.lastItems, sizeof(JE_PItemsType)); p += sizeof(JE_PItemsType);
-		memcpy(p, &tempSaveFile.difficulty, sizeof(JE_byte)); p++;
-		memcpy(p, &tempSaveFile.secretHint, sizeof(JE_byte)); p++;
-		memcpy(p, &tempSaveFile.input1, sizeof(JE_byte)); p++;
-		memcpy(p, &tempSaveFile.input2, sizeof(JE_byte)); p++;
-		
-		// booleans were 1 byte in pascal -- working around it
-		Uint8 temp = tempSaveFile.gameHasRepeated != false;
-		memcpy(p, &temp, 1); p++;
-		
-		memcpy(p, &tempSaveFile.initialDifficulty, sizeof(JE_byte)); p++;
-		
-		tempSaveFile.highScore1 = SDL_SwapLE32(tempSaveFile.highScore1);
-		memcpy(p, &tempSaveFile.highScore1, sizeof(JE_longint)); p += 4;
-		
-		tempSaveFile.highScore2 = SDL_SwapLE32(tempSaveFile.highScore2);
-		memcpy(p, &tempSaveFile.highScore2, sizeof(JE_longint)); p += 4;
-		
-		memset(p, 0, sizeof(tempSaveFile.highScoreName));
-		*p = strlen(tempSaveFile.highScoreName);
-		memcpy(&p[1], &tempSaveFile.highScoreName, *p);
-		p += 30;
-		
-		memcpy(p, &tempSaveFile.highScoreDiff, sizeof(JE_byte)); p++;
-	}
-	
-	saveTemp[SIZEOF_SAVEGAMETEMP - 6] = editorLevel >> 8;
-	saveTemp[SIZEOF_SAVEGAMETEMP - 5] = editorLevel;
-	
-	JE_encryptSaveTemp();
-	*/
-/*	
-	f = dir_fopen_warn(get_user_directory(), "tyrian.sav", "wb");
-	if (f != NULL)
-	{
-		efwrite(saveTemp, 1, sizeof(saveTemp), f);
-
-#ifndef TARGET_WIN32
-		fsync(fileno(f));
-#endif
-		fclose(f);
-	}
-	
-	JE_decryptSaveTemp();
 */
 /*
 	f = dir_fopen_warn(get_user_directory(), "tyrian.cfg", "wb");

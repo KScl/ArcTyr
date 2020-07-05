@@ -859,9 +859,6 @@ void ARC_DeathSprayWeapons( Player *this_player )
 	const JE_integer sxcs[5] = {0, -1, 1, -2, 2};
 	uint i, powerItemNo;
 
-	if (superArcadeMode == SA_NONE)
-		return;
-
 	if (normalBonusLevelCurrent || bonusLevelCurrent)
 		return; // don't spray in bonus stages (they end on any death)
 

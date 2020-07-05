@@ -456,7 +456,6 @@ void DEV_RecordDemoInit( void )
 
 	demoDifficulty = opt_difficulty;
 
-	superArcadeMode = 1;
 	onePlayerAction = true;
 }
 

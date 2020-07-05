@@ -288,9 +288,7 @@ void JE_initPlayerData( void )
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
 	player[1].last_opt_given = player[1].last_opt_fired = 0;
 
-	superArcadeMode = SA_NONE;
 	superTyrian = false;
-	twoPlayerMode = false;
 
 	secretHint = (mt_rand() % 3) + 1;
 
@@ -355,7 +353,6 @@ void JE_doInGameSetup( void )
 		reallyEndLevel = true;
 		playerEndLevel = true;
 	}
-	quitRequested = false;
 
 	//skipStarShowVGA = true;
 }
@@ -437,8 +434,6 @@ JE_boolean JE_inGameSetup( void )
 					case 6:
 						returnvalue = true;
 						quit = true;
-						if (constantPlay)
-							JE_tyrianHalt(0);
 						break;
 				}
 				break;
@@ -614,7 +609,6 @@ bool load_next_demo( void )
 		player[1].items.special = ships[player[1].items.ship].special_weapons[player[1].weapon_mode - 1];
 	}
 
-	superArcadeMode = 1;
 	onePlayerAction = true;
 
 	demo_keys[0] = demo_keys[1] = 0;
@@ -919,26 +913,6 @@ void JE_endLevelAni( void )
 	// We don't use tmpBuf because this function needs strings to persist beyond screen flips
 	char tempStr[256];
 
-	if (!constantPlay)
-	{
-		// grant shipedit privileges
-
-		// special
-		if (player[0].items.special < 21)
-			saveTemp[SAVE_FILES_SIZE + 81 + player[0].items.special] = 1;
-
-		for (uint p = 0; p < COUNTOF(player); ++p)
-		{
-			// front, rear
-			for (uint i = 0; i < COUNTOF(player[p].items.weapon); ++i)
-				saveTemp[SAVE_FILES_SIZE + player[p].items.weapon[i].id] = 1;
-
-			// options
-			for (uint i = 0; i < COUNTOF(player[p].items.sidekick); ++i)
-				saveTemp[SAVE_FILES_SIZE + 51 + player[p].items.sidekick[i]] = 1;
-		}
-	}
-
 	if (allPlayersGone)
 		play_song(SONG_GAMEOVER);
 	else //if (!normalBonusLevelCurrent || !bonusLevelCurrent)
@@ -1058,63 +1032,6 @@ void JE_endLevelAni( void )
 
 	// ---
 
-	/*
-	if (!onePlayerAction && !twoPlayerMode)
-	{
-		JE_outTextGlow(VGAScreenSeg, 30, 120, miscText[4-1]); // Cubes 
-
-		if (cubeMax > 0)
-		{
-			if (cubeMax > 4)
-				cubeMax = 4;
-
-			if (frameCountMax != 0)
-				frameCountMax = 1;
-
-			for (temp = 1; temp <= cubeMax; temp++)
-			{
-				JE_playSampleNum(S_ITEM);
-				x = 20 + 30 * temp;
-				y = 135;
-				JE_drawCube(VGAScreenSeg, x, y, 9, 0);
-				JE_showVGA();
-
-				for (i = -15; i <= 10; i++)
-				{
-					setjasondelay(frameCountMax);
-
-					blit_sprite_hv(VGAScreenSeg, x, y, OPTION_SHAPES, 25, 0x9, i);
-
-					if (I_anyButton())
-						frameCountMax = 0;
-
-					JE_showVGA();
-
-					wait_delay();
-				}
-				for (i = 10; i >= 0; i--)
-				{
-					setjasondelay(frameCountMax);
-
-					blit_sprite_hv(VGAScreenSeg, x, y, OPTION_SHAPES, 25, 0x9, i);
-
-					if (I_anyButton())
-						frameCountMax = 0;
-
-					JE_showVGA();
-
-					wait_delay();
-				}
-			}
-		}
-		else
-		{
-			JE_outTextGlow(VGAScreenSeg, 50, 135, miscText[15-1]);
-		}
-
-	}
-*/
-
 	if (frameCountMax != 0)
 	{
 		frameCountMax = 6;
@@ -1124,16 +1041,12 @@ void JE_endLevelAni( void )
 	}
 	JE_outTextGlow(VGAScreenSeg, JE_fontCenter("Press Fire...--", SMALL_FONT_SHAPES), 160, "Press Fire...");
 
-
-	if (!constantPlay)
+	do
 	{
-		do
-		{
-			setjasondelay(1);
+		setjasondelay(1);
 
-			wait_delay();
-		} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
-	}
+		wait_delay();
+	} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
 
 	fade_black(15);
 	JE_clr256(VGAScreen);
@@ -1700,7 +1613,10 @@ redo:
 			}
 			this_player->old_x[COUNTOF(player->old_x) - 1] = this_player->x;
 			this_player->old_y[COUNTOF(player->old_x) - 1] = this_player->y;
+			this_player->moved = true;
 		}
+		else
+			this_player->moved = false;
 	}
 	else  /*twoPlayerLinked*/
 	{
@@ -1711,6 +1627,21 @@ redo:
 
 		this_player->x_velocity = other_player->x_velocity;
 		this_player->y_velocity = 4;
+
+		// if the other player moved, update our old x/y positions too
+		if (other_player->moved)
+		{
+			for (uint i = 1; i < COUNTOF(player->old_x); ++i)
+			{
+				this_player->old_x[i - 1] = this_player->old_x[i];
+				this_player->old_y[i - 1] = this_player->old_y[i];
+			}
+			this_player->old_x[COUNTOF(player->old_x) - 1] = this_player->x;
+			this_player->old_y[COUNTOF(player->old_x) - 1] = this_player->y;
+			this_player->moved = true;
+		}
+		else
+			this_player->moved = false;
 
 		// turret direction marker/shield
 		b = player_shot_create(0, SHOT_MISC, this_player->x + 1 + roundf(sinf(linkGunDirec + 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec + 0.2f) * 26), *mouseX_, *mouseY_, 148, playerNum_);
@@ -1954,9 +1885,9 @@ redo:
 	// sidekicks
 
 	if (this_player->sidekick[LEFT_SIDEKICK].style == 4 && this_player->sidekick[RIGHT_SIDEKICK].style == 4)
-		optionSatelliteRotate += 0.2f;
+		this_player->satRotate += 0.2f;
 	else if (this_player->sidekick[LEFT_SIDEKICK].style == 4 || this_player->sidekick[RIGHT_SIDEKICK].style == 4)
-		optionSatelliteRotate += 0.15f;
+		this_player->satRotate += 0.15f;
 
 	switch (this_player->sidekick[LEFT_SIDEKICK].style)
 	{
@@ -1970,16 +1901,16 @@ redo:
 		this_player->sidekick[LEFT_SIDEKICK].y = MAX(10, this_player->y - 20);
 		break;
 	case 4:  // orbitting
-		this_player->sidekick[LEFT_SIDEKICK].x = this_player->x + roundf(sinf(optionSatelliteRotate) * 20);
-		this_player->sidekick[LEFT_SIDEKICK].y = this_player->y + roundf(cosf(optionSatelliteRotate) * 20);
+		this_player->sidekick[LEFT_SIDEKICK].x = this_player->x + roundf(sinf(this_player->satRotate) * 20);
+		this_player->sidekick[LEFT_SIDEKICK].y = this_player->y + roundf(cosf(this_player->satRotate) * 20);
 		break;
 	}
 
 	switch (this_player->sidekick[RIGHT_SIDEKICK].style)
 	{
 	case 4:  // orbitting
-		this_player->sidekick[RIGHT_SIDEKICK].x = this_player->x - roundf(sinf(optionSatelliteRotate) * 20);
-		this_player->sidekick[RIGHT_SIDEKICK].y = this_player->y - roundf(cosf(optionSatelliteRotate) * 20);
+		this_player->sidekick[RIGHT_SIDEKICK].x = this_player->x - roundf(sinf(this_player->satRotate) * 20);
+		this_player->sidekick[RIGHT_SIDEKICK].y = this_player->y - roundf(cosf(this_player->satRotate) * 20);
 		break;
 	case 1:  // trailing
 	case 3:
@@ -1987,12 +1918,12 @@ redo:
 		this_player->sidekick[RIGHT_SIDEKICK].y = this_player->old_y[0];
 		break;
 	case 2:  // front-mounted
-		if (!optionAttachmentLinked)
+		if (!this_player->attachLinked)
 		{
-			this_player->sidekick[RIGHT_SIDEKICK].y += optionAttachmentMove / 2;
-			if (optionAttachmentMove >= -2)
+			this_player->sidekick[RIGHT_SIDEKICK].y += this_player->attachMove >> 1;
+			if (this_player->attachMove >= -2)
 			{
-				if (optionAttachmentReturn)
+				if (this_player->attachReturn)
 					temp = 2;
 				else
 					temp = 0;
@@ -2000,27 +1931,27 @@ redo:
 				if (this_player->sidekick[RIGHT_SIDEKICK].y > (this_player->y - 20) + 5)
 				{
 					temp = 2;
-					optionAttachmentMove -= 1 + optionAttachmentReturn;
+					this_player->attachMove -= 1 + this_player->attachReturn;
 				}
 				else if (this_player->sidekick[RIGHT_SIDEKICK].y > (this_player->y - 20) - 0)
 				{
 					temp = 3;
-					if (optionAttachmentMove > 0)
-						optionAttachmentMove--;
+					if (this_player->attachMove > 0)
+						this_player->attachMove--;
 					else
-						optionAttachmentMove++;
+						this_player->attachMove++;
 				}
 				else if (this_player->sidekick[RIGHT_SIDEKICK].y > (this_player->y - 20) - 5)
 				{
 					temp = 2;
-					optionAttachmentMove++;
+					this_player->attachMove++;
 				}
-				else if (optionAttachmentMove < 2 + optionAttachmentReturn * 4)
+				else if (this_player->attachMove < 2 + this_player->attachReturn * 4)
 				{
-					optionAttachmentMove += 1 + optionAttachmentReturn;
+					this_player->attachMove += 1 + this_player->attachReturn;
 				}
 
-				if (optionAttachmentReturn)
+				if (this_player->attachReturn)
 					temp = temp * 2;
 				if (abs(this_player->sidekick[RIGHT_SIDEKICK].x - this_player->x) < temp)
 					temp = 1;
@@ -2032,16 +1963,16 @@ redo:
 
 				if (abs(this_player->sidekick[RIGHT_SIDEKICK].y - (this_player->y - 20)) + abs(this_player->sidekick[RIGHT_SIDEKICK].x - this_player->x) < 8)
 				{
-					optionAttachmentLinked = true;
+					this_player->attachLinked = true;
 					soundQueue[2] = S_CLINK;
 				}
 
 				if (this_player->buttons[BUTTON_SKICK])
-					optionAttachmentReturn = true;
+					this_player->attachReturn = true;
 			}
 			else  // sidekick needs to catch up to player
 			{
-				optionAttachmentMove += 1 + optionAttachmentReturn;
+				this_player->attachMove += 1 + this_player->attachReturn;
 				JE_setupExplosion(this_player->sidekick[RIGHT_SIDEKICK].x + 1, this_player->sidekick[RIGHT_SIDEKICK].y + 10, 0, 0, false, false);
 			}
 		}
@@ -2051,9 +1982,8 @@ redo:
 			this_player->sidekick[RIGHT_SIDEKICK].y = this_player->y - 20;
 			if (this_player->buttons[BUTTON_SKICK])
 			{
-				optionAttachmentLinked = false;
-				optionAttachmentReturn = false;
-				optionAttachmentMove = -20;
+				this_player->attachLinked = this_player->attachReturn = false;
+				this_player->attachMove = -20;
 				soundQueue[3] = S_WEAPON_26;
 			}
 		}
@@ -2343,7 +2273,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						bonusLevel = true;
 						nextLevel = evalue - 10000;
 						enemyAvail[z] = 1;
-						displayTime = 150;
+						secretLevelDisplayTime = 150;
 					}
 				}
 				else if (enemy[z].scoreitem)

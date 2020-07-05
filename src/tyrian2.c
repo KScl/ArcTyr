@@ -965,7 +965,6 @@ start_level_first:
 	starActive = true;
 	enemyContinualDamage = false;
 	levelEnemyFrequency = 96;
-	quitRequested = false;
 
 	hurryUpTimer = 3000;
 	hurryUpLevelLoc = 0;
@@ -1013,7 +1012,7 @@ start_level_first:
 	/* Secret Level Display */
 	flash = 0;
 	flashChange = 1;
-	displayTime = 0;
+	secretLevelDisplayTime = 0;
 
 	if (can_play_audio())
 		play_song(levelSong - 1);
@@ -1057,6 +1056,11 @@ start_level_first:
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].exploding_ticks = 0;
+
+		player[i].satRotate = 0.0f;
+		player[i].attachMove = 0;
+		player[i].attachLinked = true;
+		player[i].attachReturn = false;
 	}
 
 	memset(enemyAvail,       1, sizeof(enemyAvail));
@@ -1082,12 +1086,6 @@ start_level_first:
 
 	memset(SFCurrentCode,    0, sizeof(SFCurrentCode));
 	memset(SFExecuted,       0, sizeof(SFExecuted));
-
-	optionAttachmentMove  = 0;    /*Launch the Attachments!*/
-	optionAttachmentLinked = true;
-
-	editShip1 = false;
-	editShip2 = false;
 
 	memset(smoothies, 0, sizeof(smoothies));
 
@@ -1547,6 +1545,9 @@ level_loop:
 
 				if (collided)
 				{
+					JE_byte doIced = 0;
+					JE_boolean infiniteShot = false;
+
 					if (chain > 0)
 					{
 						b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, mouseX, mouseY, chain, playerNum);
@@ -1554,22 +1555,15 @@ level_loop:
 						goto draw_player_shot_loop_end;
 					}
 
-					infiniteShot = false;
-
 					if (damage == 99)
 					{
 						damage = 0;
-						doIced = 40;
-						enemy[b].iced = 40;
+						doIced = enemy[b].iced = 40;
 					}
-					else
+					else if (damage >= 250)
 					{
-						doIced = 0;
-						if (damage >= 250)
-						{
-							damage = damage - 250;
-							infiniteShot = true;
-						}
+						damage -= 250;
+						infiniteShot = true;
 					}
 
 					int armorleft = enemy[b].armorleft;
@@ -1715,11 +1709,11 @@ level_loop:
 									if (
 										(enemy[temp2].enemydie > 0) 
 										&&
-									    !(
-									    	(superArcadeMode != SA_NONE)
-									    	&&
-									    	(enemyDat[enemy[temp2].enemydie].value == 30000)
-									    )
+										!(
+											//(superArcadeMode != SA_NONE)
+											//&&
+											(enemyDat[enemy[temp2].enemydie].value == 30000)
+										)
 									)
 									{
 										int temp_b = b;
@@ -1731,7 +1725,7 @@ level_loop:
 
 										if (b != 0)
 										{
-											if ((superArcadeMode != SA_NONE) && (enemy[b-1].evalue > 30000))
+											if (enemy[b-1].evalue > 30000)
 											{
 												JE_byte temp = SAPowerupBag[superArcadePowerUp++];
 												if (superArcadePowerUp == 5)
@@ -1937,9 +1931,9 @@ draw_player_shot_loop_end:
 						}
 
 						if (enemyShot[z].sgr >= 500)
-							blit_sprite2(VGAScreen, enemyShot[z].sx, enemyShot[z].sy, shapesW2, enemyShot[z].sgr + enemyShot[z].animate - 500);
+							blit_sprite2(VGAScreen, enemyShot[z].sx, enemyShot[z].sy, shotShapes[1], enemyShot[z].sgr + enemyShot[z].animate - 500);
 						else
-							blit_sprite2(VGAScreen, enemyShot[z].sx, enemyShot[z].sy, shapesC1, enemyShot[z].sgr + enemyShot[z].animate);
+							blit_sprite2(VGAScreen, enemyShot[z].sx, enemyShot[z].sy, shotShapes[0], enemyShot[z].sgr + enemyShot[z].animate);
 					}
 				}
 
@@ -2208,9 +2202,9 @@ draw_player_shot_loop_end:
 		lastDebugTime = debugTime;
 	}
 
-	if (displayTime > 0)
+	if (secretLevelDisplayTime > 0)
 	{
-		displayTime--;
+		secretLevelDisplayTime--;
 		JE_outTextAndDarken(VGAScreen, 90, 10, miscText[59], 15, (JE_byte)flash - 8, FONT_SHAPES);
 		flash += flashChange;
 		if (flash > 4 || flash == 0)
@@ -2307,7 +2301,6 @@ draw_player_shot_loop_end:
 		skip_header_undraw = false;
 
 	JE_showVGA();
-	quitRequested = false;
 
 
 	/*Start backgrounds if no enemies on screen
@@ -2497,7 +2490,6 @@ new_game:
 /*						doNotSaveBackup = true;
 						onePlayerAction = true;
 						superTyrian = true;
-						twoPlayerMode = false;
 
 						player[0].cash = 0;
 
@@ -2662,8 +2654,7 @@ new_game:
 						levelWarningLines--;
 
 						frameCountMax = 4;
-						if (!constantPlay)
-							JE_displayText();
+						JE_displayText();
 
 						fade_black(15);
 
@@ -2692,13 +2683,10 @@ new_game:
 							JE_showVGA();
 							fade_palette(colors, 15, 0, 255);
 
-							if (!constantPlay)
+							do
 							{
-								do
-								{
-									SDL_Delay(16);
-								} while (!I_anyButton());
-							}
+								SDL_Delay(16);
+							} while (!I_anyButton());
 
 							fade_black(15);
 						}
@@ -2706,161 +2694,147 @@ new_game:
 
 					case 'P':
 						printf("pic P\n");
-						if (!constantPlay)
+						tempX = atoi(s + 3);
+						if (tempX > 900)
 						{
-							tempX = atoi(s + 3);
-							if (tempX > 900)
-							{
-								memcpy(colors, palettes[pcxpal[tempX-1 - 900]], sizeof(colors));
-								JE_clr256(VGAScreen);
-								JE_showVGA();
-								fade_palette(colors, 1, 0, 255);
-							}
+							memcpy(colors, palettes[pcxpal[tempX-1 - 900]], sizeof(colors));
+							JE_clr256(VGAScreen);
+							JE_showVGA();
+							fade_palette(colors, 1, 0, 255);
+						}
+						else
+						{
+							if (tempX == 0)
+								JE_loadPCX(data_dir(), "tshp2.pcx");
 							else
-							{
-								if (tempX == 0)
-									JE_loadPCX(data_dir(), "tshp2.pcx");
-								else
-									JE_loadPic(VGAScreen, tempX, false);
+								JE_loadPic(VGAScreen, tempX, false);
 
-								JE_showVGA();
-								fade_palette(colors, 10, 0, 255);
-							}
+							JE_showVGA();
+							fade_palette(colors, 10, 0, 255);
 						}
 						break;
 
 					case 'U':
 						printf("pic U\n");
-						if (!constantPlay)
+						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+						tempX = atoi(s + 3);
+						JE_loadPic(VGAScreen, tempX, false);
+						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+						I_checkButtons();
+
+						for (int z = 0; z <= 199; z++)
 						{
-							memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-							tempX = atoi(s + 3);
-							JE_loadPic(VGAScreen, tempX, false);
-							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-							I_checkButtons();
-
-							for (int z = 0; z <= 199; z++)
+							if (true /* !newkey */)
 							{
-								if (true /* !newkey */)
+								vga = VGAScreen->pixels;
+								vga2 = VGAScreen2->pixels;
+								pic = pic_buffer + (199 - z) * 320;
+
+								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+								for (y = 0; y <= 199; y++)
 								{
-									vga = VGAScreen->pixels;
-									vga2 = VGAScreen2->pixels;
-									pic = pic_buffer + (199 - z) * 320;
-
-									setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-									for (y = 0; y <= 199; y++)
+									if (y <= z)
 									{
-										if (y <= z)
-										{
-											memcpy(vga, pic, 320);
-											pic += 320;
-										}
-										else
-										{
-											memcpy(vga, vga2, VGAScreen->pitch);
-											vga2 += VGAScreen->pitch;
-										}
-										vga += VGAScreen->pitch;
+										memcpy(vga, pic, 320);
+										pic += 320;
 									}
-
-									JE_showVGA();
-									service_wait_delay();
+									else
+									{
+										memcpy(vga, vga2, VGAScreen->pitch);
+										vga2 += VGAScreen->pitch;
+									}
+									vga += VGAScreen->pitch;
 								}
-							}
 
-							memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+								JE_showVGA();
+								service_wait_delay();
+							}
 						}
+
+						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
 						break;
 
 					case 'V':
 						printf("pic V\n");
-						if (!constantPlay)
+						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+						tempX = atoi(s + 3);
+						JE_loadPic(VGAScreen, tempX, false);
+						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+						I_checkButtons();
+						for (int z = 0; z <= 199; z++)
 						{
-							/* TODO: NETWORK */
-							memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-							tempX = atoi(s + 3);
-							JE_loadPic(VGAScreen, tempX, false);
-							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-							I_checkButtons();
-							for (int z = 0; z <= 199; z++)
+							if (true /* !newkey */)
 							{
-								if (true /* !newkey */)
+								vga = VGAScreen->pixels;
+								vga2 = VGAScreen2->pixels;
+								pic = pic_buffer;
+
+								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+								for (y = 0; y < 199; y++)
 								{
-									vga = VGAScreen->pixels;
-									vga2 = VGAScreen2->pixels;
-									pic = pic_buffer;
-
-									setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-									for (y = 0; y < 199; y++)
+									if (y <= 199 - z)
 									{
-										if (y <= 199 - z)
-										{
-											memcpy(vga, vga2, VGAScreen->pitch);
-											vga2 += VGAScreen->pitch;
-										}
-										else
-										{
-											memcpy(vga, pic, 320);
-											pic += 320;
-										}
-										vga += VGAScreen->pitch;
+										memcpy(vga, vga2, VGAScreen->pitch);
+										vga2 += VGAScreen->pitch;
 									}
-
-									JE_showVGA();
-									service_wait_delay();
+									else
+									{
+										memcpy(vga, pic, 320);
+										pic += 320;
+									}
+									vga += VGAScreen->pitch;
 								}
-							}
 
-							memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+								JE_showVGA();
+								service_wait_delay();
+							}
 						}
+
+						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
 						break;
 
 					case 'R':
 						printf("pic R\n");
-						if (!constantPlay)
+						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+						tempX = atoi(s + 3);
+						JE_loadPic(VGAScreen, tempX, false);
+						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+						I_checkButtons();
+
+						for (int z = 0; z <= 318; z++)
 						{
-							/* TODO: NETWORK */
-							memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-							tempX = atoi(s + 3);
-							JE_loadPic(VGAScreen, tempX, false);
-							memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-							I_checkButtons();
-
-							for (int z = 0; z <= 318; z++)
+							if (true /* !newkey */)
 							{
-								if (true /* !newkey */)
+								vga = VGAScreen->pixels;
+								vga2 = VGAScreen2->pixels;
+								pic = pic_buffer;
+
+								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+								for(y = 0; y < 200; y++)
 								{
-									vga = VGAScreen->pixels;
-									vga2 = VGAScreen2->pixels;
-									pic = pic_buffer;
-
-									setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-									for(y = 0; y < 200; y++)
-									{
-										memcpy(vga, vga2 + z, 319 - z);
-										vga += 320 - z;
-										vga2 += VGAScreen2->pitch;
-										memcpy(vga, pic, z + 1);
-										vga += z;
-										pic += 320;
-									}
-
-									JE_showVGA();
-									service_wait_delay();
+									memcpy(vga, vga2 + z, 319 - z);
+									vga += 320 - z;
+									vga2 += VGAScreen2->pitch;
+									memcpy(vga, pic, z + 1);
+									vga += z;
+									pic += 320;
 								}
-							}
 
-							memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+								JE_showVGA();
+								service_wait_delay();
+							}
 						}
+
+						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
 						break;
 
 					case 'C':
@@ -2883,34 +2857,31 @@ new_game:
 
 					case 'W':
 						skip_header_draw = true;
-						if (!constantPlay)
+						if (true /* !ESCPressed */)
 						{
-							if (true /* !ESCPressed */)
+							warningCol = 14 * 16 + 5;
+							warningColChange = 1;
+							warningSoundDelay = 0;
+							levelWarningDisplay = (s[2] == 'y');
+							levelWarningLines = 0;
+							frameCountMax = atoi(s + 4);
+							setjasondelay2(6);
+							warningRed = frameCountMax / 10;
+							frameCountMax = frameCountMax % 10;
+
+							do
 							{
-								warningCol = 14 * 16 + 5;
-								warningColChange = 1;
-								warningSoundDelay = 0;
-								levelWarningDisplay = (s[2] == 'y');
-								levelWarningLines = 0;
-								frameCountMax = atoi(s + 4);
-								setjasondelay2(6);
-								warningRed = frameCountMax / 10;
-								frameCountMax = frameCountMax % 10;
+								read_encrypted_pascal_string(s, sizeof(s), ep_f);
 
-								do
+								if (s[0] != '#')
 								{
-									read_encrypted_pascal_string(s, sizeof(s), ep_f);
-
-									if (s[0] != '#')
-									{
-										strcpy(levelWarningText[levelWarningLines], s);
-										levelWarningLines++;
-									}
+									strcpy(levelWarningText[levelWarningLines], s);
+									levelWarningLines++;
 								}
-								while (!(s[0] == '#'));
-
-								JE_displayText();
 							}
+							while (!(s[0] == '#'));
+
+							JE_displayText();
 						}
 						skip_header_draw = false;
 						break;
@@ -3260,7 +3231,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 
 	JE_byte shapeTableI;
 
-	if (superArcadeMode != SA_NONE && eDatI == 534)
+	if (eDatI == 534) // Super Arcade mode only ... but we're always in that mode
 		eDatI = 533;
 
 	enemyShapeTables[5-1] = 21;   /*Coins&Gems*/
@@ -4178,14 +4149,11 @@ void JE_eventSystem( void )
 
 	case 33: /* Enemy From other Enemies */
 		event_name("enemy_from_other_enemies");
-		if (!((eventRec[eventLoc-1].eventdat == 512 || eventRec[eventLoc-1].eventdat == 513) && (twoPlayerMode || onePlayerAction || superTyrian)))
+		if (!((eventRec[eventLoc-1].eventdat == 512 || eventRec[eventLoc-1].eventdat == 513) && (onePlayerAction || superTyrian)))
 		{
-			if (superArcadeMode != SA_NONE)
-			{
-				if (eventRec[eventLoc-1].eventdat == 534)
-					eventRec[eventLoc-1].eventdat = 827;
-			}
-			else if (!superTyrian)
+			if (eventRec[eventLoc-1].eventdat == 534)
+				eventRec[eventLoc-1].eventdat = 827;
+/*			else if (!superTyrian)
 			{
 				const uint lives = player[0].lives;
 
@@ -4197,7 +4165,7 @@ void JE_eventSystem( void )
 			}
 			if (eventRec[eventLoc-1].eventdat == 534 && superTyrian)
 				eventRec[eventLoc-1].eventdat = 828 + superTyrianSpecials[mt_rand() % 4];
-
+*/
 			for (temp = 0; temp < 100; temp++)
 			{
 				if (enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
@@ -4307,7 +4275,7 @@ void JE_eventSystem( void )
 			//{
 			//	eventRec[eventLoc-1].eventdat = 829 + (mt_rand() % 6);
 			//}
-			if (twoPlayerMode || onePlayerAction)
+			if (onePlayerAction)
 			{
 				for (temp = 0; temp < 100; temp++)
 				{
@@ -4324,7 +4292,7 @@ void JE_eventSystem( void )
 			damageRate = eventRec[eventLoc-1].eventdat3;
 
 		// always true
-		//if (eventRec[eventLoc-1].eventdat2 == 0 || twoPlayerMode || onePlayerAction)
+		//if (eventRec[eventLoc-1].eventdat2 == 0 || onePlayerAction)
 		{
 			//printf("(%d) Difficulty level change: %d + %d\n", eventRec[eventLoc-1].eventdat2, difficultyLevel, eventRec[eventLoc-1].eventdat);
 			ARC_RankLevelAdjusts(eventRec[eventLoc-1].eventdat);
@@ -4480,7 +4448,7 @@ void JE_eventSystem( void )
 	case 63:  // skip events if not in 2-player mode
 		event_name("jump_if_fullgame");
 		//printf("ignoring event type 63 (skip in full game mode)\n");
-		//if (!twoPlayerMode && !onePlayerAction)
+		//if (!onePlayerAction)
 		//	eventLoc += eventRec[eventLoc-1].eventdat;
 		break;
 

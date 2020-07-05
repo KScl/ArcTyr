@@ -32,7 +32,6 @@
 #include <string.h>
 
 JE_word goToWeaponCreator = 0;
-JE_boolean constantPlay = false;
 JE_byte shutdownCode = 0;
 
 /* YKS: Note: LOOT cheat had non letters removed. */
@@ -124,13 +123,6 @@ void JE_paramCheck( int argc, char *argv[] )
 			xmas = true;
 			break;
 			
-		case 'c':
-			/* Constant play for testing purposes (C key activates invincibility)
-			   This might be useful for publishers to see everything - especially
-			   those who can't play it */
-			constantPlay = true;
-			break;
-			
 		case 'r':
 			record_demo = true;
 			break;
@@ -185,7 +177,6 @@ void JE_paramCheck( int argc, char *argv[] )
 				case 2:
 					break;
 				case 3:
-					constantPlay = true;
 					break;
 				case 4:
 					break;
