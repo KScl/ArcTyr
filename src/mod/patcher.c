@@ -21,16 +21,19 @@ typedef struct {
 	struct JE_EventRecType new_ev;
 } Patches;
 
-static const Patches _P1_TYRIAN[] = {
+static const Patches _P1_TYRIAN_HARD[] = {
+	{5,   false, {0, 64, 6, 0, 0}}, // Remove view cone smoothie
 	{17,  false, {160, 33, 533, 0, 0, 0, 0, 1}}, // restore shield powerup drop from first u-ship when fleeing
 	{315, true,  {1300, 6, 17, 150, 3, 0, 0, 96}}, // add shield powerup to an oncoming enemy
 	{316, false, {1300, 33, 533, 0, 0, 0, 0, 96}}, //  "
 	{488, false, {2260, 100, 5, 230, 6, 0, 0, 10}}, // add normal powerup
 	{508, false, {2360, 100, 5, 20, 6, 0, 0, 15}}, // add normal powerup
-	{709, false, {2845, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
-	{723, false, {2875, 45, 603, 0, 0, 0, 0, 7}}, // add normal powerup to tail of a pattern
-	{857, false, {3345, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
-	{883, false, {3415, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
+	{512, true,  {2400, 64, 6, 1, 1}}, // Add view cone for platforms area
+	{710, false, {2845, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
+	{724, false, {2875, 45, 603, 0, 0, 0, 0, 7}}, // add normal powerup to tail of a pattern
+	{858, false, {3345, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
+	{884, false, {3415, 45, 603, 0, 0, 0, 0, 17}}, // add normal powerup to tail of a pattern
+	{886, true,  {3480, 64, 6, 0, 0}}, // Remove view cone for end of platforms area
 	{0},
 };
 
@@ -150,7 +153,7 @@ void MOD_PatcherInit( JE_byte episode, JE_byte level )
 		switch (level)
 		{
 			default: return;
-			case 15: curPatches = _P1_TYRIAN; return;
+			case 15: curPatches = _P1_TYRIAN_HARD; return;
 		}
 	case 2:
 		switch (level)

@@ -3131,33 +3131,6 @@ void intro_logos( void )
 	fade_black(10);
 }
 
-void JE_readTextSync( void )
-{
-#if 0  // this function seems to be unnecessary
-	JE_clr256(VGAScreen);
-	JE_showVGA();
-	JE_loadPic(VGAScreen, 1, true);
-
-	JE_barShade(VGAScreen, 3, 3, 316, 196);
-	JE_barShade(VGAScreen, 1, 1, 318, 198);
-	JE_dString(VGAScreen, 10, 160, "Waiting for other player.", SMALL_FONT_SHAPES);
-	JE_showVGA();
-
-	/* TODO: NETWORK */
-
-	do
-	{
-		setjasondelay(2);
-
-		/* TODO: NETWORK */
-
-		wait_delay();
-
-	} while (0 /* TODO: NETWORK */);
-#endif
-}
-
-
 void JE_displayText( void )
 {
 	/* Display Warning Text */
