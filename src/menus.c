@@ -219,6 +219,7 @@ void select_gameplay( void )
 			uint p = 0;
 			switch (button++)
 			{
+#ifdef ENABLE_DEVTOOLS
 			case INPUT_P1_UP:
 			case INPUT_P2_UP:
 				mainLevel--;
@@ -229,6 +230,7 @@ void select_gameplay( void )
 				mainLevel++;
 				JE_playSampleNum(S_CURSOR);
 				break;
+#endif
 
 			case INPUT_P2_FIRE:
 				p = 1;

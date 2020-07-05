@@ -93,7 +93,9 @@ typedef struct
 Sprite2_array;
 
 extern Sprite2_array shotShapes[2];
-extern Sprite2_array eShapes[6];
+extern Sprite2_array iconShapes;
+extern Sprite2_array pickupShapes;
+extern Sprite2_array eShapes[4];
 extern Sprite2_array shapes6, shapes9;
 
 void JE_loadCompShapes( Sprite2_array *, JE_char s );

@@ -116,7 +116,7 @@ JE_MultiEnemyType enemy;
 JE_EnemyAvailType enemyAvail;  /* values: 0: used, 1: free, 2: secret pick-up */
 JE_word enemyOffset;
 JE_word enemyOnScreen;
-JE_byte enemyShapeTables[6]; /* [1..6] */
+JE_byte enemyShapeTables[4];
 JE_word superEnemy254Jump;
 
 /*EnemyShotData*/

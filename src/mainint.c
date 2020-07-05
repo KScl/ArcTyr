@@ -1838,7 +1838,7 @@ redo:
 		const JE_byte chargeRates[11] = {23, 21, 19, 17, 15, 13, 12, 11, 10, 9, 8};
 
 		if (!twoPlayerLinked && chargeLevel > 0)
-			blit_sprite2(VGAScreen, this_player->x + (shipGr_ == 0) + 1, this_player->y - 13, eShapes[5], 77 + chargeLevel + chargeGr * 19);
+			blit_sprite2(VGAScreen, this_player->x + (shipGr_ == 0) + 1, this_player->y - 13, iconShapes, 77 + chargeLevel + chargeGr * 19);
 
 		if (!chargeGrWait || !(--chargeGrWait))
 		{
@@ -2070,7 +2070,7 @@ redo:
 			const uint sprite = this_option->gr[this_player->sidekick[i].animation_frame] + this_player->sidekick[i].charge;
 
 			if (this_player->sidekick[i].style == 1 || this_player->sidekick[i].style == 2)
-				blit_sprite2x2(VGAScreen, x - 6, y, eShapes[5], sprite);
+				blit_sprite2x2(VGAScreen, x - 6, y, iconShapes, sprite);
 			else
 				blit_sprite2(VGAScreen, x, y, shapes9, sprite);
 		}

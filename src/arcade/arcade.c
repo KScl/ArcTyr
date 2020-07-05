@@ -721,7 +721,7 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x )
 
 	if (this_player->is_dragonwing)
 	{
-		blit_sprite2x2(VGAScreen, x + 1, 1, eShapes[5], 41);
+		blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, 41);
 		if (twoPlayerLinkReady)
 		{
 			JE_textShade(VGAScreen, x + 8, 20, "OK!", 7, this_player->hud_ready_timer > 3 ? 0 : 6, FULL_SHADE);
@@ -736,7 +736,7 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x )
 	if (this_player->items.special == 0)
 		return;
 
-	blit_sprite2x2(VGAScreen, x + 1, 1, eShapes[5], special[this_player->items.special].itemgraphic);
+	blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, special[this_player->items.special].itemgraphic);
 
 	if (!this_player->hud_repeat_start)
 		return;

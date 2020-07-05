@@ -3206,14 +3206,14 @@ void JE_displayText( void )
 	levelWarningDisplay = false;
 }
 
-Sint16 JE_newEnemy( int enemyOffset, Uint16 eDatI, Sint16 uniqueShapeTableI )
+Sint16 JE_newEnemy( int enemyOffset, Uint16 eDatI, JE_byte shapeTableOverride )
 {
 	int i = enemyOffset, stop = enemyOffset + 25;
 	for (; i < stop; ++i)
 	{
 		if (enemyAvail[i] == 1)
 		{
-			enemyAvail[i] = JE_makeEnemy(&enemy[i], eDatI, uniqueShapeTableI);
+			enemyAvail[i] = JE_makeEnemy(&enemy[i], eDatI, shapeTableOverride);
 			return i + 1;
 		}
 	}
@@ -3221,47 +3221,46 @@ Sint16 JE_newEnemy( int enemyOffset, Uint16 eDatI, Sint16 uniqueShapeTableI )
 	return 0;
 }
 
-uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 uniqueShapeTableI )
+uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shapeTableOverride )
 {
-	uint avail;
+	uint avail, i;
+	JE_byte shapeTableI;
 
 	// T2000 NOTE:
 	// 851 - 999 is technically a "gray area" when playing in T2000 mode.
 	// Nothing *should* be loaded there.
 
-	JE_byte shapeTableI;
-
 	if (eDatI == 534) // Super Arcade mode only ... but we're always in that mode
 		eDatI = 533;
 
-	enemyShapeTables[5-1] = 21;   /*Coins&Gems*/
-	enemyShapeTables[6-1] = 26;   /*Two-Player Stuff*/
-
-	if (uniqueShapeTableI > 0)
+	switch ((shapeTableI = shapeTableOverride > 0 ? shapeTableOverride : enemyDat[eDatI].shapebank))
 	{
-		shapeTableI = uniqueShapeTableI;
+		case 21: // Coins and Gems -- always loaded into pickupShapes
+			enemy->sprite2s = &pickupShapes;
+			break;
+		case 26: // Icons -- always loaded into iconShapes
+			enemy->sprite2s = &iconShapes;
+			break;
+		default:
+			for (i = 0; i < COUNTOF(enemyShapeTables); ++i)
+			{
+				if (enemyShapeTables[i] == shapeTableI)
+				{
+					enemy->sprite2s = &eShapes[i];
+					goto shape_found; // double-break
+				}
+			}
+			// maintain buggy Tyrian behavior (use shape table value from previous enemy that occupied this index in the enemy array)
+			fprintf(stderr, "warning: ignoring sprite from unloaded shape table %d\n", shapeTableI);
+			break;
 	}
-	else
-	{
-		shapeTableI = enemyDat[eDatI].shapebank;
-	}
-	
-	Sprite2_array *sprite2s = NULL;
-	for (uint i = 0; i < 6; ++i)
-		if (shapeTableI == enemyShapeTables[i])
-			sprite2s = &eShapes[i];
-	
-	if (sprite2s != NULL)
-		enemy->sprite2s = sprite2s;
-	else
-		// maintain buggy Tyrian behavior (use shape table value from previous enemy that occupied this index in the enemy array)
-		fprintf(stderr, "warning: ignoring sprite from unloaded shape table %d\n", shapeTableI);
 
+	shape_found:
 	enemy->enemydatofs = &enemyDat[eDatI];
 
 	enemy->mapoffset = 0;
 
-	for (uint i = 0; i < 3; ++i)
+	for (i = 0; i < 3; ++i)
 	{
 		enemy->eshotmultipos[i] = 0;
 	}
@@ -3283,7 +3282,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 	enemy->ymaxbounce = 10000;
 	/*Far enough away to be impossible to reach*/
 
-	for (uint i = 0; i < 3; ++i)
+	for (i = 0; i < 3; ++i)
 	{
 		enemy->tur[i] = enemyDat[eDatI].tur[i];
 	}
@@ -3355,7 +3354,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 
 	enemy->enemytype = eDatI;
 
-	for (uint i = 0; i < 3; ++i)
+	for (i = 0; i < 3; ++i)
 	{
 		if (enemy->tur[i] == 252)
 			enemy->eshotwait[i] = 1;
@@ -3364,7 +3363,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 		else
 			enemy->eshotwait[i] = 255;
 	}
-	for (uint i = 0; i < 20; ++i)
+	for (i = 0; i < 20; ++i)
 		enemy->egr[i] = enemyDat[eDatI].egraphic[i];
 	enemy->size = enemyDat[eDatI].esize;
 	enemy->linknum = 0;
@@ -3518,7 +3517,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, Sint16 unique
 	return avail;
 }
 
-void JE_createNewEventEnemy( JE_byte enemyTypeOfs, JE_word enemyOffset, Sint16 uniqueShapeTableI )
+void JE_createNewEventEnemy( JE_byte enemyTypeOfs, JE_word enemyOffset, JE_byte shapeTableOverride )
 {
 	int i;
 
@@ -3540,7 +3539,7 @@ void JE_createNewEventEnemy( JE_byte enemyTypeOfs, JE_word enemyOffset, Sint16 u
 
 	tempW = eventRec[eventLoc-1].eventdat + enemyTypeOfs;
 
-	enemyAvail[b-1] = JE_makeEnemy(&enemy[b-1], tempW, uniqueShapeTableI);
+	enemyAvail[b-1] = JE_makeEnemy(&enemy[b-1], tempW, shapeTableOverride);
 
 	// T2000
 	// When T2000 gives an X position of -200, what it actually wants is a random X position...

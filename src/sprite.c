@@ -27,7 +27,9 @@
 Sprite_array sprite_table[SPRITE_TABLES_MAX];
 
 Sprite2_array shotShapes[2];
-Sprite2_array eShapes[6];
+Sprite2_array iconShapes;
+Sprite2_array pickupShapes;
+Sprite2_array eShapes[4];
 Sprite2_array shapes6, shapes9;
 
 void load_sprites_file( unsigned int table, const char *dir, const char *filename )
@@ -725,15 +727,15 @@ void JE_loadMainShapeTables( const char *shpfile )
 	i++;
 
 	// power-up sprites
-	loadCompShapesArc(&eShapes[5], "a_icons.shp");
+	loadCompShapesArc(&iconShapes, "a_icons.shp");
 	// skip shapes in shpfile
 	i++;
 
 	fseek(f, shpPos[i], SEEK_SET);
 
 	// coins, datacubes, etc sprites
-	eShapes[4].size = shpPos[i + 1] - shpPos[i];
-	JE_loadCompShapesB(&eShapes[4], f);
+	pickupShapes.size = shpPos[i + 1] - shpPos[i];
+	JE_loadCompShapesB(&pickupShapes, f);
 	i++;
 	
 	// more player shot sprites
@@ -756,8 +758,8 @@ void free_main_shape_tables( void )
 		free_sprites(i);
 
 	free_sprite2s(&shapes9);
-	free_sprite2s(&eShapes[5]);
-	free_sprite2s(&eShapes[4]);
+	free_sprite2s(&iconShapes);
+	free_sprite2s(&pickupShapes);
 	free_sprite2s(&shotShapes[0]);
 	free_sprite2s(&shotShapes[1]);
 }
