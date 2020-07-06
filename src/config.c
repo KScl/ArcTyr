@@ -42,23 +42,6 @@
 #include <unistd.h>
 #endif
 
-/* Configuration Load/Save handler */
-
-const JE_KeySettingType defaultKeySettings =
-{
-	SDLK_UP, SDLK_DOWN, SDLK_LEFT, SDLK_RIGHT, SDLK_SPACE, SDLK_RETURN, SDLK_LCTRL, SDLK_LALT
-/*	72, 80, 75, 77, 57, 28, 29, 56*/
-};
-
-/* Last 2 bytes = Word
- *
- * Max Value = 1680
- * X div  60 = Armor  (1-28)
- * X div 168 = Shield (1-12)
- * X div 280 = Engine (1-06)
- */
-
-
 JE_boolean smoothies[9] = /* [1..9] */
 { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -75,9 +58,6 @@ JE_shortint difficultyLevel, oldDifficultyLevel,
 /* Level Data */
 char    lastLevelName[11], levelName[11]; /* string [10] */
 JE_byte mainLevel, nextLevel, saveLevel;   /*Current Level #*/
-
-/* Keyboard Junk */
-JE_KeySettingType keySettings;
 
 /* Configuration */
 JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
@@ -124,8 +104,6 @@ static bool _TAV_loadConfig( void )
 	// default openTyrian settings
 	fullscreen_enabled = false;
 	set_scaler_by_name("2x");
-
-	memcpy(&keySettings, &defaultKeySettings, sizeof(keySettings));
 
 	// tyrian.cfg video settings
 	gammaCorrection = 0;

@@ -42,7 +42,6 @@ typedef JE_byte JE_PItemsType[12]; /* [1..12] */
 
 typedef JE_byte JE_EditorItemAvailType[100]; /* [1..100] */
 
-extern const JE_KeySettingType defaultKeySettings;
 extern JE_boolean smoothies[9];
 extern JE_byte starShowVGASpecialCode;
 extern JE_word lastCubeMax, cubeMax;
@@ -51,7 +50,6 @@ extern JE_shortint difficultyLevel, oldDifficultyLevel, initialDifficulty;
 
 extern char lastLevelName[11], levelName[11];
 extern JE_byte mainLevel, nextLevel, saveLevel;
-extern JE_KeySettingType keySettings;
 extern JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 extern JE_boolean filtrationAvail, filterActive, filterFade, filterFadeStart;
 extern JE_boolean gameJustLoaded;

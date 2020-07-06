@@ -1051,8 +1051,6 @@ start_level_first:
 
 	init_saweapon_bag();
 
-	constantLastX = -1;
-
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].exploding_ticks = 0;

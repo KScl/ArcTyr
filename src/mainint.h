@@ -25,10 +25,7 @@
 #include "player.h"
 #include "sprite.h"
 
-extern JE_shortint constantLastX;
 extern JE_word textErase;
-extern JE_word upgradeCost;
-extern JE_word downgradeCost;
 extern JE_boolean performSave;
 extern JE_boolean jumpSection;
 extern JE_boolean useLastBank;
