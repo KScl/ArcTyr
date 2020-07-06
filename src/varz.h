@@ -217,8 +217,6 @@ typedef struct {
 
 extern JE_integer tempDat, tempDat2, tempDat3;
 extern const JE_byte randomEnemyLaunchSounds[3];
-extern JE_byte SFCurrentCode[2][21];
-extern JE_byte SFExecuted[2];
 extern JE_byte lvlFileNum;
 extern JE_word maxEvent, eventLoc;
 extern JE_word tempBackMove, explodeMove;

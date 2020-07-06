@@ -122,6 +122,11 @@ typedef struct
 		JE_byte zinglon;
 	} specials;
 
+	struct {
+		JE_byte progress[5];
+		JE_byte execute;
+	} twiddle;
+
 	// option toggles
 	JE_byte last_opt_given, last_opt_fired;
 
@@ -252,5 +257,7 @@ JE_boolean PL_ShotRepeat( Player *this_player, uint port );
 bool PL_PowerUpWeapon( Player *, uint port );
 
 JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt );
+
+void PL_Twiddle( Player *this_player );
 
 #endif // PLAYER_H

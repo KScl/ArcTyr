@@ -920,6 +920,7 @@ start_level_first:
 
 		// Special data all wiped
 		memset(&player[i].specials, 0, sizeof(player[i].specials));
+		memset(&player[i].twiddle, 0, sizeof(player[i].twiddle));
 
 		// Don't fire special if holding fire at start
 		player[i].shot_repeat[SHOT_SPECIAL] = 2;
@@ -1081,9 +1082,6 @@ start_level_first:
 
 	memset(enemyShapeTables, 0, sizeof(enemyShapeTables));
 	memset(enemy,            0, sizeof(enemy));
-
-	memset(SFCurrentCode,    0, sizeof(SFCurrentCode));
-	memset(SFExecuted,       0, sizeof(SFExecuted));
 
 	memset(smoothies, 0, sizeof(smoothies));
 

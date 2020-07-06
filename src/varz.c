@@ -40,10 +40,6 @@ JE_integer tempDat, tempDat2, tempDat3;
 
 const JE_byte randomEnemyLaunchSounds[3] /* [1..3] */ = {13,6,26};
 
-/*Street-Fighter Commands*/
-JE_byte SFCurrentCode[2][21]; /* [1..2, 1..21] */
-JE_byte SFExecuted[2]; /* [1..2] */
-
 /*Special General Data*/
 JE_byte lvlFileNum;
 JE_word maxEvent, eventLoc;
@@ -554,11 +550,10 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 	//
 	// Twiddles
 	//
-	temp = SFExecuted[playerNum-1];
-	if (temp > 0 && this_player->shot_repeat[SHOT_TWIDDLE] == 0
+	if (this_player->twiddle.execute > 0 && this_player->shot_repeat[SHOT_TWIDDLE] == 0
 		&& this_player->specials.flare_time == 0 && !globalFlare)
 	{
-		JE_byte twiddlePower = special[temp].pwr;
+		JE_byte twiddlePower = special[this_player->twiddle.execute].pwr;
 
 		bool can_afford = true;
 
@@ -593,12 +588,8 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 			}
 		}
 
-		//this_player->shot_multi_pos[SHOT_SPECIAL] = 0;
-		//this_player->shot_multi_pos[SHOT_SPECIAL2] = 0;
-
 		if (can_afford)
-			JE_specialComplete(playerNum, temp, SHOT_TWIDDLE, twiddlePower);
-		SFExecuted[playerNum-1] = 0;
+			JE_specialComplete(playerNum, this_player->twiddle.execute, SHOT_TWIDDLE, twiddlePower);
 
 		JE_drawShield();
 		JE_drawArmor();

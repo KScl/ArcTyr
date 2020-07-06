@@ -234,3 +234,72 @@ JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt )
 
 	return playerDamage;
 }
+
+void PL_Twiddle( Player *this_player )
+{
+	JE_byte twidDir = 99, twidCheckDirs;
+	JE_byte currentKey;
+	JE_byte i;
+
+	JE_ShipType *ship = &ships[this_player->items.ship];
+
+	this_player->twiddle.execute = 0;
+
+	// this uses buttons instead of PX/Y and mouseX/Y
+	// possibly more precise than before?
+	twidCheckDirs = (this_player->buttons[BUTTON_UP])   +  /*UP*/
+	                (this_player->buttons[BUTTON_DOWN]) +  /*DOWN*/
+	                (this_player->buttons[BUTTON_LEFT]) +  /*LEFT*/
+	                (this_player->buttons[BUTTON_RIGHT]);  /*RIGHT*/
+
+	if (twidCheckDirs == 0) // no direction being pressed
+	{
+		// only if all buttons released
+		if (this_player->buttons[BUTTON_FIRE] || this_player->buttons[BUTTON_SKICK])
+			return;
+	}
+	else if (twidCheckDirs == 1)
+	{
+		twidDir = (this_player->buttons[BUTTON_UP])    * 1 + /*UP*/
+		          (this_player->buttons[BUTTON_DOWN])  * 2 + /*DOWN*/
+		          (this_player->buttons[BUTTON_LEFT])  * 3 + /*LEFT*/
+		          (this_player->buttons[BUTTON_RIGHT]) * 4 + /*RIGHT*/
+		          (this_player->buttons[BUTTON_FIRE])  * 4 +
+		          (this_player->buttons[BUTTON_SKICK]) * 8;
+	}
+	else // more than one direction pressed
+		return;
+
+	// 1: UP      5: UP+FIRE      9: UP+SKICK
+	// 2: DOWN    6: DOWN+FIRE   10: DOWN+SKICK
+	// 3: LEFT    7: LEFT+FIRE   11: LEFT+SKICK
+	// 4: RIGHT   8: RIGHT+FIRE  12: RIGHT+SKICK
+	// 99: All buttons and directions released
+
+	for (i = 0; i < ship->numTwiddles; i++)
+	{
+		// get next combo key
+		currentKey = ship->twiddles[i][this_player->twiddle.progress[i]];
+
+		// correct key
+		if (currentKey == twidDir)
+		{
+			// if next key is a special number, code is done
+			currentKey = ship->twiddles[i][++this_player->twiddle.progress[i]];
+			if (currentKey > 100)
+			{
+				this_player->twiddle.progress[i] = 0;
+				this_player->twiddle.execute = currentKey - 100;
+			}
+		}
+		else if (this_player->twiddle.progress[i])
+		{
+			if ((twidDir != 99) && // Don't reset if waiting for all release
+			    ((currentKey - 1) & 3) != ((twidDir - 1) & 3) && // Don't reset if correct direction but wrong buttons
+			    (ship->twiddles[i][this_player->twiddle.progress[i]-1] != twidDir)) // Don't reset if previous direction is our current
+			{
+				this_player->twiddle.progress[i] = 0;
+			}
+		}
+	}
+}

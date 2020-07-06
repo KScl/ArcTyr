@@ -46,8 +46,6 @@ JE_boolean JE_inGameSetup( void );
 
 bool load_next_demo( void );
 
-void JE_SFCodes( JE_byte playerNum_ );
-
 void JE_drawPortConfigButtons( void );
 void JE_outCharGlow( JE_word x, JE_word y, const char *s );
 

@@ -618,79 +618,6 @@ bool load_next_demo( void )
 	return true;
 }
 
-/*Street Fighter codes*/
-void JE_SFCodes( JE_byte playerNum_ )
-{
-	JE_byte twidDir, twidCheckDirs;
-	JE_byte currentKey;
-	JE_byte i;
-
-	Player *this_player = &player[playerNum_-1];
-	uint ship = player[playerNum_-1].items.ship;
-
-	// this uses buttons instead of PX/Y and mouseX/Y
-	// possibly more precise than before?
-	twidCheckDirs = (this_player->buttons[BUTTON_UP])   +  /*UP*/
-	                (this_player->buttons[BUTTON_DOWN]) +  /*DOWN*/
-	                (this_player->buttons[BUTTON_LEFT]) +  /*LEFT*/
-	                (this_player->buttons[BUTTON_RIGHT]);  /*RIGHT*/
-	twidDir = (this_player->buttons[BUTTON_UP])    * 1 + /*UP*/
-	          (this_player->buttons[BUTTON_DOWN])  * 2 + /*DOWN*/
-	          (this_player->buttons[BUTTON_LEFT])  * 3 + /*LEFT*/
-	          (this_player->buttons[BUTTON_RIGHT]) * 4;  /*RIGHT*/
-
-	if (twidDir == 0) // no direction being pressed
-	{
-		if (!this_player->buttons[BUTTON_FIRE]) // if fire button is released
-		{
-			twidDir = 9;
-			twidCheckDirs = 1;
-		} else {
-			twidCheckDirs = 0;
-			twidDir = 99;
-		}
-	}
-
-	if (twidCheckDirs == 1) // if exactly one direction pressed or firebutton is released
-	{
-		twidDir += this_player->buttons[BUTTON_FIRE] * 4;
-		// 1: UP      5: UP+FIRE
-		// 2: DOWN    6: DOWN+FIRE
-		// 3: LEFT    7: LEFT+FIRE
-		// 4: RIGHT   8: RIGHT+FIRE
-		// 9: All buttons and directions released
-
-		for (i = 0; i < ships[ship].numTwiddles; i++)
-		{
-			// get next combo key
-			currentKey = ships[ship].twiddles[i][SFCurrentCode[playerNum_-1][i]];
-
-			// correct key
-			if (currentKey == twidDir)
-			{
-				SFCurrentCode[playerNum_-1][i]++;
-
-				currentKey = ships[ship].twiddles[i][SFCurrentCode[playerNum_-1][i]];
-				if (currentKey > 100 && currentKey <= 100 + SPECIAL_NUM)
-				{
-					SFCurrentCode[playerNum_-1][i] = 0;
-					SFExecuted[playerNum_-1] = currentKey - 100;
-				}
-			}
-			else
-			{
-				if ((twidDir != 9) &&
-				    (currentKey - 1) % 4 != (twidDir - 1) % 4 &&
-				    (SFCurrentCode[playerNum_-1][i] == 0 ||
-				     ships[ship].twiddles[i][SFCurrentCode[playerNum_-1][i]-1] != twidDir))
-				{
-					SFCurrentCode[playerNum_-1][i] = 0;
-				}
-			}
-		}
-	}
-}
-
 void JE_playCredits( void )
 {
 	static const JE_byte ships_allowed[] = {2, 1, 3, 4, 5, 6, 2};
@@ -1422,7 +1349,7 @@ redo:
 		/* --- Movement Routine Ending --- */
 
 		// Street-Fighter codes
-		JE_SFCodes(playerNum_);
+		PL_Twiddle(this_player);
 
 		// Linking Routines
 		twoPlayerLinkReady = (!twoPlayerLinked && PL_Alive(0) && PL_Alive(1)
@@ -2002,7 +1929,7 @@ redo:
 			{
 				if ((this_player->buttons[BUTTON_FIRE] && !this_player->sidekick[i].ammo) ||
 					(this_player->buttons[BUTTON_SKICK] &&
-						(!this_player->sidekick[i].ammo || (!this_player->last_buttons[BUTTON_SKICK] && !fired_ammo_opt))
+						(!this_player->sidekick[i].ammo || (!this_player->last_buttons[BUTTON_SKICK] && !this_player->twiddle.execute && !fired_ammo_opt))
 					))
 				{
 					b = player_shot_create(this_option->wport, shot_i, this_player->sidekick[i].x, this_player->sidekick[i].y, *mouseX_, *mouseY_, this_option->wpnum + this_player->sidekick[i].charge, playerNum_);
@@ -2085,9 +2012,6 @@ void JE_mainGamePlayerFunctions( void )
 		levelEnd--;
 		levelEndWarp++;
 	}
-
-	/*Reset Street-Fighter commands*/
-	memset(SFExecuted, 0, sizeof(SFExecuted));
 
 	shipGr = ships[player[0].items.ship].shipgraphic;
 	shipGr2 = ships[player[1].items.ship].shipgraphic;
