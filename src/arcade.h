@@ -55,12 +55,13 @@ JE_word ARC_GetCoins( void );
 
 typedef struct {
 	char name[10];
-	uint cash;
-	JE_boolean new;
+	uint cash, ship;
+	JE_boolean isNew;
 } HighScoreEntry;
 
-JE_boolean ARC_HS_IsLeading( uint cash );
-int ARC_HS_FindPosition( uint cash );
+HighScoreEntry highScores[20];
+JE_boolean HighScore_Leading( uint cash );
+JE_boolean HighScore_InsertName( Player *pl );
 
 //
 // Visual displays

@@ -1011,8 +1011,6 @@ start_level_first:
 	cubeMax = 0;
 
 	/* Secret Level Display */
-	flash = 0;
-	flashChange = 1;
 	secretLevelDisplayTime = 0;
 
 	if (can_play_audio())
@@ -2200,11 +2198,8 @@ draw_player_shot_loop_end:
 
 	if (secretLevelDisplayTime > 0)
 	{
-		secretLevelDisplayTime--;
-		JE_outTextAndDarken(VGAScreen, 90, 10, miscText[59], 15, (JE_byte)flash - 8, FONT_SHAPES);
-		flash += flashChange;
-		if (flash > 4 || flash == 0)
-			flashChange = -flashChange;
+		const JE_byte flash[8] = {-6, -5, -4, -3, -2, -3, -4, -5};
+		JE_outTextAndDarken(VGAScreen, 90, 14, miscText[59], 15, flash[(--secretLevelDisplayTime) & 7], FONT_SHAPES);
 	}
 
 	/*Pentium Speed Mode?*/

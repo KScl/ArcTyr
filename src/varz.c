@@ -75,8 +75,6 @@ struct JE_MegaDataType2 megaData2;
 struct JE_MegaDataType3 megaData3;
 
 /* Secret Level Display */
-JE_byte flash;
-JE_shortint flashChange;
 JE_byte secretLevelDisplayTime;
 
 /* Sound Effects Queue */

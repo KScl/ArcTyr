@@ -155,63 +155,6 @@ JE_word ARC_GetCoins( void )
 }
 
 
-
-//
-// High Scores
-//
-HighScoreEntry highScores[20] = {
-	{"Trent    ", 100000, false},
-	{"Dougan   ",  90000, false},
-	{"Transon  ",  80000, false},
-	{"Vykromod ",  70000, false},
-	{"Beppo    ",  60000, false},
-	{"Steffan  ",  50000, false},
-	{"Lori     ",  45000, false},
-	{"Angel    ",  40000, false},
-	{"Jazz     ",  35000, false},
-	{"Crystal  ",  30000, false},
-	{"Javi     ",  25000, false},
-	{"Cossette ",  20000, false},
-	{"Jill     ",  15000, false},
-	{"Raven    ",  10000, false},
-	{"Spaz     ",   7000, false},
-	{"849      ",   5000, false},
-	{"Darcy    ",   4000, false},
-	{"Jean-Paul",   3000, false},
-	{"Jake     ",   2000, false},
-	{"Devan    ",   1000, false},
-};
-
-JE_boolean ARC_HS_IsLeading( uint cash )
-{
-	return (cash >= highScores[0].cash);
-}
-
-JE_boolean ARC_HS_InsertName( Player *pl )
-{
-	for (int i = 0; i < 20; ++i)
-	{
-		if (pl->cash >= highScores[i].cash)
-		{
-			// Shift down high scores if necessary
-			if (i < 19)
-				memmove(&highScores[i+1], &highScores[i], sizeof(HighScoreEntry) * (19 - i));
-			snprintf(highScores[i].name, sizeof(highScores[i].name), "Unknown");
-			highScores[i].cash = pl->cash;
-			highScores[i].new = true;
-
-			pl->arc.hsPos = i;
-			{
-				Player *otherPl = PL_OtherPlayer(pl);
-				if (otherPl->arc.hsPos >= i)
-					++otherPl->arc.hsPos;
-			}
-			return true;
-		}
-	}
-	return false;
-}
-
 //
 // Arcade text displays
 //
@@ -297,7 +240,7 @@ void ARC_DISP_InGameDisplay( uint pNum )
 
 	sprintf(tmpBuf.s, "%lu", player[pNum - 1].cash);
 	x = (pNum == 2) ? 264 - JE_textWidth(tmpBuf.s, TINY_FONT) : 58;
-	JE_textShade(VGAScreen, x, 13, tmpBuf.s, ARC_HS_IsLeading(player[pNum -1].cash) ? 15 : 2, 4, FULL_SHADE);
+	JE_textShade(VGAScreen, x, 13, tmpBuf.s, HighScore_Leading(player[pNum -1].cash) ? 15 : 2, 4, FULL_SHADE);
 }
 
 void ARC_DISP_HighScoreEntry( uint pNum )
@@ -459,7 +402,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 			return;
 		}
 		// Failed to enter high scores -- skip name entry?
-		if (!ARC_HS_InsertName(pl))
+		if (!HighScore_InsertName(pl))
 		{
 			pl->arc.timer = 10;
 			pl->player_status = (playingCredits) ? STATUS_GAMEOVER : STATUS_CONTINUE;

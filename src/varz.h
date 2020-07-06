@@ -239,8 +239,6 @@ extern JE_word enemyKilled[2];
 extern struct JE_MegaDataType1 megaData1;
 extern struct JE_MegaDataType2 megaData2;
 extern struct JE_MegaDataType3 megaData3;
-extern JE_byte flash;
-extern JE_shortint flashChange;
 extern JE_byte secretLevelDisplayTime;
 
 extern JE_byte soundQueue[STANDARD_SFX_CHANNELS];
