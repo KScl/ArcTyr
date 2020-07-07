@@ -181,7 +181,9 @@ static bool _TAV_loadConfig( void )
 		get_byte_minmax(DIP.difficultyMax, "difficulty_max", 1, 10);
 		get_byte_max(DIP.rankAffectsScore, "rank_affects_score", 1);
 
-		get_byte_max(DIP.coinsPerGame, "coins_per_game", 8);
+		get_byte_max(DIP.coinsToStart, "coins_to_start", 8);
+		get_byte_max(DIP.coinsToContinue, "coins_to_continue", 8);
+
 		get_byte_minmax(DIP.livesStart, "lives_start", 1, 11);
 		get_byte_minmax(DIP.livesContinue, "lives_continue", 1, 11);
 		get_byte_minmax(DIP.powerStart, "power_start", 1, 11);
@@ -226,7 +228,9 @@ static bool _TAV_saveConfig( void )
 		config_set_uint_option(sec, "difficulty_max", DIP.difficultyMax);
 		config_set_uint_option(sec, "rank_affects_score", DIP.rankAffectsScore);
 
-		config_set_uint_option(sec, "coins_per_game", DIP.coinsPerGame);
+		config_set_uint_option(sec, "coins_to_start", DIP.coinsToStart);
+		config_set_uint_option(sec, "coins_to_continue", DIP.coinsToContinue);
+
 		config_set_uint_option(sec, "lives_start", DIP.livesStart);
 		config_set_uint_option(sec, "lives_continue", DIP.livesContinue);
 		config_set_uint_option(sec, "power_start", DIP.powerStart);

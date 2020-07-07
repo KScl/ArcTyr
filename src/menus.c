@@ -74,7 +74,7 @@ static void draw_shipGraphic( int x, int y, uint sGr, int facing )
 
 static void draw_PlayerStatusText( JE_byte p )
 {
-	JE_word cF = 1, cP = 0xFFFF;
+	JE_word curCoins;
 	if (player[p].player_status == STATUS_SELECT)
 	{
 		outTextMirrorX(VGAScreen, 12, 136, "Wait For", 15, -4, SMALL_FONT_SHAPES, true, p);
@@ -82,20 +82,15 @@ static void draw_PlayerStatusText( JE_byte p )
 		return;
 	}
 
-	ARC_GetCredits(&cF, &cP, NULL);
-	if (!cF)
-		strcpy(tmpBuf.s, "Insert Coin");
-	else
-		strcpy(tmpBuf.s, "Press Fire");
+	curCoins = ARC_GetCoins();
 
+	strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
 	outTextMirrorX(VGAScreen, 12, 136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
 
-	if (cP == 0xFFFF)
+	if (DIP.coinsToStart == 0)
 		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Free Play");
-	else if (!cP)
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", cF);
 	else
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu %hu/%hu", cF, cP, (JE_word)DIP.coinsPerGame);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", curCoins, DIP.coinsToStart);
 
 	outTextMirrorX(VGAScreen, 12, 152, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
 }
@@ -242,7 +237,7 @@ void select_gameplay( void )
 					player[p].player_status = STATUS_INGAME;
 					break;
 				}
-				else if (player[p].player_status != STATUS_INGAME && ARC_CoinStart())
+				else if (player[p].player_status != STATUS_INGAME && ARC_CoinStart(&player[p]))
 				{
 					JE_playSampleNum(S_SELECT);
 					player[p].player_status = STATUS_SELECT;
@@ -388,7 +383,7 @@ void select_episode( void )
 			switch (button++)
 			{
 			case INPUT_P1_FIRE:
-				if (player[0].player_status != STATUS_SELECT && ARC_CoinStart())
+				if (player[0].player_status != STATUS_SELECT && ARC_CoinStart(&player[0]))
 				{
 					JE_playSampleNum(S_SELECT);
 					player[0].player_status = STATUS_SELECT;
@@ -397,7 +392,7 @@ void select_episode( void )
 					selection_made = true;
 				break;
 			case INPUT_P2_FIRE:
-				if (player[1].player_status != STATUS_SELECT && ARC_CoinStart())
+				if (player[1].player_status != STATUS_SELECT && ARC_CoinStart(&player[1]))
 				{
 					JE_playSampleNum(S_SELECT);
 					player[1].player_status = STATUS_SELECT;
@@ -470,7 +465,7 @@ void JE_titleScreen( void )
 	//unsigned int arcade_code_i[SA_ENGAGE] = { 0 };
 
 	JE_word waitForDemo;
-	JE_word oldCoins;
+	JE_word oldCoins, curCoins;
 
 	//JE_byte menu = 0;
 	//JE_boolean redraw = true,
@@ -528,7 +523,7 @@ void JE_titleScreen( void )
 	}
 
 	oldCoins = ARC_GetCoins();
-	waitForDemo = (oldCoins >= DIP.coinsPerGame) ? 35*10 : 35*5;
+	waitForDemo = (oldCoins >= DIP.coinsToStart) ? 35*10 : 35*5;
 
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
 	do
@@ -537,16 +532,12 @@ void JE_titleScreen( void )
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen2->pitch * VGAScreen2->h);
 
 		int x = VGAScreen->w / 2, y = 110;
-		JE_word cF = 1, cP = 0xFFFF;
-
 		if (tyrian2000detected)
 			y += 32;
 
-		ARC_GetCredits(&cF, &cP, NULL);
-		if (!cF)
-			strcpy(tmpBuf.s, "Insert Coin");
-		else
-			strcpy(tmpBuf.s, "Press Fire");
+		curCoins = ARC_GetCoins();
+
+		strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
 		draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y + 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
@@ -554,17 +545,26 @@ void JE_titleScreen( void )
 		draw_font_hv(VGAScreen, x,     y,     tmpBuf.s, normal_font, centered, 15, -3);
 		y += 16;
 
-		if (cP == 0xFFFF)
+		if (DIP.coinsToStart == 0)
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Free Play");
-		else if (!cP)
-			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", cF);
 		else
-			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu %hu/%hu", cF, cP, (JE_word)DIP.coinsPerGame);
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", curCoins, DIP.coinsToStart);
 		draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y + 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x - 1, y + 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x,     y,     tmpBuf.s, normal_font, centered, 15, -3);
+
+		if (DIP.coinsToStart != DIP.coinsToContinue)
+		{
+			y += 16;
+			snprintf(tmpBuf.l, sizeof(tmpBuf.l), "%hu Credit%s To Continue", DIP.coinsToContinue, DIP.coinsToContinue == 1 ? "" : "s");
+			draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.l, normal_font, centered, 15, -10);
+			draw_font_hv(VGAScreen, x + 1, y + 1, tmpBuf.l, normal_font, centered, 15, -10);
+			draw_font_hv(VGAScreen, x + 1, y - 1, tmpBuf.l, normal_font, centered, 15, -10);
+			draw_font_hv(VGAScreen, x - 1, y + 1, tmpBuf.l, normal_font, centered, 15, -10);
+			draw_font_hv(VGAScreen, x,     y,     tmpBuf.l, normal_font, centered, 15, -3);
+		}
 
 		if (fadeIn)
 		{
@@ -585,11 +585,11 @@ void JE_titleScreen( void )
 			switch (button++)
 			{
 			case INPUT_P2_FIRE:
-				if (ARC_CoinStart())
+				if (ARC_CoinStart(&player[1]))
 					player[1].player_status = STATUS_SELECT;
 				break;
 			case INPUT_P1_FIRE:
-				if (ARC_CoinStart())
+				if (ARC_CoinStart(&player[0]))
 					player[0].player_status = STATUS_SELECT;
 				break;
 			}
@@ -619,7 +619,7 @@ void JE_titleScreen( void )
 		if (oldCoins != ARC_GetCoins())
 		{
 			oldCoins = ARC_GetCoins();
-			waitForDemo = (oldCoins >= DIP.coinsPerGame) ? 35*10 : 35*5;
+			waitForDemo = (oldCoins >= DIP.coinsToStart) ? 35*10 : 35*5;
 		}
 		else
 		{

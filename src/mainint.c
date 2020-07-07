@@ -749,7 +749,7 @@ void JE_playCredits( void )
 			ship_sprite -= (shipxc < -20) ? 4 : 2;
 		else if (shipxc > 10)
 			ship_sprite += (shipxc > 20) ? 4 : 2;
-		
+
 		blit_sprite2x2(VGAScreen, shipx / 40, 184 - (ticks % 200), shapes9, ship_sprite);
 		
 		const int bottom_line = (ticks / 3) / 20;

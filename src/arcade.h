@@ -26,7 +26,8 @@ typedef struct {
 	JE_byte difficultyMax;
 	JE_byte rankAffectsScore;
 
-	JE_byte coinsPerGame;
+	JE_byte coinsToStart;
+	JE_byte coinsToContinue;
 	JE_byte livesStart;
 	JE_byte livesContinue;
 	JE_byte powerStart;
@@ -47,8 +48,7 @@ void ARC_Identify( void );
 void ARC_IdentifyEnd( void );
 
 void ARC_InsertCoin( void );
-JE_boolean ARC_CoinStart( void );
-void ARC_GetCredits( JE_word *cFull, JE_word *cPartial, JE_word *cpg );
+JE_boolean ARC_CoinStart( Player *pl );
 JE_word ARC_GetCoins( void );
 
 //

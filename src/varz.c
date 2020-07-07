@@ -390,7 +390,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			this_player->invulnerable_ticks = twiddlePower * 10;
 			break;
 		case 12: // special invuln
-			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, 707, 1);
+			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, 707, playerNum);
 			this_player->shot_repeat[shot_i] = 250;
 			this_player->invulnerable_ticks = 100;
 			break;

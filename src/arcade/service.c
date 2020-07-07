@@ -83,6 +83,18 @@ static void SRVH_DispOption( const char *name )
 	}
 }
 
+static void SRVH_DispFadedLabel( const char *name )
+{
+	if (selectionType == __DISPLAY)
+	{
+		JE_outTextAdjust(VGAScreen, 
+			50, optionY, 
+			name, 15, -7, 
+			SMALL_FONT_SHAPES, true);
+		optionY += 16;
+	}
+}
+
 static void SRVH_DispLabel( const char *name )
 {
 	if (selectionType == __DISPLAY)
@@ -92,6 +104,17 @@ static void SRVH_DispLabel( const char *name )
 			name, 15, -4 + (*menuOption == numOptions ? 2 : 0), 
 			SMALL_FONT_SHAPES, true);
 		optionY += 16;
+	}
+}
+
+static void SRVH_DispFadedValue( const char *value )
+{
+	if (selectionType == __DISPLAY)
+	{
+		JE_outTextAdjust(VGAScreen, 
+			270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
+			value, 15, -7, 
+			SMALL_FONT_SHAPES, true);
 	}
 }
 
@@ -308,9 +331,19 @@ void SRV_MoneyMenu( void )
 {
 	SRVH_DispHeader("Coin Settings");
 
-	if (DIP.coinsPerGame == 0)
+	if (DIP.coinsToContinue > DIP.coinsToStart || (DIP.coinsToContinue == 0 && DIP.coinsToStart != 0))
+		DIP.coinsToContinue = DIP.coinsToStart;
+
+	if (DIP.coinsToStart == 0)
 		SRVH_DispValue("Free Play");
-	SRVH_AdjustableByte("Coins per Credit", (DIP.coinsPerGame > 0) ? true : false, &DIP.coinsPerGame, 0, 8);
+	SRVH_AdjustableByte("Credits to Start", (DIP.coinsToStart > 0) ? true : false, &DIP.coinsToStart, 0, 8);
+	if (DIP.coinsToStart == 0)
+	{
+		SRVH_DispFadedValue("Free Play");
+		SRVH_DispFadedLabel("Credits to Continue");
+	}
+	else
+		SRVH_AdjustableByte("Credits to Continue", true, &DIP.coinsToContinue, 1, DIP.coinsToStart);
 
 	optionY += 16;
 

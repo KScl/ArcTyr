@@ -106,7 +106,7 @@ void ARC_InsertCoin( void )
 	if (++coins > 10000)
 		coins = 10000;
 	JE_playSampleNumOnChannel(S_ITEM, SFXPRIORITY+6);
-	if (DIP.coinsPerGame && !(coins % DIP.coinsPerGame))
+	if (DIP.coinsToStart && !(coins % DIP.coinsToStart))
 	{
 		if (play_demo)
 			reallyEndLevel = true;
@@ -127,26 +127,24 @@ void ARC_InsertCoin( void )
 	}
 }
 
-JE_boolean ARC_CoinStart( void )
+JE_boolean ARC_CoinStart( Player *pl )
 {
 	if (isInGame && (normalBonusLevelCurrent || bonusLevelCurrent))
 		return false; // Can't join in the middle of a bonus level!
-	if (coins < DIP.coinsPerGame)
-		return false;
-	coins -= DIP.coinsPerGame;
-	return true;
-}
-
-void ARC_GetCredits( JE_word *cFull, JE_word *cPartial, JE_word *cpg )
-{
-	if (DIP.coinsPerGame == 0)
-		return;
-	if (cFull)
-		*cFull = coins / DIP.coinsPerGame;
-	if (cPartial)
-		*cPartial = coins % DIP.coinsPerGame;
-	if (cpg)
-		*cpg = (JE_word)DIP.coinsPerGame;
+	if (pl->player_status == STATUS_CONTINUE)
+	{
+		if (coins < DIP.coinsToContinue)
+			return false;
+		coins -= DIP.coinsToContinue;
+		return true;
+	}
+	else
+	{
+		if (coins < DIP.coinsToStart)
+			return false;
+		coins -= DIP.coinsToStart;
+		return true;
+	}
 }
 
 JE_word ARC_GetCoins( void )
@@ -181,24 +179,14 @@ void ARC_DISP_NoPlayerInSlot( uint pNum )
 	}
 	else if (arcTextTimer >= 100)
 	{
-		if (coins < DIP.coinsPerGame)
-			strcpy(tmpBuf.s, "Insert Coin");
-		else
-			strcpy(tmpBuf.s, "Press Fire");
+		strcpy(tmpBuf.s, (coins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
 	}
 	else
 	{
-		if (DIP.coinsPerGame == 0)
+		if (DIP.coinsToStart == 0)
 			strcpy(tmpBuf.s, "Free Play");
-		else 
-		{
-			JE_word cFull = 1, cPartial = 0;
-			ARC_GetCredits(&cFull, &cPartial, NULL);
-			if (!cPartial)
-				snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", cFull);
-			else
-				snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu %hu/%hu", cFull, (JE_word)cPartial, (JE_word)DIP.coinsPerGame);
-		}
+		else
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", coins, (JE_word)DIP.coinsToStart);
 	}
 
 	switch (arcTextTimer % 100)
@@ -307,6 +295,12 @@ void ARC_DISP_ContinueEntry( uint pNum )
 	x = (pNum == 2) ? (210 - JE_textWidth(tmpBuf.s, SMALL_FONT_SHAPES)) : 112;
 	JE_dString (VGAScreen, x, 4, tmpBuf.s, SMALL_FONT_SHAPES);
 
+	if (DIP.coinsToStart == 0)
+		strcpy(tmpBuf.s, "Free Play");
+	else
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", coins, (JE_word)DIP.coinsToContinue);
+	x = (pNum == 2) ? (264 - JE_textWidth(tmpBuf.s, TINY_FONT)) : 58;
+	JE_textShade(VGAScreen, x, 13, tmpBuf.s, 15, 1, FULL_SHADE);
 }
 
 void ARC_DISP_MidGameSelect( uint pNum )
@@ -566,7 +560,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 		// EMPTY PLAYER SLOT
 		//
 		case STATUS_NONE:
-			if (gameNotOverYet && buttons[BUTTON_FIRE] && ARC_CoinStart())
+			if (gameNotOverYet && buttons[BUTTON_FIRE] && ARC_CoinStart(pl))
 			{
 				JE_playSampleNumOnChannel(S_SELECT, SFXPRIORITY+7);
 				ARC_SetPlayerStatus(pl, STATUS_SELECT);
