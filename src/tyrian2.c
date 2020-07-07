@@ -2865,10 +2865,7 @@ new_game:
 								read_encrypted_pascal_string(s, sizeof(s), ep_f);
 
 								if (s[0] != '#')
-								{
-									strcpy(levelWarningText[levelWarningLines], s);
-									levelWarningLines++;
-								}
+									strncpy(levelWarningText[levelWarningLines++], s, 60);
 							}
 							while (!(s[0] == '#'));
 

@@ -53,7 +53,8 @@ JE_byte textGlowFont, textGlowBrightness = 6;
 
 JE_boolean levelWarningDisplay;
 JE_byte levelWarningLines;
-char levelWarningText[10][61]; /* [1..10] of string [60] */
+// T2000: The ending text requires 12 lines
+char levelWarningText[12][61]; /* [1..12] of string [60] */
 JE_boolean warningRed;
 
 JE_byte warningSoundDelay;
