@@ -441,7 +441,7 @@ void DEV_RecordDemoInit( void )
 		if (opt_weapon[1] == 255)
 			opt_weapon[1] = mt_rand() % 5;
 		player[1].port_mode = opt_weapon[1];
-		player[1].cur_item.weapon = player[1].items.weapon[opt_weapon[0]];
+		player[1].cur_item.weapon = player[1].items.weapon[opt_weapon[1]];
 
 		if (opt_power[1] == 255)
 			opt_power[1] = mt_rand() % 11;
