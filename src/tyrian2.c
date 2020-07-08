@@ -820,7 +820,6 @@ start_level_first:
 	endLevel = false;
 	reallyEndLevel = false;
 	playerEndLevel = false;
-	extraGame = false;
 
 	JE_loadMap();
 
@@ -1139,10 +1138,7 @@ level_loop:
 			wait_delay();
 			setjasondelay(frameCountMax);
 
-			I_checkButtons();
-
-			ARC_HandlePlayerStatus(&player[0], 1);
-			ARC_HandlePlayerStatus(&player[1], 2);
+			I_checkStatus();
 
 			if (player[0].player_status == STATUS_CONTINUE || player[1].player_status == STATUS_CONTINUE)
 			{
@@ -2367,6 +2363,9 @@ void JE_loadMap( void )
 
 	lastCubeMax = cubeMax;
 
+	// Hide the header until we're in game
+	skip_header_draw = true;
+
 	/*Defaults*/
 	songBuy = DEFAULT_SONG_BUY;  /*Item Screen default song*/
 
@@ -2375,7 +2374,6 @@ void JE_loadMap( void )
 
 new_game:
 	useLastBank = false;
-	extraGame   = false;
 
 	gameLoaded = false;
 
@@ -2464,15 +2462,10 @@ new_game:
 
 					case 'g':
 						printf("hit galaga mode -- ignoring\n");
-
-						//player[1].items = player[0].items;
-						//player[1].items.weapon[REAR_WEAPON].id = 15;  // Vulcan Cannon
-						//for (uint i = 0; i < COUNTOF(player[1].items.sidekick); ++i)
-						//	player[1].items.sidekick[i] = 0;          // None
 						break;
 
 					case 'x':
-						extraGame = true;
+						printf("hit extra game flag -- ignoring");
 						break;
 
 					case 'e': // ENGAGE mode, used for mini-games
@@ -2653,6 +2646,7 @@ new_game:
 						if (!JE_nextEpisode())
 						{
 							mainLevel = 0;
+							skip_header_draw = false;
 
 							JE_playCredits();
 							return;
@@ -2677,7 +2671,7 @@ new_game:
 							do
 							{
 								SDL_Delay(16);
-							} while (!I_anyButton());
+							} while (!I_checkSkipScene());
 
 							fade_black(15);
 						}
@@ -2847,7 +2841,6 @@ new_game:
 						break;
 
 					case 'W':
-						skip_header_draw = true;
 						if (true /* !ESCPressed */)
 						{
 							warningCol = 14 * 16 + 5;
@@ -2871,7 +2864,6 @@ new_game:
 
 							JE_displayText();
 						}
-						skip_header_draw = false;
 						break;
 
 					case 'H':
@@ -2916,9 +2908,13 @@ new_game:
 		if (!load_next_demo())
 		{
 			mainLevel = 0;
+			skip_header_draw = false;
 			return;
 		}
 	}
+
+	skip_header_draw = false;
+	arcTextTimer = 0;
 
 	FILE *level_f = dir_fopen_die(data_dir(), levelFile, "rb");
 
@@ -3121,6 +3117,8 @@ void intro_logos( void )
 
 void JE_displayText( void )
 {
+	hasRequestedToSkip = false;
+
 	/* Display Warning Text */
 	tempY = 55;
 	if (warningRed)
@@ -3136,13 +3134,15 @@ void JE_displayText( void )
 			tempY += 10;
 		}
 	}
-	if (frameCountMax != 0)
+
+	if (!hasRequestedToSkip)
 	{
 		frameCountMax = 6;
 		temp = 1;
 	} else {
 		temp = 0;
 	}
+
 	textGlowFont = TINY_FONT;
 	tempW = 184;
 	if (warningRed)
@@ -3150,7 +3150,7 @@ void JE_displayText( void )
 		tempW = 7 * 16 + 6;
 	}
 
-	JE_outCharGlow(JE_fontCenter(miscText[4], TINY_FONT), tempW, miscText[4]);
+	JE_outCharGlow(JE_fontCenter("Press Fire...", TINY_FONT), tempW, "Press Fire...");
 
 	do
 	{
@@ -3163,7 +3163,7 @@ void JE_displayText( void )
 
 		wait_delay();
 
-	} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
+	} while (!I_checkSkipScene() && !(hasRequestedToSkip && temp == 1));
 	levelWarningDisplay = false;
 }
 
@@ -4778,7 +4778,7 @@ void JE_whoa( unsigned int timer )
 		TempScreen1    = TempScreen2;
 		TempScreen2    = TempScreenSwap;
 
-	} while (!(timer == 0 || I_anyButton()));
+	} while (!(timer == 0 || I_checkSkipSceneFromAnyone()));
 
 	levelWarningLines = 4;
 }

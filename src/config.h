@@ -53,7 +53,6 @@ extern JE_byte mainLevel, nextLevel, saveLevel;
 extern JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 extern JE_boolean filtrationAvail, filterActive, filterFade, filterFadeStart;
 extern JE_boolean gameJustLoaded;
-extern JE_boolean extraGame;
 extern JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
 extern JE_byte SAPowerupBag[5];
 extern JE_byte superArcadePowerUp;

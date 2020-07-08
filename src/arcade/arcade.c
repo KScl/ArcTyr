@@ -236,7 +236,7 @@ void ARC_DISP_HighScoreEntry( uint pNum )
 	Sint8 vBright = -4;
 	JE_byte position = player[pNum - 1].arc.hsPos + 1;
 
-	x = 58;
+	x = 32 + ((pNum == 2) ? 144 : 0);
 	if (position == 1)
 		strcpy(tmpBuf.s, "1st");
 	else if (position == 2)
@@ -249,7 +249,7 @@ void ARC_DISP_HighScoreEntry( uint pNum )
 		snprintf(tmpBuf.s, 5, "%dth", position);
 	JE_textShade(VGAScreen, x, 4, tmpBuf.s, 15, 4, FULL_SHADE);
 
-	x = 80;
+	x = 52 + ((pNum == 2) ? 144 : 0);
 
 	if (player[pNum - 1].arc.timer >= 65465)
 	{

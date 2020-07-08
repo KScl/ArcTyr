@@ -49,7 +49,7 @@ static void draw_arc_header( SDL_Surface *src_surface )
 	if (!header_cache_buf)
 	{
 		header_cache_offset = src_surface->pitch * 1;
-		header_cache_size = src_surface->pitch * 24;
+		header_cache_size = src_surface->pitch * 28;
 		header_cache_buf = malloc(header_cache_size);
 		if (!header_cache_buf)
 		{

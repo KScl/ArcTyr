@@ -164,10 +164,11 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 	if (s[0] == '\0')
 		return;
 
-	if (frameCountMax == 0)
+	if (hasRequestedToSkip)
 	{
 		JE_textShade(VGAScreen, x, y, s, bank, 0, PART_SHADE);
 		JE_showVGA();
+		return;
 	}
 	else
 	{
@@ -218,8 +219,13 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 				if (sprite_id != -1 && --z < maxloc)
 					blit_sprite_dark(VGAScreen, textloc[z] + 1, y + 1, TINY_FONT, sprite_id, true);
 
-				if (I_anyButton())
-					frameCountMax = 0;
+				if (I_checkSkipScene())
+				{
+					hasRequestedToSkip = true;
+					JE_textShade(VGAScreen, x, y, s, bank, 0, PART_SHADE);
+					JE_showVGA();
+					return;
+				}
 
 				do
 				{
@@ -801,7 +807,7 @@ void JE_playCredits( void )
 		
 		wait_delay();
 		
-		if (PL_NumPotentialPlayers() == 0 && I_anyButton())
+		if (PL_NumPotentialPlayers() == 0 && I_checkSkipSceneFromAnyone())
 			break;
 	}
 	
@@ -833,6 +839,8 @@ static void award_bonus_points( uint points )
 void JE_endLevelAni( void )
 {
 	int destruct1 = 0, destruct2 = 0;
+	int xpos;
+	JE_word allowedDelay;
 
 	// We don't use tmpBuf because this function needs strings to persist beyond screen flips
 	char tempStr[256];
@@ -845,7 +853,7 @@ void JE_endLevelAni( void )
 	player[0].last_items = player[0].items;
 	strcpy(lastLevelName, levelName);
 
-	frameCountMax = 4;
+	hasRequestedToSkip = false;
 	textGlowFont = SMALL_FONT_SHAPES;
 
 	SDL_Color white = { 255, 255, 255 };
@@ -955,22 +963,89 @@ void JE_endLevelAni( void )
 	}
 
 	// ---
+	// After display, wait for everyone to be ready, then countdown to next level
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
 
-	if (frameCountMax != 0)
+	weAreNotActuallyReady:
+
+	// Ten seconds to view the results screen before auto-advancing
+	allowedDelay = 35*10;
+
+	if (player[0].player_status > STATUS_INGAME || player[1].player_status > STATUS_INGAME)
 	{
-		frameCountMax = 6;
-		temp = 1;
-	} else {
-		temp = 0;
+		// We need to wait for someone to finish either joining or leaving the game
+		xpos = JE_fontCenter("Wait for other player", SMALL_FONT_SHAPES);
+		JE_outTextAdjust(VGAScreen, xpos - 1, 160,     "Wait for other player", 0, -12, SMALL_FONT_SHAPES, false);
+		JE_outTextAdjust(VGAScreen, xpos,     160 - 1, "Wait for other player", 0, -12, SMALL_FONT_SHAPES, false);
+		JE_outTextAdjust(VGAScreen, xpos + 1, 160,     "Wait for other player", 0, -12, SMALL_FONT_SHAPES, false);
+		JE_outTextAdjust(VGAScreen, xpos,     160 + 1, "Wait for other player", 0, -12, SMALL_FONT_SHAPES, false);	
+		JE_outTextAdjust(VGAScreen, xpos,     160,     "Wait for other player", 15, -6, SMALL_FONT_SHAPES, false);
+		JE_showVGA();
+
+		while (player[0].player_status > STATUS_INGAME || player[1].player_status > STATUS_INGAME)
+		{
+			setjasondelay(2);
+
+			I_checkStatus();
+
+			JE_showVGA();
+			wait_delay();
+		}
+
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+		// in case something changed (a player joined?)
+		JE_drawShield();
+		JE_drawArmor();
+		JE_drawPortConfigButtons();
+
+		JE_updateOption(&player[0], 0);
+		JE_updateOption(&player[0], 1);
+		JE_updateOption(&player[1], 0);
+		JE_updateOption(&player[1], 1);
+		memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
 	}
-	JE_outTextGlow(VGAScreenSeg, JE_fontCenter("Press Fire...--", SMALL_FONT_SHAPES), 160, "Press Fire...");
 
 	do
 	{
-		setjasondelay(1);
+		if (player[0].player_status > STATUS_INGAME || player[1].player_status > STATUS_INGAME)
+			break;
 
+		setjasondelay(2);
+		if (!(allowedDelay-- % 35))
+		{
+			memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+			xpos = JE_fontCenter("Press Fire... 10", SMALL_FONT_SHAPES);
+			JE_outTextAdjust(VGAScreen, xpos - 1, 160,     "Press Fire...", 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos,     160 - 1, "Press Fire...", 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos + 1, 160,     "Press Fire...", 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos,     160 + 1, "Press Fire...", 0, -12, SMALL_FONT_SHAPES, false);	
+			JE_outTextAdjust(VGAScreen, xpos,     160,     "Press Fire...", 15, -4, SMALL_FONT_SHAPES, false);
+
+			sprintf(tmpBuf.s, "%hu", (allowedDelay + 1) / 35);
+			xpos = 210 - JE_textWidth(tmpBuf.s, SMALL_FONT_SHAPES);
+
+			JE_outTextAdjust(VGAScreen, xpos - 1, 160,     tmpBuf.s, 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos,     160 - 1, tmpBuf.s, 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos + 1, 160,     tmpBuf.s, 0, -12, SMALL_FONT_SHAPES, false);
+			JE_outTextAdjust(VGAScreen, xpos,     160 + 1, tmpBuf.s, 0, -12, SMALL_FONT_SHAPES, false);	
+			JE_outTextAdjust(VGAScreen, xpos,     160,     tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, false);
+
+			if (allowedDelay < 35*3)
+				JE_playSampleNum(S_CLICK);
+		}
+		JE_showVGA();
 		wait_delay();
-	} while (!(I_anyButton() || (frameCountMax == 0 && temp == 1)));
+	} while (!I_checkSkipAndStatus() && allowedDelay > 0);		
+
+	if (player[0].player_status > STATUS_INGAME || player[1].player_status > STATUS_INGAME)
+	{
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+		goto weAreNotActuallyReady;
+	}
+
+	JE_playSampleNum(S_SELECT);
 
 	fade_black(15);
 	JE_clr256(VGAScreen);

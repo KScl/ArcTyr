@@ -65,8 +65,6 @@ JE_boolean  filtrationAvail, filterActive, filterFade, filterFadeStart;
 
 JE_boolean gameJustLoaded;
 
-JE_boolean extraGame;
-
 JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
 
 JE_byte    SAPowerupBag[5];

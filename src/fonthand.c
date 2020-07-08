@@ -49,7 +49,7 @@ const int font_ascii[256] =
 
 /* shape constants included in newshape.h */
 
-JE_byte textGlowFont, textGlowBrightness = 6;
+JE_byte textGlowFont;
 
 JE_boolean levelWarningDisplay;
 JE_byte levelWarningLines;
@@ -284,11 +284,15 @@ void JE_updateWarning( SDL_Surface * screen )
 	}
 }
 
+// ---
+// End Level Animation Glowing Text
+// ---
+
 static struct {
 	char buf[48];
 	int x, y;
 } tg_data[3];
-static int num_tg_data = 0;
+static uint num_tg_data = 0;
 
 void JE_saveTextGlow( int x, int y, const char *s )
 {
@@ -303,54 +307,43 @@ void JE_saveTextGlow( int x, int y, const char *s )
 
 void JE_drawTextGlow( SDL_Surface * screen )
 {
-	JE_integer z;
-	JE_byte c = 15;
-
-	if (warningRed)
+	uint z = 0, n;
+	const JE_byte c = 15;
+	const JE_byte brightness[] =
 	{
-		c = 7;
-	}
+		-9, -9, -8, -8, -7, -7, -6, -6, -5, -5,
+		-4, -4, -3, -3, -2, -2, -1, -1,  0,  0,
+		 1,  1,  2,  2,  2,  2,  1,  1,  0,  0,
+		-1, -1, -2, -2, -3, -3, -4, -4
+	};
 
-	for (int n = 0; n < num_tg_data; ++n)
+	for (n = 0; n < num_tg_data; ++n)
 	{
 		JE_outTextAdjust(screen, tg_data[n].x - 1, tg_data[n].y,     tg_data[n].buf, 0, -12, textGlowFont, false);
 		JE_outTextAdjust(screen, tg_data[n].x,     tg_data[n].y - 1, tg_data[n].buf, 0, -12, textGlowFont, false);
 		JE_outTextAdjust(screen, tg_data[n].x + 1, tg_data[n].y,     tg_data[n].buf, 0, -12, textGlowFont, false);
 		JE_outTextAdjust(screen, tg_data[n].x,     tg_data[n].y + 1, tg_data[n].buf, 0, -12, textGlowFont, false);		
 	}
-	if (frameCountMax > 0)
-	{
-		for (z = 1; z <= 12; z++)
-		{
-			setjasondelay(frameCountMax);
 
-			for (int n = 0; n < num_tg_data; ++n)
-				JE_outTextAdjust(screen, tg_data[n].x, tg_data[n].y, tg_data[n].buf, c, z - 10, textGlowFont, false);
+	if (hasRequestedToSkip)
+		z = COUNTOF(brightness) - 1;
 
-			if (I_anyButton())
-				frameCountMax = 0;
-
-			JE_showVGA();
-
-			wait_delay();
-		}
-	}
-	for (z = (frameCountMax == 0) ? 6 : 12; z >= textGlowBrightness; z--)
+	for (; z < COUNTOF(brightness); ++z)
 	{
 		setjasondelay(frameCountMax);
 
-		for (int n = 0; n < num_tg_data; ++n)
-			JE_outTextAdjust(screen, tg_data[n].x, tg_data[n].y, tg_data[n].buf, c, z - 10, textGlowFont, false);
+		for (n = 0; n < num_tg_data; ++n)
+			JE_outTextAdjust(screen, tg_data[n].x, tg_data[n].y, tg_data[n].buf, c, brightness[z], textGlowFont, false);
 
-		if (I_anyButton())
-			frameCountMax = 0;
+		if (!hasRequestedToSkip && I_checkSkipAndStatus())
+		{
+			z = COUNTOF(brightness) - 2;
+			hasRequestedToSkip = true;
+		}
 
 		JE_showVGA();
-
 		wait_delay();
 	}
-	textGlowBrightness = 6;
-
 	num_tg_data = 0;
 }
 
@@ -359,5 +352,3 @@ void JE_outTextGlow( SDL_Surface * screen, int x, int y, const char *s )
 	JE_saveTextGlow(x, y, s);
 	JE_drawTextGlow(screen);
 }
-
-

@@ -71,7 +71,12 @@ void I_checkButtons( void );
 void I_assignInput( Player *pl, uint pNum );
 bool I_inputForMenu( uint *i, uint stop );
 bool I_waitOnInputForMenu( uint start, uint stop, uint wait );
-bool I_anyButton( void );
+
+extern bool hasRequestedToSkip;
+void I_checkStatus( void );
+bool I_checkSkipAndStatus( void );
+bool I_checkSkipScene( void );
+bool I_checkSkipSceneFromAnyone( void );
 
 void I_readButtonCode( uint inputNum, uint subInput, const char *code );
 const char *I_getButtonCode( uint inputNum, uint subInput );

@@ -208,7 +208,7 @@ void JE_playAnim( const char *animfile, JE_byte startingframe, JE_byte speed )
 
 
 		/* Return early if user presses a key */
-		if (I_anyButton())
+		if (I_checkSkipScene())
 			break;
 
 		/* Wait until we need the next frame */

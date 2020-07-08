@@ -88,8 +88,9 @@ typedef struct
 	enum {
 		STATUS_GAMEOVER = -1,
 		STATUS_NONE = 0,
-		STATUS_SELECT,
 		STATUS_INGAME,
+		// Past this point: in game, but not controlling a ship
+		STATUS_SELECT,
 		STATUS_NAMEENTRY,
 		STATUS_CONTINUE,
 	} player_status;

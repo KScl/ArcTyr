@@ -491,8 +491,49 @@ bool I_waitOnInputForMenu( uint start, uint stop, uint wait )
 	return false;
 }
 
-bool I_anyButton( void )
+bool hasRequestedToSkip = false;
+
+void I_checkStatus( void )
 {
+	++arcTextTimer;
+	arcTextTimer %= 200;
+
+	I_checkButtons();
+
+	ARC_HandlePlayerStatus(&player[0], 1);
+	ARC_HandlePlayerStatus(&player[1], 2);
+}
+
+bool I_checkSkipAndStatus( void )
+{
+	++arcTextTimer;
+	arcTextTimer %= 200;
+
+	I_checkButtons();
+
+	ARC_HandlePlayerStatus(&player[0], 1);
+	ARC_HandlePlayerStatus(&player[1], 2);
+
+	return ((player[0].player_status == STATUS_INGAME && button_time_held[INPUT_P1_FIRE] == 1)
+		||  (player[1].player_status == STATUS_INGAME && button_time_held[INPUT_P2_FIRE] == 1));
+}
+
+bool I_checkSkipScene( void )
+{
+	++arcTextTimer;
+	arcTextTimer %= 200;
+
+	// if an ingame player presses the fire button
+	I_checkButtons();
+	return ((player[0].player_status == STATUS_INGAME && button_time_held[INPUT_P1_FIRE] == 1)
+		||  (player[1].player_status == STATUS_INGAME && button_time_held[INPUT_P2_FIRE] == 1));
+}
+
+bool I_checkSkipSceneFromAnyone( void )
+{
+	++arcTextTimer;
+	arcTextTimer %= 200;
+
 	// ... what this actually means: a fire button
 	I_checkButtons();
 	return ((button_time_held[INPUT_P1_FIRE] == 1) || (button_time_held[INPUT_P2_FIRE] == 1));
