@@ -47,9 +47,9 @@ void JE_weaponViewFrame( void )
 	update_and_draw_starfield(VGAScreen, 1);
 
 	// create shots in weapon simulator
-	if (PL_ShotRepeat(&player[0], FRONT_WEAPON))
+	if (PL_ShotRepeat(&player[0], SHOT_NORMAL))
 	{
-		player_shot_create(1, FRONT_WEAPON, player[0].x, player[0].y, player[0].x, player[0].y, 1, 1);
+		player_shot_create(1, SHOT_NORMAL, player[0].x, player[0].y, player[0].x, player[0].y, 1, 1);
 	}
 
 	simulate_player_shots();

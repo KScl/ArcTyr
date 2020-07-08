@@ -28,19 +28,28 @@ Player player[2];
 
 void PL_Init( Player *this_player, uint ship, bool continuing )
 {
-	this_player->items.weapon[FRONT_WEAPON].id = ships[ship].port_weapons[0];
-	this_player->items.special = ships[ship].special_weapons[0];
-	this_player->weapon_mode = 1;
-	this_player->cur_weapon = 0;
+	// unrolled
+	this_player->items.weapon[0] = ships[ship].port_weapons[0];
+	this_player->items.weapon[1] = ships[ship].port_weapons[1];
+	this_player->items.weapon[2] = ships[ship].port_weapons[2];
+	this_player->items.weapon[3] = ships[ship].port_weapons[3];
+	this_player->items.weapon[4] = ships[ship].port_weapons[4];
+	this_player->port_mode = 0;
+	this_player->items.special[0] = ships[ship].special_weapons[0];
+	this_player->items.special[1] = ships[ship].special_weapons[1];
+	this_player->special_mode = 0;
+
+	this_player->cur_item.weapon = this_player->items.weapon[0];
+	this_player->cur_item.special = this_player->items.special[0];
 
 	if (!continuing)
 	{
-		this_player->items.weapon[0].power = DIP.powerStart;
+		this_player->items.power_level = DIP.powerStart;
 		this_player->lives = DIP.livesStart;
 	}
 	else
 	{
-		this_player->items.weapon[0].power = DIP.powerContinue;
+		this_player->items.power_level = DIP.powerContinue;
 		this_player->lives = DIP.livesContinue;		
 	}
 
@@ -71,6 +80,7 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 	this_player->cashForNextLife = 50000;
 }
 
+// Unused?
 void PL_CleanupLeavingPlayer( Player *this_player )
 {
 	if (this_player->player_status == STATUS_INGAME)
@@ -78,9 +88,8 @@ void PL_CleanupLeavingPlayer( Player *this_player )
 
 	this_player->cash = 0;
 	this_player->is_dragonwing = false;
-	this_player->items.weapon[FRONT_WEAPON].id = 0;
-	this_player->items.special = 0;
-
+	this_player->cur_item.weapon = 0;
+	this_player->cur_item.special = 0;
 }
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port )
@@ -91,16 +100,84 @@ JE_boolean PL_ShotRepeat( Player *this_player, uint port )
 	return false;
 }
 
-
-bool PL_PowerUpWeapon( Player *this_player, uint port )
+void PL_SwitchWeapon( Player *this_player, uint switchTo, bool inform )
 {
-	const bool can_power_up = this_player->items.weapon[port].id != 0 &&  // not None
-	                          this_player->items.weapon[port].power < 11; // not at max power
-	if (can_power_up)
+	this_player->port_mode = switchTo;
+	this_player->cur_item.weapon = this_player->items.weapon[switchTo];
+
+	this_player->shot_multi_pos[SHOT_NORMAL] = 0;
+	this_player->shot_repeat[SHOT_NORMAL] = 10;
+
+	if (inform)
 	{
-		++this_player->items.weapon[port].power;
-		this_player->shot_multi_pos[port] = 0;
+		char *color = JE_textColorFromPWeapon(switchTo);
+		char *wName = JE_trim(weaponPort[this_player->cur_item.weapon].name);
+
+		if (PL_NumPlayers() == 2)
+			sprintf(tmpBuf.s, "Player %d got", this_player == &player[0] ? 1 : 2);
+		else
+			sprintf(tmpBuf.s, "You got");
+
+		if (!strncmp(wName, "The", 3))
+			sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, color, wName);
+		else
+			sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, color, wName);
+		JE_drawTextWindowColorful(tmpBuf.l);
 	}
+}
+
+void PL_SwitchSpecial( Player *this_player, uint switchTo, bool inform )
+{
+	this_player->special_mode = switchTo;
+	this_player->cur_item.special = this_player->items.special[switchTo];
+
+	this_player->shot_multi_pos[SHOT_SPECIAL] = 0;
+	this_player->shot_multi_pos[SHOT_SPECIAL2] = 0;
+
+	if (inform)
+	{
+		char *wName = JE_trim(special[this_player->cur_item.special].name);
+
+		if (PL_NumPlayers() == 2)
+			sprintf(tmpBuf.s, "Player %d got", this_player == &player[0] ? 1 : 2);
+		else
+			sprintf(tmpBuf.s, "You got");
+
+		if (!strncmp(wName, "The", 3))
+			sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, "^04", wName);
+		else
+			sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^04", wName);
+		JE_drawTextWindowColorful(tmpBuf.l);
+	}
+}
+
+bool PL_PowerUpWeapon( Player *this_player, bool inform )
+{
+	bool can_power_up = (this_player->items.power_level < 11);
+
+	this_player->shot_multi_pos[SHOT_NORMAL] = 0;
+	this_player->shot_repeat[SHOT_NORMAL] = 10;
+
+	if (can_power_up)
+		++this_player->items.power_level;
+
+	if (inform)
+	{
+		char *color = JE_textColorFromPWeapon(this_player->port_mode);
+		char *wName = JE_trim(weaponPort[this_player->cur_item.weapon].name);		
+
+		if (PL_NumPlayers() == 2)
+			sprintf(tmpBuf.s, "Player %d's ", this_player == &player[0] ? 1 : 2);
+		else
+			tmpBuf.s[0] = 0;
+
+		if (can_power_up)
+			sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "powered up");
+		else
+			sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "power is maxed!");
+		JE_drawTextWindowColorful(tmpBuf.l);
+	}
+
 	return can_power_up;
 }
 

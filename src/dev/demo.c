@@ -414,12 +414,12 @@ void DEV_RecordDemoInit( void )
 
 		if (opt_weapon[0] == 255)
 			opt_weapon[0] = mt_rand() % 5;
-		player[0].cur_weapon = opt_weapon[0];
-		player[0].items.weapon[0].id = ships[player[0].items.ship].port_weapons[player[0].cur_weapon];
+		player[0].port_mode = opt_weapon[0];
+		player[0].cur_item.weapon = player[0].items.weapon[opt_weapon[0]];
 
 		if (opt_power[0] == 255)
 			opt_power[0] = mt_rand() % 11;
-		player[0].items.weapon[0].power = opt_power[0] + 1;
+		player[0].items.power_level = opt_power[0] + 1;
 
 		if (opt_shield[0] == 255)
 			opt_shield[0] = mt_rand() % 10;
@@ -440,12 +440,12 @@ void DEV_RecordDemoInit( void )
 
 		if (opt_weapon[1] == 255)
 			opt_weapon[1] = mt_rand() % 5;
-		player[1].cur_weapon = opt_weapon[1];
-		player[1].items.weapon[0].id = ships[player[1].items.ship].port_weapons[player[1].cur_weapon];
+		player[1].port_mode = opt_weapon[1];
+		player[1].cur_item.weapon = player[1].items.weapon[opt_weapon[0]];
 
 		if (opt_power[1] == 255)
 			opt_power[1] = mt_rand() % 11;
-		player[1].items.weapon[0].power = opt_power[1] + 1;
+		player[1].items.power_level = opt_power[1] + 1;
 
 		if (opt_shield[1] == 255)
 			opt_shield[1] = mt_rand() % 10;
@@ -490,17 +490,17 @@ void DEV_RecordDemoStart( void )
 	fputc(player[0].items.sidekick[0],     demo_file);
 	fputc(player[0].items.sidekick[1],     demo_file);
 	fputc(player[0].lives,                 demo_file);
-	fputc(player[0].weapon_mode,           demo_file);
-	fputc(player[0].cur_weapon,            demo_file);
-	fputc(player[0].items.weapon[0].power, demo_file);
+	fputc(1,                               demo_file);
+	fputc(player[0].port_mode,             demo_file);
+	fputc(player[0].items.power_level,     demo_file);
 	fputc(player[1].items.ship,            demo_file);
 	fputc(player[1].items.shield,          demo_file);
 	fputc(player[1].items.sidekick[0],     demo_file);
 	fputc(player[1].items.sidekick[1],     demo_file);
 	fputc(player[1].lives,                 demo_file);
-	fputc(player[1].weapon_mode,           demo_file);
-	fputc(player[1].cur_weapon,            demo_file);
-	fputc(player[1].items.weapon[0].power, demo_file);
+	fputc(1,                               demo_file);
+	fputc(player[1].port_mode,             demo_file);
+	fputc(player[1].items.power_level,     demo_file);
 
 	memset(player[0].buttons, 0, sizeof(player[0].buttons));
 	memset(player[1].buttons, 0, sizeof(player[0].buttons));

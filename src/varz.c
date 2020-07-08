@@ -188,39 +188,33 @@ void JE_getShipInfo( void )
 	}
 
 	// Randomizer / Mix Machine
-	do // randomize special weapon 1
-		ships[0].special_weapons[0] = (mt_rand() % num_specials) + 1;
-	while (special[ships[0].special_weapons[0]].itemgraphic == 0);
-
-	do // randomize special weapon 2
-		ships[0].special_weapons[1] = (mt_rand() % num_specials) + 1;
-	while (ships[0].special_weapons[0] == ships[0].special_weapons[1]
-		|| special[ships[0].special_weapons[1]].itemgraphic == 0);
-
-	// randomize port weapons
-	for (int wp = 0; wp < 5; ++wp)
+	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
-		retry:
-		ships[0].port_weapons[wp] = (mt_rand() % num_ports) + 1;
-		for (int ck = wp - 1; ck >= 0; --ck)
+		if (player[i].items.ship != 0)
+			continue;
+
+		do // randomize special weapon 1
+			player[i].items.special[0] = (mt_rand() % num_specials) + 1;
+		while (special[player[i].items.special[0]].itemgraphic == 0);
+
+		do // randomize special weapon 2
+			player[i].items.special[1] = (mt_rand() % num_specials) + 1;
+		while (player[i].items.special[0] == player[i].items.special[1]
+			|| special[player[i].items.special[1]].itemgraphic == 0);
+
+		// randomize port weapons
+		for (int wp = 0; wp < 5; ++wp)
 		{
-			if (ships[0].port_weapons[wp] == ships[0].port_weapons[ck])
-				goto retry; // ensure no duplicates
+			retry:
+			player[i].items.weapon[wp] = (mt_rand() % num_ports) + 1;
+			for (int ck = wp - 1; ck >= 0; --ck)
+			{
+				if (player[i].items.weapon[wp] == player[i].items.weapon[ck])
+					goto retry; // ensure no duplicates
+			}
 		}
-	}
-
-	// if either player's using the randomizer, make sure data is up to date
-	if (player[0].items.ship == 0)
-	{
-		player[0].items.weapon[FRONT_WEAPON].id = ships[0].port_weapons[player[0].cur_weapon];
-		player[0].items.special = ships[0].special_weapons[0];
-		player[0].weapon_mode = 1;
-	}
-	if (player[1].items.ship == 0)
-	{
-		player[1].items.weapon[FRONT_WEAPON].id = ships[0].port_weapons[player[1].cur_weapon];
-		player[1].items.special = ships[0].special_weapons[0];
-		player[1].weapon_mode = 1;
+		player[i].cur_item.weapon = player[i].items.weapon[player[i].port_mode];
+		player[i].cur_item.special = player[i].items.special[player[i].special_mode];
 	}
 }
 
@@ -326,7 +320,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 		case 16:
 			this_player->shot_repeat[SHOT_SPECIAL2] = 0;
 
-			uint powerMult = this_player->items.weapon[FRONT_WEAPON].power;
+			uint powerMult = this_player->items.power_level;
 
 			this_player->specials.flare_wpn = special[specialType].wpn;
 			this_player->specials.flare_freq = 8;
@@ -468,32 +462,32 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			break;
 		case 21:; // spawn sidekick from weapon
 			JE_byte spOption = 0;
-			switch (this_player->cur_weapon)
+			switch (this_player->port_mode)
 			{
 			case 0: // Turbo Vulcan
 				spOption = // Side Ship, Vulcan Shot Option, Satellite Marlo
-					(this_player->items.weapon[0].power > 8) ? 18 :
-					((this_player->items.weapon[0].power > 4) ? 4 : 30);
+					(this_player->items.power_level > 8) ? 18 :
+					((this_player->items.power_level > 4) ? 4 : 30);
 				break;
 			case 1: // Protron Shield
 				spOption = // Beno Protron, Warfly, Gerund
-					(this_player->items.weapon[0].power > 8) ? 28 :
-					((this_player->items.weapon[0].power > 4) ? 19 : 21);
+					(this_player->items.power_level > 8) ? 28 :
+					((this_player->items.power_level > 4) ? 19 : 21);
 				break;
 			case 2: // X-Cannon
 				spOption = // Beno Wallop, Dual Shot, Single Shot
-					(this_player->items.weapon[0].power > 8) ? 27 :
-					((this_player->items.weapon[0].power > 4) ? 2 : 1);
+					(this_player->items.power_level > 8) ? 27 :
+					((this_player->items.power_level > 4) ? 2 : 1);
 				break;
 			case 3: // Sonic Wave
 				spOption = // Zica Supercharger, Charge Cannon, Wobbley
-					(this_player->items.weapon[0].power > 8) ? 12 :
-					((this_player->items.weapon[0].power > 4) ? 3 : 5);
+					(this_player->items.power_level > 8) ? 12 :
+					((this_player->items.power_level > 4) ? 3 : 5);
 				break;
 			case 4: // Rear Heavy Missiles
 				spOption = // Atom Bombs, Buster Rocket, MicroBomb
-					(this_player->items.weapon[0].power > 8) ? 7 :
-					((this_player->items.weapon[0].power > 4) ? 11 : 13);
+					(this_player->items.power_level > 8) ? 7 :
+					((this_player->items.power_level > 4) ? 11 : 13);
 				break;
 			}
 
@@ -596,13 +590,13 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 	// End Twiddles
 	//
 
-	if (this_player->items.special > 0)
+	if (this_player->cur_item.special > 0)
 	{  /*Main Begin*/
 		if (this_player->buttons[BUTTON_FIRE] && !this_player->last_buttons[BUTTON_FIRE]
 			&& this_player->shot_repeat[SHOT_SPECIAL] == 0 && this_player->specials.flare_time == 0
 			&& !globalFlare)
 		{
-			JE_specialComplete(playerNum, this_player->items.special, SHOT_SPECIAL, 0);
+			JE_specialComplete(playerNum, this_player->cur_item.special, SHOT_SPECIAL, 0);
 		}
 
 	}  /*Main End*/

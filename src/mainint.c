@@ -245,14 +245,14 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 void JE_drawPortConfigButtons( void ) // rear weapon pattern indicator
 {
 	int x, wm;
-	static const uint pcbshapes[] = {0, 18, 19, 18, 19, 19};
+	static const uint pcbshapes[] = {18, 19, 18, 19, 19};
 
 	for (int i = 0; i < 2; ++i)
 	{
 		if (player[i].player_status != STATUS_INGAME)
 			continue;
 
-		wm = (player[i].items.special) ? player[i].weapon_mode : 4;
+		wm = (player[i].cur_item.special) ? player[i].special_mode : 3;
 		x = (i == 0) ? 16 : 294;
 
 		blit_sprite(VGAScreenSeg, x, 1, OPTION_SHAPES, pcbshapes[wm++]);
@@ -270,23 +270,15 @@ void JE_initPlayerData( void )
 	player[1].is_dragonwing = false;
 
 	/* JE: New Game Items/Data */
+	memset(&player[0].items, 0, sizeof(player[0].items));
+	memset(&player[1].items, 0, sizeof(player[1].items));
+	memset(&player[0].cur_item, 0, sizeof(player[0].cur_item));
+	memset(&player[1].cur_item, 0, sizeof(player[1].cur_item));
+
 
 	player[0].items.ship = shiporder[0];
-	player[0].items.weapon[FRONT_WEAPON].id = 1;  // Pulse Cannon
-	player[0].items.weapon[REAR_WEAPON].id = 0;   // None
-	player[0].items.shield = 1;                   // Gencore High Energy Shield
-	player[0].items.generator = 2;                // Advanced MR-12
-	for (uint i = 0; i < COUNTOF(player[0].items.sidekick); ++i)
-		player[0].items.sidekick[i] = 0;          // None
-	player[0].items.special = 0;                  // None
-
-	player[0].last_items = player[0].items;
-
 	player[1].items.ship = shiporder[1];
-	player[1].items = player[0].items;
-	player[1].items.weapon[FRONT_WEAPON].id = 15; // Vulcan Cannon
-	player[1].items.sidekick_level = 101;         // 101, 102, 103
-	player[1].items.sidekick_series = 0;          // None
+	player[0].items.shield = player[1].items.shield = 1;
 
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
 	player[1].last_opt_given = player[1].last_opt_fired = 0;
@@ -297,12 +289,8 @@ void JE_initPlayerData( void )
 
 	for (uint p = 0; p < COUNTOF(player); ++p)
 	{
-		for (uint i = 0; i < COUNTOF(player->items.weapon); ++i)
-		{
-			player[p].items.weapon[i].power = 1;
-		}
-
-		player[p].weapon_mode = 1;
+		player[p].special_mode = 0;
+		player[p].port_mode = 0;
 		player[p].armor = 1;
 		player[p].lives = 1;
 	}
@@ -583,15 +571,15 @@ bool load_next_demo( void )
 	player[0].items.sidekick[0]       = fgetc(demo_file);
 	player[0].items.sidekick[1]       = fgetc(demo_file);
 	player[0].lives                   = fgetc(demo_file);
-	player[0].weapon_mode             = fgetc(demo_file);
-	player[0].cur_weapon              = fgetc(demo_file);
-	player[0].items.weapon[0].power   = fgetc(demo_file);
+	player[0].special_mode            = fgetc(demo_file) - 1;
+	player[0].port_mode               = fgetc(demo_file);
+	player[0].items.power_level       = fgetc(demo_file);
 	player[0].cash                    = 0;
 
 	if (temp & 1)
 	{
-		player[0].items.weapon[0].id = ships[player[0].items.ship].port_weapons[player[0].cur_weapon];
-		player[0].items.special = ships[player[0].items.ship].special_weapons[player[0].weapon_mode - 1];
+		player[0].cur_item.weapon = player[0].items.weapon[player[0].port_mode];
+		player[0].cur_item.special = player[0].items.special[player[0].special_mode];
 	}
 
 	player[1].items.ship              = fgetc(demo_file);
@@ -601,15 +589,15 @@ bool load_next_demo( void )
 	player[1].items.sidekick[0]       = fgetc(demo_file);
 	player[1].items.sidekick[1]       = fgetc(demo_file);
 	player[1].lives                   = fgetc(demo_file);
-	player[1].weapon_mode             = fgetc(demo_file);
-	player[1].cur_weapon              = fgetc(demo_file);
-	player[1].items.weapon[0].power   = fgetc(demo_file);
+	player[1].special_mode            = fgetc(demo_file) - 1;
+	player[1].port_mode               = fgetc(demo_file);
+	player[1].items.power_level       = fgetc(demo_file);
 	player[1].cash                    = 0;
 
 	if (temp & 2)
 	{
-		player[1].items.weapon[0].id = ships[player[1].items.ship].port_weapons[player[1].cur_weapon];
-		player[1].items.special = ships[player[1].items.ship].special_weapons[player[1].weapon_mode - 1];
+		player[1].cur_item.weapon = player[1].items.weapon[player[1].port_mode];
+		player[1].cur_item.special = player[1].items.special[player[1].special_mode];
 	}
 
 	onePlayerAction = true;
@@ -850,7 +838,6 @@ void JE_endLevelAni( void )
 	else //if (!normalBonusLevelCurrent || !bonusLevelCurrent)
 		ARC_RankIncrease();	
 
-	player[0].last_items = player[0].items;
 	strcpy(lastLevelName, levelName);
 
 	hasRequestedToSkip = false;
@@ -1303,7 +1290,7 @@ redo:
 			}
 			else
 			{
-				this_player->items.weapon[0].power = 1;
+				this_player->items.power_level = 1;
 				this_player->shot_multi_pos[SHOT_NORMAL] = 0;
 				this_player->shot_repeat[SHOT_NORMAL] = 10;
 				this_player->items.shield = 1;		
@@ -1349,7 +1336,7 @@ redo:
 					blit_sprite(VGAScreenSeg, (playerNum_ == 1) ? 16 : 294, 10, OPTION_SHAPES, 19);
 
 					// remove player's special (for the header)
-					this_player->items.special = 0;
+					this_player->cur_item.special = 0;
 					this_player->is_dragonwing = false;
 
 					// for this frame only: undraw the header after drawing it (we might be about to pause action for a bit)
@@ -1649,11 +1636,11 @@ redo:
 
 		if (PL_ShotRepeat(this_player, SHOT_AIMED) && this_player->buttons[BUTTON_FIRE])
 		{
-			const uint item_power = (this_player->items.weapon[FRONT_WEAPON].power - 1) >> 1;
+			const uint item_power = (this_player->items.power_level - 1) >> 1;
 
 			b = player_shot_create(0, SHOT_AIMED, 
 				this_player->x, this_player->y, *mouseX_, *mouseY_, 
-				weaponPort[this_player->items.weapon[FRONT_WEAPON].id].aimedOp[item_power], playerNum_);
+				weaponPort[this_player->cur_item.weapon].aimedOp[item_power], playerNum_);
 		}
 	}
 
@@ -1790,12 +1777,7 @@ redo:
 	// PLAYER SHOT Change
 	if (this_player->buttons[BUTTON_MODE] && !this_player->last_buttons[BUTTON_MODE])
 	{
-		this_player->shot_multi_pos[SHOT_SPECIAL] = 0;
-		this_player->shot_multi_pos[SHOT_SPECIAL2] = 0;
-		if (++this_player->weapon_mode > 2)
-			this_player->weapon_mode = 1;
-		this_player->items.special = ships[this_player->items.ship].special_weapons[this_player->weapon_mode - 1];
-
+		PL_SwitchSpecial(this_player, !this_player->special_mode, false);
 		JE_drawPortConfigButtons();
 	}
 
@@ -1807,21 +1789,12 @@ redo:
 	/*Normal Main Weapons*/
 	if (!(twoPlayerLinked && this_player->is_dragonwing))
 	{
-		int min = 1, max = 2;
-
-		for (temp = min - 1; temp < max; temp++)
+		if (PL_ShotRepeat(this_player, SHOT_NORMAL) && this_player->buttons[BUTTON_FIRE])
 		{
-			const uint item = this_player->items.weapon[temp].id;
+			const uint item = this_player->cur_item.weapon;
+			const uint item_power = this_player->items.power_level - 1;
 
-			if (item > 0)
-			{
-				if (PL_ShotRepeat(this_player, temp) && this_player->buttons[BUTTON_FIRE])
-				{
-					const uint item_power = this_player->items.weapon[temp].power - 1;
-
-					b = player_shot_create(item, temp, this_player->x, this_player->y, *mouseX_, *mouseY_, weaponPort[item].normalOp[item_power], playerNum_);
-				}
-			}
+			b = player_shot_create(item, SHOT_NORMAL, this_player->x, this_player->y, *mouseX_, *mouseY_, weaponPort[item].normalOp[item_power], playerNum_);
 		}
 	}
 
@@ -1845,7 +1818,7 @@ redo:
 			if (chargeLevel < MAXCHARGE)
 				++chargeLevel;
 
-			chargeWait = chargeRates[this_player->items.weapon[FRONT_WEAPON].power - 1];
+			chargeWait = chargeRates[this_player->items.power_level - 1];
 		}
 
 		// Mode 2 Power 1: Charge Level 1
@@ -1861,12 +1834,12 @@ redo:
 				this_player->shot_multi_pos[SHOT_CHARGE] = 0;
 				b = player_shot_create(16, SHOT_CHARGE,
 					this_player->x, this_player->y, *mouseX_, *mouseY_,
-					weaponPort[this_player->items.weapon[FRONT_WEAPON].id].chargeOp[chargeLevel - 1],
+					weaponPort[this_player->cur_item.weapon].chargeOp[chargeLevel - 1],
 					playerNum_);
 			}
 
 			chargeLevel = 0;
-			chargeWait = chargeRates[this_player->items.weapon[FRONT_WEAPON].power - 1];
+			chargeWait = chargeRates[this_player->items.power_level - 1];
 		}
 	}
 	else
@@ -2180,49 +2153,19 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						if (enemy[z].eycc)
 							continue;
 
-						uint pw = evalue - 30000-1;
+						uint pw = evalue - 30001;
 
-						this_player->shot_multi_pos[SHOT_NORMAL] = 0;
-						this_player->shot_repeat[SHOT_NORMAL] = 10;
-
-						tempW = ships[this_player->items.ship].port_weapons[pw];
-						char *wName = JE_trim(weaponPort[tempW].name);
-						char *color = JE_textColorFromPWeapon(pw);
-
-						if (pw == this_player->cur_weapon)
+						if (pw == this_player->port_mode)
 						{
-							if (PL_NumPlayers() == 2)
-								sprintf(tmpBuf.s, "Player %d's ", playerNum_);
-							else
-								tmpBuf.s[0] = 0;
-
-							if (PL_PowerUpWeapon(this_player, FRONT_WEAPON))
-								sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "powered up");
-							else
-							{
-								if (awardPoints)
-									this_player->cash += 750;
-								sprintf(tmpBuf.l, "%s%s%s ^04%s", tmpBuf.s, color, wName, "power is maxed!");
-							}
+							if (!PL_PowerUpWeapon(this_player, true) && awardPoints)
+								this_player->cash += 750;
 						}
 						else
-						{
-							if (PL_NumPlayers() == 2)
-								sprintf(tmpBuf.s, "Player %d got", playerNum_);
-							else
-								sprintf(tmpBuf.s, "You got");
+							PL_SwitchWeapon(this_player, pw, true);
 
-							if (!strncmp(wName, "The", 3))
-								sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, color, wName);
-							else
-								sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, color, wName);
-						}
-						JE_drawTextWindowColorful(tmpBuf.l);
 						if (awardPoints)
 							this_player->cash += 250;
 
-						this_player->cur_weapon = pw;
-						this_player->items.weapon[FRONT_WEAPON].id = tempW;
 						soundQueue[7] = S_POWERUP;
 						enemyAvail[z] = 1;
 					}
@@ -2241,15 +2184,15 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						for (uint i = 0; i < COUNTOF(player); ++i)
 						{
 							player[i].armor += (evalue - 20000) / COUNTOF(player);
-							if (player[i].armor > 28)
-								player[i].armor = 28;
+							if (player[i].armor > player[i].initial_armor)
+								player[i].armor = player[i].initial_armor;
 						}
 					}
 					else
 					{
 						this_player->armor += evalue - 20000;
-						if (this_player->armor > 28)
-							this_player->armor = 28;
+						if (this_player->armor > this_player->initial_armor)
+							this_player->armor = this_player->initial_armor;
 					}
 					enemyAvail[z] = 1;
 					JE_drawArmor();
@@ -2323,18 +2266,8 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 					}
 					else if (evalue == -5)
 					{
-						player[0].items.weapon[FRONT_WEAPON].id = 25;  // HOT DOG!
-						player[0].items.weapon[REAR_WEAPON].id = 26;
-						player[1].items.weapon[REAR_WEAPON].id = 26;
-
-						player[0].last_items = player[0].items;
-
-						for (uint i = 0; i < COUNTOF(player); ++i)
-							player[i].weapon_mode = 1;
-
-						player[0].shot_multi_pos[FRONT_WEAPON] = 0;
-						player[0].shot_multi_pos[REAR_WEAPON] = 0;
-						player[1].shot_multi_pos[REAR_WEAPON] = 0;
+						this_player->items.weapon[this_player->port_mode] = 25;  // HOT DOG!
+						PL_SwitchWeapon(this_player, this_player->port_mode, true);
 					}
 					else if (twoPlayerLinked)
 					{

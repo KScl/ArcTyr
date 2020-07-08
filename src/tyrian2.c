@@ -1258,20 +1258,20 @@ level_loop:
 				continue;
 			}
 
-			uint item_power = player[i].items.weapon[0].power;
+			uint item_power = player[i].items.power_level;
 
-			if (old_weapon_bar[i] != player[i].items.weapon[0].power || old_weapon_num[i] != player[i].cur_weapon)
+			if (old_weapon_bar[i] != player[i].items.power_level || old_weapon_num[i] != player[i].port_mode)
 			{
 				int x = (i == 0) ? 4 : 308;
 				int y;
 				JE_byte cc, c, bri;
 
 				old_weapon_bar[i] = item_power;
-				old_weapon_num[i] = player[i].cur_weapon;
+				old_weapon_num[i] = player[i].port_mode;
 
 				fill_rectangle_xy(VGAScreenSeg, x, 8, x + 7, 62, 0);
 
-				JE_colorFromPWeapon(player[i].cur_weapon, &c, &bri);
+				JE_colorFromPWeapon(player[i].port_mode, &c, &bri);
 				cc = (c * 16) + bri + 2;
 				y = 59;
 
@@ -2469,28 +2469,7 @@ new_game:
 						break;
 
 					case 'e': // ENGAGE mode, used for mini-games
-						printf("hit ENGAGE mode\n");
-
-/*						doNotSaveBackup = true;
-						onePlayerAction = true;
-						superTyrian = true;
-
-						player[0].cash = 0;
-
-						player[0].items.ship = 13;                     // The Stalker 21.126
-						player[0].items.weapon[FRONT_WEAPON].id = 39;  // Atomic RailGun
-						player[0].items.weapon[REAR_WEAPON].id = 0;    // None
-						for (uint i = 0; i < COUNTOF(player[0].items.sidekick); ++i)
-							player[0].items.sidekick[i] = 0;           // None
-						player[0].items.generator = 2;                 // Advanced MR-12
-						player[0].items.shield = 4;                    // Advanced Integrity Field
-						player[0].items.special = 0;                   // None
-
-						player[0].items.weapon[FRONT_WEAPON].power = 3;
-						player[0].items.weapon[REAR_WEAPON].power = 1; */
-						superTyrian = true;
-						player[0].items.shield = 0;
-						player[0].items.weapon[FRONT_WEAPON].id = 39;  // Atomic RailGun
+						printf("hit ENGAGE mode -- ignoring\n");
 						break;
 
 					case 'J':  // section jump
@@ -4598,12 +4577,12 @@ void JE_eventSystem( void )
 
 	case 82: /*Give SPECIAL WEAPON*/
 		event_name("give_special_weapon");
+		// Note: This is currently commented out because of HOLES.
 /*	
-		player[0].items.special = eventRec[eventLoc-1].eventdat;
-		player[0].shot_repeat[SHOT_SPECIAL] = 0;
-		player[0].shot_repeat[SHOT_SPECIAL2] = 0;
-		player[0].shot_multi_pos[SHOT_SPECIAL] = 0;
-		player[0].shot_multi_pos[SHOT_SPECIAL2] = 0;
+		player[0].items.special[player[0].special_mode] = eventRec[eventLoc-1].eventdat;
+		player[1].items.special[player[1].special_mode] = eventRec[eventLoc-1].eventdat;
+		PL_SwitchSpecial(&player[0], player[0].special_mode, false);
+		PL_SwitchSpecial(&player[1], player[1].special_mode, false);
 */
 		break;
 
@@ -4665,11 +4644,11 @@ void JE_eventSystem( void )
 		event_name("arc_powerup_help");
 		uint powerItem = 0;
 		if (eventRec[eventLoc-1].eventdat == 1 && PL_Alive(0)
-		 && (player[0].items.weapon[0].power < (unsigned)eventRec[eventLoc-1].eventdat2))
-			powerItem = player[0].cur_weapon;
+		 && (player[0].items.power_level < (unsigned)eventRec[eventLoc-1].eventdat2))
+			powerItem = player[0].port_mode;
 		else if (eventRec[eventLoc-1].eventdat == 2 && PL_Alive(1)
-		 && (player[1].items.weapon[0].power < (unsigned)eventRec[eventLoc-1].eventdat2))
-			powerItem = player[1].cur_weapon;
+		 && (player[1].items.power_level < (unsigned)eventRec[eventLoc-1].eventdat2))
+			powerItem = player[1].port_mode;
 		else
 			break;
 

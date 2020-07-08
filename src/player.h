@@ -26,34 +26,9 @@
 
 enum
 {
-	FRONT_WEAPON = 0,
-	REAR_WEAPON = 1
-};
-
-enum
-{
 	LEFT_SIDEKICK = 0,
 	RIGHT_SIDEKICK = 1
 };
-
-typedef struct
-{
-	uint ship;
-	uint generator;
-	uint shield;
-	struct { uint id; uint power; } weapon[2];
-	uint sidekick[2];
-	uint special;
-	
-	// Dragonwing only:
-	// repeatedly collecting the same powerup gives a series of sidekick upgrades
-	uint sidekick_series;
-	uint sidekick_level;
-	
-	// Single-player only
-	uint super_arcade_mode;  // stored as an item for compatibility :(
-}
-PlayerItems;
 
 enum
 {
@@ -135,7 +110,21 @@ typedef struct
 	JE_byte hud_repeat_start;
 	JE_byte hud_ready_timer;
 
-	PlayerItems items, last_items;
+	struct
+	{
+		uint ship;
+		uint shield;
+		uint power_level;
+		uint weapon[5];
+		uint sidekick[2];
+		uint special[2];
+	} items;
+
+	struct
+	{
+		uint weapon;
+		uint special;
+	} cur_item;
 	
 	bool is_dragonwing; // requires a bunch of special cases
 	bool is_nortship; // same as above
@@ -152,7 +141,9 @@ typedef struct
 	uint exploding_ticks;     // ticks until ship done exploding
 	uint shield;
 	uint armor;
-	uint weapon_mode;
+
+	JE_byte special_mode;
+	JE_byte port_mode;
 	
 	int x, y;
 	int old_x[20], old_y[20];
@@ -166,7 +157,6 @@ typedef struct
 	int last_x_shot_move, last_y_shot_move;
 	int last_x_explosion_follow, last_y_explosion_follow;
 
-	JE_byte cur_weapon;
 
 	struct
 	{
@@ -255,7 +245,9 @@ void PL_Init( Player *this_player, uint ship, bool continuing );
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port );
 
-bool PL_PowerUpWeapon( Player *, uint port );
+void PL_SwitchWeapon( Player *this_player, uint switchTo, bool inform );
+void PL_SwitchSpecial( Player *this_player, uint switchTo, bool inform );
+bool PL_PowerUpWeapon( Player *this_player, bool inform );
 
 JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt );
 

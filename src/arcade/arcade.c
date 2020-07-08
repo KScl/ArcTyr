@@ -670,10 +670,10 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x )
 		return;
 	}
 
-	if (this_player->items.special == 0)
+	if (this_player->cur_item.special == 0)
 		return;
 
-	blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, special[this_player->items.special].itemgraphic);
+	blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, special[this_player->cur_item.special].itemgraphic);
 
 	if (!this_player->hud_repeat_start)
 		return;
@@ -791,7 +791,7 @@ void ARC_Timers( void )
 
 void ARC_DeathSprayWeapons( Player *this_player )
 {
-	const uint spray = (this_player->items.weapon[0].power >= 6) ? 5 : this_player->items.weapon[0].power - 1;
+	const uint spray = (this_player->items.power_level >= 6) ? 5 : this_player->items.power_level - 1;
 	const JE_integer sys[5] = {-16, -8, -8, 0, 0};
 	const JE_integer sxcs[5] = {0, -1, 1, -2, 2};
 	uint i, powerItemNo;
@@ -802,14 +802,14 @@ void ARC_DeathSprayWeapons( Player *this_player )
 	// Any death that matters cuts rank
 	ARC_RankCut();
 
-	powerItemNo = 30011 + this_player->cur_weapon;
+	powerItemNo = 30011 + this_player->port_mode;
 
 	for (i = 0; i < spray; ++i)
 	{
 		b = JE_newEnemy(100, 603, 0);
 		if (b == 0)
 			return;
-		enemy[b-1].egr[1-1] = 7 + (this_player->cur_weapon * 2);
+		enemy[b-1].egr[1-1] = 7 + (this_player->port_mode * 2);
 		enemy[b-1].evalue = powerItemNo;
 		enemy[b-1].scoreitem = true;
 		enemy[b-1].ex = this_player->x - 32;
