@@ -25,6 +25,8 @@
 #include "opentyr.h"
 #include "varz.h"
 
+#include "mod/patcher.h"
+
 /* MAIN Weapons Data */
 JE_WeaponType  eWeapons[256];
 JE_WeaponType *pWeapons = NULL; // dynamically allocated
@@ -493,6 +495,7 @@ void JE_initEpisode( JE_byte newEpisode )
 	
 	JE_analyzeLevel();
 	JE_loadItemDat();
+	MOD_PatcherSetup(levelFile);
 }
 
 void JE_scanForEpisodes( void )

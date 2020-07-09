@@ -10,6 +10,9 @@
 /// \file  mod/patcher.c
 /// \brief Level and episode patchers
 
+#include "patcher.h"
+
+#include "../file.h"
 #include "../mainint.h"
 #include "../opentyr.h"
 #include "../tyrian2.h"
@@ -94,6 +97,10 @@ static const Patches _P2_GRYPHON[] = {
 	{0},// End
 };
 
+// ---
+// Episode 4
+// ---
+
 static const Patches _P4_SURFACE[] = {
 	{553, false, {3220, 66, 32767, 23}}, // Skip the rolling ball of death
 	{0}, // End
@@ -141,21 +148,82 @@ static const Patches _P4_NOSE_DRIP[] = {
 	{0}, // End
 };
 
+// ---
+// Episode 4 (Tyrian 2000)
+// ---
+
+// Episode 4 slightly differs in Tyrian 2000, so we need to take this into account
+
+static const Patches _P4T2K_CORE[] = {
+	{663, true, {10090, 69, -1}}, // Second indefinite invuln, in case player is dead during the first one
+	{0},
+};
+
+static const Patches _P4T2K_QTUNNELQ[] = {
+	// We can't justify a difficulty increase because ?TUNNEL? isn't flagged as a bonus level in T2K
+	{714, false, {4300, 16, 8}}, // improper SFX callout changed to proper event
+	{0}, // End
+};
+
+static const Patches _P4T2K_UNDERDELI[] = {
+	{525,  false, {2950, 16, 3}}, // improper SFX callout changed to proper event
+	{1140, false, {9610, 62, 21}}, // improper SFX callout removed
+	{0}, // End
+};
+
+static const Patches _P4T2K_ICE_EXIT[] = {
+	{523, false, {2550, 16, 1}}, // "Enemy approaching from behind." (already Danger! here, replaced)
+	{0}, // End
+};
+
 static const Patches *curPatches = NULL;
 
-void MOD_PatcherInit( JE_byte episode, JE_byte level )
+int patchSet = PATCH_DISABLED;
+
+void MOD_PatcherSetup( const char *levelFile )
+{
+	FILE *f = dir_fopen_die(data_dir(), levelFile, "rb");
+	unsigned int fileSize = ftell_eof(f);
+	fclose(f);
+
+	switch (fileSize)
+	{
+		case 538262: patchSet = PATCH_EPISODE_1; break;
+		case 381242: patchSet = PATCH_EPISODE_2; break;
+		case 393398: patchSet = PATCH_EPISODE_3; break;
+		case 800006: patchSet = PATCH_EPISODE_4; break;
+		case 538856: patchSet = PATCH_EPISODE_1_T2K; break;
+		case 381187: patchSet = PATCH_EPISODE_2_T2K; break;
+		case 393938: patchSet = PATCH_EPISODE_3_T2K; break;
+		case 937303: patchSet = PATCH_EPISODE_4_T2K; break;
+		case 521137: patchSet = PATCH_EPISODE_5_T2K; break;
+		default: patchSet = PATCH_DISABLED; break;
+	}
+
+	if (patchSet >= PATCH_EPISODE_1_T2K)
+		printf("patcher: Set to patch Episode %d (ver T2000)\n", patchSet - PATCH_EPISODE_4);
+	else if (patchSet >= PATCH_EPISODE_1)
+		printf("patcher: Set to patch Episode %d (ver 2.1)\n", patchSet);
+	else
+		printf("patcher: Episode not recognized, patcher disabled\n");
+}
+
+void MOD_PatcherInit( JE_byte level )
 {
 	curPatches = NULL;
-	switch (episode)
+	switch (patchSet)
 	{
-	default: return;
-	case 1:
+	default: 
+		return;
+	case PATCH_EPISODE_1:
+	case PATCH_EPISODE_1_T2K:
 		switch (level)
 		{
 			default: return;
 			case 15: curPatches = _P1_TYRIAN_HARD; return;
 		}
-	case 2:
+	case PATCH_EPISODE_2:
+	case PATCH_EPISODE_2_T2K:
 		switch (level)
 		{
 			default: return;
@@ -163,7 +231,20 @@ void MOD_PatcherInit( JE_byte episode, JE_byte level )
 			case 6: curPatches = _P2_GRYPHON; return;
 			case 7: curPatches = _P2_GEM_WAR; return;
 		}
-	case 4:
+	case PATCH_EPISODE_3:
+	case PATCH_EPISODE_3_T2K:
+		return;
+	case PATCH_EPISODE_4_T2K:
+		switch (level)
+		{
+			default: break;
+			case 5: curPatches = _P4T2K_CORE; return;
+			case 7: curPatches = _P4T2K_UNDERDELI; return;
+			case 8: curPatches = _P4T2K_ICE_EXIT; return;
+			case 11: curPatches = _P4T2K_QTUNNELQ; return;
+		}
+		// fall through
+	case PATCH_EPISODE_4:
 		switch (level)
 		{
 			default: return;
@@ -174,6 +255,8 @@ void MOD_PatcherInit( JE_byte episode, JE_byte level )
 			case 11: curPatches = _P4_QTUNNELQ; return;
 			case 16: curPatches = _P4_NOSE_DRIP; return;
 		}
+	case PATCH_EPISODE_5_T2K:
+		return;
 	}
 }
 

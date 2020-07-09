@@ -13,9 +13,23 @@
 #ifndef MOD_PATCHER_H
 #define MOD_PATCHER_H
 
+enum {
+	PATCH_DISABLED = 0,
+	PATCH_EPISODE_1,
+	PATCH_EPISODE_2,
+	PATCH_EPISODE_3,
+	PATCH_EPISODE_4,
+	PATCH_EPISODE_1_T2K,
+	PATCH_EPISODE_2_T2K,
+	PATCH_EPISODE_3_T2K,
+	PATCH_EPISODE_4_T2K,
+	PATCH_EPISODE_5_T2K,
+};
+
 #include "../varz.h"
 
-void MOD_PatcherInit( JE_byte episode, JE_byte level );
+void MOD_PatcherSetup( const char *levelFile );
+void MOD_PatcherInit( JE_byte level );
 bool MOD_Patcher( struct JE_EventRecType *allEvs, JE_word *ev );
 void MOD_PatcherClose( void );
 

@@ -2898,7 +2898,7 @@ new_game:
 	FILE *level_f = dir_fopen_die(data_dir(), levelFile, "rb");
 
 	printf("num: %d, location: $%x\n", lvlFileNum, lvlPos[(lvlFileNum-1) * 2]);
-	MOD_PatcherInit(episodeNum, lvlFileNum);
+	MOD_PatcherInit(lvlFileNum);
 
 	fseek(level_f, lvlPos[(lvlFileNum-1) * 2], SEEK_SET);
 
