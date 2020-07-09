@@ -468,7 +468,7 @@ JE_boolean JE_inGameSetup( void )
 					case 4:
 						if (--gameSpeed < 1)
 						{
-							gameSpeed = 5;
+							gameSpeed = 6;
 						}
 						JE_initProcessorType();
 						JE_setNewGameSpeed();
@@ -503,7 +503,7 @@ JE_boolean JE_inGameSetup( void )
 						JE_setNewGameSpeed();
 						break;
 					case 4:
-						if (++gameSpeed > 5)
+						if (++gameSpeed > 6)
 						{
 							gameSpeed = 1;
 						}

@@ -153,144 +153,146 @@ bool player_shot_move_and_draw(
 	PlayerShotDataType* shot = &playerShotData[shot_id];
 
 	shotAvail[shot_id]--;
-	if (true /* shot_id != MAX_PWEAPON - 1 */)
+
+	if (--shot->shotXCW <= 0)
 	{
-		if (--shot->shotXCW <= 0)
-		{
-			shot->shotXM += shot->shotXC;
-			shot->shotXCW = shot->shotXCWmax;
-		}
-		shot->shotX += shot->shotXM;
-		JE_integer tmp_shotXM = shot->shotXM;
+		shot->shotXM += shot->shotXC;
+		shot->shotXCW = shot->shotXCWmax;
+	}
+	shot->shotX += shot->shotXM;
+	JE_integer tmp_shotXM = shot->shotXM;
 
-		if (shot->shotXM > 100)
+	if (shot->shotXM > 100)
+	{
+		if (shot->shotXM == 101)
 		{
-			if (shot->shotXM == 101)
-			{
-				shot->shotX -= 101;
-				shot->shotX += player[shot->playerNumber-1].delta_x_shot_move;
-				shot->shotY += player[shot->playerNumber-1].delta_y_shot_move;
-			}
-			else
-			{
-				shot->shotX -= 120;
-				shot->shotX += player[shot->playerNumber-1].delta_x_shot_move;
-			}
-		}
-
-		if (--shot->shotYCW <= 0)
-		{
-			shot->shotYM += shot->shotYC;
-			shot->shotYCW = shot->shotYCWmax;
-		}
-		shot->shotY += shot->shotYM;
-
-		if (shot->shotYM > 100)
-		{
-			shot->shotY -= 120;
+			shot->shotX -= 101;
+			shot->shotX += player[shot->playerNumber-1].delta_x_shot_move;
 			shot->shotY += player[shot->playerNumber-1].delta_y_shot_move;
-		}
-
-		if (shot->shotComplicated != 0)
-		{
-			shot->shotDevX += shot->shotDirX;
-			shot->shotX += shot->shotDevX;
-
-			if (abs(shot->shotDevX) == shot->shotCirSizeX)
-				shot->shotDirX = -shot->shotDirX;
-
-			shot->shotDevY += shot->shotDirY;
-			shot->shotY += shot->shotDevY;
-
-			if (abs(shot->shotDevY) == shot->shotCirSizeY)
-				shot->shotDirY = -shot->shotDirY;
-
-			/*Double Speed Circle Shots - add a second copy of above loop*/
-		}
-
-		*out_shotx = shot->shotX;
-		*out_shoty = shot->shotY;
-
-		if (shot->shotX < -34 || shot->shotX > 290 ||
-			shot->shotY < -15 || shot->shotY > 190)
-		{
-			shotAvail[shot_id] = 0;
-			return false;
-		}
-
-		if (shot->shotTrail != 255)
-		{
-			if (shot->shotTrail == 98)
-				JE_setupExplosion(shot->shotX - shot->shotXM, shot->shotY - shot->shotYM, 0, shot->shotTrail, false, false);
-			else
-				JE_setupExplosion(shot->shotX, shot->shotY, 0, shot->shotTrail, false, false);
-		}
-
-		if (shot->aimAtEnemy != 0)
-		{
-			if (--shot->aimDelay == 0)
-			{
-				shot->aimDelay = shot->aimDelayMax;
-
-				if (enemyAvail[shot->aimAtEnemy - 1] != 1)
-				{
-					if (shot->shotX < enemy[shot->aimAtEnemy - 1].ex)
-						shot->shotXM++;
-					else
-						shot->shotXM--;
-
-					if (shot->shotY < enemy[shot->aimAtEnemy - 1].ey)
-						shot->shotYM++;
-					else
-						shot->shotYM--;
-				}
-				else
-				{
-					if (shot->shotXM > 0)
-						shot->shotXM++;
-					else
-						shot->shotXM--;
-				}
-			}
-		}
-
-		JE_word sprite_frame = shot->shotGr + shot->shotAni;
-		if (++shot->shotAni == shot->shotAniMax)
-			shot->shotAni = 0;
-
-		*out_shot_damage = shot->shotDmg;
-		*out_blast_filter = shot->shotBlastFilter;
-		*out_chain = shot->chainReaction;
-		*out_playerNum = shot->playerNumber;
-
-		*out_is_special = sprite_frame > 60000;
-
-		if (*out_is_special)
-		{
-			blit_sprite_blend(VGAScreen, *out_shotx+1, *out_shoty, OPTION_SHAPES, sprite_frame - 60001);
-
-			*out_special_radiusw = sprite(OPTION_SHAPES, sprite_frame - 60001)->width / 2;
-			*out_special_radiush = sprite(OPTION_SHAPES, sprite_frame - 60001)->height / 2;
 		}
 		else
 		{
-			if (sprite_frame > 1000)
+			shot->shotX -= 120;
+			shot->shotX += player[shot->playerNumber-1].delta_x_shot_move;
+		}
+	}
+
+	if (--shot->shotYCW <= 0)
+	{
+		shot->shotYM += shot->shotYC;
+		shot->shotYCW = shot->shotYCWmax;
+	}
+	shot->shotY += shot->shotYM;
+
+	if (shot->shotYM > 100)
+	{
+		shot->shotY -= 120;
+		shot->shotY += player[shot->playerNumber-1].delta_y_shot_move;
+	}
+
+	if (shot->shotComplicated != 0)
+	{
+		shot->shotDevX += shot->shotDirX;
+		shot->shotX += shot->shotDevX;
+
+		if (abs(shot->shotDevX) == shot->shotCirSizeX)
+			shot->shotDirX = -shot->shotDirX;
+
+		shot->shotDevY += shot->shotDirY;
+		shot->shotY += shot->shotDevY;
+
+		if (abs(shot->shotDevY) == shot->shotCirSizeY)
+			shot->shotDirY = -shot->shotDirY;
+
+		/*Double Speed Circle Shots - add a second copy of above loop*/
+	}
+
+	*out_shotx = shot->shotX;
+	*out_shoty = shot->shotY;
+
+	if (shot->shotX < -34 || shot->shotX > 290 ||
+		shot->shotY < -15 || shot->shotY > 190)
+	{
+		shotAvail[shot_id] = 0;
+		return false;
+	}
+
+	switch (shot->shotTrail)
+	{
+		case 255: // no trail
+			break;
+		case 98:
+			JE_setupExplosion(shot->shotX - shot->shotXM, shot->shotY - shot->shotYM, 0, shot->shotTrail, false, false);
+			break;
+		default:
+			JE_setupExplosion(shot->shotX, shot->shotY, 0, shot->shotTrail, false, false);
+			break;
+	}
+
+	if (shot->aimAtEnemy != 0)
+	{
+		if (--shot->aimDelay == 0)
+		{
+			shot->aimDelay = shot->aimDelayMax;
+
+			if (enemyAvail[shot->aimAtEnemy - 1] != 1)
 			{
-				JE_doSP(*out_shotx+1 + 6, *out_shoty + 6, 5, 3, (sprite_frame / 1000) << 4);
-				sprite_frame = sprite_frame % 1000;
-			}
-			if (sprite_frame > 500)
-			{
-				if (background2 && *out_shoty + shadowYDist < 190 && tmp_shotXM < 100)
-					blit_sprite2_darken(VGAScreen, *out_shotx+1, *out_shoty + shadowYDist, shotShapes[1], sprite_frame - 500);
-				blit_sprite2(VGAScreen, *out_shotx+1, *out_shoty, shotShapes[1], sprite_frame - 500);
+				if (shot->shotX < enemy[shot->aimAtEnemy - 1].ex)
+					shot->shotXM++;
+				else
+					shot->shotXM--;
+
+				if (shot->shotY < enemy[shot->aimAtEnemy - 1].ey)
+					shot->shotYM++;
+				else
+					shot->shotYM--;
 			}
 			else
 			{
-				if (background2 && *out_shoty + shadowYDist < 190 && tmp_shotXM < 100)
-					blit_sprite2_darken(VGAScreen, *out_shotx+1, *out_shoty + shadowYDist, shotShapes[0], sprite_frame);
-				blit_sprite2(VGAScreen, *out_shotx+1, *out_shoty, shotShapes[0], sprite_frame);
+				if (shot->shotXM > 0)
+					shot->shotXM++;
+				else
+					shot->shotXM--;
 			}
+		}
+	}
+
+	JE_word sprite_frame = shot->shotGr + shot->shotAni;
+	if (++shot->shotAni == shot->shotAniMax)
+		shot->shotAni = 0;
+
+	*out_shot_damage = shot->shotDmg;
+	*out_blast_filter = shot->shotBlastFilter;
+	*out_chain = shot->chainReaction;
+	*out_playerNum = shot->playerNumber;
+
+	*out_is_special = sprite_frame > 60000;
+
+	if (*out_is_special)
+	{
+		blit_sprite_blend(VGAScreen, *out_shotx+1, *out_shoty, OPTION_SHAPES, sprite_frame - 60001);
+
+		*out_special_radiusw = sprite(OPTION_SHAPES, sprite_frame - 60001)->width / 2;
+		*out_special_radiush = sprite(OPTION_SHAPES, sprite_frame - 60001)->height / 2;
+	}
+	else
+	{
+		if (sprite_frame > 1000)
+		{
+			JE_doSP(*out_shotx+1 + 6, *out_shoty + 6, 5, 3, (sprite_frame / 1000) << 4);
+			sprite_frame = sprite_frame % 1000;
+		}
+		if (sprite_frame > 500)
+		{
+			if (background2 && *out_shoty + shadowYDist < 190 && tmp_shotXM < 100)
+				blit_sprite2_darken(VGAScreen, *out_shotx+1, *out_shoty + shadowYDist, shotShapes[1], sprite_frame - 500);
+			blit_sprite2(VGAScreen, *out_shotx+1, *out_shoty, shotShapes[1], sprite_frame - 500);
+		}
+		else
+		{
+			if (background2 && *out_shoty + shadowYDist < 190 && tmp_shotXM < 100)
+				blit_sprite2_darken(VGAScreen, *out_shotx+1, *out_shoty + shadowYDist, shotShapes[0], sprite_frame);
+			blit_sprite2(VGAScreen, *out_shotx+1, *out_shoty, shotShapes[0], sprite_frame);
 		}
 	}
 

@@ -315,6 +315,9 @@ void JE_initProcessorType( void )
 		case 5: /* Pentium Hyper */
 			fastPlay = 1;
 			break;
+		case 6: /* Unbounded */
+			fastPlay = 6;
+			break;
 	}
 
 }
@@ -322,17 +325,16 @@ void JE_initProcessorType( void )
 void JE_setNewGameSpeed( void )
 {
 	pentiumMode = false;
+	smoothScroll = true;
 
 	switch (fastPlay)
 	{
 	case 0:
 		speed = 0x4300;
-		smoothScroll = true;
 		frameCountMax = 2;
 		break;
 	case 1:
 		speed = 0x3000;
-		smoothScroll = true;
 		frameCountMax = 2;
 		break;
 	case 2:
@@ -342,19 +344,20 @@ void JE_setNewGameSpeed( void )
 		break;
 	case 3:
 		speed = 0x5300;
-		smoothScroll = true;
 		frameCountMax = 4;
 		break;
 	case 4:
 		speed = 0x4300;
-		smoothScroll = true;
 		frameCountMax = 3;
 		break;
 	case 5:
 		speed = 0x4300;
-		smoothScroll = true;
 		frameCountMax = 2;
 		pentiumMode = true;
+		break;
+	case 6:
+		speed = 0x4300;
+		frameCountMax = 0;
 		break;
 	}
 
