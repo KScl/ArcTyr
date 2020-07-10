@@ -1532,26 +1532,26 @@ redo:
 	// NOTE: endLevel checks past this point are REDUNDANT
 	// ****
 
+	// non-dragonwing sidekicks movement
+	if (!this_player->is_dragonwing)
+	{
+		if (this_player->sidekick[LEFT_SIDEKICK].style == 0)
+		{
+			this_player->sidekick[LEFT_SIDEKICK].x = *mouseX_ - 14;
+			this_player->sidekick[LEFT_SIDEKICK].y = *mouseY_;
+		}
+
+		if (this_player->sidekick[RIGHT_SIDEKICK].style == 0)
+		{
+			this_player->sidekick[RIGHT_SIDEKICK].x = *mouseX_ + 16;
+			this_player->sidekick[RIGHT_SIDEKICK].y = *mouseY_;
+		}
+	}
+
 	// player movement
 	// when linked, the dragonwing has no XY movement controls
 	if (!twoPlayerLinked || !this_player->is_dragonwing)
 	{
-		// non-dragonwing sidekicks
-		if (shipGr2 != 0)
-		{
-			if (this_player->sidekick[LEFT_SIDEKICK].style == 0)
-			{
-				this_player->sidekick[LEFT_SIDEKICK].x = *mouseX_ - 14;
-				this_player->sidekick[LEFT_SIDEKICK].y = *mouseY_;
-			}
-
-			if (this_player->sidekick[RIGHT_SIDEKICK].style == 0)
-			{
-				this_player->sidekick[RIGHT_SIDEKICK].x = *mouseX_ + 16;
-				this_player->sidekick[RIGHT_SIDEKICK].y = *mouseY_;
-			}
-		}
-
 		if (this_player->x_friction_ticks > 0)
 		{
 			--this_player->x_friction_ticks;
