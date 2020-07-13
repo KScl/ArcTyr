@@ -273,7 +273,7 @@ void DEV_RecordDemoInit( void )
 				{
 				case 0:
 					if (--opt_ship[p] == 253)
-						opt_ship[p] = SHIPORDER_MAX - 1;
+						opt_ship[p] = shiporder_count - 1;
 					break;
 				case 1:
 					if (--opt_shield[p] == 254)
@@ -317,7 +317,7 @@ void DEV_RecordDemoInit( void )
 				switch(onOption[p])
 				{
 				case 0:
-					if (++opt_ship[p] == SHIPORDER_MAX)
+					if (++opt_ship[p] == shiporder_count)
 						opt_ship[p] = 254;
 					break;
 				case 1:
@@ -408,7 +408,7 @@ void DEV_RecordDemoInit( void )
 	if (opt_ship[0] != 254)
 	{
 		if (opt_ship[0] == 255)
-			opt_ship[0] = mt_rand() % SHIPORDER_NOSECRET;
+			opt_ship[0] = mt_rand() % shiporder_count;
 		player[0].items.ship = shiporder[opt_ship[0]];
 		PL_Init(&player[0], player[0].items.ship, true);
 
@@ -432,7 +432,7 @@ void DEV_RecordDemoInit( void )
 		if (opt_ship[1] == 255)
 		{
 			do
-				opt_ship[1] = mt_rand() % SHIPORDER_MAX;
+				opt_ship[1] = mt_rand() % shiporder_count;
 			while (opt_ship[0] == opt_ship[1]);
 		}
 		player[1].items.ship = shiporder[opt_ship[1]];

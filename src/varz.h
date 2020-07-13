@@ -284,7 +284,6 @@ extern JE_word x, y;
 extern JE_integer b;
 extern JE_byte **BKwrap1to, **BKwrap2to, **BKwrap3to, **BKwrap1, **BKwrap2, **BKwrap3;
 extern JE_word shipGr, shipGr2;
-extern Sprite2_array *shipGrPtr, *shipGr2ptr;
 
 static const int hud_sidekickX[2] = {   1, 293 };
 static const int hud_sidekickY[2] = {  69,  88 };

@@ -45,6 +45,10 @@ JE_boolean skipIdentify = false;
 static bool inIdentify = false;
 static int identifyStrY = 31;
 
+JE_byte shiporder_nosecret;
+JE_byte shiporder_count;
+JE_byte shiporder[16];
+
 bool attractAudioAllowed = true;
 
 void ARC_IdentifyPrint( const char *s )
@@ -308,16 +312,18 @@ void ARC_DISP_MidGameSelect( uint pNum )
 	uint sGr = ships[player[pNum - 1].items.ship].shipgraphic;
 	if (sGr == 0) // Dragonwing
 	{
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shapes9, 13);
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shapes9, 51);
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 13);
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 51);
 	}
 	else if (sGr == 1) // Nortship
 	{
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shapes9, 318);
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shapes9, 320);
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 318);
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 320);
 	}
-	else
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shapes9, sGr);
+	else if (sGr >= 1000) // T2000
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapesT2K, sGr - 1000);
+	else		
+		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapes, sGr);
 
 	strcpy(tmpBuf.l, JE_trim(ships[player[pNum - 1].items.ship].name));
 	x = (pNum == 2) ? (264 - JE_textWidth(tmpBuf.l, TINY_FONT)) : 58;
@@ -366,7 +372,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 		// if continuing: quickly find what our current ship is and preselect it
 		if (pl->player_status == STATUS_CONTINUE)
 		{
-			for (uint i = 0; i < COUNTOF(shiporder); ++i)
+			for (uint i = 0; i < shiporder_count; ++i)
 			{
 				if (shiporder[i] == pl->items.ship)
 				{
@@ -623,7 +629,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				do
 				{
 					if (--pl->arc.cursor == 255)
-						pl->arc.cursor = SHIPORDER_NOSECRET - 1;
+						pl->arc.cursor = shiporder_nosecret - 1;
 					pl->items.ship = shiporder[pl->arc.cursor];
 				}
 				while (otherPl->player_status > STATUS_NONE && player[0].items.ship == player[1].items.ship);
@@ -633,7 +639,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 			{
 				do
 				{
-					if (++pl->arc.cursor >= SHIPORDER_NOSECRET)
+					if (++pl->arc.cursor >= shiporder_nosecret)
 						pl->arc.cursor = 0;
 					pl->items.ship = shiporder[pl->arc.cursor];					
 				}

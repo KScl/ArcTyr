@@ -94,9 +94,9 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x );
 // Gameplay Elements
 //
 
-#define SHIPORDER_MAX      9
-#define SHIPORDER_NOSECRET 8
-static const JE_byte shiporder[SHIPORDER_MAX] = {6, 7, 4, 1, 3, 5, 2, 9, 0};
+extern JE_byte shiporder_nosecret;
+extern JE_byte shiporder_count;
+extern JE_byte shiporder[16];
 
 JE_word hurryUpTimer;
 JE_word hurryUpLevelLoc;

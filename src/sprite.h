@@ -95,8 +95,9 @@ Sprite2_array;
 extern Sprite2_array shotShapes[2];
 extern Sprite2_array iconShapes;
 extern Sprite2_array pickupShapes;
+extern Sprite2_array shipShapes, shipShapesT2K;
 extern Sprite2_array eShapes[4];
-extern Sprite2_array shapes6, shapes9;
+extern Sprite2_array shapes6;
 
 void JE_loadCompShapes( Sprite2_array *, JE_char s );
 void JE_loadCompShapesB( Sprite2_array *, FILE *f );

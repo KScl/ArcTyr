@@ -282,9 +282,10 @@ int main( int argc, char *argv[] )
 	// This should never happen, but until the game is loaded, be "in" a service menu
 	inServiceMenu = true;
 
-	printf("\nWelcome to... >> %s %s <<\n\n", opentyrian_str, opentyrian_version);
+	printf("\nThis is... >> %s %s <<\n\n", opentyrian_str, opentyrian_version);
 
-	printf("Copyright (C) 2007-2013 The OpenTyrian Development Team\n\n");
+	printf("Copyright          (C) 2007-2020  The OpenTyrian Development Team\n");
+	printf("Portions copyright (C) 2019-2020  Kaito Sinclaire\n\n");
 
 	printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
 	printf("This is free software, and you are welcome to redistribute it\n");
@@ -376,7 +377,7 @@ int main( int argc, char *argv[] )
 		ARC_IdentifyPrint("Entering the weapon creator.");
 		DEV_WeaponCreator(goToWeaponCreator);
 #else
-		fprintf(stderr, "OpenTyrian was compiled without devtools.\n");
+		fprintf(stderr, "ArcTyr was compiled without devtools.\n");
 		JE_tyrianHalt(5);
 #endif
 	}
@@ -396,7 +397,7 @@ int main( int argc, char *argv[] )
 		JE_main();
 		// Never returns
 #else
-		fprintf(stderr, "OpenTyrian was compiled without devtools.\n");
+		fprintf(stderr, "ArcTyr was compiled without devtools.\n");
 		JE_tyrianHalt(5);
 #endif
 	}	

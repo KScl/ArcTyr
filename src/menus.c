@@ -57,19 +57,21 @@ static void draw_shipGraphic( int x, int y, uint sGr, int facing )
 {
 	if (sGr == 0) // Dragonwing
 	{
-		blit_sprite2x2(VGAScreen, x - 24, y, shapes9, 13 + (facing * 2));
-		blit_sprite2x2(VGAScreen, x     , y, shapes9, 51 + (facing * 2));
+		blit_sprite2x2(VGAScreen, x - 24, y, shipShapes, 13 + (facing * 2));
+		blit_sprite2x2(VGAScreen, x     , y, shipShapes, 51 + (facing * 2));
 	}
 	else if (sGr == 1) // Nortship
 	{
-		blit_sprite2x2(VGAScreen, x - 12, y,      shapes9, 319);
-		blit_sprite2(VGAScreen,   x - 24, y,      shapes9, 318);
-		blit_sprite2(VGAScreen,   x - 24, y + 14, shapes9, 337 + ((facing > 0) ? -facing : 0) );
-		blit_sprite2(VGAScreen,   x + 12, y,      shapes9, 321);
-		blit_sprite2(VGAScreen,   x + 12, y + 14, shapes9, 340 + ((facing < 0) ? -facing : 0) );
+		blit_sprite2x2(VGAScreen, x - 12, y,      shipShapes, 319);
+		blit_sprite2(VGAScreen,   x - 24, y,      shipShapes, 318);
+		blit_sprite2(VGAScreen,   x - 24, y + 14, shipShapes, 337 + ((facing > 0) ? -facing : 0) );
+		blit_sprite2(VGAScreen,   x + 12, y,      shipShapes, 321);
+		blit_sprite2(VGAScreen,   x + 12, y + 14, shipShapes, 340 + ((facing < 0) ? -facing : 0) );
 	}
+	else if (sGr >= 1000)
+		blit_sprite2x2(VGAScreen, x - 12, y, shipShapesT2K, sGr + (facing * 2) - 1000);		
 	else
-		blit_sprite2x2(VGAScreen, x - 12, y, shapes9, sGr + (facing * 2));
+		blit_sprite2x2(VGAScreen, x - 12, y, shipShapes, sGr + (facing * 2));
 }
 
 static void draw_PlayerStatusText( JE_byte p )
@@ -100,10 +102,11 @@ void select_gameplay( void )
 	bool fade_in = true;
 
 	// Nortship secret unlock
-	JE_byte max_ship_select = SHIPORDER_NOSECRET, rightloops = 7;
+	JE_byte max_ship_select = shiporder_nosecret, rightloops = 7;
 	JE_byte ship_select[2] = {0, 1};
 	bool twoP = (player[0].player_status == player[1].player_status);
 
+	const int xIncrease = 320 / (shiporder_nosecret + 1);
 	size_t shipXofs = 1, lastXofs = 0;
 	int shipAngle;
 
@@ -139,12 +142,12 @@ void select_gameplay( void )
 				continue;
 			}
 
-			int x = -20 + 35 * (ship_select[p] + 1);
+			int x = -20 + xIncrease * (ship_select[p] + 1);
 			int y = 50 + (ship_select[p] & 1) * 40;
 
 			strcpy(tmpBuf.l, JE_trim(ships[shiporder[ship_select[p]]].name));
 
-			if (ship_select[p] >= SHIPORDER_NOSECRET) // On the Nortship
+			if (ship_select[p] >= shiporder_nosecret) // On the Nortship
 			{
 				fill_rectangle_xy(VGAScreen,   0, y,  19, 90, pcolor[p] +5);
 				fill_rectangle_xy(VGAScreen, 300, y, 319, 90, pcolor[p] +5);
@@ -166,9 +169,9 @@ void select_gameplay( void )
 			if (player[p].player_status == STATUS_INGAME)
 				outTextMirrorX(VGAScreen, 136, 182, "OK", 15, -4, SMALL_FONT_SHAPES, true, p);
 		}
-		for (int i = 1; i <= SHIPORDER_NOSECRET; ++i)
+		for (int i = 1; i <= shiporder_nosecret; ++i)
 		{
-			int x = 35 * i;
+			int x = xIncrease * i;
 			int y = 54 + ((i & 1) ? 0 : 40);
 			draw_shipGraphic(x, y, ships[shiporder[i - 1]].shipgraphic, 0);
 		}
@@ -274,10 +277,10 @@ void select_gameplay( void )
 				{
 					if (++ship_select[p] >= max_ship_select)
 					{
-						if (max_ship_select == SHIPORDER_NOSECRET && !(--rightloops))
+						if (max_ship_select == shiporder_nosecret && !(--rightloops))
 						{
 							JE_playSampleNumOnChannel(S_POWERUP, 1);
-							max_ship_select = SHIPORDER_MAX;
+							max_ship_select = shiporder_count;
 						}
 						else
 							ship_select[p] = 0;

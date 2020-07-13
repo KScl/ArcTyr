@@ -218,7 +218,7 @@ void ADTA_loadSpecials( void )
 void ADTA_loadShips( void )
 {
 	FILE *f = NULL;
-	size_t shipSize;
+	size_t i, shipSize;
 	JE_byte tmp_b;
 
 	f = dir_fopen_die(arcdata_dir(), "arcship.dta", "rb");
@@ -228,7 +228,30 @@ void ADTA_loadShips( void )
 	ships = realloc(ships, shipSize);
 	memset(ships, 0, shipSize);
 
-	for (size_t i = 0; i < num_ships + 1; ++i)
+	// Order of display on Ship Select
+	efread(&shiporder_count, sizeof(JE_byte), 1, f);
+	memset(shiporder, 0, sizeof(shiporder));
+	for (i = 0; i < shiporder_count; ++i) {
+		efread(&shiporder[i], sizeof(JE_byte), 1, f);
+		if ((shiporder[i] & 0x40) && !tyrian2000detected)
+		{ // T2000 only ship?
+			--i;
+			--shiporder_count;
+			continue;
+		}
+		if (!(shiporder[i] & 0x80))
+			++shiporder_nosecret;
+		shiporder[i] &= 0x3F;
+	}
+
+	efread(&tmp_b, sizeof(JE_byte), 1, f);
+	if (tmp_b != ';')
+	{
+		fprintf(stderr, "error: ships array is bad at <shiporder>: got %d\n", tmp_b);
+		JE_tyrianHalt(1);
+	}
+
+	for (i = 0; i < num_ships + 1; ++i)
 	{
 		fseek(f, 1, SEEK_CUR); 
 		efread(&ships[i].name,           1, 30, f);

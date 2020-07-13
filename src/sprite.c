@@ -29,8 +29,9 @@ Sprite_array sprite_table[SPRITE_TABLES_MAX];
 Sprite2_array shotShapes[2];
 Sprite2_array iconShapes;
 Sprite2_array pickupShapes;
+Sprite2_array shipShapes, shipShapesT2K;
 Sprite2_array eShapes[4];
-Sprite2_array shapes6, shapes9;
+Sprite2_array shapes6;
 
 void load_sprites_file( unsigned int table, const char *dir, const char *filename )
 {
@@ -691,7 +692,7 @@ void blit_sprite2x2_darken( SDL_Surface *surface, int x, int y, Sprite2_array sp
 
 void JE_loadMainShapeTables( const char *shpfile )
 {
-	enum { SHP_NUM = 12 };
+	enum { SHP_NUM = 13 };
 
 	FILE *f = dir_fopen_die(data_dir(), shpfile, "rb");
 	
@@ -715,14 +716,19 @@ void JE_loadMainShapeTables( const char *shpfile )
 		fseek(f, shpPos[i], SEEK_SET);
 		load_sprites(i, f);
 	}
-	
+
+	// T2000 -- detection
+	// Check to see if the 2000(tm) logo is loaded or not
+	if (sprite_table[PLANET_SHAPES].count == 152)
+		tyrian2000detected = true;
+
 	// player shot sprites
 	loadCompShapesArc(&shotShapes[0], "a_shots1.shp");
 	// skip shapes in shpfile
 	i++;
 	
 	// player ship sprites
-	loadCompShapesArc(&shapes9, "a_ships.shp");
+	loadCompShapesArc(&shipShapes, "a_ships.shp");
 	// skip shapes in shpfile
 	i++;
 
@@ -741,15 +747,19 @@ void JE_loadMainShapeTables( const char *shpfile )
 	// more player shot sprites
 	shotShapes[1].size = shpPos[i + 1] - shpPos[i];
 	JE_loadCompShapesB(&shotShapes[1], f);
-	
+	i++;
+
+	if (tyrian2000detected)
+	{
+		// extra T2K ships
+		shipShapesT2K.size = shpPos[i + 1] - shpPos[i];
+		JE_loadCompShapesB(&shipShapesT2K, f);
+	}
+
 	fclose(f);
 
 	load_sprites_file(EXTRA_SHAPES, arcdata_dir(), "arcopts.spr");
 
-	// T2000 -- detection
-	// Check to see if the 2000(tm) logo is loaded or not
-	if (sprite_table[PLANET_SHAPES].count == 152)
-		tyrian2000detected = true;
 }
 
 void free_main_shape_tables( void )
@@ -757,9 +767,12 @@ void free_main_shape_tables( void )
 	for (uint i = 0; i < COUNTOF(sprite_table); ++i)
 		free_sprites(i);
 
-	free_sprite2s(&shapes9);
+	free_sprite2s(&shipShapes);
 	free_sprite2s(&iconShapes);
 	free_sprite2s(&pickupShapes);
 	free_sprite2s(&shotShapes[0]);
 	free_sprite2s(&shotShapes[1]);
+
+	if (tyrian2000detected)
+		free_sprite2s(&shipShapesT2K);
 }

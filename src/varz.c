@@ -158,13 +158,9 @@ JE_byte **BKwrap1to, **BKwrap2to, **BKwrap3to,
         **BKwrap1, **BKwrap2, **BKwrap3;
 
 JE_word shipGr, shipGr2;
-Sprite2_array *shipGrPtr, *shipGr2ptr;
 
 void JE_getShipInfo( void )
 {
-	shipGrPtr = &shapes9;
-	shipGr2ptr = &shapes9;
-
 	shipGr = ships[player[0].items.ship].shipgraphic;
 	player[0].armor = ships[player[0].items.ship].dmg;
 
@@ -190,31 +186,37 @@ void JE_getShipInfo( void )
 	// Randomizer / Mix Machine
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
-		if (player[i].items.ship != 0)
+		if (player[i].player_status != STATUS_INGAME)
 			continue;
 
-		do // randomize special weapon 1
-			player[i].items.special[0] = (mt_rand() % num_specials) + 1;
-		while (special[player[i].items.special[0]].itemgraphic == 0);
+		if (ships[player[i].items.ship].special_weapons[0] == 0)
+		{
+			do // randomize special weapon 1
+				player[i].items.special[0] = (mt_rand() % num_specials) + 1;
+			while (special[player[i].items.special[0]].itemgraphic == 0);
 
-		do // randomize special weapon 2
-			player[i].items.special[1] = (mt_rand() % num_specials) + 1;
-		while (player[i].items.special[0] == player[i].items.special[1]
-			|| special[player[i].items.special[1]].itemgraphic == 0);
+			do // randomize special weapon 2
+				player[i].items.special[1] = (mt_rand() % num_specials) + 1;
+			while (player[i].items.special[0] == player[i].items.special[1]
+				|| special[player[i].items.special[1]].itemgraphic == 0);			
+		}
 
 		// randomize port weapons
-		for (int wp = 0; wp < 5; ++wp)
+		if (ships[player[i].items.ship].port_weapons[0] == 0)
 		{
-			retry:
-			player[i].items.weapon[wp] = (mt_rand() % num_ports) + 1;
-			for (int ck = wp - 1; ck >= 0; --ck)
+			for (int wp = 0; wp < 5; ++wp)
 			{
-				if (player[i].items.weapon[wp] == player[i].items.weapon[ck])
-					goto retry; // ensure no duplicates
+				retry:
+				player[i].items.weapon[wp] = (mt_rand() % num_ports) + 1;
+				for (int ck = wp - 1; ck >= 0; --ck)
+				{
+					if (player[i].items.weapon[wp] == player[i].items.weapon[ck])
+						goto retry; // ensure no duplicates
+				}
 			}
+			player[i].cur_item.weapon = player[i].items.weapon[player[i].port_mode];
+			player[i].cur_item.special = player[i].items.special[player[i].special_mode];
 		}
-		player[i].cur_item.weapon = player[i].items.weapon[player[i].port_mode];
-		player[i].cur_item.special = player[i].items.special[player[i].special_mode];
 	}
 }
 

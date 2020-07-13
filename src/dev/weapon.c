@@ -62,7 +62,7 @@ void JE_weaponViewFrame( void )
 void JE_weaponSimUpdate( void )
 {
 	JE_weaponViewFrame();
-	blit_sprite2x2(VGAScreen, player[0].x - 5, player[0].y - 7, shapes9, ships[player[0].items.ship].shipgraphic);
+	blit_sprite2x2(VGAScreen, player[0].x - 5, player[0].y - 7, shipShapes, ships[player[0].items.ship].shipgraphic);
 }
 
 void JE_initWeaponView( void )
