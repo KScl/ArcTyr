@@ -1,0 +1,47 @@
+{
+	"Shots":{
+		"MissileShrapnelLow":{ // 12 Missile Launcher shrapnel (low power)
+			"Delay":0,
+			"Sound":9,
+			"Trail":1,
+			"Filter":112,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":2,"Duration":8,"MoveY":-1}
+			]
+		},
+		"MissileShrapnelHigh":{ // 13 Missile Launcher shrapnel (high power)
+			"Delay":0,
+			"Sound":12,
+			"Trail":1,
+			"Filter":112,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"Duration":8,"MoveY":2},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"MoveY":-2},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"MoveX":3},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":4,"MoveX":5},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"MoveX":-3},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":-4,"MoveX":-5},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":-4,"MoveX":-6},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":4,"MoveX":6}
+			]
+		},
+		"MissileShrapnelMega":{ // 14 MegaMissile \/ Missile Launcher shrapnel
+			"Delay":0,
+			"Sound":12,
+			"Trail":1,
+			"Filter":112,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":6,"Y":6,"MoveX":6,"MoveY":6},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":-6,"Y":6,"MoveX":-6,"MoveY":6},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":6,"Y":-6,"MoveX":6,"MoveY":-6},
+				{"Sprite":20,"AttackPower":1,"Duration":8,"X":-6,"Y":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"Y":8,"MoveY":8},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"X":8,"MoveX":8},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"X":-8,"MoveX":-8},
+				{"Sprite":20,"AttackPower":2,"Duration":8,"Y":-8,"MoveY":-8}
+			]
+		}
+	}
+}

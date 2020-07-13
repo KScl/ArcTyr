@@ -1,0 +1,25 @@
+{
+	"Ships":{
+		"Talon":{
+			"Name":"StormWind",
+			"Graphic":233,
+			"Armor":12,
+			"SpecialWeapons":[
+				"S3",
+				"S8"
+			],
+			"PortWeapons":[
+				"P19",
+				"P8",
+				"P22",
+				"P41",
+				"P34"
+			],
+			"Twiddles":[
+				["Down", "Up", "Down", "Up+Fire", {"Special":"S37"}],
+				["Right", "Left", "Down", "Up+Fire", {"Special":"S38"}],
+				["Left", "Right", "Down", "Up+Fire", {"Special":"S42"}]
+			]
+		}
+	}
+}

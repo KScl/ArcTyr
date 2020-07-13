@@ -1,0 +1,23 @@
+{
+	"Ships":{
+		"Maelstrom":{
+			"Name":"Ninja Star",
+			"Graphic":157,
+			"Armor":17,
+			"SpecialWeapons":[
+				"S7",
+				"S22"
+			],
+			"PortWeapons":[
+				"P9",
+				"P31",
+				"P32",
+				"P33",
+				"P34"
+			],
+			"Twiddles":[
+				["Down+Fire", "Left+Fire", "Up+Fire", "Right+Fire", "Down+Fire", "Left+Fire", "Up+Fire", {"Special":"S12"}]
+			]
+		}
+	}
+}

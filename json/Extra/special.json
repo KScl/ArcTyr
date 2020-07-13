@@ -1,0 +1,237 @@
+{
+	"Specials":{
+		"S1":{ // 1
+			"Name":"Repulsor",
+			"Graphic":271,
+			"SpecialType":"Repulsor",
+			"PowerUse":{"Shield":1}
+		},
+		"S2":{ // 2
+			"Name":"Pearl Wind",
+			"Graphic":273,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T620"},
+			"PowerUse":10
+		},
+		"S3":{ // 3
+			"Name":"Soul of Zinglon",
+			"Graphic":275,
+			"SpecialType":"Zinglon",
+			"PowerUse":50
+		},
+		"S4":{ // 4
+			"Name":"Attractor",
+			"Graphic":277,
+			"SpecialType":"Attractor",
+			"PowerUse":{"Shield":2}
+		},
+		"S5":{ // 5
+			"Name":"Ice Beam",
+			"Graphic":121,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T621"},
+			"PowerUse":5
+		},
+		"S6":{ // 6
+			"Name":"Flare",
+			"Graphic":123,
+			"SpecialType":"Flare",
+			"ShotData":{"Shot":"T622"},
+			"PowerUse":10
+		},
+		"S7":{ // 7
+			"Name":"Blade Field",
+			"Graphic":125,
+			"SpecialType":"FireMultipleRandomX",
+			"ShotData":{"Shot":"T623"},
+			"PowerUse":20
+		},
+		"S8":{ // 8
+			"Name":"SandStorm",
+			"Graphic":125,
+			"SpecialType":"Sandstorm",
+			"ShotData":{"Shot":"T624"},
+			"PowerUse":20
+		},
+		"S9":{ // 9
+			"Name":"MineField",
+			"Graphic":283,
+			"SpecialType":"FlareZinglon",
+			"ShotData":{"Shot":"T29"},
+			"PowerUse":{"Armor":4}
+		},
+		"S10":{ // 10
+			"Name":"Dual Vulcan",
+			"Graphic":131,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T658"},
+			"PowerUse":20
+		},
+		"S12":{ // 12
+			"Name":"Protron Dispersal",
+			"Graphic":125,
+			"SpecialType":"FireMultipleLong",
+			"ShotData":{"Shot":"T670"},
+			"PowerUse":30
+		},
+		"S13":{ // 13
+			"Name":"Astral Zone",
+			"Graphic":125,
+			"SpecialType":11,
+			"ShotData":{"Shot":"T672"},
+			"PowerUse":2
+		},
+		"S14":{ // 14
+			"Name":"Xega Ball",
+			"Graphic":127,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T720"},
+			"PowerUse":20
+		},
+		"S15":{ // 15
+			"Name":"MegaLaser Dual",
+			"Graphic":279,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T751"},
+			"PowerUse":20
+		},
+		"S17":{ // 17
+			"Name":"Pulse Blast",
+			"Graphic":55,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T753"},
+			"PowerUse":{"Shield":2}
+		},
+		"S18":{ // 18
+			"Name":"MegaLaser",
+			"Graphic":91,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T754"},
+			"PowerUse":100
+		},
+		"S19":{ // 19
+			"Name":"Missile Pod",
+			"Graphic":125,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T755"},
+			"PowerUse":80
+		},
+		"S20":{ // 20
+			"Name":"Minefield",
+			"Graphic":305,
+			"SpecialType":16,
+			"ShotData":{"Shot":"T710"},
+			"PowerUse":{"Armor":4}
+		},
+		"S21":{ // 21
+			"Name":"Post-It Blast",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T708"},
+			"PowerUse":{"Armor":5}
+		},
+		"S22":{ // 22
+			"Name":"Drone **",
+			"Graphic":129,
+			"SpecialType":12,
+			"PowerUse":{"Shield":"All"}
+		},
+		"S23":{ // 23
+			"Name":"Repair Player 1",
+			"SpecialType":14,
+			"PowerUse":{"Shield":"All"}
+		},
+		"S24":{ // 24
+			"Name":"Super Bomb",
+			"SpecialType":5,
+			"ShotData":{"Shot":"T622"},
+			"PowerUse":{"Armor":4}
+		},
+		"TwiddleLightningUp":{ // 26
+			"Name":"Lightning UP",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T721"}
+		},
+		"TwiddleLightningUpLeft":{ // 27
+			"Name":"Lightning UP+LEFT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T722"}
+		},
+		"TwiddleLightningUpRight":{ // 28
+			"Name":"Lightning UP+RIGHT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T723"}
+		},
+		"TwiddleLightningLeft":{ // 29
+			"Name":"Lightning LEFT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T724"}
+		},
+		"TwiddleLightningRight":{ // 30
+			"Name":"Lightning RIGHT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T725"}
+		},
+		"S37":{ // 37
+			"Name":"Cloak",
+			"SpecialType":"Invulnerability",
+			"PowerUse":{"Shield":"All"}
+		},
+		"S38":{ // 38
+			"Name":"Atom Bomb",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T19"},
+			"PowerUse":{"Armor":2}
+		},
+		"S39":{ // 39
+			"Name":"Seeker Bombs",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T709"},
+			"PowerUse":{"Armor":3}
+		},
+		"S40":{ // 40
+			"Name":"Lightning Zone",
+			"Graphic":93,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T750"},
+			"PowerUse":10
+		},
+		"S41":{ // 41
+			"Name":"SDF Main Gun",
+			"Graphic":307,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T778"},
+			"PowerUse":15
+		},
+		"S42":{ // 42
+			"Name":"Ice Blast",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T706"},
+			"PowerUse":4
+		},
+		"S43":{ // 43
+			"Name":"Repair Player 1",
+			"SpecialType":"Heal",
+			"PowerUse":{"Shield":"All"}
+		},
+		"S44":{ // 44
+			"Name":"Pearl Wind",
+			"Graphic":273,
+			"SpecialType":"FireMultipleRandomX",
+			"ShotData":{"Shot":"T620"},
+			"PowerUse":10
+		},
+		"S45":{ // 45
+			"Name":"8-Way Microbomb",
+			"Graphic":129,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T29"},
+			"PowerUse":10
+		},
+		"S46":{ // 46
+			"Name":"Protron Field",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T707"},
+			"PowerUse":{"Shield":"Half"}
+		}
+	}
+}

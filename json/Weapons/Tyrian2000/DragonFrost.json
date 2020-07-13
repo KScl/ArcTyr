@@ -1,0 +1,163 @@
+{
+	"Shots":{
+		"DragonFrost1":{ // T2K: 1-806
+			"Delay":7,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":522},"AttackPower":3,"MoveY":7}
+			]
+		},
+		"DragonFrost2":{ // T2K: 1-807
+			"Delay":9,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":4,"MoveY":6}
+			]
+		},
+		"DragonFrost3":{ // T2K: 1-808
+			"Delay":11,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":522},"AttackPower":3,"MoveY":7}
+			]
+		},
+		"DragonFrost4":{ // T2K: 1-809
+			"Delay":12,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":541},"AttackPower":5,"MoveY":7}
+			]
+		},
+		"DragonFrost5":{ // T2K: 1-810
+			"Delay":13,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":522},"AttackPower":3,"MoveY":7}
+			]
+		},
+		"DragonFrost6":{ // T2K: 1-811
+			"Delay":14,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":541},"AttackPower":5,"MoveY":7}
+			]
+		},
+		"DragonFrost7":{ // T2K: 1-812
+			"Delay":15,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":541},"AttackPower":5,"MoveY":7},
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":5,"MoveY":5}
+			]
+		},
+		"DragonFrost8":{ // T2K: 1-813
+			"Delay":16,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":541},"AttackPower":5,"MoveY":7}
+			]
+		},
+		"DragonFrost9":{ // T2K: 1-814
+			"Delay":17,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7}
+			]
+		},
+		"DragonFrost10":{ // T2K: 1-815
+			"Delay":18,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7},
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":5,"MoveY":5}
+			]
+		},
+		"DragonFrost11":{ // T2K: 1-816
+			"Delay":19,
+			"Sound":30, // (was 31)
+			"Trail":11,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":3,"MoveY":6},
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7},
+				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":5,"MoveY":5},
+				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-7,"MoveY":4},
+				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":7,"MoveY":4}
+			]
+		}
+	},
+	"Ports":{
+		"RedDragonFrost":{
+			"Name":"Dragon Frost",
+			"NormalShots":[
+				"DragonFrost1",
+				"DragonFrost2",
+				"DragonFrost3",
+				"DragonFrost4",
+				"DragonFrost5",
+				"DragonFrost6",
+				"DragonFrost7",
+				"DragonFrost8",
+				"DragonFrost9",
+				"DragonFrost10",
+				"DragonFrost11"
+			]
+		}
+	}
+}

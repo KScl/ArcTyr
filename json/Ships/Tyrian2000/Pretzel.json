@@ -1,0 +1,47 @@
+{
+	"Import":[
+		"./Weapons/Tyrian2000/PretzelMissile.json",
+		"./Weapons/Tyrian2000/PeoplePretzels.json"
+	],
+	"Shots":{
+		"GiantPretzelSpecial":{ // T2K: 2-24
+			"Delay":150,
+			"Sound":28,
+			"Filter":112,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":610},"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":611},"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":629},"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":630},"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":5}
+			]
+		}
+	},
+	"Specials":{
+		"SpecialSuperPretzel":{
+			"Name":"SuperPretzel",
+			"Graphic":"Unknown",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"GiantPretzelSpecial"},
+			"PowerUse":10
+		}
+	},
+	"Ships":{
+		"PeteZoomer":{
+			"Name":"PeteZoomer",
+			"Graphic":{"Tyrian2000":119},
+			"Armor":18,
+			"SpecialWeapons":[
+				"SpecialSuperPretzel",
+				"SpecialSuperPretzel"
+			],
+			"PortWeapons":[
+				"PretzelPeteMissile",
+				"P26",
+				"PretzelPeople",
+				"P25",
+				"P1"
+			]
+		}
+	}
+}

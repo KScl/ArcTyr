@@ -1,0 +1,23 @@
+{
+	"Ships":{
+		"SilverShip":{
+			"Name":"TX SilverCloud",
+			"Graphic":81,
+			"Armor":16,
+			"SpecialWeapons":[
+				"S12",
+				"S14"
+			],
+			"PortWeapons":[
+				"P1",
+				"P13",
+				"P20",
+				"P7",
+				"P3"
+			],
+			"Twiddles":[
+				["Left", "Right", "Down", {"Special":"S39"}]
+			]
+		}
+	}
+}

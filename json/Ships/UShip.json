@@ -1,0 +1,28 @@
+{
+	"Import":[
+		"./Weapons/ArcTyr/NeedleLaser.json"
+	],
+	"Ships":{
+		"UShip":{
+			"Name":"U-Fighter",
+			"Graphic":271,
+			"Armor":10,
+			"SpecialWeapons":[
+				"S10",
+				"S40"
+			],
+			"PortWeapons":[
+				"P7",
+				"NeedleLaser",
+				"P28",
+				"P22",
+				"P17"
+			],
+			"Twiddles":[
+				["Down", "Up", "Down", "Up+Fire", {"Special":"S37"}],
+				["Up", "Left+Fire", {"Special":"TwiddleLightningUpLeft"}],
+				["Up", "Right+Fire", {"Special":"TwiddleLightningUpRight"}]
+			]
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+	"Ships":{
+		"NortShip":{
+			"Name":"NortShip Z",
+			"Graphic":"Nortship",
+			"Armor":28,
+			"SpecialWeapons":[
+				"S13",
+				"S41"
+			],
+			"PortWeapons":[
+				"P4",
+				"P38",
+				"P37",
+				"P30",
+				"P36"
+			],
+			"Twiddles":[
+				["Release", "Up+Fire", {"Special":"TwiddleLightningUp"}],
+				["Release", "Left+Fire", {"Special":"TwiddleLightningLeft"}],
+				["Release", "Right+Fire", {"Special":"TwiddleLightningRight"}],
+				["Up", "Left+Fire", {"Special":"TwiddleLightningUpLeft"}],
+				["Up", "Right+Fire", {"Special":"TwiddleLightningUpRight"}]
+			]
+		}
+	}
+}

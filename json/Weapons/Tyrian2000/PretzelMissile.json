@@ -1,0 +1,147 @@
+{
+	"Shots":{
+		"PretzelPeteMissile1":{ // T2K: 1-795
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":-2,"AccelY":1},
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":4,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile2":{ // T2K: 1-796
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":-4,"AccelY":1},
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":6,"AccelY":1},
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":1,"Y":-2,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile3":{ // T2K: 1-797
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":621},"AttackPower":2,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":2,"X":6,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile4":{ // T2K: 1-798
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":622},"AttackPower":3,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile5":{ // T2K: 1-799
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":622},"AttackPower":3,"AccelY":1},
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":-2,"MoveX":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":620},"AttackPower":1,"X":4,"MoveX":1,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile6":{ // T2K: 1-800
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":622},"AttackPower":3,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":2,"X":-5,"MoveX":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":2,"X":6,"MoveX":1,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile7":{ // T2K: 1-801
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":5,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile8":{ // T2K: 1-802
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":-6,"MoveX":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":8,"MoveX":1,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile9":{ // T2K: 1-803
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":-13,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":13,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile10":{  // T2K: 1-804
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":-13,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":13,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":-16,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":18,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"PretzelPeteMissile11":{ // T2K: 1-805
+			"Delay":5,
+			"Sound":42, // (was 31)
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":-5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":627},"AttackPower":3,"X":5,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":-13,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":622},"AttackPower":2,"X":13,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":-16,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":18,"MoveY":-1,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":-20,"MoveY":-2,"AccelY":1},
+				{"Sprite":{"Tyrian2000":621},"AttackPower":1,"X":22,"MoveY":-2,"AccelY":1}
+			]
+		}
+	},
+	"Ports":{
+		"PretzelPeteMissile":{
+			"Name":"Pretzel Missile",
+			"NormalShots":[
+				"PretzelPeteMissile1",
+				"PretzelPeteMissile2",
+				"PretzelPeteMissile3",
+				"PretzelPeteMissile4",
+				"PretzelPeteMissile5",
+				"PretzelPeteMissile6",
+				"PretzelPeteMissile7",
+				"PretzelPeteMissile8",
+				"PretzelPeteMissile9",
+				"PretzelPeteMissile10",
+				"PretzelPeteMissile11"
+			]
+		}
+	}
+}

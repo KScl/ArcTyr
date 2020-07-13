@@ -1,0 +1,55 @@
+{
+	"Import":[
+		"./Options/IceCube.json"
+	],
+	"Specials":{
+		"SpecialBananaBomb":{ // 11
+			"Name":"Banana Bomb",
+			"Graphic":"Unknown",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T525"},
+			"PowerUse":20
+		},
+		"SpecialOrangeShield":{ // 16
+			"Name":"Orange Shield",
+			"Graphic":"Unknown",
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T749"},
+			"PowerUse":80
+		},
+		"TwiddleHotDog":{ // 25
+			"Name":"Hot Dog",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T711"},
+			"PowerUse":{"Armor":1}
+		},
+		"TwiddleCreateIceCube":{ // 49 -- NEW
+			"Name":"Icemaker",
+			"SpecialType":"SpawnOptionAlternate",
+			"ShotData":{"Option":"IceCube"},
+			"PowerUse":{"Shield":8}
+		}
+	},
+	"Ships":{
+		"SuperCarrot":{
+			"Name":"FoodShip Nine",
+			"Graphic":119,
+			"Armor":16,
+			"SpecialWeapons":[
+				"SpecialBananaBomb",
+				"SpecialOrangeShield"
+			],
+			"PortWeapons":[
+				"P23",
+				"P35",
+				"P25",
+				"P14",
+				"P6"
+			],
+			"Twiddles":[
+				["Up", "Down+Fire", {"Special":"TwiddleHotDog"}],
+				["Down", "Left", "Up", "Right", "Down+Sidekick", {"Special":"TwiddleCreateIceCube"}]
+			]
+		}
+	}
+}

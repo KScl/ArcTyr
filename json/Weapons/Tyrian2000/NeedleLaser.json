@@ -1,0 +1,157 @@
+{
+	"Shots":{
+		"T2KNeedleLaser1":{ // T2K: 1-781
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"Y":-7,"MoveY":12},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"Y":7,"MoveY":12}
+			]
+		},
+		"T2KNeedleLaser2":{ // T2K: 1-782
+			"Delay":6,
+			"Sound":31,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"Y":-7,"MoveY":14},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":0},"Y":7,"MoveY":14}
+			]
+		},
+		"T2KNeedleLaser3":{ // T2K: 1-783
+			"Delay":6,
+			"Sound":31,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-5,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-5,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":5,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":5,"Y":7,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser4":{ // T2K: 1-784
+			"Delay":8,
+			"Sound":31,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":9,"Y":7,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser5":{ // T2K: 1-785
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-6,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":6,"Y":7,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser6":{ // T2K: 1-786
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-6,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":6,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":9,"Y":7,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser7":{ // T2K: 1-787
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"Y":11,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser8":{ // T2K: 1-788
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":1},"Y":11,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser9":{ // T2K: 1-789
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":1},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":1},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"Y":11,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser10":{ // T2K: 1-790
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-11,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-11,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":11,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":11,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":-4,"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":-4,"Y":11,"MoveY":16},
+				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":1},"X":4,"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":0},"X":4,"Y":11,"MoveY":16}
+			]
+		},
+		"T2KNeedleLaser11":{ // T2K: 1-791
+			"Delay":7,
+			"Sound":31,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":-11,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":1},"X":-11,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":11,"Y":-7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":1},"X":11,"Y":7,"MoveY":16},
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":-4,"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":0},"X":-4,"Y":11,"MoveY":16},
+				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":1},"X":4,"Y":-3,"MoveY":16},
+				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":0},"X":4,"Y":11,"MoveY":16}
+			]
+		}
+	},
+	"Ports":{
+		"T2KNeedleLaser":{
+			"Name":"Retro Needle Laser",
+			"NormalShots":[
+				"T2KNeedleLaser1",
+				"T2KNeedleLaser2",
+				"T2KNeedleLaser3",
+				"T2KNeedleLaser4",
+				"T2KNeedleLaser5",
+				"T2KNeedleLaser6",
+				"T2KNeedleLaser7",
+				"T2KNeedleLaser8",
+				"T2KNeedleLaser9",
+				"T2KNeedleLaser10",
+				"T2KNeedleLaser11"
+			]
+		}
+	}
+}

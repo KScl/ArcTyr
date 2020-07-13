@@ -1,0 +1,27 @@
+{
+	"Import":[
+		"./Weapons/Vanilla/RetroBall.json"
+	],
+	"Ships":{
+		"Stalker":{
+			"Name":"Microsol PQZ",
+			"Graphic":195,
+			"Armor":20,
+			"SpecialWeapons":[
+				"S9",
+				"S15"
+			],
+			"PortWeapons":[
+				"P27",
+				"P5",
+				"P20",
+				"RetroBall",
+				"P31"
+			],
+			"Twiddles":[
+				["Left+Fire", "Right+Fire", {"Special":"S1"}],
+				["Up", "Down", {"Special":"S4"}]
+			]
+		}
+	}
+}

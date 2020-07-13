@@ -1,0 +1,44 @@
+{
+	"Output":"../arcdata/",
+	"Import":[
+		// Needs to be loaded first, to ensure shrapnel shots
+		// are in a position that works for Tyrian
+		"./Weapons/Shrapnel.json",
+
+		// Unsorted data.
+		"./Extra/option.json",
+		"./Extra/ports.json",
+		"./Extra/shots.json",
+		"./Extra/special.json",
+
+		// Ships
+		"./Ships/SilverShip.json",
+		"./Ships/DragonWing.json",
+		"./Ships/Stalker.json",
+		"./Ships/Talon.json",
+		"./Ships/Maelstrom.json",
+		"./Ships/UShip.json",
+		"./Ships/SuperCarrot.json",
+		"./Ships/Magma.json",
+		"./Ships/Randomizer.json",
+		"./Ships/NortShip.json",
+		"./Ships/Tyrian2000/Dragon.json",
+		"./Ships/Tyrian2000/Pretzel.json"
+	],
+	"Info":{
+		"ShipOrder":[ // Order of ships in Ship Select
+			"SilverShip",
+			"DragonWing",
+			"Stalker",
+			"Talon",
+			"Maelstrom",
+			"UShip",
+			"SuperCarrot",
+			{"Tyrian2000":"RedDragon"},
+			{"Tyrian2000":"PeteZoomer"},
+			"Magma",
+			{"Secret":"Randomizer"},
+			{"Secret":"NortShip"}
+		]
+	}
+}

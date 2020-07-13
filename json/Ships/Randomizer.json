@@ -1,0 +1,18 @@
+{
+	"Specials":{
+		"S48":{ // 48 -- NEW
+			"Name":"Chaotic Option",
+			"Graphic":125,
+			"SpecialType":"SpawnRandomAmmoOption"
+		}
+	},
+	"Ships":{
+		"Randomizer":{
+			"Name":"Mystery Machine",
+			"Graphic":233,
+			"Armor":16,
+			"Twiddles":[
+			]
+		}
+	}
+}

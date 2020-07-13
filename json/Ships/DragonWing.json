@@ -1,0 +1,62 @@
+{
+	"Import":[
+		"./Weapons/ArcTyr/TurboVulcan.json"
+	],
+
+	"Info":{
+		// This is where info about DragonWing's specials WILL go
+	},
+	"Specials":{
+		"TwiddleCreateOptionLeft":{ // 31
+			"Name":"DragonOption Left",
+			"SpecialType":"SpawnOptionFromWeapon",
+			"ShotData":{"Side":"Left"},
+			"PowerUse":{"Shield":10}
+		},
+		"TwiddleCreateOptionRight":{ // 36
+			"Name":"DragonOption Right",
+			"SpecialType":"SpawnOptionFromWeapon",
+			"ShotData":{"Side":"Right"},
+			"PowerUse":{"Shield":10}
+		},
+		"TwiddleCreatePlasma":{ // 32
+			"Name":"Dragonwing EX Plasma",
+			"SpecialType":"SpawnOptionAlternate",
+			"ShotData":9,
+			"PowerUse":{"Shield":28}
+		},
+		"TwiddleCreatePhoenix":{ // 33
+			"Name":"Dragonwing EX Phoenix",
+			"SpecialType":"SpawnOptionAlternate",
+			"ShotData":8,
+			"PowerUse":{"Shield":18}
+		},
+		"TwiddleCreate8Way":{ // 34
+			"Name":"Dragonwing EX 8-Way",
+			"SpecialType":"SpawnOptionAlternate",
+			"ShotData":14,
+			"PowerUse":{"Shield":14}
+		}
+	},
+	"Ships":{
+		"DragonWing":{
+			"Name":"TX DragonWing",
+			"Graphic":"Dragonwing",
+			"Armor":12,
+			"PortWeapons":[
+				"TurboVulcan",
+				"P12",
+				"P10",
+				"P11",
+				"P21"
+			],
+			"Twiddles":[
+				["Down", "Left", "Down", "Left+Sidekick", {"Special":"TwiddleCreateOptionLeft"}],
+				["Down", "Right", "Down", "Right+Sidekick", {"Special":"TwiddleCreateOptionRight"}],
+				["Down", "Left", "Right", "Up", "Left", "Right", "Down+Sidekick", {"Special":"TwiddleCreatePlasma"}],
+				["Up", "Down", "Left", "Right", "Up", "Down+Sidekick", {"Special":"TwiddleCreatePhoenix"}],
+				["Up", "Right", "Down", "Up", "Left", "Down+Sidekick", {"Special":"TwiddleCreate8Way"}]
+			]
+		}
+	}
+}
