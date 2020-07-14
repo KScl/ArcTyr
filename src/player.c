@@ -189,6 +189,15 @@ JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt )
 
 	soundQueue[7] = S_SHIELD_HIT;
 
+	if (damage_amt != DKILL)
+	{
+		// When at extremely high ranks, boost damage amounts dealt to players
+		if (difficultyLevel >= 8) // Lord of the Game and above
+			damage_amt *= 2; // Double all damage dealt
+		else if (difficultyLevel >= 6 && damage_amt > 0) // Suicide and above
+			++damage_amt; // Add an additional point of damage		
+	}
+
 	if (!this_player->is_alive)
 		return 0; // sanity check??
 

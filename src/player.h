@@ -227,7 +227,7 @@ static inline JE_byte PL_RandomPlayer( void )
 {
 	switch (PL_WhosAlive())
 	{
-		case 3: return (mt_rand() & 1);
+		case 3: return (mt_rand() % (player[0].items.power_level + player[1].items.power_level)) >= player[0].items.power_level;
 		case 2: return 1;
 		default: return 0;
 	}

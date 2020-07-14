@@ -600,6 +600,9 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				// sets STATUS_INGAME
 				PL_Init(pl, pl->items.ship, true);
 
+				// To be fair to a player that just joined, cut rank.
+				ARC_RankCut();
+
 				pl->armor = pl->initial_armor = ships[pl->items.ship].dmg;
 				pl->shield_max = shields[pl->items.shield].mpwr * 2;
 				pl->shield = pl->shield_max / 2;
