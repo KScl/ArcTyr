@@ -514,7 +514,29 @@ foreach ($all_ships as $id => $ship) {
 		}
 	}
 
+	$start_opt = [0, 0];
+	if (isset($ship['StartingOptions']))
+	{
+		foreach ($ship['StartingOptions'] as $soptSide => $soptName)
+		{
+			$temp = array_search($soptName, $option_ids);
+			if ($temp === FALSE) die("Invalid ship {$id}: {$soptName} doesn't match an option\n");
+			switch ($soptSide) {
+				case 'Left': $start_opt[0] = $temp; break;
+				case 'Right': $start_opt[1] = $temp; break;
+				default: die("Invalid ship {$id}: Invalid option side {$soptSide}\n");
+			}
+		}
+	}
+	write_byte($output, $start_opt[0]);
+	write_byte($output, $start_opt[1]);
+
 	$twiddles = [
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0],
@@ -545,6 +567,7 @@ foreach ($all_ships as $id => $ship) {
 					case 'Left+Sidekick':  $twiddles[$twiddleNum][$commandNum] = 11; break;
 					case 'Right+Sidekick': $twiddles[$twiddleNum][$commandNum] = 12; break;
 					case 'Release':        $twiddles[$twiddleNum][$commandNum] = 99; break;
+					default: die("Invalid ship {$id}: Invalid twiddle command {$command}\n");
 				}
 			}
 		}
@@ -553,7 +576,7 @@ foreach ($all_ships as $id => $ship) {
 		$numtwiddles = 0;
 
 	write_byte($output, $numtwiddles);
-	for ($twnum = 0; $twnum < 5; ++$twnum)
+	for ($twnum = 0; $twnum < $numtwiddles; ++$twnum)
 		for ($j = 0; $j < 8; ++$j) write_byte($output, $twiddles[$twnum][$j]);
 
 	write_byte($output, ord(';'));

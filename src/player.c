@@ -38,6 +38,8 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 	this_player->items.special[0] = ships[ship].special_weapons[0];
 	this_player->items.special[1] = ships[ship].special_weapons[1];
 	this_player->special_mode = 0;
+	this_player->items.sidekick[0] = ships[ship].sidekick_start[0];
+	this_player->items.sidekick[1] = ships[ship].sidekick_start[1];
 
 	this_player->cur_item.weapon = this_player->items.weapon[0];
 	this_player->cur_item.special = this_player->items.special[0];
@@ -53,21 +55,15 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 		this_player->lives = DIP.livesContinue;		
 	}
 
-	this_player->items.sidekick[0] = 0;
-	this_player->items.sidekick[1] = 0;
-
 	switch (ships[ship].shipgraphic)
 	{
 	case 0: // Dragonwing
 		this_player->is_dragonwing = true;
 		this_player->is_nortship = false;
-		//this_player->items.sidekick[0] = 30;  // Satellite Marlo
 		break;
 	case 1: // Nortship
 		this_player->is_dragonwing = false;
 		this_player->is_nortship = true;
-		this_player->items.sidekick[0] = 24;  // Companion Ship Quicksilver
-		this_player->items.sidekick[1] = 24;  // Companion Ship Quicksilver
 		break;
 	default:
 		this_player->is_dragonwing = false;

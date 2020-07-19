@@ -269,8 +269,11 @@ void ADTA_loadShips( void )
 			efread(&ships[i].special_weapons[j], sizeof(JE_word), 1, f);
 		for (int j = 0; j < 5; ++j)
 			efread(&ships[i].port_weapons[j],    sizeof(JE_word), 1, f);
+		for (int j = 0; j < 2; ++j)
+			efread(&ships[i].sidekick_start[j],  sizeof(JE_byte), 1, f);
+
 		efread(&ships[i].numTwiddles,            sizeof(JE_byte), 1, f);
-		for (int j = 0; j < 5; ++j)
+		for (int j = 0; j < ships[i].numTwiddles; ++j)
 			for (int k = 0; k < 8; ++k)
 				efread(&ships[i].twiddles[j][k], sizeof(JE_byte), 1, f);
 

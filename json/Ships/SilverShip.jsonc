@@ -10,7 +10,7 @@
 		"SilverShip":{
 			"Name":"TX SilverCloud",
 			"Graphic":81,
-			"Armor":16,
+			"Armor":12,
 			"SpecialWeapons":[
 				"S12",
 				"S14"

@@ -31,7 +31,11 @@
 				["Release", "Right+Fire", {"Special":"TwiddleLightningRight"}],
 				["Up", "Left+Fire", {"Special":"TwiddleLightningUpLeft"}],
 				["Up", "Right+Fire", {"Special":"TwiddleLightningUpRight"}]
-			]
+			],
+			"StartingOptions":{
+				"Left":"O24",
+				"Right":"O24"
+			}
 		}
 	}
 }

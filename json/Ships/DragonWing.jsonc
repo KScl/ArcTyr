@@ -45,7 +45,7 @@
 		"DragonWing":{
 			"Name":"TX DragonWing",
 			"Graphic":"Dragonwing",
-			"Armor":12,
+			"Armor":16,
 			"PortWeapons":[
 				"TurboVulcan",
 				"P12",

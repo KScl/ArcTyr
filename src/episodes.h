@@ -126,9 +126,10 @@ typedef struct
 	// ARC data
 	JE_word     special_weapons[2];
 	JE_word     port_weapons[5];
+	JE_byte     sidekick_start[2];
 
 	JE_byte     numTwiddles;
-	JE_byte     twiddles[5][8];
+	JE_byte     twiddles[10][8];
 } JE_ShipType; /* [0..shipnum] */
 
 /* EnemyData */
