@@ -4586,6 +4586,10 @@ void JE_eventSystem( void )
 */
 		break;
 
+	case 84: // T2000 Timed Battle parameters
+		event_name("t2k_timed_battle_params");
+		break; // Ignored -- no reason to do anything with these
+
 	case 100: // Sky enemy with normal powerup
 	case 101: // Sky enemy with shield powerup
 		event_name("new_sky_enemy_powerup");

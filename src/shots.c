@@ -101,7 +101,7 @@ void simulate_player_shots( void )
 				if (++shot->shotAni == shot->shotAniMax)
 					shot->shotAni = 0;
 
-				if (anim_frame < 6000)
+				if (anim_frame < 60000)
 				{
 					if (anim_frame > 1000)
 						anim_frame = anim_frame % 1000;
@@ -120,11 +120,13 @@ draw_player_shot_loop_end:
 
 static void player_shot_set_direction( JE_integer shot_id, JE_real direction )
 {
-	static const JE_word aimedGrs[5][17] = {
+	static const JE_word aimedGrs[][17] = {
 	//   DOWN            RIGHT           UP              LEFT            DOWN
 		{ 77,221,183,301,  1,282,164,202, 58,201,163,281, 39,300,182,220, 77},
 		{ 85,242,131,303, 47,284,150,223, 66,224,149,283,  9,302,130,243, 85},
 		{ 78,299,295,297,  2,278,276,280, 59,279,275,277, 40,296,294,298, 78},
+		{307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323},
+		{326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342},
 		{364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380},
 		{383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399},
 	};

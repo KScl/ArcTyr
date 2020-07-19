@@ -22,7 +22,7 @@
 #include "opentyr.h"
 
 extern JE_byte shutdownCode;
-extern JE_word goToWeaponCreator;
+extern JE_boolean goToWeaponCreator;
 
 void JE_paramCheck( int argc, char *argv[] );
 

@@ -31,7 +31,7 @@
 #include <stdint.h>
 #include <string.h>
 
-JE_word goToWeaponCreator = 0;
+JE_boolean goToWeaponCreator = false;
 JE_byte shutdownCode = 0;
 
 /* YKS: Note: LOOT cheat had non letters removed. */
@@ -60,7 +60,7 @@ void JE_paramCheck( int argc, char *argv[] )
 
 		{ 'z', 'z', "shutdown",          true },
 
-		{ 258, 0, "weapon-creator",    true },
+		{ 258, 0, "weapon-creator",      false },
 		
 		{ 0, 0, NULL, false}
 	};
@@ -141,14 +141,7 @@ void JE_paramCheck( int argc, char *argv[] )
 		}
 		case 258:
 		{
-			int temp = atoi(option.arg);
-			if (temp > 0 && temp <= 1024)
-				goToWeaponCreator = temp;
-			else
-			{
-				fprintf(stderr, "%s: error: invalid starting weapon for weapon creator\n", argv[0]);
-				exit(EXIT_FAILURE);
-			}
+			goToWeaponCreator = true;
 			break;
 		}
 		default:

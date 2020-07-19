@@ -1632,9 +1632,15 @@ redo:
 			this_player->moved = false;
 
 		// turret direction marker/shield
-		b = player_shot_create(0, SHOT_MISC, this_player->x + 1 + roundf(sinf(linkGunDirec + 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec + 0.2f) * 26), *mouseX_, *mouseY_, 148, playerNum_);
-		b = player_shot_create(0, SHOT_MISC, this_player->x + 1 + roundf(sinf(linkGunDirec - 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec - 0.2f) * 26), *mouseX_, *mouseY_, 148, playerNum_);
-		b = player_shot_create(0, SHOT_MISC, this_player->x + 1 + roundf(sinf(linkGunDirec) * 26), this_player->y + roundf(cosf(linkGunDirec) * 26), *mouseX_, *mouseY_, 147, playerNum_);
+		b = player_shot_create(0, SHOT_MISC, 
+			this_player->x + 1 + roundf(sinf(linkGunDirec + 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec + 0.2f) * 26), 
+			*mouseX_, *mouseY_, PWPN_TURRET_SMALL, playerNum_);
+		b = player_shot_create(0, SHOT_MISC, 
+			this_player->x + 1 + roundf(sinf(linkGunDirec - 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec - 0.2f) * 26), 
+			*mouseX_, *mouseY_, PWPN_TURRET_SMALL, playerNum_);
+		b = player_shot_create(0, SHOT_MISC, 
+			this_player->x + 1 + roundf(sinf(linkGunDirec) * 26), this_player->y + roundf(cosf(linkGunDirec) * 26), 
+			*mouseX_, *mouseY_, PWPN_TURRET_BIG, playerNum_);
 
 		if (PL_ShotRepeat(this_player, SHOT_AIMED) && this_player->buttons[BUTTON_FIRE])
 		{
@@ -1757,7 +1763,7 @@ redo:
 	if (this_player->is_nortship && PL_ShotRepeat(this_player, SHOT_NORTSPARKS) && ship_banking != 0)
 	{
 		tempW = (ship_banking > 0) ? this_player->x - 7 : this_player->x + 9;
-		b = player_shot_create(0, SHOT_NORTSPARKS, tempW + (mt_rand() % 8) - 4, this_player->y + (mt_rand() % 8) - 4, *mouseX_, *mouseY_, 671, 1);
+		b = player_shot_create(0, SHOT_NORTSPARKS, tempW + (mt_rand() % 8) - 4, this_player->y + (mt_rand() % 8) - 4, *mouseX_, *mouseY_, PWPN_NORTSPARKS, 1);
 		this_player->shot_repeat[SHOT_NORTSPARKS] = abs(ship_banking) - 1;
 	}
 
@@ -2263,7 +2269,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 					else if (evalue == -3)
 					{
 						// picked up orbiting asteroid killer
-						b = player_shot_create(0, SHOT_MISC, this_player->x, this_player->y, mouseX, mouseY, 104, playerNum_);
+						b = player_shot_create(0, SHOT_MISC, this_player->x, this_player->y, mouseX, mouseY, PWPN_ASTEROID_KILLER, playerNum_);
 						// This is almost certainly a bad copy-paste
 						//shotAvail[z] = 0;
 					}

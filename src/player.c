@@ -61,7 +61,7 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 	case 0: // Dragonwing
 		this_player->is_dragonwing = true;
 		this_player->is_nortship = false;
-		this_player->items.sidekick[0] = 30;  // Satellite Marlo
+		//this_player->items.sidekick[0] = 30;  // Satellite Marlo
 		break;
 	case 1: // Nortship
 		this_player->is_dragonwing = false;

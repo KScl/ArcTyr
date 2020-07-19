@@ -35,6 +35,12 @@
 // max dragonwing charge
 #define MAXCHARGE 5
 
+// hardcoded shot nums
+#define PWPN_TURRET_BIG      1
+#define PWPN_TURRET_SMALL    2
+#define PWPN_NORTSPARKS      3
+#define PWPN_ASTEROID_KILLER 4
+
 enum
 {
 	SA_NONE = 0,

@@ -375,7 +375,7 @@ int main( int argc, char *argv[] )
 	{
 #ifdef ENABLE_DEVTOOLS
 		ARC_IdentifyPrint("Entering the weapon creator.");
-		DEV_WeaponCreator(goToWeaponCreator);
+		DEV_WeaponCreator();
 #else
 		fprintf(stderr, "ArcTyr was compiled without devtools.\n");
 		JE_tyrianHalt(5);

@@ -16,7 +16,7 @@
 #include "../opentyr.h"
 
 #ifdef ENABLE_DEVTOOLS
-void DEV_WeaponCreator( uint start_weap );
+void DEV_WeaponCreator( void );
 #endif
 
 #endif /* DEV_WEAPON_H */
