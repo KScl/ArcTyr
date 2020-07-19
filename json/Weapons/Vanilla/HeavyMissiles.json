@@ -1,0 +1,110 @@
+{
+	"Shots":{
+		"T411":{ // 411
+			"Delay":8,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"AccelY":1}
+			]
+		},
+		"T412":{ // 412
+			"Delay":6,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"AccelY":1}
+			]
+		},
+		"T413":{ // 413
+			"Delay":4,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"AccelY":1}
+			]
+		},
+		"T414":{ // 414
+			"Delay":10,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-9,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T415":{ // 415
+			"Delay":8,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":9,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-9,"AccelY":1}
+			]
+		},
+		"T416":{ // 416
+			"Delay":6,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"Y":4,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T417":{ // 417
+			"Delay":4,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"Y":4,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T418":{ // 418
+			"Delay":5,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"Y":4,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T419":{ // 419
+			"Delay":6,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":-9,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T420":{ // 420
+			"Delay":7,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T421":{ // 421
+			"Delay":9,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":16,"MoveY":-2,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-16,"MoveY":-2,"AccelY":1}
+			]
+		}
+	},
+	"Ports":{
+		"P20":{ // 20 [TX SilverCloud ~ C]
+			"Name":"Heavy Missile Launcher",
+			"NormalShots":["T411","T412","T413","T414","T415","T416","T417","T418","T419","T420","T421"]
+		}
+	}
+}

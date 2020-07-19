@@ -1,4 +1,11 @@
 {
+	"Import":[
+		"./Weapons/Vanilla/Rear/Starburst.json",
+		"./Weapons/Vanilla/GuidedBombs.json",
+		"./Weapons/Vanilla/ShurikenField.json",
+		"./Weapons/Vanilla/PoisonBomb.json",
+		"./Weapons/Vanilla/ProtronWave.json"
+	],
 	"Ships":{
 		"Maelstrom":{
 			"Name":"Ninja Star",

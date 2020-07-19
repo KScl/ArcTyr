@@ -146,31 +146,6 @@
 			"ShotData":{"Shot":"T622"},
 			"PowerUse":{"Armor":4}
 		},
-		"TwiddleLightningUp":{ // 26
-			"Name":"Lightning UP",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T721"}
-		},
-		"TwiddleLightningUpLeft":{ // 27
-			"Name":"Lightning UP+LEFT",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T722"}
-		},
-		"TwiddleLightningUpRight":{ // 28
-			"Name":"Lightning UP+RIGHT",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T723"}
-		},
-		"TwiddleLightningLeft":{ // 29
-			"Name":"Lightning LEFT",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T724"}
-		},
-		"TwiddleLightningRight":{ // 30
-			"Name":"Lightning RIGHT",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T725"}
-		},
 		"S37":{ // 37
 			"Name":"Cloak",
 			"SpecialType":"Invulnerability",
@@ -194,13 +169,6 @@
 			"SpecialType":"FireMultiple",
 			"ShotData":{"Shot":"T750"},
 			"PowerUse":10
-		},
-		"S41":{ // 41
-			"Name":"SDF Main Gun",
-			"Graphic":307,
-			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"T778"},
-			"PowerUse":15
 		},
 		"S42":{ // 42
 			"Name":"Ice Blast",

@@ -1,0 +1,33 @@
+{
+	"Shots":{
+		"OptionChargeCannonA":{ // 101 Charge Cannon Stage 1
+			"Delay":6,
+			"Sound":28,
+			"Pieces":[
+				{"Sprite":252,"AttackPower":2,"MoveY":12}
+			]
+		},
+		"OptionChargeCannonB":{ // 102 Charge Cannon Stage 2
+			"Delay":10,
+			"Sound":27,
+			"Pieces":[
+				{"Sprite":253,"AttackPower":10,"MoveY":10}
+			]
+		},
+		"OptionChargeCannonC":{ // 103 Charge Cannon Stage 3
+			"Delay":16,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":254,"AttackPower":30,"MoveY":8}
+			]
+		}
+	},
+	"Options":{
+		"ChargeCannon":{ // 3
+			"Name":"Charge Cannon",
+			"Shot":["OptionChargeCannonA","OptionChargeCannonB","OptionChargeCannonC"],
+			"Graphics":[258,258,258,277,277,277,296,296,296],
+			"HUDIcon":10
+		}
+	}
+}

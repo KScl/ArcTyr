@@ -1,8 +1,11 @@
 {
 	"Import":[
-		"./Weapons/ArcTyr/TurboVulcan.json"
+		"./Weapons/ArcTyr/TurboVulcan.json",
+		"./Weapons/ArcTyr/ProtronShield.json",
+		"./Weapons/ArcTyr/CrossCannon.json",
+		"./Weapons/Vanilla/Rear/HeavyMissiles.json",
+		"./Weapons/Vanilla/Rear/SonicWave.json"
 	],
-
 	"Info":{
 		// This is where info about DragonWing's specials WILL go
 	},
@@ -46,7 +49,7 @@
 			"PortWeapons":[
 				"TurboVulcan",
 				"P12",
-				"P10",
+				"DWCrossCannon",
 				"P11",
 				"P21"
 			],

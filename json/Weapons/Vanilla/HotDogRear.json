@@ -1,0 +1,230 @@
+{
+	"Shots":{
+		"T547":{ // 547 Hotdog Rear Lv.1
+			"Delay":2,
+			"Sound":5,
+			"Filter":96,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6}
+			]
+		},
+		"T548":{ // 548 Hotdog Rear Lv.2
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6}
+			]
+		},
+		"T549":{ // 549 Hotdog Rear Lv.3
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-7,"MoveY":5},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":7,"MoveY":5}
+			]
+		},
+		"T550":{ // 550 Hotdog Rear Lv.4
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":160,"AttackPower":2,"MoveY":-8}
+			]
+		},
+		"T551":{ // 551 Hotdog Rear Lv.5
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":160,"AttackPower":2,"X":-8,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":8,"MoveY":-8}
+			]
+		},
+		"T552":{ // 552 Hotdog Rear Lv.6
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"MoveY":-8}
+			]
+		},
+		"T553":{ // 553 Hotdog Rear Lv.7
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"X":-8,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":8,"MoveY":-8}
+			]
+		},
+		"T554":{ // 554 Hotdog Rear Lv.8
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"X":-12,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":12,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"Y":4,"MoveY":-8}
+			]
+		},
+		"T555":{ // 555 Hotdog Rear Lv.9
+			"Delay":5,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"X":-16,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":16,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":-10,"Y":4,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":10,"Y":4,"MoveY":-8}
+			]
+		},
+		"T556":{ // 556 Hotdog Rear Lv.10
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"X":-16,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":16,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"Y":4,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"Y":-4,"MoveY":8}
+			]
+		},
+		"T557":{ // 557 Hotdog Rear Lv.11
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":159,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":6},
+				{"Sprite":161,"AttackPower":2,"X":6,"MoveX":6,"MoveY":6},
+				{"Sprite":159,"AttackPower":2,"X":6,"MoveX":6,"MoveY":-6},
+				{"Sprite":161,"AttackPower":2,"X":-6,"MoveX":-6,"MoveY":-6},
+				{"Sprite":160,"AttackPower":2,"X":-16,"MoveY":-8},
+				{"Sprite":160,"AttackPower":2,"X":16,"MoveY":-8},
+				{"Sprite":159,"AttackPower":2,"Y":-4,"MoveX":-6,"MoveY":8},
+				{"Sprite":161,"AttackPower":2,"Y":-4,"MoveX":6,"MoveY":8}
+			]
+		},
+
+		"T558":{ // 558 Hotdog DragonWing ChargeLv.0
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T559":{ // 559 Hotdog DragonWing ChargeLv.1
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":2,"X":-8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":2,"X":8,"MoveY":8}
+			]
+		},
+		"T560":{ // 560 Hotdog DragonWing ChargeLv.2
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":2,"X":-15,"Y":5,"MoveY":8},
+				{"Sprite":14160,"AttackPower":2,"X":15,"Y":5,"MoveY":8},
+				{"Sprite":14160,"AttackPower":2,"X":-8,"Y":-5,"MoveY":8},
+				{"Sprite":14160,"AttackPower":2,"X":8,"Y":-5,"MoveY":8}
+			]
+		},
+		"T561":{ // 561 Hotdog DragonWing ChargeLv.3
+			"Delay":5,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":3,"X":-20,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":3,"X":20,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":3,"X":-12,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":3,"X":12,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":3,"Y":-6,"MoveY":8}
+			]
+		},
+		"T562":{ // 562 Hotdog DragonWing ChargeLv.4
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":4,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"X":12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":4,"Y":-8,"MoveY":8}
+			]
+		},
+		"T563":{ // 563 Hotdog DragonWing ChargeLv.5
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":6,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-5,"Y":-8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":5,"Y":-8,"MoveY":8}
+			]
+		}
+	},
+	"Ports":{
+		"P26":{ // 26
+			"Name":"HotDog Rear",
+			"NormalShots":["T547","T548","T549","T550","T551","T552","T553","T554","T555","T556","T557"],
+			"ChargeShots":["T559","T560","T561","T562","T563"]
+		}
+	}
+}

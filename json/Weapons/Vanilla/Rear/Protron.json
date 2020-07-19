@@ -1,0 +1,312 @@
+{
+	"Shots":{
+		"T300":{ // 300 Rear Protron Lv.1
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":227,"AttackPower":1,"MoveX":-10},
+				{"Sprite":227,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T301":{ // 301 Rear Protron Lv.2
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-10},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":10}
+			]
+		},
+		"T302":{ // 302 Rear Protron Lv.3
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T303":{ // 303 Rear Protron Lv.4
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T304":{ // 304 Rear Protron Lv.5
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-10},
+				{"Sprite":227,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T305":{ // 305 Rear Protron Lv.6
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-10},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":10},
+				{"Sprite":227,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T306":{ // 306 Rear Protron Lv.7
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-10},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":10},
+				{"Sprite":227,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T307":{ // 307 Rear Protron Lv.8
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":-6},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":6}
+			]
+		},
+		"T308":{ // 308 Rear Protron Lv.9
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":-2},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":-6},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":6}
+			]
+		},
+		"T309":{ // 309 Rear Protron Lv.10
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-9,"MoveY":-2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-3,"MoveY":-7},
+				{"Sprite":227,"AttackPower":1,"MoveX":3,"MoveY":-7},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":-6},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":6}
+			]
+		},
+		"T310":{ // 310 Rear Protron Lv.11
+			"Delay":7,
+			"Sound":26,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":-2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":9,"MoveY":2},
+				{"Sprite":601,"AttackPower":2,"Duration":{"SetAni":7},"MoveX":-9,"MoveY":-2},
+				{"Sprite":227,"AttackPower":1,"MoveX":-3,"MoveY":-7},
+				{"Sprite":227,"AttackPower":1,"MoveX":3,"MoveY":-7},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":-6},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":6}
+			]
+		},
+		"T311":{ // 311 Rear Protron Mode B Lv.1
+			"Delay":11,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":227,"AttackPower":1,"Duration":90,"X":-13,"Y":14,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6}
+			]
+		},
+		"T312":{ // 312 Rear Protron Mode B Lv.2
+			"Delay":21,
+			"AnimFrames":7,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-18,"Y":20,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":7}
+			]
+		},
+		"T313":{ // 313 Rear Protron Mode B Lv.3
+			"Delay":16,
+			"AnimFrames":7,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-24,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T314":{ // 314 Rear Protron Mode B Lv.4
+			"Delay":8,
+			"AnimFrames":7,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-24,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T315":{ // 315 Rear Protron Mode B Lv.5
+			"Delay":16,
+			"AnimFrames":7,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-30,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-18,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T316":{ // 316 Rear Protron Mode B Lv.6
+			"Delay":8,
+			"AnimFrames":7,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":45,"X":-40,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":601,"AttackPower":2,"Duration":45,"X":-8,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T317":{ // 317 Rear Protron Mode B Lv.7
+			"Delay":16,
+			"AnimFrames":7,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":2,"Duration":45,"X":-40,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":601,"AttackPower":2,"Duration":45,"X":-8,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":601,"AttackPower":2,"Duration":90,"X":-24,"Y":4,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T318":{ // 318 Rear Protron Mode B Lv.8
+			"Delay":8,
+			"AnimFrames":5,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":4,"Duration":90,"X":-24,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T319":{ // 319 Rear Protron Mode B Lv.9
+			"Delay":16,
+			"AnimFrames":5,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":4,"Duration":90,"X":-30,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":582,"AttackPower":4,"Duration":90,"X":-18,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T320":{ // 320 Rear Protron Mode B Lv.10
+			"Delay":8,
+			"AnimFrames":5,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":4,"Duration":45,"X":-40,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":582,"AttackPower":4,"Duration":45,"X":-8,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+		"T321":{ // 321 Rear Protron Mode B Lv.11
+			"Delay":16,
+			"AnimFrames":5,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":4,"Duration":45,"X":-50,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":582,"AttackPower":4,"Duration":45,"X":8,"Y":24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8},
+				{"Sprite":582,"AttackPower":4,"Duration":90,"X":-24,"Y":4,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":8}
+			]
+		},
+
+		"T482":{ // 482 Rear Protron DragonWing ChargeLv.0
+			"Delay":4,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":601,"AttackPower":3,"Duration":{"SetAni":7},"MoveY":7}
+			]
+		},
+		"T483":{ // 483 Rear Protron DragonWing ChargeLv.1
+			"Delay":2,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveY":7}
+			]
+		},
+		"T484":{ // 484 Rear Protron DragonWing ChargeLv.2
+			"Delay":2,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"MoveY":7},
+				{"Sprite":601,"AttackPower":3,"Duration":{"SetAni":7},"X":-4,"MoveX":-1,"MoveY":7},
+				{"Sprite":601,"AttackPower":3,"Duration":{"SetAni":7},"X":4,"MoveX":1,"MoveY":7}
+			]
+		},
+		"T485":{ // 485 Rear Protron DragonWing ChargeLv.3
+			"Delay":2,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"MoveY":7},
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":-9,"MoveY":6},
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":9,"MoveY":6}
+			]
+		},
+		"T486":{ // 486 Rear Protron DragonWing ChargeLv.4
+			"Delay":2,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":-4,"MoveY":7},
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":4,"MoveY":7},
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":-14,"MoveY":6},
+				{"Sprite":582,"AttackPower":8,"Duration":{"SetAni":5},"X":14,"MoveY":6}
+			]
+		},
+		"T487":{ // 487 Rear Protron DragonWing ChargeLv.5
+			"Delay":2,
+			"AnimFrames":7,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":683,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":2},
+				{"Sprite":702,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":2},
+				{"Sprite":721,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":2},
+				{"Sprite":740,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":2}
+			]
+		}
+	},
+	"Ports":{
+		"RearProtronA":{ // 47
+			"Name":"Rear Protron Alpha",
+			"NormalShots":["T300","T301","T302","T303","T304","T305","T306","T307","T308","T309","T310"],
+			"ChargeShots":["T483","T484","T485","T486","T487"]
+		},
+		"RearProtronB":{ // 47
+			"Name":"Rear Protron Beta",
+			"NormalShots":["T311","T312","T313","T314","T315","T316","T317","T318","T319","T320","T321"],
+			"ChargeShots":["T483","T484","T485","T486","T487"]
+		}
+	}
+}

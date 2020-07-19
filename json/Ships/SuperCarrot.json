@@ -1,26 +1,61 @@
 {
 	"Import":[
-		"./Options/IceCube.json"
+		"./Weapons/Vanilla/BananaBlast.json",
+		"./Weapons/Vanilla/OrangeJuicer.json",
+		"./Weapons/Vanilla/HotDog.json",
+		"./Weapons/Vanilla/Rear/WildBall.json",
+		"./Weapons/Vanilla/ProtronZ.json",
+
+		"./Options/ArcTyr/IceCube.json",
+
+		// Needed for Banana Bomb special
+		"./Weapons/Vanilla/Rear/BananaBlast.json"
 	],
+	"Shots":{
+		"ShipSpecialOranges":{ // 749 Orange shield special
+			"Delay":4,
+			"Sound":26,
+			"Filter":32,
+			"Pieces":[
+				{"Sprite":88,"AttackPower":3,"X":-24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":168}
+			]
+		},
+		"TwiddleHotDogBlast":{ // 711 Hotdog blast
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":14160,"AttackPower":12,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":12,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":12,"Y":-6,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":-5,"Y":-8,"MoveY":8},
+				{"Sprite":14160,"AttackPower":6,"X":5,"Y":-8,"MoveY":8}
+			]
+		}
+	},
 	"Specials":{
 		"SpecialBananaBomb":{ // 11
 			"Name":"Banana Bomb",
 			"Graphic":"Unknown",
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T525"},
+			"ShotData":{"Shot":"T525"}, // Note: requires Banana Blast Rear
 			"PowerUse":20
 		},
 		"SpecialOrangeShield":{ // 16
 			"Name":"Orange Shield",
 			"Graphic":"Unknown",
 			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"T749"},
+			"ShotData":{"Shot":"ShipSpecialOranges"},
 			"PowerUse":80
 		},
 		"TwiddleHotDog":{ // 25
 			"Name":"Hot Dog",
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T711"},
+			"ShotData":{"Shot":"TwiddleHotDogBlast"},
 			"PowerUse":{"Armor":1}
 		},
 		"TwiddleCreateIceCube":{ // 49 -- NEW

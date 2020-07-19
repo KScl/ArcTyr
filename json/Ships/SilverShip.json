@@ -1,4 +1,11 @@
 {
+	"Import":[
+		"./Weapons/Vanilla/PulseCannon.json",
+		"./Weapons/Vanilla/Protron.json",
+		"./Weapons/Vanilla/HeavyMissiles.json",
+		"./Weapons/Vanilla/VulcanCannon.json",
+		"./Weapons/Vanilla/MegaCannon.json"
+	],
 	"Ships":{
 		"SilverShip":{
 			"Name":"TX SilverCloud",

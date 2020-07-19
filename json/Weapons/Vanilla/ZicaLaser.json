@@ -1,0 +1,161 @@
+{
+	"Shots":{
+		"T199":{ // 199 Zica Laser Lv.1
+			"Delay":9,
+			"Sound":14,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1}
+			]
+		},
+		"T200":{ // 200 Zica Laser Lv.2
+			"Delay":8,
+			"Sound":14,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1}
+			]
+		},
+		"T201":{ // 201 Zica Laser Lv.3
+			"Delay":8,
+			"Sound":14,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":7,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":{"FollowX":0},"MoveY":7,"AccelY":1}
+			]
+		},
+		"T202":{ // 202 Zica Laser Lv.4
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":7,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":6,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":{"FollowX":0},"MoveY":6,"AccelY":1}
+			]
+		},
+		"T203":{ // 203 Zica Laser Lv.5
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":7,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":6,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":5,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":{"FollowX":0},"MoveY":4,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":{"FollowX":0},"MoveY":4,"AccelY":1}
+			]
+		},
+		"T204":{ // 204 Zica Laser Lv.6
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":-1,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":-1,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":-1,"MoveY":13,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":-1,"MoveY":13,"AccelY":1},
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":1,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":1,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":1,"MoveY":13,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":1,"MoveY":13,"AccelY":1}
+			]
+		},
+		"T205":{ // 205 Zica Laser Lv.7
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":97,"AttackPower":4,"Y":-18,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":2,"Y":-4,"MoveY":14,"AccelY":1}
+			]
+		},
+		"T206":{ // 206 Zica Laser Lv.8
+			"Delay":6,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":97,"AttackPower":4,"Y":-14,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":116,"AttackPower":2,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":1,"Y":14,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":101,"AttackPower":12,"Y":-18,"MoveY":14,"AccelY":1},
+				{"Sprite":139,"AttackPower":4,"Y":-4,"MoveY":14,"AccelY":1}
+			]
+		},
+		"T207":{ // 207 Zica Laser Lv.9
+			"Delay":6,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":97,"AttackPower":4,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":135,"AttackPower":2,"Y":14,"MoveX":-3,"MoveY":14,"AccelY":1},
+				{"Sprite":101,"AttackPower":4,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":139,"AttackPower":2,"Y":14,"MoveX":3,"MoveY":14,"AccelY":1},
+				{"Sprite":101,"AttackPower":12,"Y":-18,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"Y":-4,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"Y":-4,"MoveY":13,"AccelY":1},
+				{"Sprite":139,"AttackPower":2,"Y":10,"MoveY":13,"AccelY":1}
+			]
+		},
+		"T208":{ // 208 Zica Laser Lv.10
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":101,"AttackPower":12,"Y":-14,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":9,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":8,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":7,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":6,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":5,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"MoveX":{"FollowX":0},"MoveY":4,"AccelY":1},
+				{"Sprite":139,"AttackPower":2,"Y":14,"MoveX":{"FollowX":0},"MoveY":4,"AccelY":1}
+			]
+		},
+		"T209":{ // 209 Zica Laser Lv.11
+			"Delay":7,
+			"Sound":14,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":101,"AttackPower":12,"X":-8,"Y":-14,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"X":-8,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"X":-8,"MoveY":13,"AccelY":1},
+				{"Sprite":139,"AttackPower":2,"X":-8,"Y":14,"MoveY":13,"AccelY":1},
+				{"Sprite":101,"AttackPower":12,"X":8,"Y":-14,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"X":8,"MoveY":14,"AccelY":1},
+				{"Sprite":120,"AttackPower":4,"X":8,"MoveY":13,"AccelY":1},
+				{"Sprite":139,"AttackPower":2,"X":8,"Y":14,"MoveY":13,"AccelY":1}
+			]
+		}
+	},
+	"Ports":{
+		"P5":{ // 5 [Microsol PQZ]
+			"Name":"Zica Laser",
+			"NormalShots":["T199","T200","T201","T202","T203","T204","T205","T206","T207","T208","T209"]
+		}
+	}
+}

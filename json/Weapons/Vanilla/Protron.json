@@ -1,0 +1,143 @@
+{
+	"Shots":{
+		"T322":{ // 322 Front Protron Lv.1
+			"Delay":4,
+			"Sound":26,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"X":-5,"MoveY":12},
+				{"Sprite":225,"AttackPower":1,"X":5,"MoveY":12}
+			]
+		},
+		"T323":{ // 323 Front Protron Lv.2
+			"Delay":5,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveY":12},
+				{"Sprite":225,"AttackPower":1,"MoveX":-2,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":2,"MoveY":11}
+			]
+		},
+		"T324":{ // 324 Front Protron Lv.3
+			"Delay":5,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveX":-2,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":2,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":-4,"MoveY":12},
+				{"Sprite":225,"AttackPower":1,"MoveX":4,"MoveY":12}
+			]
+		},
+		"T325":{ // 325 Front Protron Lv.4
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveY":12},
+				{"Sprite":225,"AttackPower":1,"MoveX":-3,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":3,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":-6,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"MoveX":6,"MoveY":9}
+			]
+		},
+		"T326":{ // 326 Front Protron Lv.5
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveX":-3,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":3,"MoveY":11},
+				{"Sprite":225,"AttackPower":1,"MoveX":-6,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"MoveX":6,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"X":-4,"MoveY":12},
+				{"Sprite":225,"AttackPower":1,"X":4,"MoveY":12}
+			]
+		},
+		"T327":{ // 327 Front Protron Lv.6
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveX":-6,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"MoveX":6,"MoveY":9},
+				{"Sprite":244,"AttackPower":2,"X":8,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"X":-8,"MoveY":11}
+			]
+		},
+		"T328":{ // 328 Front Protron Lv.7
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveX":-5,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"MoveX":5,"MoveY":9},
+				{"Sprite":244,"AttackPower":2,"MoveX":3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"MoveX":-3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"MoveY":12}
+			]
+		},
+		"T329":{ // 329 Front Protron Lv.8
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":225,"AttackPower":1,"MoveX":-6,"MoveY":9},
+				{"Sprite":225,"AttackPower":1,"MoveX":6,"MoveY":9},
+				{"Sprite":244,"AttackPower":3,"MoveX":3,"MoveY":11},
+				{"Sprite":244,"AttackPower":3,"MoveX":-3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"X":-8,"MoveY":12},
+				{"Sprite":244,"AttackPower":2,"X":8,"MoveY":12}
+			]
+		},
+		"T330":{ // 330 Front Protron Lv.9
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":244,"AttackPower":2,"MoveX":-6,"MoveY":9},
+				{"Sprite":244,"AttackPower":2,"MoveX":6,"MoveY":9},
+				{"Sprite":244,"AttackPower":3,"MoveX":3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"MoveX":-3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"X":-8,"MoveY":12},
+				{"Sprite":244,"AttackPower":2,"X":8,"MoveY":12}
+			]
+		},
+		"T331":{ // 331 Front Protron Lv.10
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":244,"AttackPower":2,"MoveX":-8,"MoveY":9},
+				{"Sprite":244,"AttackPower":2,"MoveX":8,"MoveY":9},
+				{"Sprite":244,"AttackPower":3,"MoveX":6,"MoveY":10},
+				{"Sprite":244,"AttackPower":2,"MoveX":-6,"MoveY":10},
+				{"Sprite":244,"AttackPower":2,"MoveX":3,"MoveY":11},
+				{"Sprite":244,"AttackPower":2,"MoveX":-3,"MoveY":11},
+				{"Sprite":244,"AttackPower":3,"MoveY":12}
+			]
+		},
+		"T332":{ // 332 Front Protron Lv.11
+			"Delay":6,
+			"Sound":26,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":244,"AttackPower":5,"MoveY":12},
+				{"Sprite":244,"AttackPower":2,"X":-4,"Y":-6,"MoveX":-4,"MoveY":12},
+				{"Sprite":244,"AttackPower":2,"X":4,"Y":-6,"MoveX":4,"MoveY":12},
+				{"Sprite":244,"AttackPower":2,"MoveX":-6,"MoveY":9},
+				{"Sprite":244,"AttackPower":2,"MoveX":6,"MoveY":9},
+				{"Sprite":226,"AttackPower":2,"Y":9,"MoveY":12},
+				{"Sprite":226,"AttackPower":2,"MoveX":-3,"MoveY":11},
+				{"Sprite":226,"AttackPower":2,"MoveX":3,"MoveY":11}
+			]
+		}
+	},
+	"Ports":{
+		"P13":{ // 13 [TX SilverCloud ~ B]
+			"Name":"Protron",
+			"NormalShots":["T322","T323","T324","T325","T326","T327","T328","T329","T330","T331","T332"]
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T366":{ // 366 Wobbley
+			"Delay":3,
+			"AnimFrames":4,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":233,"AttackPower":1,"X":-4,"MoveY":6},
+				{"Sprite":233,"AttackPower":1,"X":4,"MoveY":6}
+			]
+		}
+	},
+	"Options":{
+		"O5":{ // 5
+			"Name":"Wobbley",
+			"Shot":"T366",
+			"Graphics":[246,246,265,265,284,284,303,303],
+			"HUDIcon":11
+		}
+	}
+}

@@ -1,0 +1,262 @@
+{
+	"Shots":{
+		"T378":{ // 378 Fireball Lv.1
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":3,"MoveX":-2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T379":{ // 379 Fireball Lv.2
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":3,"MoveX":-2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T380":{ // 380 Fireball Lv.3
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":3,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":3,"MoveX":-3,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":4,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-4,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T381":{ // 381 Fireball Lv.4
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":3,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":3,"MoveX":-3,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":4,"MoveY":-2,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-4,"MoveY":-2,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":5,"MoveY":-3,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-5,"MoveY":-3,"AccelY":1}
+			]
+		},
+		"T382":{ // 382 Fireball Lv.5
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T383":{ // 383 Fireball Lv.6
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T384":{ // 384 Fireball Lv.7
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":3,"MoveY":-4,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-3,"MoveY":-4,"AccelY":1}
+			]
+		},
+		"T385":{ // 385 Fireball Lv.8
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":3,"MoveY":-4,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-3,"MoveY":-4,"AccelY":1}
+			]
+		},
+		"T386":{ // 386 Fireball Lv.9
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1}
+			]
+		},
+		"T387":{ // 387 Fireball Lv.10
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":4,"MoveY":-4,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-4,"MoveY":-4,"AccelY":1}
+			]
+		},
+		"T388":{ // 388 Fireball Lv.11
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":4,"MoveY":-4,"AccelY":1},
+				{"Sprite":100,"AttackPower":4,"MoveX":-4,"MoveY":-4,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":6,"MoveY":-6,"AccelY":1},
+				{"Sprite":99,"AttackPower":2,"MoveX":-6,"MoveY":-6,"AccelY":1}
+			]
+		},
+		"T389":{ // 389 Fireball Mode B Lv.1
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":3,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":4}
+			]
+		},
+		"T390":{ // 390 Fireball Mode B Lv.2
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":3,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":4}
+			]
+		},
+		"T391":{ // 391 Fireball Mode B Lv.3
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":3,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":3,"MoveX":-3,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":4,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":-4,"MoveY":-1,"AccelY":1,"CircleParams":4}
+			]
+		},
+		"T392":{ // 392 Fireball Mode B Lv.4
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":3,"MoveX":3,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":3,"MoveX":-3,"MoveY":-1,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":4,"MoveY":-2,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":-4,"MoveY":-2,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":5,"MoveY":-3,"AccelY":1,"CircleParams":4},
+				{"Sprite":99,"AttackPower":2,"MoveX":-5,"MoveY":-3,"AccelY":1,"CircleParams":4}
+			]
+		},
+		"T393":{ // 393 Fireball Mode B Lv.5
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":5}
+			]
+		},
+		"T394":{ // 394 Fireball Mode B Lv.6
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":5}
+			]
+		},
+		"T395":{ // 395 Fireball Mode B Lv.7
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":99,"AttackPower":2,"MoveX":3,"MoveY":-4,"AccelY":1,"CircleParams":5},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":99,"AttackPower":2,"MoveX":-3,"MoveY":-4,"AccelY":1,"CircleParams":5}
+			]
+		},
+		"T396":{ // 396 Fireball Mode B Lv.8
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":4,"MoveX":2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":99,"AttackPower":2,"MoveX":3,"MoveY":-4,"AccelY":1,"CircleParams":5},
+				{"Sprite":100,"AttackPower":4,"MoveX":-2,"MoveY":-1,"AccelY":1,"CircleParams":5},
+				{"Sprite":99,"AttackPower":2,"MoveX":-3,"MoveY":-4,"AccelY":1,"CircleParams":5}
+			]
+		},
+		"T397":{ // 397 Fireball Mode B Lv.9
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1,"CircleParams":6},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1,"CircleParams":6}
+			]
+		},
+		"T398":{ // 398 Fireball Mode B Lv.10
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1,"CircleParams":6},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1,"CircleParams":6},
+				{"Sprite":100,"AttackPower":4,"MoveX":4,"MoveY":-4,"AccelY":1,"CircleParams":6},
+				{"Sprite":100,"AttackPower":4,"MoveX":-4,"MoveY":-4,"AccelY":1,"CircleParams":6}
+			]
+		},
+		"T399":{ // 399 Fireball Mode B Lv.11
+			"Delay":11,
+			"Sound":1,
+			"Trail":0,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":8,"MoveX":2,"MoveY":-2,"AccelY":1,"CircleParams":6},
+				{"Sprite":98,"AttackPower":8,"MoveX":-2,"MoveY":-2,"AccelY":1,"CircleParams":6},
+				{"Sprite":100,"AttackPower":4,"MoveX":4,"MoveY":-4,"AccelY":1,"CircleParams":6},
+				{"Sprite":100,"AttackPower":4,"MoveX":-4,"MoveY":-4,"AccelY":1,"CircleParams":6},
+				{"Sprite":99,"AttackPower":2,"MoveX":6,"MoveY":-6,"AccelY":1,"CircleParams":6},
+				{"Sprite":99,"AttackPower":2,"MoveX":-6,"MoveY":-6,"AccelY":1,"CircleParams":6}
+			]
+		}
+	},
+	"Ports":{
+		"P18":{ // 18 [Mag-Malice ~ D]
+			"Name":"Fireball",
+			"NormalShots":["T378","T379","T380","T381","T382","T383","T384","T385","T386","T387","T388"]
+		},
+		"FireballTypeB":{
+			"Name":"Fireball Beta",
+			"NormalShots":["T389","T390","T391","T392","T393","T394","T395","T396","T397","T398","T399"]
+		}
+	}
+}

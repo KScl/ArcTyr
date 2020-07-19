@@ -1,0 +1,25 @@
+{
+	"Shots":{
+		"T778":{ // 778 SDF Main Gun
+			"Delay":0,
+			"AnimFrames":1,
+			"Sound":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":558,"AttackPower":{"Infinite":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":561,"AttackPower":{"Infinite":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":559,"AttackPower":{"Infinite":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":562,"AttackPower":{"Infinite":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14}
+			]
+		}
+	},
+	"Specials":{
+		"S41":{ // 41
+			"Name":"SDF Main Gun",
+			"Graphic":307,
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"T778"},
+			"PowerUse":15
+		}
+	}
+}

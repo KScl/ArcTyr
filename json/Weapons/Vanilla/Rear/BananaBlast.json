@@ -1,0 +1,157 @@
+{
+	"Shots":{
+		"T517":{ // 517 Banana Blast Rear Lv.1
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":2,"MoveX":-6,"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":6,"MoveY":2}
+			]
+		},
+		"T518":{ // 518 Banana Blast Rear Lv.2
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3}
+			]
+		},
+		"T519":{ // 519 Banana Blast Rear Lv.3
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3}
+			]
+		},
+		"T520":{ // 520 Banana Blast Rear Lv.4
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":-1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":-1}
+			]
+		},
+		"T521":{ // 521 Banana Blast Rear Lv.5
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2}
+			]
+		},
+		"T522":{ // 522 Banana Blast Rear Lv.6
+			"Delay":20,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2}
+			]
+		},
+		"T523":{ // 523 Banana Blast Rear Lv.7
+			"Delay":20,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2}
+			]
+		},
+		"T524":{ // 524 Banana Blast Rear Lv.8
+			"Delay":30,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2}
+			]
+		},
+		"T525":{ // 525 Banana Blast Rear Lv.9 \/ Banana Bomb special
+			"Delay":30,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2}
+			]
+		},
+		"T526":{ // 526 Banana Blast Rear Lv.10
+			"Delay":20,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":-3,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2,"AccelY":1}
+			]
+		},
+		"T527":{ // 527 Banana Blast Rear Lv.11
+			"Delay":15,
+			"AnimFrames":3,
+			"Sound":2,
+			"Filter":0,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":-1,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2,"AccelY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2,"AccelY":1}
+			]
+		}
+	},
+	"Ports":{
+		"P24":{ // 24
+			"Name":"Banana Blast Rear",
+			"NormalShots":["T517","T518","T519","T520","T521","T522","T523","T524","T525","T526","T527"]
+		}
+	}
+}

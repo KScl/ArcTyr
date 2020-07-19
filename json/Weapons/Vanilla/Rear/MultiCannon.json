@@ -1,0 +1,330 @@
+{
+	"Shots":{
+		"T254":{ // 254 Rear Multi Cannon Lv.1
+			"Delay":4,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T255":{ // 255 Rear Multi Cannon Lv.2
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T256":{ // 256 Rear Multi Cannon Lv.3
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10},
+				{"Sprite":2,"AttackPower":2,"MoveX":10}
+			]
+		},
+		"T257":{ // 257 Rear Multi Cannon Lv.4
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":281,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":282,"AttackPower":1,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":301,"AttackPower":1,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":300,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":-2},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T258":{ // 258 Rear Multi Cannon Lv.5
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":41,"AttackPower":3,"MoveX":-10},
+				{"Sprite":3,"AttackPower":3,"MoveX":10}
+			]
+		},
+		"T259":{ // 259 Rear Multi Cannon Lv.6
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":41,"AttackPower":3,"MoveX":-10},
+				{"Sprite":3,"AttackPower":3,"MoveX":10},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T260":{ // 260 Rear Multi Cannon Lv.7
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T261":{ // 261 Rear Multi Cannon Lv.8
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T262":{ // 262 Rear Multi Cannon Lv.9
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10},
+				{"Sprite":3,"AttackPower":3,"MoveX":10}
+			]
+		},
+		"T263":{ // 263 Rear Multi Cannon Lv.10
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2},
+				{"Sprite":203,"AttackPower":4,"MoveX":-10},
+				{"Sprite":222,"AttackPower":4,"MoveX":10}
+			]
+		},
+		"T264":{ // 264 Rear Multi Cannon Lv.11
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2},
+				{"Sprite":43,"AttackPower":5,"MoveX":-10},
+				{"Sprite":5,"AttackPower":5,"MoveX":10}
+			]
+		},
+		"T265":{ // 265 Rear Multi Cannon Mode B Lv.1
+			"Delay":3,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":281,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":282,"AttackPower":1,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":301,"AttackPower":1,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":300,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T266":{ // 266 Rear Multi Cannon Mode B Lv.2
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":281,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":282,"AttackPower":1,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":301,"AttackPower":1,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":300,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T267":{ // 267 Rear Multi Cannon Mode B Lv.3
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":281,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":282,"AttackPower":1,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":301,"AttackPower":1,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":300,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"T268":{ // 268 Rear Multi Cannon Mode B Lv.4
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-4,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":4,"MoveX":6,"MoveY":6},
+				{"Sprite":183,"AttackPower":1,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":182,"AttackPower":1,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T269":{ // 269 Rear Multi Cannon Mode B Lv.5
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":183,"AttackPower":1,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":182,"AttackPower":1,"X":-4,"MoveX":-6,"MoveY":-6}
+			]
+		},
+		"T270":{ // 270 Rear Multi Cannon Mode B Lv.6
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":183,"AttackPower":1,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":182,"AttackPower":1,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T271":{ // 271 Rear Multi Cannon Mode B Lv.7
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":295,"AttackPower":2,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":294,"AttackPower":2,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T272":{ // 272 Rear Multi Cannon Mode B Lv.8
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":295,"AttackPower":2,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":294,"AttackPower":2,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T273":{ // 273 Rear Multi Cannon Mode B Lv.9
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":295,"AttackPower":2,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":294,"AttackPower":2,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":77,"AttackPower":1,"MoveY":-10},
+				{"Sprite":298,"AttackPower":2,"X":-4,"MoveX":-2,"MoveY":-9},
+				{"Sprite":299,"AttackPower":2,"X":4,"MoveX":2,"MoveY":-9}
+			]
+		},
+		"T274":{ // 274 Rear Multi Cannon Mode B Lv.10
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":295,"AttackPower":2,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":294,"AttackPower":2,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":298,"AttackPower":2,"X":-4,"MoveX":-2,"MoveY":-9},
+				{"Sprite":299,"AttackPower":2,"X":4,"MoveX":2,"MoveY":-9},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T275":{ // 275 Rear Multi Cannon Mode B Lv.11
+			"Delay":6,
+			"Sound":25,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":295,"AttackPower":2,"X":4,"MoveX":6,"MoveY":-6},
+				{"Sprite":294,"AttackPower":2,"X":-4,"MoveX":-6,"MoveY":-6},
+				{"Sprite":298,"AttackPower":2,"X":-4,"MoveX":-2,"MoveY":-9},
+				{"Sprite":299,"AttackPower":2,"X":4,"MoveX":2,"MoveY":-9},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10},
+				{"Sprite":2,"AttackPower":2,"MoveX":10}
+			]
+		},
+		"T458":{ // 458 Pulse Cannon DragonWing ChargeLv.0
+			"Delay":3,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"MoveY":9}
+			]
+		},
+		"T459":{ // 459 Pulse Cannon DragonWing ChargeLv.1
+			"Delay":2,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":4,"MoveY":9}
+			]
+		},
+		"T460":{ // 460 Pulse Cannon DragonWing ChargeLv.2
+			"Delay":2,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":8,"MoveY":9}
+			]
+		},
+		"T461":{ // 461 Pulse Cannon DragonWing ChargeLv.3
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":6,"MoveY":9},
+				{"Sprite":279,"AttackPower":5,"X":-2,"MoveX":-2,"MoveY":8},
+				{"Sprite":280,"AttackPower":5,"X":2,"MoveX":2,"MoveY":8}
+			]
+		},
+		"T462":{ // 462 Pulse Cannon DragonWing ChargeLv.4
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":600,"AttackPower":{"Infinite":3},"Y":-7,"MoveY":9},
+				{"Sprite":619,"AttackPower":{"Infinite":3},"Y":7,"MoveY":9},
+				{"Sprite":581,"AttackPower":4,"X":-10,"Y":9,"MoveY":9},
+				{"Sprite":581,"AttackPower":4,"X":10,"Y":9,"MoveY":9}
+			]
+		},
+		"T463":{ // 463 Pulse Cannon DragonWing ChargeLv.5
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":600,"AttackPower":{"Infinite":3},"X":-6,"Y":-7,"MoveY":9},
+				{"Sprite":619,"AttackPower":{"Infinite":3},"X":-6,"Y":7,"MoveY":9},
+				{"Sprite":600,"AttackPower":{"Infinite":3},"X":6,"Y":-7,"MoveY":9},
+				{"Sprite":619,"AttackPower":{"Infinite":3},"X":6,"Y":7,"MoveY":9},
+				{"Sprite":581,"AttackPower":4,"X":-14,"Y":9,"MoveY":9},
+				{"Sprite":581,"AttackPower":4,"X":14,"Y":9,"MoveY":9}
+			]
+		}
+	},
+	"Ports":{
+		"P10":{ // 10 [TX-DragonWing ~ C]
+			"Name":"Rear Multi-Cannon Alpha",
+			"NormalShots":["T254","T255","T256","T257","T258","T259","T260","T261","T262","T263","T264"],
+			"ChargeShots":["T459","T460","T461","T462","T463"],
+			//"AimedShots":["T270","T271","T272","T273","T274","T275"]
+		},
+		"RearMultiCannonTypeB":{
+			"Name":"Rear Multi-Cannon Beta",
+			"NormalShots":["T265","T266","T267","T268","T269","T270","T271","T272","T273","T274","T275"],
+			"ChargeShots":["T459","T460","T461","T462","T463"],
+			//"AimedShots":["T270","T271","T272","T273","T274","T275"]
+		}
+	}
+}

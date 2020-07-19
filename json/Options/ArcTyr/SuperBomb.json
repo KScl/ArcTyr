@@ -1,0 +1,23 @@
+{
+	"Shots":{
+		"T535":{ // 535 SuperBomb
+			"Delay":10,
+			"Sound":14,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":90,"AttackPower":{"Shrapnel":"T66"},"MoveY":7},
+				{"Sprite":90,"AttackPower":{"Shrapnel":"T66"},"MoveY":7}
+			]
+		}
+	},
+	"Options":{
+		"O31":{ // 31 -- NEW
+			"Name":"SuperBomb (x1)",
+			"Shot":"T535",
+			"Ammo":1,
+			"Graphics":2,
+			"HUDIcon":5
+		}
+	}
+}

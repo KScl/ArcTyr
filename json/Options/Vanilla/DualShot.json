@@ -1,0 +1,19 @@
+{
+	"Shots":{
+		"OptionDualShot":{ // 5 Dual Shot Option
+			"Delay":5,
+			"Sound":28,
+			"Pieces":[
+				{"Sprite":245,"AttackPower":2,"MoveY":12}
+			]
+		}
+	},
+	"Options":{
+		"O2":{ // 2
+			"Name":"Dual Shot Option",
+			"Shot":"OptionDualShot",
+			"Graphics":[{"WaitUntilFire":169},188,207,188],
+			"HUDIcon":2
+		}
+	}
+}

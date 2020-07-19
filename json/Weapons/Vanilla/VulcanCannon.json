@@ -1,0 +1,142 @@
+{
+	"Shots":{
+		"T221":{ // 221 Vulcan Cannon Lv.1
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T222":{ // 222 Vulcan Cannon Lv.2
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-6,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":6,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T223":{ // 223 Vulcan Cannon Lv.3
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-6,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":6,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T224":{ // 224 Vulcan Cannon Lv.4
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-6,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":6,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-2,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T225":{ // 225 Vulcan Cannon Lv.5
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T226":{ // 226 Vulcan Cannon Lv.6
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":67,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T227":{ // 227 Vulcan Cannon Lv.7
+			"Delay":2,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-6,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":6,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T228":{ // 228 Vulcan Cannon Lv.8
+			"Delay":2,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-6,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":6,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-2,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T229":{ // 229 Vulcan Cannon Lv.9
+			"Delay":2,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T230":{ // 230 Vulcan Cannon Lv.10
+			"Delay":1,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1}
+			]
+		},
+		"T231":{ // 231 Vulcan Cannon Lv.11
+			"Delay":0,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":20,"AccelY":-1},
+				{"Sprite":70,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":20,"AccelY":-1}
+			]
+		}
+	},
+	"Ports":{
+		"P7":{ // 7
+			"Name":"Vulcan Cannon",
+			"NormalShots":["T221","T222","T223","T224","T225","T226","T227","T228","T229","T230","T231"]
+		}
+	}
+}

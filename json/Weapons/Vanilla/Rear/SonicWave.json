@@ -1,0 +1,334 @@
+{
+	"Shots":{
+		"T276":{ // 276 Rear Sonic Wave Lv.1
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":6,"AttackPower":1,"Duration":{"Carry":"Y"},"X":-2,"MoveX":-13},
+				{"Sprite":44,"AttackPower":1,"Duration":{"Carry":"Y"},"X":2,"MoveX":13}
+			]
+		},
+		"T277":{ // 277 Rear Sonic Wave Lv.2
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":6,"AttackPower":1,"Duration":{"Carry":"Y"},"X":-2,"MoveX":-13},
+				{"Sprite":44,"AttackPower":1,"Duration":{"Carry":"Y"},"X":2,"MoveX":13},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":13}
+			]
+		},
+		"T278":{ // 278 Rear Sonic Wave Lv.3
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":6,"AttackPower":1,"Duration":{"Carry":"Y"},"X":-2,"MoveX":-13},
+				{"Sprite":44,"AttackPower":1,"Duration":{"Carry":"Y"},"X":2,"MoveX":13},
+				{"Sprite":224,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-2,"MoveY":13},
+				{"Sprite":223,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":2,"MoveY":13}
+			]
+		},
+		"T279":{ // 279 Rear Sonic Wave Lv.4
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":16,"AttackPower":2,"Duration":{"Carry":"Y"},"X":-2,"MoveX":-13},
+				{"Sprite":54,"AttackPower":2,"Duration":{"Carry":"Y"},"X":2,"MoveX":13},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":13}
+			]
+		},
+		"T280":{ // 280 Rear Sonic Wave Lv.5
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":16,"AttackPower":2,"Duration":{"Carry":"Y"},"X":-2,"MoveX":-13},
+				{"Sprite":54,"AttackPower":2,"Duration":{"Carry":"Y"},"X":2,"MoveX":13},
+				{"Sprite":224,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-2,"MoveY":13},
+				{"Sprite":223,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":2,"MoveY":13}
+			]
+		},
+		"T281":{ // 281 Rear Sonic Wave Lv.6
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":16,"AttackPower":2,"Duration":{"Carry":"Y"},"X":-2,"Y":4,"MoveX":-13,"MoveY":-1},
+				{"Sprite":54,"AttackPower":2,"Duration":{"Carry":"Y"},"X":2,"Y":4,"MoveX":13,"MoveY":-1},
+				{"Sprite":16,"AttackPower":2,"Duration":{"Carry":"Y"},"X":-2,"Y":-4,"MoveX":-13,"MoveY":1},
+				{"Sprite":54,"AttackPower":2,"Duration":{"Carry":"Y"},"X":2,"Y":-4,"MoveX":13,"MoveY":1},
+				{"Sprite":224,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-2,"MoveY":13},
+				{"Sprite":223,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":2,"MoveY":13}
+			]
+		},
+		"T282":{ // 282 Rear Sonic Wave Lv.7
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":105,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":-7,"MoveX":-13},
+				{"Sprite":106,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":-7,"MoveX":13},
+				{"Sprite":124,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":7,"MoveX":-13},
+				{"Sprite":125,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":7,"MoveX":13},
+				{"Sprite":224,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-2,"MoveY":13},
+				{"Sprite":223,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":2,"MoveY":13}
+			]
+		},
+		"T283":{ // 283 Rear Sonic Wave Lv.8
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":105,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":-7,"MoveX":-13},
+				{"Sprite":106,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":-7,"MoveX":13},
+				{"Sprite":124,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":7,"MoveX":-13},
+				{"Sprite":125,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":7,"MoveX":13},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":13},
+				{"Sprite":82,"AttackPower":1,"Duration":{"Carry":"X"},"MoveY":-13}
+			]
+		},
+		"T284":{ // 284 Rear Sonic Wave Lv.9
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":105,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":-7,"MoveX":-13},
+				{"Sprite":106,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":-7,"MoveX":13},
+				{"Sprite":124,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":7,"MoveX":-13},
+				{"Sprite":125,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":7,"MoveX":13},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":13},
+				{"Sprite":243,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-2,"MoveY":-13},
+				{"Sprite":242,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":2,"MoveY":-13}
+			]
+		},
+		"T285":{ // 285 Rear Sonic Wave Lv.10
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":105,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":-7,"MoveX":-13},
+				{"Sprite":106,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":-7,"MoveX":13},
+				{"Sprite":124,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":7,"MoveX":-13},
+				{"Sprite":125,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":7,"MoveX":13},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"MoveY":13},
+				{"Sprite":130,"AttackPower":2,"Duration":{"Carry":"X"},"X":-9,"MoveX":-9,"MoveY":-9},
+				{"Sprite":131,"AttackPower":2,"Duration":{"Carry":"X"},"X":9,"MoveX":9,"MoveY":-9}
+			]
+		},
+		"T286":{ // 286 Rear Sonic Wave Lv.11
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":105,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":-7,"MoveX":-13},
+				{"Sprite":106,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":-7,"MoveX":13},
+				{"Sprite":124,"AttackPower":3,"Duration":{"Carry":"Y"},"X":-2,"Y":7,"MoveX":-13},
+				{"Sprite":125,"AttackPower":3,"Duration":{"Carry":"Y"},"X":2,"Y":7,"MoveX":13},
+				{"Sprite":130,"AttackPower":2,"Duration":{"Carry":"X"},"X":-9,"MoveX":-9,"MoveY":-9},
+				{"Sprite":131,"AttackPower":2,"Duration":{"Carry":"X"},"X":9,"MoveX":9,"MoveY":-9},
+				{"Sprite":149,"AttackPower":2,"Duration":{"Carry":"X"},"X":-9,"MoveX":-9,"MoveY":9},
+				{"Sprite":150,"AttackPower":2,"Duration":{"Carry":"X"},"X":9,"MoveX":9,"MoveY":9}
+			]
+		},
+		"T287":{ // 287 Rear Sonic Wave Mode B Lv.1
+			"Delay":6,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"AccelY":1}
+			]
+		},
+		"T288":{ // 288 Rear Sonic Wave Mode B Lv.2
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T289":{ // 289 Rear Sonic Wave Mode B Lv.3
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T290":{ // 290 Rear Sonic Wave Mode B Lv.4
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":-2,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":-2,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"AccelY":1}
+			]
+		},
+		"T291":{ // 291 Rear Sonic Wave Mode B Lv.5
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-3,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":3,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T292":{ // 292 Rear Sonic Wave Mode B Lv.6
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-6,"MoveY":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":6,"MoveY":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T293":{ // 293 Rear Sonic Wave Mode B Lv.7
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-6,"MoveY":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":6,"MoveY":1,"AccelY":1},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T294":{ // 294 Rear Sonic Wave Mode B Lv.8
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-6,"MoveY":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":6,"MoveY":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-2,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":2,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T295":{ // 295 Rear Sonic Wave Mode B Lv.9
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-6,"MoveY":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":6,"MoveY":1,"AccelY":1},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":73,"AttackPower":2,"Duration":{"Carry":"X"},"X":4,"MoveX":1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":-8,"MoveX":-3,"MoveY":-1,"AccelY":1},
+				{"Sprite":63,"AttackPower":1,"Duration":{"Carry":"X"},"X":8,"MoveX":3,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T296":{ // 296 Rear Sonic Wave Mode B Lv.10
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-6,"MoveY":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":6,"MoveY":1,"AccelY":1},
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-12,"MoveX":-3,"MoveY":-2,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"MoveX":-3,"MoveY":-2,"AccelY":1},
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"MoveX":3,"MoveY":-2,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":12,"MoveX":3,"MoveY":-2,"AccelY":1}
+			]
+		},
+		"T297":{ // 297 Rear Sonic Wave Mode B Lv.11
+			"Delay":6,
+			"Sound":13,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-12,"MoveX":-1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"MoveX":-1,"AccelY":1},
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"MoveX":1,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":12,"MoveX":1,"AccelY":1},
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":-24,"MoveX":-3,"MoveY":-2,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":-12,"MoveX":-3,"MoveY":-2,"AccelY":1},
+				{"Sprite":143,"AttackPower":3,"Duration":{"Carry":"X"},"X":12,"MoveX":3,"MoveY":-2,"AccelY":1},
+				{"Sprite":144,"AttackPower":3,"Duration":{"Carry":"X"},"X":24,"MoveX":3,"MoveY":-2,"AccelY":1}
+			]
+		},
+
+		"T464":{ // 464 Sonic Wave DragonWing ChargeLv.0
+			"Delay":5,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":66,"AttackPower":2,"Duration":{"Carry":"X"},"AccelY":1}
+			]
+		},
+		"T465":{ // 465 Sonic Wave DragonWing ChargeLv.1
+			"Delay":3,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":73,"AttackPower":6,"Duration":{"Carry":"X"},"AccelY":1}
+			]
+		},
+		"T466":{ // 466 Sonic Wave DragonWing ChargeLv.2
+			"Delay":3,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":123,"AttackPower":12,"Duration":{"Carry":"X"},"AccelY":1}
+			]
+		},
+		"T467":{ // 467 Sonic Wave DragonWing ChargeLv.3
+			"Delay":3,
+			"Sound":13,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":143,"AttackPower":10,"Duration":{"Carry":"X"},"X":-6,"AccelY":1},
+				{"Sprite":144,"AttackPower":10,"Duration":{"Carry":"X"},"X":6,"AccelY":1}
+			]
+		},
+		"T468":{ // 468 Sonic Wave DragonWing ChargeLv.4
+			"Delay":3,
+			"Sound":13,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":73,"AttackPower":10,"Duration":{"Carry":"X"},"AccelY":1},
+				{"Sprite":73,"AttackPower":10,"Duration":{"Carry":"X"},"X":-12,"MoveY":-1,"AccelY":1},
+				{"Sprite":73,"AttackPower":10,"Duration":{"Carry":"X"},"X":12,"MoveY":-1,"AccelY":1}
+			]
+		},
+		"T469":{ // 469 Sonic Wave DragonWing ChargeLv.5
+			"Delay":3,
+			"Sound":14,
+			"Filter":192,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":767,"AttackPower":{"Infinite":0},"X":-18,"Y":-7,"MoveY":7},
+				{"Sprite":768,"AttackPower":{"Infinite":2},"X":-6,"Y":-7,"MoveY":7},
+				{"Sprite":769,"AttackPower":{"Infinite":2},"X":6,"Y":-7,"MoveY":7},
+				{"Sprite":770,"AttackPower":{"Infinite":0},"X":18,"Y":-7,"MoveY":7},
+				{"Sprite":786,"AttackPower":{"Infinite":1},"X":-18,"Y":7,"MoveY":7},
+				{"Sprite":787,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":7},
+				{"Sprite":788,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":7},
+				{"Sprite":789,"AttackPower":{"Infinite":1},"X":18,"Y":7,"MoveY":7}
+			]
+		}
+	},
+	"Ports":{
+		"SonicWaveA":{
+			"Name":"Sonic Wave Alpha",
+			"NormalShots":["T276","T277","T278","T279","T280","T281","T282","T283","T284","T285","T286"],
+			"ChargeShots":["T465","T466","T467","T468","T469"]
+		},
+		"P11":{ // 11 [TX DragonWing ~ D]
+			"Name":"Sonic Wave Beta",
+			"NormalShots":["T287","T288","T289","T290","T291","T292","T293","T294","T295","T296","T297"],
+			"ChargeShots":["T465","T466","T467","T468","T469"],
+			"AimedShots":["T292","T293","T294","T295","T296","T297"]
+		}
+	}
+}

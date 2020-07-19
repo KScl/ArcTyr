@@ -1,4 +1,14 @@
 {
+	"Import":[
+		"./Weapons/Vanilla/Laser.json",
+		"./Weapons/Vanilla/Rear/ScatterWave.json",
+		"./Weapons/Vanilla/NortSuperPulse.json",
+		"./Weapons/Vanilla/NortSpreadA.json",
+		"./Weapons/Vanilla/NortSpreadB.json",
+
+		"./Specials/Twiddles/Lightning.json",
+		"./Specials/SDFMainGun.json"
+	],
 	"Ships":{
 		"NortShip":{
 			"Name":"NortShip Z",

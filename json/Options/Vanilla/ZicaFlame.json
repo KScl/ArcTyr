@@ -1,0 +1,29 @@
+{
+	"Shots":{
+		"OptionZicaFlame":{ // 780 Zica Flamethrower
+			"Delay":3,
+			"AnimFrames":11,
+			"Sound":4,
+			"Filter":112,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":672,"AttackPower":{"Infinite":0},"Duration":11,"X":-6,"Y":-7,"MoveY":11,"AccelY":-1},
+				{"Sprite":691,"AttackPower":{"Infinite":0},"Duration":11,"X":6,"Y":-7,"MoveY":11,"AccelY":-1},
+				{"Sprite":710,"AttackPower":{"Infinite":1},"Duration":11,"X":-6,"Y":7,"MoveY":11,"AccelY":-1},
+				{"Sprite":729,"AttackPower":{"Infinite":1},"Duration":11,"X":6,"Y":7,"MoveY":11,"AccelY":-1},
+				{"Sprite":672,"AttackPower":{"Infinite":0},"Duration":11,"X":-6,"Y":-7,"MoveY":11,"AccelY":-1},
+				{"Sprite":691,"AttackPower":{"Infinite":0},"Duration":11,"X":6,"Y":-7,"MoveY":11,"AccelY":-1},
+				{"Sprite":710,"AttackPower":{"Infinite":0},"Duration":11,"X":-6,"Y":7,"MoveY":11,"AccelY":-1},
+				{"Sprite":729,"AttackPower":{"Infinite":0},"Duration":11,"X":6,"Y":7,"MoveY":11,"AccelY":-1}
+			]
+		}
+	},
+	"Options":{
+		"ZicaFlame":{ // 17
+			"Name":"Zica Flamethrower",
+			"Shot":"OptionZicaFlame",
+			"Graphics":[87,87,87,106,106,106,125,125,125,144,144,144],
+			"HUDIcon":6
+		}
+	}
+}

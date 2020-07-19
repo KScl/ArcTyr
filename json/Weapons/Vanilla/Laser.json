@@ -1,0 +1,130 @@
+{
+	"Shots":{
+		"T188":{ // 188 Laser Lv.1
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":289,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T189":{ // 189 Laser Lv.2
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":289,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T190":{ // 190 Laser Lv.3
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":286,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T191":{ // 191 Laser Lv.4
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":286,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":288,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T192":{ // 192 Laser Lv.5
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":286,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T193":{ // 193 Laser Lv.6
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":287,"AttackPower":2,"X":-6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"X":6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":-6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":288,"X":-6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":288,"X":6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":-6,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":6,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T194":{ // 194 Laser Lv.7
+			"Delay":0,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":290,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":291,"AttackPower":4,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":290,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":292,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T195":{ // 195 Laser Lv.8
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":286,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T196":{ // 196 Laser Lv.9
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":293,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T197":{ // 197 Laser Lv.10
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":290,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":289,"AttackPower":1,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":291,"AttackPower":4,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":293,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		},
+		"T198":{ // 198 Laser Lv.11
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":290,"AttackPower":2,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":287,"AttackPower":2,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":291,"AttackPower":4,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":-10,"Y":4,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":286,"AttackPower":1,"X":10,"Y":4,"MoveX":"FollowShip","MoveY":14}
+			]
+		}
+	},
+	"Ports":{
+		"P4":{ // 4 [NortShip Z - A]
+			"Name":"Laser",
+			"NormalShots":["T188","T189","T190","T191","T192","T193","T194","T195","T196","T197","T198"]
+		}
+	}
+}

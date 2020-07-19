@@ -1,0 +1,13 @@
+{
+	"Import":[
+		"./Weapons/Vanilla/ZicaLaser.json"
+	],
+	"Options":{
+		"ZicaCharge":{ // 12
+			"Name":"Zica SuperCharger",
+			"Shot":["T199","T200","T201","T202","T203"],
+			"Graphics":[3,3,22,22,41,41,60,60],
+			"HUDIcon":9
+		}
+	}
+}

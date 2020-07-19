@@ -1,0 +1,114 @@
+{
+	"Shots":{
+		"LightningFireUp":{ // 721 Lightning UP
+			"Delay":5,
+			"AnimFrames":1,
+			"Sound":15,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":192,"AttackPower":5,"MoveY":22},
+				{"Sprite":191,"AttackPower":5,"Y":-14,"MoveY":22},
+				{"Sprite":192,"AttackPower":4,"Y":-28,"MoveY":22},
+				{"Sprite":191,"AttackPower":4,"Y":-42,"MoveY":22},
+				{"Sprite":192,"AttackPower":4,"Y":-56,"MoveY":22},
+				{"Sprite":191,"AttackPower":4,"Y":-70,"MoveY":22},
+				{"Sprite":192,"AttackPower":4,"Y":-84,"MoveY":22},
+				{"Sprite":191,"AttackPower":4,"Y":-98,"MoveY":22}
+			]
+		},
+		"LightingFireUpLeft":{ // 722 Lightning UP+LEFT
+			"Delay":5,
+			"Sound":15,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":194,"AttackPower":5,"MoveX":-12,"MoveY":14},
+				{"Sprite":195,"AttackPower":5,"X":-12,"Y":-14,"MoveX":-12,"MoveY":14},
+				{"Sprite":194,"AttackPower":4,"X":-24,"Y":-28,"MoveX":-12,"MoveY":14},
+				{"Sprite":195,"AttackPower":4,"X":-36,"Y":-42,"MoveX":-12,"MoveY":14},
+				{"Sprite":194,"AttackPower":4,"X":-48,"Y":-56,"MoveX":-12,"MoveY":14},
+				{"Sprite":195,"AttackPower":4,"X":-60,"Y":-70,"MoveX":-12,"MoveY":14},
+				{"Sprite":194,"AttackPower":4,"X":-72,"Y":-84,"MoveX":-12,"MoveY":14},
+				{"Sprite":195,"AttackPower":4,"X":-84,"Y":-98,"MoveX":-12,"MoveY":14}
+			]
+		},
+		"LightningFireUpRight":{ // 723 Lightning UP-RIGHT
+			"Delay":5,
+			"Sound":15,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":196,"AttackPower":5,"MoveX":12,"MoveY":14},
+				{"Sprite":197,"AttackPower":5,"X":12,"Y":-14,"MoveX":12,"MoveY":14},
+				{"Sprite":196,"AttackPower":4,"X":24,"Y":-28,"MoveX":12,"MoveY":14},
+				{"Sprite":197,"AttackPower":4,"X":36,"Y":-42,"MoveX":12,"MoveY":14},
+				{"Sprite":196,"AttackPower":4,"X":48,"Y":-56,"MoveX":12,"MoveY":14},
+				{"Sprite":197,"AttackPower":4,"X":60,"Y":-70,"MoveX":12,"MoveY":14},
+				{"Sprite":196,"AttackPower":4,"X":72,"Y":-84,"MoveX":12,"MoveY":14},
+				{"Sprite":197,"AttackPower":4,"X":84,"Y":-98,"MoveX":12,"MoveY":14}
+			]
+		},
+		"LightningFireLeft":{ // 724 Lightning LEFT
+			"Delay":5,
+			"AnimFrames":1,
+			"Sound":15,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":198,"AttackPower":5,"MoveX":-22},
+				{"Sprite":199,"AttackPower":5,"X":-12,"MoveX":-22},
+				{"Sprite":198,"AttackPower":4,"X":-24,"MoveX":-22},
+				{"Sprite":199,"AttackPower":4,"X":-36,"MoveX":-22},
+				{"Sprite":198,"AttackPower":4,"X":-48,"MoveX":-22},
+				{"Sprite":199,"AttackPower":4,"X":-60,"MoveX":-22},
+				{"Sprite":198,"AttackPower":4,"X":-72,"MoveX":-22},
+				{"Sprite":199,"AttackPower":4,"X":-84,"MoveX":-22}
+			]
+		},
+		"LightningFireRight":{ // 725 Lightning RIGHT
+			"Delay":5,
+			"AnimFrames":1,
+			"Sound":15,
+			"Filter":128,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":198,"AttackPower":5,"MoveX":22},
+				{"Sprite":199,"AttackPower":5,"X":12,"MoveX":22},
+				{"Sprite":198,"AttackPower":4,"X":24,"MoveX":22},
+				{"Sprite":199,"AttackPower":4,"X":36,"MoveX":22},
+				{"Sprite":198,"AttackPower":4,"X":48,"MoveX":22},
+				{"Sprite":199,"AttackPower":4,"X":60,"MoveX":22},
+				{"Sprite":198,"AttackPower":4,"X":72,"MoveX":22},
+				{"Sprite":199,"AttackPower":4,"X":84,"MoveX":22}
+			]
+		}
+	},
+	"Specials":{
+		"TwiddleLightningUp":{ // 26
+			"Name":"Lightning UP",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"LightningFireUp"}
+		},
+		"TwiddleLightningUpLeft":{ // 27
+			"Name":"Lightning UP+LEFT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"LightingFireUpLeft"}
+		},
+		"TwiddleLightningUpRight":{ // 28
+			"Name":"Lightning UP+RIGHT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"LightningFireUpRight"}
+		},
+		"TwiddleLightningLeft":{ // 29
+			"Name":"Lightning LEFT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"LightningFireLeft"}
+		},
+		"TwiddleLightningRight":{ // 30
+			"Name":"Lightning RIGHT",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"LightningFireRight"}
+		}
+	}
+}

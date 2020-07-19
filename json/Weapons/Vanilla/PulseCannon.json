@@ -1,0 +1,116 @@
+{
+	"Shots":{
+		"T155":{ // 155 Pulse Cannon Lv.1
+			"Delay":3,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":2,"MoveY":10}
+			]
+		},
+		"T156":{ // 156 Pulse Cannon Lv.2
+			"Delay":4,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":3,"MoveY":10}
+			]
+		},
+		"T157":{ // 157 Pulse Cannon Lv.3
+			"Delay":4,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":165,"AttackPower":4,"MoveY":10}
+			]
+		},
+		"T158":{ // 158 Pulse Cannon Lv.4
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":2,"X":-6,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":6,"MoveY":10}
+			]
+		},
+		"T159":{ // 159 Pulse Cannon Lv.5
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":3,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-8,"Y":4,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":8,"Y":4,"MoveY":10}
+			]
+		},
+		"T160":{ // 160 Pulse Cannon Lv.6
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":165,"AttackPower":4,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-9,"Y":4,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":9,"Y":4,"MoveY":10}
+			]
+		},
+		"T161":{ // 161 Pulse Cannon Lv.7
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":2,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":10,"Y":4,"MoveY":10}
+			]
+		},
+		"T162":{ // 162 Pulse Cannon Lv.8
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":3,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":10,"Y":4,"MoveY":10}
+			]
+		},
+		"T163":{ // 163 Pulse Cannon Lv.9
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":3,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":10,"Y":4,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-18,"Y":8,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":18,"Y":8,"MoveY":10}
+			]
+		},
+		"T164":{ // 164 Pulse Cannon Lv.10
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":60,"AttackPower":3,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-20,"Y":8,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":20,"Y":8,"MoveY":10}
+			]
+		},
+		"T165":{ // 165 Pulse Cannon Lv.11
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":62,"AttackPower":5,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":10,"Y":4,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":-24,"Y":8,"MoveY":10},
+				{"Sprite":59,"AttackPower":2,"X":24,"Y":8,"MoveY":10}
+			]
+		}
+	},
+	"Ports":{
+		"P1":{ // 1 [TX SilverCloud ~ A]
+			"Name":"Pulse-Cannon",
+			"NormalShots":["T155","T156","T157","T158","T159","T160","T161","T162","T163","T164","T165"]
+		}
+	}
+}

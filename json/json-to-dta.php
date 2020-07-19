@@ -601,7 +601,7 @@ foreach ($all_options as $id => $option) {
 	elseif (is_array($option['Shot'])) {
 		foreach ($option['Shot'] as $sid => $shot) {
 			$temp = array_search($shot, $shot_ids);
-			if ($temp === NULL) die("Invalid option {$id}: {$shot} doesn't match a shot\n");
+			if ($temp === FALSE) die("Invalid option {$id}: {$shot} doesn't match a shot\n");
 
 			if ($sid == 0) {
 				$shottype = $temp;
@@ -616,7 +616,7 @@ foreach ($all_options as $id => $option) {
 	}
 	elseif (!is_int($option['Shot'])) {
 		$temp = array_search($option['Shot'], $shot_ids);
-		if ($temp === NULL) die("Invalid option {$id}: {$shot} doesn't match a shot\n");
+		if ($temp === FALSE) die("Invalid option {$id}: {$option['Shot']} doesn't match a shot\n");
 		$shottype = $temp;
 	}
 

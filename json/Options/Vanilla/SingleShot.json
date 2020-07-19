@@ -1,0 +1,19 @@
+{
+	"Shots":{
+		"OptionSingleShot":{ // 1 Single Shot Option
+			"Delay":5,
+			"Sound":28,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"MoveY":12}
+			]
+		}
+	},
+	"Options":{
+		"SingleShot":{ // 1
+			"Name":"Single Shot Option",
+			"Shot":"OptionSingleShot",
+			"Graphics":[{"WaitUntilFire":168},187,206,187],
+			"HUDIcon":1
+		}
+	}
+}

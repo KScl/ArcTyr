@@ -1,6 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/RetroBall.json"
+		"./Weapons/Vanilla/HyperPulse.json",
+		"./Weapons/Vanilla/ZicaLaser.json",
+		"./Weapons/Vanilla/HeavyMissiles.json",
+		"./Weapons/Vanilla/RetroBall.json",
+		"./Weapons/Vanilla/GuidedBombs.json"
 	],
 	"Ships":{
 		"Stalker":{

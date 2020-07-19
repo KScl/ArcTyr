@@ -1,0 +1,20 @@
+{
+	"Shots":{
+		"T470":{ // 470 Rear Vulcan DragonWing ChargeLv.0 \/ Satellite Marlo
+			"Delay":4,
+			"Sound":20,
+			"Pieces":[
+				{"Sprite":67,"AttackPower":1,"MoveY":21,"AccelY":-1}
+			]
+		}
+	},
+	"Options":{
+		"O30":{ // 30
+			"Name":"Satellite Marlo",
+			"MovementType":"Orbit",
+			"Shot":"T470",
+			"Graphics":152,
+			"HUDIcon":6
+		}
+	}
+}

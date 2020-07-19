@@ -1,0 +1,123 @@
+{
+	"Shots":{
+		"T565":{ // 565 Hyper Pulse Lv.1
+			"Delay":2,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T566":{ // 566 Hyper Pulse Lv.2
+			"Delay":3,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveX":1,"MoveY":9}
+			]
+		},
+		"T567":{ // 567 Hyper Pulse Lv.3
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveX":1,"MoveY":9}
+			]
+		},
+		"T568":{ // 568 Hyper Pulse Lv.4
+			"Delay":3,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveX":1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T569":{ // 569 Hyper Pulse Lv.5
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveX":1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T570":{ // 570 Hyper Pulse Lv.6
+			"Delay":2,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveX":1,"MoveY":9},
+				{"Sprite":59,"AttackPower":2,"MoveY":10}
+			]
+		},
+		"T571":{ // 571 Hyper Pulse Lv.7
+			"Delay":3,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":2,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":59,"AttackPower":2,"X":4,"MoveX":1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T572":{ // 572 Hyper Pulse Lv.8
+			"Delay":3,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":59,"AttackPower":2,"X":-4,"MoveX":-1,"MoveY":9},
+				{"Sprite":59,"AttackPower":2,"X":4,"MoveX":1,"MoveY":9},
+				{"Sprite":59,"AttackPower":2,"MoveY":10}
+			]
+		},
+		"T573":{ // 573 Hyper Pulse Lv.9
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":279,"AttackPower":2,"X":-8,"MoveX":-2,"MoveY":8},
+				{"Sprite":280,"AttackPower":2,"X":8,"MoveX":2,"MoveY":8},
+				{"Sprite":59,"AttackPower":2,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-2,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":2,"MoveX":1,"MoveY":9}
+			]
+		},
+		"T574":{ // 574 Hyper Pulse Lv.10
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":279,"AttackPower":2,"X":-8,"MoveX":-2,"MoveY":8},
+				{"Sprite":280,"AttackPower":2,"X":8,"MoveX":2,"MoveY":8},
+				{"Sprite":60,"AttackPower":3,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-2,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":2,"MoveX":1,"MoveY":9}
+			]
+		},
+		"T575":{ // 575 Hyper Pulse Lv.11
+			"Delay":3,
+			"Sound":25,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":279,"AttackPower":2,"X":-8,"MoveX":-2,"MoveY":8},
+				{"Sprite":280,"AttackPower":2,"X":8,"MoveX":2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"MoveY":10},
+				{"Sprite":58,"AttackPower":1,"X":-1,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":1,"MoveX":1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":-7,"MoveX":-1,"MoveY":9},
+				{"Sprite":58,"AttackPower":1,"X":7,"MoveX":1,"MoveY":9}
+			]
+		}
+	},
+	"Ports":{
+		"P27":{ // 27 [Microsol PQZ ~ A]
+			"Name":"Hyper Pulse",
+			"NormalShots":["T565","T566","T567","T568","T569","T570","T571","T572","T573","T574","T575"]
+		}
+	}
+}

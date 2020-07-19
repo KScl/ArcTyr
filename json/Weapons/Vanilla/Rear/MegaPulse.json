@@ -1,0 +1,174 @@
+{
+	"Shots":{
+		"T433":{ // 433
+			"Delay":2,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T49"},"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T49"},"MoveX":9}
+			]
+		},
+		"T434":{ // 434
+			"Delay":3,
+			"Sound":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T49"},"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T49"},"MoveX":9}
+			]
+		},
+		"T435":{ // 435
+			"Delay":4,
+			"Sound":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T50"},"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T50"},"MoveX":9}
+			]
+		},
+		"T436":{ // 436
+			"Delay":5,
+			"Sound":1,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T50"},"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T50"},"MoveX":9},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T50"},"MoveY":-9}
+			]
+		},
+		"T437":{ // 437
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T50"},"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T50"},"MoveX":9},
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T50"},"Y":14,"MoveX":-9},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T50"},"Y":14,"MoveX":9}
+			]
+		},
+		"T438":{ // 438
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"MoveX":10},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T50"},"MoveY":-9}
+			]
+		},
+		"T439":{ // 439
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"MoveX":10},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T50"},"MoveY":-9},
+				{"Sprite":208,"AttackPower":{"Shrapnel":"T50"},"MoveY":9}
+			]
+		},
+		"T440":{ // 440
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T52"},"MoveX":-12},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T52"},"MoveX":12},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"X":-6,"MoveY":-11},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"X":6,"MoveY":-11}
+			]
+		},
+		"T441":{ // 441
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T53"},"MoveX":-12},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T53"},"MoveX":12},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"X":-6,"MoveY":-11},
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"X":6,"MoveY":-11}
+			]
+		},
+		"T442":{ // 442
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"MoveY":-11},
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"Y":7,"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"Y":7,"MoveX":10},
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"Y":-7,"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"Y":-7,"MoveX":10}
+			]
+		},
+		"T443":{ // 443
+			"Delay":6,
+			"Sound":1,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":209,"AttackPower":{"Shrapnel":"T51"},"MoveY":-11},
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"Y":7,"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"Y":7,"MoveX":10},
+				{"Sprite":256,"AttackPower":{"Shrapnel":"T51"},"Y":-7,"MoveX":-10},
+				{"Sprite":257,"AttackPower":{"Shrapnel":"T51"},"Y":-7,"MoveX":10},
+				{"Sprite":208,"AttackPower":{"Shrapnel":"T54"},"MoveY":13}
+			]
+		},
+
+		"T500":{ // 500 Rear Mega Pulse DragonWing ChargeLv.0
+			"Delay":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T49"},"MoveY":6}
+			]
+		},
+		"T501":{ // 501 Rear Mega Pulse DragonWing ChargeLv.1
+			"Delay":4,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T502":{ // 502 Rear Mega Pulse DragonWing ChargeLv.2
+			"Delay":5,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T503":{ // 503 Rear Mega Pulse DragonWing ChargeLv.3
+			"Delay":5,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T504":{ // 504 Rear Mega Pulse DragonWing ChargeLv.4
+			"Delay":5,
+			"Sound":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-7,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":7,"MoveY":6}
+			]
+		},
+		"T505":{ // 505 Rear Mega Pulse DragonWing ChargeLv.5
+			"Delay":5,
+			"Sound":1,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-9,"Y":6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":9,"Y":6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		}
+	},
+	"Ports":{
+		"P22":{ // 22
+			"Name":"Rear Mega Pulse",
+			"NormalShots":["T433","T434","T435","T436","T437","T438","T439","T440","T441","T442","T443"],
+			"ChargeShots":["T501","T502","T503","T504","T505"]
+		}
+	}
+}

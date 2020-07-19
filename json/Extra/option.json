@@ -1,34 +1,10 @@
 {
 	"Options":{
-		"O1":{ // 1
-			"Name":"Single Shot Option",
-			"Shot":"T1",
-			"Graphics":[{"WaitUntilFire":168},187,206,187],
-			"HUDIcon":1
-		},
-		"O2":{ // 2
-			"Name":"Dual Shot Option",
-			"Shot":"T5",
-			"Graphics":[{"WaitUntilFire":169},188,207,188],
-			"HUDIcon":2
-		},
-		"O3":{ // 3
-			"Name":"Charge Cannon",
-			"Shot":["T101","T102","T103"],
-			"Graphics":[258,258,258,277,277,277,296,296,296],
-			"HUDIcon":10
-		},
 		"O4":{ // 4
 			"Name":"Vulcan Shot Option",
 			"Shot":"T11",
 			"Graphics":[167,167,167,186,186,186,205,205,205],
 			"HUDIcon":3
-		},
-		"O5":{ // 5
-			"Name":"Wobbley",
-			"Shot":"T366",
-			"Graphics":[246,246,265,265,284,284,303,303],
-			"HUDIcon":11
 		},
 		"O6":{ // 6
 			"Name":"MegaMissile (x1)",
@@ -70,12 +46,6 @@
 			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
 			"HUDIcon":5
 		},
-		"O12":{ // 12
-			"Name":"Zica SuperCharger",
-			"Shot":["T199","T200","T201","T202","T203"],
-			"Graphics":[3,3,22,22,41,41,60,60],
-			"HUDIcon":9
-		},
 		"O13":{ // 13
 			"Name":"MicroBomb (x5)",
 			"Shot":"T29",
@@ -102,12 +72,6 @@
 			"MovementType":"SmallFollower",
 			"Shot":"T452",
 			"Graphics":[112,112,112,112,131,131,131,131,150,150,150,150,131,131,131,131],
-			"HUDIcon":6
-		},
-		"O17":{ // 17
-			"Name":"Zica Flamethrower",
-			"Shot":"T780",
-			"Graphics":[87,87,87,106,106,106,125,125,125,144,144,144],
 			"HUDIcon":6
 		},
 		"O18":{ // 18
@@ -192,20 +156,6 @@
 			"Shot":"T453",
 			"Graphics":[113,113,113,113,132,132,132,132,151,151,151,151,132,132,132,132],
 			"HUDIcon":6
-		},
-		"O30":{ // 30
-			"Name":"Satellite Marlo",
-			"MovementType":"Orbit",
-			"Shot":"T470",
-			"Graphics":152,
-			"HUDIcon":6
-		},
-		"O31":{ // 31 -- NEW
-			"Name":"SuperBomb (x1)",
-			"Shot":"T535",
-			"Ammo":1,
-			"Graphics":2,
-			"HUDIcon":5
 		}
 	}
 }

@@ -1,7 +1,10 @@
 {
 	"Import":[
 		"./Weapons/Tyrian2000/DragonFlame.json",
-		"./Weapons/Tyrian2000/DragonFrost.json"
+		"./Weapons/Tyrian2000/DragonFrost.json",
+		"./Weapons/Vanilla/MegaPulse.json",
+		"./Weapons/Vanilla/PoisonBomb.json",
+		"./Weapons/Vanilla/Rear/MegaPulse.json"
 	],
 	"Shots":{
 		"DragonSpecial":{ // T2K: 2-25
@@ -42,10 +45,10 @@
 			],
 			"PortWeapons":[
 				"RedDragonFlame",
-				"RedDragonFlame",
 				"RedDragonFrost",
-				"RedDragonFlame",
-				"RedDragonFlame"
+				"P19",
+				"P33",
+				"P22"
 			]
 		}
 	}

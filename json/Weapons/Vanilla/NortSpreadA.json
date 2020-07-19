@@ -1,0 +1,135 @@
+{
+	"Shots":{
+		"T684":{ // 684 NortShip Spreader A Lv.1
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":15,"MoveX":6,"MoveY":6}
+			]
+		},
+		"T685":{ // 685 NortShip Spreader A Lv.2
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":77,"AttackPower":1,"Y":4,"MoveY":-8}
+			]
+		},
+		"T686":{ // 686 NortShip Spreader A Lv.3
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":281,"AttackPower":1,"X":-16,"MoveX":-7,"MoveY":4},
+				{"Sprite":282,"AttackPower":1,"X":15,"MoveX":7,"MoveY":4}
+			]
+		},
+		"T687":{ // 687 NortShip Spreader A Lv.4
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":281,"AttackPower":1,"X":-16,"MoveX":-7,"MoveY":3},
+				{"Sprite":282,"AttackPower":1,"X":15,"MoveX":7,"MoveY":3},
+				{"Sprite":39,"AttackPower":1,"X":-16,"MoveX":-8},
+				{"Sprite":1,"AttackPower":1,"X":15,"MoveX":8}
+			]
+		},
+		"T688":{ // 688 NortShip Spreader A Lv.5
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":281,"AttackPower":1,"X":-16,"MoveX":-7,"MoveY":3},
+				{"Sprite":282,"AttackPower":1,"X":15,"MoveX":7,"MoveY":3},
+				{"Sprite":39,"AttackPower":1,"X":-16,"MoveX":-8},
+				{"Sprite":1,"AttackPower":1,"X":15,"MoveX":8},
+				{"Sprite":201,"AttackPower":1,"X":-16,"MoveX":-3,"MoveY":7},
+				{"Sprite":202,"AttackPower":1,"X":15,"MoveX":3,"MoveY":7}
+			]
+		},
+		"T689":{ // 689 NortShip Spreader A Lv.6
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":121,"AttackPower":3,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":122,"AttackPower":3,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":201,"AttackPower":1,"X":-16,"MoveX":-3,"MoveY":7},
+				{"Sprite":202,"AttackPower":1,"X":15,"MoveX":3,"MoveY":7}
+			]
+		},
+		"T690":{ // 690 NortShip Spreader A Lv.7
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":121,"AttackPower":3,"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":122,"AttackPower":3,"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":201,"AttackPower":1,"X":-16,"MoveX":-3,"MoveY":7},
+				{"Sprite":202,"AttackPower":1,"X":15,"MoveX":3,"MoveY":7},
+				{"Sprite":281,"AttackPower":1,"X":-16,"MoveX":-7,"MoveY":3},
+				{"Sprite":282,"AttackPower":1,"X":15,"MoveX":7,"MoveY":3}
+			]
+		},
+		"T691":{ // 691 NortShip Spreader A Lv.8
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":3,"X":-16,"MoveX":-7,"MoveY":4},
+				{"Sprite":98,"AttackPower":3,"X":15,"MoveX":7,"MoveY":4},
+				{"Sprite":98,"AttackPower":3,"X":-16,"MoveX":-4,"MoveY":7},
+				{"Sprite":98,"AttackPower":3,"X":15,"MoveX":4,"MoveY":7}
+			]
+		},
+		"T692":{ // 692 NortShip Spreader A Lv.9
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":98,"AttackPower":3,"X":-16,"MoveX":-7,"MoveY":4},
+				{"Sprite":98,"AttackPower":3,"X":15,"MoveX":7,"MoveY":4},
+				{"Sprite":98,"AttackPower":3,"X":-16,"MoveX":-4,"MoveY":7},
+				{"Sprite":98,"AttackPower":3,"X":15,"MoveX":4,"MoveY":7},
+				{"Sprite":98,"AttackPower":3,"X":-16,"MoveX":-8,"MoveY":1},
+				{"Sprite":98,"AttackPower":3,"X":15,"MoveX":8,"MoveY":1}
+			]
+		},
+		"T693":{ // 693 NortShip Spreader A Lv.10
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveX":6,"MoveY":6}
+			]
+		},
+		"T694":{ // 694 NortShip Spreader A Lv.11
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"MoveY":-7}
+			]
+		}
+	},
+	"Ports":{
+		"P37":{ // 37 [NortShip Z ~ C]
+			"Name":"NortShip Spreader Alpha",
+			"NormalShots":["T684","T685","T686","T687","T688","T689","T690","T691","T692","T693","T694"]
+		}
+	}
+}

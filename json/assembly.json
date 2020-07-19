@@ -7,23 +7,25 @@
 
 		// Unsorted data.
 		"./Extra/option.json",
-		"./Extra/ports.json",
 		"./Extra/shots.json",
 		"./Extra/special.json",
 
 		// Ships
+		"./Ships/Talon.json",
+		"./Ships/SuperCarrot.json",
+		"./Ships/Maelstrom.json",
+		"./Ships/Stalker.json",
+		"./Ships/UShip.json",
 		"./Ships/SilverShip.json",
 		"./Ships/DragonWing.json",
-		"./Ships/Stalker.json",
-		"./Ships/Talon.json",
-		"./Ships/Maelstrom.json",
-		"./Ships/UShip.json",
-		"./Ships/SuperCarrot.json",
-		"./Ships/Magma.json",
-		"./Ships/Randomizer.json",
 		"./Ships/NortShip.json",
+		"./Ships/Magma.json",
 		"./Ships/Tyrian2000/Dragon.json",
-		"./Ships/Tyrian2000/Pretzel.json"
+		"./Ships/Tyrian2000/Pretzel.json",
+		"./Ships/Randomizer.json",
+
+		// Powerup Weapons
+		"./Weapons/Vanilla/AtomicRailgun.json"
 	],
 	"Info":{
 		"ShipOrder":[ // Order of ships in Ship Select
@@ -39,6 +41,12 @@
 			"Magma",
 			{"Secret":"Randomizer"},
 			{"Secret":"NortShip"}
-		]
+		],
+		"PortIndexMap":{ // For events in levels, etc.
+
+		},
+		"SpecialIndexMap":{ // For events in levels, etc.
+			"41":"SDFMainGun"
+		}
 	}
 }

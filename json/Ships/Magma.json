@@ -1,7 +1,10 @@
 {
 	"Import":[
 		"./Weapons/ArcTyr/Starblast.json",
-		"./Weapons/ArcTyr/CosmicNapalm.json"
+		"./Weapons/Vanilla/WidgetBeam.json",
+		"./Weapons/ArcTyr/CosmicNapalm.json",
+		"./Weapons/Vanilla/MultiCannon.json",
+		"./Weapons/Vanilla/Rear/Fireball.json"
 	],
 	"Shots":{
 		"MagmaExhaust":{ // 781 -- NEW Exhaust Shot

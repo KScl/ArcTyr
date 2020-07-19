@@ -1,0 +1,148 @@
+{
+	"Shots":{
+		"T598":{ // 598
+			"Delay":4,
+			"Sound":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":285,"AttackPower":1,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"T599":{ // 599
+			"Delay":4,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":285,"AttackPower":1,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T600":{ // 600
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":285,"AttackPower":1,"Y":3,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"Y":3,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"Y":-4,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"Y":-4,"MoveX":10}
+			]
+		},
+		"T601":{ // 601
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":285,"AttackPower":1,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T602":{ // 602
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":285,"AttackPower":1,"Y":3,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"Y":3,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"Y":-4,"MoveX":-10},
+				{"Sprite":285,"AttackPower":1,"Y":-4,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T603":{ // 603
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"MoveY":10},
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-10,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":10}
+			]
+		},
+		"T604":{ // 604
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":-10}
+			]
+		},
+		"T605":{ // 605
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"MoveY":10},
+				{"Sprite":285,"AttackPower":1,"X":-3,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"X":3,"MoveY":-10}
+			]
+		},
+		"T606":{ // 606
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-8,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":8,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"X":-3,"MoveY":10},
+				{"Sprite":285,"AttackPower":1,"X":3,"MoveY":10},
+				{"Sprite":285,"AttackPower":1,"X":-3,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"X":3,"MoveY":-10}
+			]
+		},
+		"T607":{ // 607
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"Y":-16,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-16,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":16,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":16,"MoveX":10}
+			]
+		},
+		"T608":{ // 608
+			"Delay":5,
+			"Sound":6,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":170,"AttackPower":2,"Y":-16,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":-16,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"MoveX":10},
+				{"Sprite":170,"AttackPower":2,"Y":16,"MoveX":-10},
+				{"Sprite":170,"AttackPower":2,"Y":16,"MoveX":10},
+				{"Sprite":285,"AttackPower":1,"X":-3,"MoveY":-10},
+				{"Sprite":285,"AttackPower":1,"X":3,"MoveY":-10}
+			]
+		}
+	},
+	"Ports":{
+		"P30":{ // 30 [NortShip Z ~ D]
+			"Name":"Scatter Wave",
+			"NormalShots":["T598","T599","T600","T601","T602","T603","T604","T605","T606","T607","T608"]
+		}
+	}
+}

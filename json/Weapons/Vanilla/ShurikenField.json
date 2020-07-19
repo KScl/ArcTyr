@@ -1,0 +1,165 @@
+{
+	"Shots":{
+		"T625":{ // 625 Shuruiken Field Lv.1
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T626":{ // 626 Shuruiken Field Lv.2
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveY":8}
+			]
+		},
+		"T627":{ // 627 Shuruiken Field Lv.3
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T628":{ // 628 Shuruiken Field Lv.4
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveY":8}
+			]
+		},
+		"T629":{ // 629 Shuruiken Field Lv.5
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T630":{ // 630 Shuruiken Field Lv.6
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":-3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-1,"MoveY":8}
+			]
+		},
+		"T631":{ // 631 Shuruiken Field Lv.7
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":-3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T632":{ // 632 Shuruiken Field Lv.8
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveY":8}
+			]
+		},
+		"T633":{ // 633 Shuruiken Field Lv.9
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"MoveY":10}
+			]
+		},
+		"T634":{ // 634 Shuruiken Field Lv.10
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-7,"MoveY":10},
+				{"Sprite":109,"AttackPower":2,"X":7,"MoveY":10}
+			]
+		},
+		"T635":{ // 635 Shuruiken Field Lv.11
+			"Delay":4,
+			"AnimFrames":1,
+			"Sound":5,
+			"Filter":240,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":109,"AttackPower":2,"X":40,"Y":20,"MoveX":-3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-40,"Y":20,"MoveX":3,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":26,"Y":14,"MoveX":1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-26,"Y":14,"MoveX":-1,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":12,"Y":14,"MoveX":2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-12,"Y":14,"MoveX":-2,"MoveY":8},
+				{"Sprite":109,"AttackPower":2,"X":-7,"MoveX":1,"MoveY":10},
+				{"Sprite":109,"AttackPower":2,"X":7,"MoveX":-1,"MoveY":10}
+			]
+		}
+	},
+	"Ports":{
+		"P32":{ // 32 [Ninja Star ~ C]
+			"Name":"Shuriken Field",
+			"NormalShots":["T625","T626","T627","T628","T629","T630","T631","T632","T633","T634","T635"]
+		}
+	}
+}

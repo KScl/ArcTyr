@@ -1,4 +1,8 @@
 {
+	"Import":[
+		// For charged shots
+		"./Weapons/Vanilla/Rear/VulcanCannon.json"
+	],
 	"Shots":{
 		"TurboVulcan1":{ // 804 -- NEW Turbo Vulcan Lv.1
 			"Delay":2,
@@ -220,17 +224,16 @@
 			]
 		},
 		"TurboVulcanAimed6":{ // 831 -- NEW Turbo Vulvan AimedLv.6
-			"Delay":2,
-			"Sound":20,
+			"Delay":1,
+			"Sound":1,
+			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":372,"AttackPower":1,"X":-8,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"X":-4,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"X":4,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"X":8,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"X":4,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"MoveY":14},
-				{"Sprite":372,"AttackPower":1,"X":-4,"MoveY":14}
+				{"Sprite":70,"AttackPower":2,"X":-8,"MoveX":-2,"MoveY":14},
+				{"Sprite":70,"AttackPower":2,"X":8,"MoveX":2,"MoveY":14},
+				{"Sprite":70,"AttackPower":2,"X":-4,"MoveX":-1,"MoveY":14},
+				{"Sprite":70,"AttackPower":2,"X":4,"MoveX":1,"MoveY":14},
+				{"Sprite":70,"AttackPower":2,"X":-2,"MoveY":14},
+				{"Sprite":70,"AttackPower":2,"X":2,"MoveY":14}
 			]
 		}
 	},

@@ -1,0 +1,138 @@
+{
+	"Shots":{
+		"T536":{ // 536 Hotdog Front Lv.1
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T537":{ // 537 Hotdog Front Lv.2
+			"Delay":2,
+			"Sound":5,
+			"Filter":96,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"MoveY":8}
+			]
+		},
+		"T538":{ // 538 Hotdog Front Lv.3
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":8,"MoveY":8}
+			]
+		},
+		"T539":{ // 539 Hotdog Front Lv.4
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":8,"MoveY":8}
+			]
+		},
+		"T540":{ // 540 Hotdog Front Lv.5
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-10,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":10,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"Y":-5,"MoveY":8}
+			]
+		},
+		"T541":{ // 541 Hotdog Front Lv.6
+			"Delay":3,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-10,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":10,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"Y":-5,"MoveY":8}
+			]
+		},
+		"T542":{ // 542 Hotdog Front Lv.7
+			"Delay":4,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-15,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":15,"Y":5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-8,"Y":-5,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":8,"Y":-5,"MoveY":8}
+			]
+		},
+		"T543":{ // 543 Hotdog Front Lv.8
+			"Delay":5,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-20,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":20,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-12,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":12,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"Y":-6,"MoveY":8}
+			]
+		},
+		"T544":{ // 544 Hotdog Front Lv.9
+			"Delay":5,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":12,"Y":-6,"MoveY":8}
+			]
+		},
+		"T545":{ // 545 Hotdog Front Lv.10
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":12,"Y":-6,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"Y":-8,"MoveY":8}
+			]
+		},
+		"T546":{ // 546 Hotdog Front Lv.11
+			"Delay":6,
+			"Sound":5,
+			"Filter":96,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":160,"AttackPower":2,"X":-24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":24,"Y":8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":18,"Y":-2,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-12,"Y":-6,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":12,"Y":-6,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":-5,"Y":-8,"MoveY":8},
+				{"Sprite":160,"AttackPower":2,"X":5,"Y":-8,"MoveY":8}
+			]
+		}
+	},
+	"Ports":{
+		"P25":{ // 25 [FoodShip Nine ~ B]
+			"Name":"HotDog Front",
+			"NormalShots":["T536","T537","T538","T539","T540","T541","T542","T543","T544","T545","T546"]
+		}
+	}
+}

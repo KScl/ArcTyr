@@ -1,0 +1,248 @@
+{
+	"Import":[
+		// Charged shots are regular Pulse Cannon shots
+		"./Weapons/Vanilla/PulseCannon.json"
+	],
+	"Shots":{
+		"CrossCannon1":{
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10},
+				{"Sprite":2,"AttackPower":2,"MoveX":10}
+			]
+		},
+		"CrossCannon2":{
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":41,"AttackPower":3,"MoveX":-10},
+				{"Sprite":3,"AttackPower":3,"MoveX":10}
+			]
+		},
+		"CrossCannon3":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,"Y":-6},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,"Y": 6},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,"Y":-6},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,"Y": 6}
+			]
+		},
+		"CrossCannon4":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":39,"AttackPower":1,"MoveX":-10,       "Y":-7},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10,       "Y": 9},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10,       "Y":-7},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10,       "Y": 9}
+			]
+		},
+		"CrossCannon5":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,"Y":-10},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,"Y":  8},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,"Y":-10},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,"Y":  8}
+			]
+		},
+		"CrossCannon6":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite": 39,"AttackPower":1,"MoveX":-10,       "Y":-7},
+				{"Sprite":203,"AttackPower":4,"MoveX":-10,"X":-6},
+				{"Sprite": 39,"AttackPower":1,"MoveX":-10,       "Y": 9},
+				{"Sprite":  1,"AttackPower":1,"MoveX": 10,       "Y":-7},
+				{"Sprite":222,"AttackPower":4,"MoveX": 10,"X": 6},
+				{"Sprite":  1,"AttackPower":1,"MoveX": 10,       "Y": 9}
+			]
+		},
+		"CrossCannon7":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,       "Y":-10},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,       "Y": 10},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,       "Y":-10},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,       "Y": 10}
+			]
+		},
+		"CrossCannon8":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":39,"AttackPower":1,"MoveX":-10,       "Y":-12},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4,"Y": -5},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4,"Y":  7},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10,       "Y": 16},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10,       "Y":-12},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4,"Y": -5},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4,"Y":  7},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10,       "Y": 16}
+			]
+		},
+		"CrossCannon9":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,       "Y":-9},
+				{"Sprite":39,"AttackPower":1,"MoveX":-10,       "Y": 2},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,"X": 1,"Y": 1},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,       "Y":11},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,       "Y":-9},
+				{"Sprite": 1,"AttackPower":1,"MoveX": 10,       "Y": 2},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,"X":-1,"Y": 1},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,       "Y":11}
+			]
+		},
+		"CrossCannon10":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":203,"AttackPower":4,"MoveX":-10,"X":-5,"Y":-10},
+				{"Sprite": 40,"AttackPower":2,"MoveX":-10},
+				{"Sprite":203,"AttackPower":4,"MoveX":-10,"X":-5,"Y": 10},
+				{"Sprite":222,"AttackPower":4,"MoveX": 10,"X": 5,"Y":-10},
+				{"Sprite":  2,"AttackPower":2,"MoveX": 10},
+				{"Sprite":222,"AttackPower":4,"MoveX": 10,"X": 5,"Y": 10}
+			]
+		},
+		"CrossCannon11":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,       "Y":-16},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4,"Y": -5},
+				{"Sprite":41,"AttackPower":3,"MoveX":-10,"X":-4,"Y":  7},
+				{"Sprite":40,"AttackPower":2,"MoveX":-10,       "Y": 18},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,       "Y":-16},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4,"Y": -5},
+				{"Sprite": 3,"AttackPower":3,"MoveX": 10,"X": 4,"Y":  7},
+				{"Sprite": 2,"AttackPower":2,"MoveX": 10,       "Y": 18}
+			]
+		},
+
+		"CrossCannonAim1":{
+			"Delay":4,
+			"Sound":25,
+			"Pieces":[
+				{"Sprite":334,"AttackPower":2,"MoveY":10}
+			]
+		},
+		"CrossCannonAim2":{
+			"Delay":4,
+			"Sound":25,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":-4,"Y":-2},
+				{"Sprite":315,"AttackPower":1,"MoveY":10              },
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": 4,"Y":-2}
+			]
+		},
+		"CrossCannonAim3":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":-8,"Y":-4},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":-4,"Y":-2},
+				{"Sprite":315,"AttackPower":1,"MoveY":10              },
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": 4,"Y":-2},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": 8,"Y":-4}
+			]
+		},
+		"CrossCannonAim4":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X":-10,"Y":-4},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": -4,"Y":-2},
+				{"Sprite":315,"AttackPower":1,"MoveY":10               },
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":  4,"Y":-2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X": 10,"Y":-4}
+			]
+		},
+		"CrossCannonAim5":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X":-16,"Y":-4},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": -8,"Y":-2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10               },
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":  8,"Y":-2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X": 16,"Y":-4}
+			]
+		},
+		"CrossCannonAim6":{
+			"Delay":5,
+			"Sound":25,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X":-20,"Y":-4},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X":-13,"Y":-2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X": -6,"Y": 0},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,        "Y": 2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X":  6,"Y": 0},
+				{"Sprite":315,"AttackPower":1,"MoveY":10,"X": 13,"Y":-2},
+				{"Sprite":334,"AttackPower":2,"MoveY":10,"X": 20,"Y":-4}
+			]
+		}
+	},
+	"Ports":{
+		"DWCrossCannon":{ // 10 [TX-DragonWing ~ C]
+			"Name":"Cross-Cannon",
+			"NormalShots":[
+				"CrossCannon1",
+				"CrossCannon2",
+				"CrossCannon3",
+				"CrossCannon4",
+				"CrossCannon5",
+				"CrossCannon6",
+				"CrossCannon7",
+				"CrossCannon8",
+				"CrossCannon9",
+				"CrossCannon10",
+				"CrossCannon11"
+			],
+			"ChargeShots":[
+				"T158",
+				"T160",
+				"T162",
+				"T163",
+				"T165"
+			],
+			"AimedShots":[
+				"CrossCannonAim1",
+				"CrossCannonAim2",
+				"CrossCannonAim3",
+				"CrossCannonAim4",
+				"CrossCannonAim5",
+				"CrossCannonAim6"
+			]	
+		}
+	}
+}

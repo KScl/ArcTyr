@@ -1,0 +1,148 @@
+{
+	"Shots":{
+		"T673":{ // 673 NortShip Super Pulse Lv.1
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8}
+			]
+		},
+		"T674":{ // 674 NortShip Super Pulse Lv.2
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"Y":-4,"MoveY":8}
+			]
+		},
+		"T675":{ // 675 NortShip Super Pulse Lv.3
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8}
+			]
+		},
+		"T676":{ // 676 NortShip Super Pulse Lv.4
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"Y":-4,"MoveY":8}
+			]
+		},
+		"T677":{ // 677 NortShip Super Pulse Lv.5
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-11,"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":10,"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"Y":-6,"MoveY":8}
+			]
+		},
+		"T678":{ // 678 NortShip Super Pulse Lv.6
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-6,"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":5,"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"Y":-6,"MoveY":8}
+			]
+		},
+		"T679":{ // 679 NortShip Super Pulse Lv.7
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
+				{"Sprite":134,"AttackPower":1,"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
+				{"Sprite":77,"AttackPower":1,"Y":4,"MoveY":-8}
+			]
+		},
+		"T680":{ // 680 NortShip Super Pulse Lv.8
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-3,"Y":4,"MoveY":-8},
+				{"Sprite":58,"AttackPower":1,"X":2,"Y":4,"MoveY":-8},
+				{"Sprite":58,"AttackPower":1,"X":-6,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":5,"Y":-2,"MoveY":8}
+			]
+		},
+		"T681":{ // 681 NortShip Super Pulse Lv.9
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"Y":-4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
+				{"Sprite":77,"AttackPower":1,"Y":4,"MoveY":-8}
+			]
+		},
+		"T682":{ // 682 NortShip Super Pulse Lv.10
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-5,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-5,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-5,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":4,"MoveY":8}
+			]
+		},
+		"T683":{ // 683 NortShip Super Pulse Lv.11
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":58,"AttackPower":1,"X":-19,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
+				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"Y":-4,"MoveY":8}
+			]
+		}
+	},
+	"Ports":{
+		"P36":{ // 36 [NortShip Z ~ E]
+			"Name":"NortShip Super Pulse",
+			"NormalShots":["T673","T674","T675","T676","T677","T678","T679","T680","T681","T682","T683"]
+		}
+	}
+}

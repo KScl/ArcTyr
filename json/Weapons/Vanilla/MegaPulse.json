@@ -1,0 +1,103 @@
+{
+	"Shots":{
+		"T400":{ // 400
+			"Delay":3,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T49"},"MoveY":6}
+			]
+		},
+		"T401":{ // 401
+			"Delay":2,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T49"},"MoveY":6}
+			]
+		},
+		"T402":{ // 402
+			"Delay":4,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T403":{ // 403
+			"Delay":3,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T404":{ // 404
+			"Delay":2,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T405":{ // 405
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T51"},"Duration":{"Carry":"X"},"MoveY":6}
+			]
+		},
+		"T406":{ // 406
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		},
+		"T407":{ // 407
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		},
+		"T408":{ // 408
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T54"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		},
+		"T409":{ // 409
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-7,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":7,"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		},
+		"T410":{ // 410
+			"Delay":5,
+			"AnimFrames":3,
+			"Sound":1,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		}
+	},
+	"Ports":{
+		"P19":{ // 19 [StormWind ~ A]
+			"Name":"Mega Pulse",
+			"NormalShots":["T400","T401","T402","T403","T404","T405","T406","T407","T408","T409","T410"]
+		}
+	}
+}

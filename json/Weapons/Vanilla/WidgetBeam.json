@@ -1,0 +1,134 @@
+{
+	"Shots":{
+		"T738":{ // 738 Widget Beam Lv.1
+			"Delay":2,
+			"Sound":13,
+			"Filter":112,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T739":{ // 739 Widget Beam Lv.2
+			"Delay":2,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+			]
+		},
+		"T740":{ // 740 Widget Beam Lv.3
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-3,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":3,"MoveY":10}
+			]
+		},
+		"T741":{ // 741 Widget Beam Lv.4
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T742":{ // 742 Widget Beam Lv.5
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-15,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":15,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T743":{ // 743 Widget Beam Lv.6
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-11,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":11,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"X":-4,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"X":4,"MoveY":10}
+			]
+		},
+		"T744":{ // 744 Widget Beam Lv.7
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":21,"AttackPower":1,"X":-17,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"X":17,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"X":-4,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"X":4,"MoveY":10}
+			]
+		},
+		"T745":{ // 745 Widget Beam Lv.8
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":22,"AttackPower":1,"X":-18,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":18,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T746":{ // 746 Widget Beam Lv.9
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+			]
+		},
+		"T747":{ // 747 Widget Beam Lv.10
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":-16,"Y":12,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":16,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"MoveY":10}
+			]
+		},
+		"T748":{ // 748 Widget Beam Lv.11
+			"Delay":3,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":-16,"Y":12,"MoveY":10},
+				{"Sprite":22,"AttackPower":1,"X":16,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+			]
+		}
+	},
+	"Ports":{
+		"P40":{ // 40 [Mag-Malice ~ B]
+			"Name":"Widget Beam",
+			"NormalShots":["T738","T739","T740","T741","T742","T743","T744","T745","T746","T747","T748"]
+		}
+	}
+}
