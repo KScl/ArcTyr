@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/Rear/Starburst.json",
-		"./Weapons/Vanilla/GuidedBombs.json",
-		"./Weapons/Vanilla/ShurikenField.json",
-		"./Weapons/Vanilla/PoisonBomb.json",
-		"./Weapons/Vanilla/ProtronWave.json"
+		"./Weapons/Vanilla/Rear/Starburst.jsonc",
+		"./Weapons/Vanilla/GuidedBombs.jsonc",
+		"./Weapons/Vanilla/ShurikenField.jsonc",
+		"./Weapons/Vanilla/PoisonBomb.jsonc",
+		"./Weapons/Vanilla/ProtronWave.jsonc"
 	],
 	"Ships":{
 		"Maelstrom":{

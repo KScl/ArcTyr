@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Tyrian2000/PretzelMissile.json",
-		"./Weapons/Vanilla/Rear/HotDog.json",
-		"./Weapons/Tyrian2000/PeoplePretzels.json",
-		"./Weapons/Vanilla/HotDog.json",
-		"./Weapons/Vanilla/PulseCannon.json"
+		"./Weapons/Tyrian2000/PretzelMissile.jsonc",
+		"./Weapons/Vanilla/Rear/HotDog.jsonc",
+		"./Weapons/Tyrian2000/PeoplePretzels.jsonc",
+		"./Weapons/Vanilla/HotDog.jsonc",
+		"./Weapons/Vanilla/PulseCannon.jsonc"
 	],
 	"Shots":{
 		"GiantPretzelSpecial":{ // T2K: 2-24

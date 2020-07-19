@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/PulseCannon.json",
-		"./Weapons/Vanilla/Protron.json",
-		"./Weapons/Vanilla/HeavyMissiles.json",
-		"./Weapons/Vanilla/VulcanCannon.json",
-		"./Weapons/Vanilla/MegaCannon.json"
+		"./Weapons/Vanilla/PulseCannon.jsonc",
+		"./Weapons/Vanilla/Protron.jsonc",
+		"./Weapons/Vanilla/HeavyMissiles.jsonc",
+		"./Weapons/Vanilla/VulcanCannon.jsonc",
+		"./Weapons/Vanilla/MegaCannon.jsonc"
 	],
 	"Ships":{
 		"SilverShip":{

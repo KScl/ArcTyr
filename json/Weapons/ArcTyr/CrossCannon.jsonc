@@ -1,7 +1,7 @@
 {
 	"Import":[
 		// Charged shots are regular Pulse Cannon shots
-		"./Weapons/Vanilla/PulseCannon.json"
+		"./Weapons/Vanilla/PulseCannon.jsonc"
 	],
 	"Shots":{
 		"CrossCannon1":{

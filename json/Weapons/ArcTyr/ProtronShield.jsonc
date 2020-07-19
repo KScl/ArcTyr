@@ -1,7 +1,7 @@
 {
 	"Import":[
 		// TEMPORARY
-		"./Weapons/Vanilla/Rear/Protron.json"
+		"./Weapons/Vanilla/Rear/Protron.jsonc"
 	],
 	"Shots":{
 		"T832":{ // 832 -- NEW Protron Shield AimedLv.1

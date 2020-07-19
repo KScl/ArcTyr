@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Tyrian2000/DragonFlame.json",
-		"./Weapons/Tyrian2000/DragonFrost.json",
-		"./Weapons/Vanilla/MegaPulse.json",
-		"./Weapons/Vanilla/PoisonBomb.json",
-		"./Weapons/Vanilla/Rear/MegaPulse.json"
+		"./Weapons/Tyrian2000/DragonFlame.jsonc",
+		"./Weapons/Tyrian2000/DragonFrost.jsonc",
+		"./Weapons/Vanilla/MegaPulse.jsonc",
+		"./Weapons/Vanilla/PoisonBomb.jsonc",
+		"./Weapons/Vanilla/Rear/MegaPulse.jsonc"
 	],
 	"Shots":{
 		"DragonSpecial":{ // T2K: 2-25

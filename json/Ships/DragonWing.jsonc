@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/ArcTyr/TurboVulcan.json",
-		"./Weapons/ArcTyr/ProtronShield.json",
-		"./Weapons/ArcTyr/CrossCannon.json",
-		"./Weapons/Vanilla/Rear/HeavyMissiles.json",
-		"./Weapons/Vanilla/Rear/SonicWave.json"
+		"./Weapons/ArcTyr/TurboVulcan.jsonc",
+		"./Weapons/ArcTyr/ProtronShield.jsonc",
+		"./Weapons/ArcTyr/CrossCannon.jsonc",
+		"./Weapons/Vanilla/Rear/HeavyMissiles.jsonc",
+		"./Weapons/Vanilla/Rear/SonicWave.jsonc"
 	],
 	"Info":{
 		// This is where info about DragonWing's specials WILL go

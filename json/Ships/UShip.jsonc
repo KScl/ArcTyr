@@ -1,12 +1,12 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/VulcanCannon.json",
-		"./Weapons/ArcTyr/NeedleLaser.json",
-		"./Weapons/Vanilla/GuidedMicroBombs.json",
-		"./Weapons/Vanilla/Rear/MegaPulse.json",
-		"./Weapons/Vanilla/Missiles.json",
+		"./Weapons/Vanilla/VulcanCannon.jsonc",
+		"./Weapons/ArcTyr/NeedleLaser.jsonc",
+		"./Weapons/Vanilla/GuidedMicroBombs.jsonc",
+		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
+		"./Weapons/Vanilla/Missiles.jsonc",
 
-		"./Specials/Twiddles/Lightning.json"
+		"./Specials/Twiddles/Lightning.jsonc"
 	],
 	"Ships":{
 		"UShip":{

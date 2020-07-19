@@ -1,15 +1,15 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/BananaBlast.json",
-		"./Weapons/Vanilla/OrangeJuicer.json",
-		"./Weapons/Vanilla/HotDog.json",
-		"./Weapons/Vanilla/Rear/WildBall.json",
-		"./Weapons/Vanilla/ProtronZ.json",
+		"./Weapons/Vanilla/BananaBlast.jsonc",
+		"./Weapons/Vanilla/OrangeJuicer.jsonc",
+		"./Weapons/Vanilla/HotDog.jsonc",
+		"./Weapons/Vanilla/Rear/WildBall.jsonc",
+		"./Weapons/Vanilla/ProtronZ.jsonc",
 
-		"./Options/ArcTyr/IceCube.json",
+		"./Options/ArcTyr/IceCube.jsonc",
 
 		// Needed for Banana Bomb special
-		"./Weapons/Vanilla/Rear/BananaBlast.json"
+		"./Weapons/Vanilla/Rear/BananaBlast.jsonc"
 	],
 	"Shots":{
 		"ShipSpecialOranges":{ // 749 Orange shield special

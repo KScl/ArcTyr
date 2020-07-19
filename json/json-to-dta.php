@@ -3,7 +3,7 @@
 // This script is a little messy, but it enables some flexibility with defining data for ArcTyr
 
 $dirsep = DIRECTORY_SEPARATOR;
-$assembly_file = './assembly.json';
+$assembly_file = './assembly.jsonc';
 $output_dir = '../arcdata/';
 
 function write_byte($f, $q) {

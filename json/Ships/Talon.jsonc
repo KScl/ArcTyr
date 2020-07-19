@@ -1,10 +1,10 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/MegaPulse.json",
-		"./Weapons/Vanilla/LightningCannon.json",
-		"./Weapons/Vanilla/Rear/MegaPulse.json",
-		"./Weapons/Vanilla/SonicImpulse.json",
-		"./Weapons/Vanilla/ProtronWave.json"
+		"./Weapons/Vanilla/MegaPulse.jsonc",
+		"./Weapons/Vanilla/LightningCannon.jsonc",
+		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
+		"./Weapons/Vanilla/SonicImpulse.jsonc",
+		"./Weapons/Vanilla/ProtronWave.jsonc"
 	],
 	"Ships":{
 		"Talon":{

@@ -1,7 +1,7 @@
 {
 	"Import":[
 		// For charged shots
-		"./Weapons/Vanilla/Rear/VulcanCannon.json"
+		"./Weapons/Vanilla/Rear/VulcanCannon.jsonc"
 	],
 	"Shots":{
 		"TurboVulcan1":{ // 804 -- NEW Turbo Vulcan Lv.1

@@ -1,13 +1,13 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/Laser.json",
-		"./Weapons/Vanilla/Rear/ScatterWave.json",
-		"./Weapons/Vanilla/NortSuperPulse.json",
-		"./Weapons/Vanilla/NortSpreadA.json",
-		"./Weapons/Vanilla/NortSpreadB.json",
+		"./Weapons/Vanilla/Laser.jsonc",
+		"./Weapons/Vanilla/Rear/ScatterWave.jsonc",
+		"./Weapons/Vanilla/NortSuperPulse.jsonc",
+		"./Weapons/Vanilla/NortSpreadA.jsonc",
+		"./Weapons/Vanilla/NortSpreadB.jsonc",
 
-		"./Specials/Twiddles/Lightning.json",
-		"./Specials/SDFMainGun.json"
+		"./Specials/Twiddles/Lightning.jsonc",
+		"./Specials/SDFMainGun.jsonc"
 	],
 	"Ships":{
 		"NortShip":{

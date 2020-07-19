@@ -3,29 +3,29 @@
 	"Import":[
 		// Needs to be loaded first, to ensure shrapnel shots
 		// are in a position that works for Tyrian
-		"./Weapons/Shrapnel.json",
+		"./Weapons/Shrapnel.jsonc",
 
 		// Unsorted data.
-		"./Extra/option.json",
-		"./Extra/shots.json",
-		"./Extra/special.json",
+		"./Extra/option.jsonc",
+		"./Extra/shots.jsonc",
+		"./Extra/special.jsonc",
 
 		// Ships
-		"./Ships/Talon.json",
-		"./Ships/SuperCarrot.json",
-		"./Ships/Maelstrom.json",
-		"./Ships/Stalker.json",
-		"./Ships/UShip.json",
-		"./Ships/SilverShip.json",
-		"./Ships/DragonWing.json",
-		"./Ships/NortShip.json",
-		"./Ships/Magma.json",
-		"./Ships/Tyrian2000/Dragon.json",
-		"./Ships/Tyrian2000/Pretzel.json",
-		"./Ships/Randomizer.json",
+		"./Ships/Talon.jsonc",
+		"./Ships/SuperCarrot.jsonc",
+		"./Ships/Maelstrom.jsonc",
+		"./Ships/Stalker.jsonc",
+		"./Ships/UShip.jsonc",
+		"./Ships/SilverShip.jsonc",
+		"./Ships/DragonWing.jsonc",
+		"./Ships/NortShip.jsonc",
+		"./Ships/Magma.jsonc",
+		"./Ships/Tyrian2000/Dragon.jsonc",
+		"./Ships/Tyrian2000/Pretzel.jsonc",
+		"./Ships/Randomizer.jsonc",
 
 		// Powerup Weapons
-		"./Weapons/Vanilla/AtomicRailgun.json"
+		"./Weapons/Vanilla/AtomicRailgun.jsonc"
 	],
 	"Info":{
 		"ShipOrder":[ // Order of ships in Ship Select

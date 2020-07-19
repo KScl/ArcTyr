@@ -1,6 +1,6 @@
 {
 	"Import":[
-		"./Weapons/Vanilla/ZicaLaser.json"
+		"./Weapons/Vanilla/ZicaLaser.jsonc"
 	],
 	"Options":{
 		"ZicaCharge":{ // 12
