@@ -23,7 +23,7 @@
 				"P3"
 			],
 			"Twiddles":[
-				["Left", "Right", "Down", {"Special":"S39"}]
+				["Left", "Right", "Down+Fire", {"Special":"S39"}]
 			]
 		}
 	}

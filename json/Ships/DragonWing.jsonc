@@ -14,13 +14,13 @@
 			"Name":"DragonOption Left",
 			"SpecialType":"SpawnOptionFromWeapon",
 			"ShotData":{"Side":"Left"},
-			"PowerUse":{"Shield":10}
+			"PowerUse":{"PowerLevel":1}
 		},
 		"TwiddleCreateOptionRight":{ // 36
 			"Name":"DragonOption Right",
 			"SpecialType":"SpawnOptionFromWeapon",
 			"ShotData":{"Side":"Right"},
-			"PowerUse":{"Shield":10}
+			"PowerUse":{"PowerLevel":1}
 		},
 		"TwiddleCreatePlasma":{ // 32
 			"Name":"Dragonwing EX Plasma",

@@ -1,7 +1,10 @@
 {
 	"Import":[
 		// For charged shots
-		"./Weapons/Vanilla/Rear/VulcanCannon.jsonc"
+		"./Weapons/Vanilla/Rear/VulcanCannon.jsonc",
+
+		// DragonWing options
+		"./Options/Vanilla/SatelliteMarlo.jsonc"
 	],
 	"Shots":{
 		"TurboVulcan1":{ // 804 -- NEW Turbo Vulcan Lv.1
@@ -267,6 +270,11 @@
 				"TurboVulcanAimed4",
 				"TurboVulcanAimed5",
 				"TurboVulcanAimed6"
+			],
+			"DragonWingOptions":[
+				"SatelliteMarlo",
+				"O4",
+				"O18"
 			]
 		}
 	}

@@ -9,7 +9,7 @@
 		}
 	},
 	"Options":{
-		"O2":{ // 2
+		"DualShot":{ // 2
 			"Name":"Dual Shot Option",
 			"Shot":"OptionDualShot",
 			"Graphics":[{"WaitUntilFire":169},188,207,188],

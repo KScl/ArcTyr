@@ -189,7 +189,7 @@ void JE_getShipInfo( void )
 		if (player[i].player_status != STATUS_INGAME)
 			continue;
 
-		if (ships[player[i].items.ship].special_weapons[0] == 0)
+		if (ships[player[i].items.ship].special_weapons[0] == 0xFFFF)
 		{
 			do // randomize special weapon 1
 				player[i].items.special[0] = (mt_rand() % num_specials) + 1;
@@ -202,7 +202,7 @@ void JE_getShipInfo( void )
 		}
 
 		// randomize port weapons
-		if (ships[player[i].items.ship].port_weapons[0] == 0)
+		if (ships[player[i].items.ship].port_weapons[0] == 0xFFFF)
 		{
 			for (int wp = 0; wp < 5; ++wp)
 			{
@@ -452,9 +452,9 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			{
 				char *wName = JE_trim(options[special[specialType].wpn].name);
 				if (PL_NumPlayers() == 2)
-					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu formed", playerNum);
+					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu got", playerNum);
 				else
-					sprintf(tmpBuf.s, "You formed");
+					sprintf(tmpBuf.s, "You got");
 				sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^56", wName);
 				JE_drawTextWindowColorful(tmpBuf.l);				
 			}
@@ -463,42 +463,19 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 				this_player->shot_repeat[SHOT_SPECIAL] = 255;
 			break;
 		case 21:; // spawn sidekick from weapon
-			JE_byte spOption = 0;
-			switch (this_player->port_mode)
+			JE_byte whichOpt = 
+				(this_player->items.power_level >= 8) ? 2 :
+				((this_player->items.power_level >= 4) ? 1 : 0);
+			JE_byte spOption = weaponPort[this_player->cur_item.weapon].dwSidekick[whichOpt];
+
+			// Fail if no option available
+			// Also, right only sidekicks fail if done on left
+			if (spOption == 0 || (options[spOption].tr == 2 && special[specialType].wpn == 0))
 			{
-			case 0: // Turbo Vulcan
-				spOption = // Side Ship, Vulcan Shot Option, Satellite Marlo
-					(this_player->items.power_level > 8) ? 18 :
-					((this_player->items.power_level > 4) ? 4 : 30);
-				break;
-			case 1: // Protron Shield
-				spOption = // Beno Protron, Warfly, Gerund
-					(this_player->items.power_level > 8) ? 28 :
-					((this_player->items.power_level > 4) ? 19 : 21);
-				break;
-			case 2: // X-Cannon
-				spOption = // Beno Wallop, Dual Shot, Single Shot
-					(this_player->items.power_level > 8) ? 27 :
-					((this_player->items.power_level > 4) ? 2 : 1);
-				break;
-			case 3: // Sonic Wave
-				spOption = // Zica Supercharger, Charge Cannon, Wobbley
-					(this_player->items.power_level > 8) ? 12 :
-					((this_player->items.power_level > 4) ? 3 : 5);
-				break;
-			case 4: // Rear Heavy Missiles
-				spOption = // Atom Bombs, Buster Rocket, MicroBomb
-					(this_player->items.power_level > 8) ? 7 :
-					((this_player->items.power_level > 4) ? 11 : 13);
+				++this_player->items.power_level;
 				break;
 			}
 
-			// Right only sidekicks fail if done on left
-			if ((spOption == 27 || spOption == 28) && special[specialType].wpn == 0)
-			{
-				this_player->shield += 10;
-				break;
-			}
 			soundQueue[3] = S_POWERUP;
 			if (special[specialType].wpn == 0)
 			{
@@ -520,9 +497,9 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			{
 				char *wName = JE_trim(options[spOption].name);
 				if (PL_NumPlayers() == 2)
-					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu formed", playerNum);
+					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu got", playerNum);
 				else
-					sprintf(tmpBuf.s, "You formed");
+					sprintf(tmpBuf.s, "You got");
 				sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^56", wName);
 				JE_drawTextWindowColorful(tmpBuf.l);
 			}
@@ -572,13 +549,20 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 				twiddlePower = *shield / 2;
 				*shield = twiddlePower;
 			}
-			else  // costs some armor
+			else if (twiddlePower < 200) // costs some armor
 			{
 				twiddlePower -= 100;
 				if (*armor > twiddlePower)
 					*armor -= twiddlePower;
 				else
 					can_afford = false;
+			}
+			else // costs a power level
+			{
+				if (this_player->items.power_level <= 1)
+					can_afford = false;
+				else
+					--this_player->items.power_level;
 			}
 		}
 

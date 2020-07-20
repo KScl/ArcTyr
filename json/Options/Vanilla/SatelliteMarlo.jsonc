@@ -9,7 +9,7 @@
 		}
 	},
 	"Options":{
-		"O30":{ // 30
+		"SatelliteMarlo":{ // 30
 			"Name":"Satellite Marlo",
 			"MovementType":"Orbit",
 			"Shot":"T470",

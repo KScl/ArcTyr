@@ -1,7 +1,11 @@
 {
 	"Import":[
 		// Charged shots are regular Pulse Cannon shots
-		"./Weapons/Vanilla/PulseCannon.jsonc"
+		"./Weapons/Vanilla/PulseCannon.jsonc",
+
+		// DragonWing options
+		"./Options/Vanilla/SingleShot.jsonc",
+		"./Options/Vanilla/DualShot.jsonc"
 	],
 	"Shots":{
 		"CrossCannon1":{
@@ -242,7 +246,12 @@
 				"CrossCannonAim4",
 				"CrossCannonAim5",
 				"CrossCannonAim6"
-			]	
+			],
+			"DragonWingOptions":[
+				"SingleShot",
+				"DualShot",
+				"O27"
+			]
 		}
 	}
 }

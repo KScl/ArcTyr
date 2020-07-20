@@ -169,6 +169,7 @@ void ADTA_loadPorts( void )
 		{			
 			efread(&weaponPort[i].chargeOp,    sizeof(JE_word), 5, f);
 			efread(&weaponPort[i].aimedOp,     sizeof(JE_word), 6, f);
+			efread(&weaponPort[i].dwSidekick,  sizeof(JE_byte), 3, f);
 		}
 		efread(&weaponPort[i].cost,        sizeof(JE_word), 1, f);
 		efread(&weaponPort[i].itemgraphic, sizeof(JE_word), 1, f);

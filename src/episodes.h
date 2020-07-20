@@ -69,6 +69,7 @@ typedef struct
 	JE_word normalOp[11]; // main weapon
 	JE_word chargeOp[5]; // dragonwing charged
 	JE_word aimedOp[6]; // dragonwing aimed
+	JE_byte dwSidekick[3]; // dragonwing sidekick given
 
 	JE_word cost;
 	JE_word itemgraphic;

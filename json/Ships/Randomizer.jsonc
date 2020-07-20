@@ -11,6 +11,8 @@
 			"Name":"Mystery Machine",
 			"Graphic":233,
 			"Armor":16,
+			"SpecialWeapons":"Random",
+			"PortWeapons":"Random",
 			"Twiddles":[
 			]
 		}

@@ -76,7 +76,8 @@
 			"Name":"Protron Shield",
 			"NormalShots":["T311","T312","T313","T314","T315","T316","T317","T318","T319","T320","T321"],
 			"ChargeShots":["T483","T484","T485","T486","T487"],
-			"AimedShots":["T832","T833","T834","T835","T836","T837"]
+			"AimedShots":["T832","T833","T834","T835","T836","T837"],
+			"DragonWingOptions":["O21","O19","O28"]
 		}
 	}
 }

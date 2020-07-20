@@ -312,6 +312,17 @@ foreach ($all_ports as $id => $port)
 				write_word($output, $temp);
 			}
 		}
+
+		if (!isset($port['DragonWingOptions'])) {
+			for ($j = 0; $j < 3; ++$j) write_byte($output, 0);
+		}
+		else {
+			for ($j = 0; $j < 3; ++$j) {
+				$temp = array_search($port['DragonWingOptions'][$j], $option_ids);
+				if ($temp === FALSE) die("Invalid port {$id}: {$port['DragonWingOptions'][$j]} doesn't match an option\n");
+				write_byte($output, $temp);
+			}
+		}
 	}
 
 	write_word($output, get_default($port, 'Cost', 0));
@@ -393,6 +404,11 @@ foreach ($all_specials as $id => $special) {
 			if ($power['Armor'] > 0 && $power['Armor'] <= 28)
 				$power = $power['Armor'] + 100;
 			else die("Invalid special {$id}: Armor:{$power['Armor']} is invalid\n");
+		}
+		elseif (isset($power['PowerLevel'])) {
+			if ($power['PowerLevel'] == 1)
+				$power = 201;
+			else die("Invalid special {$id}: PowerLevel:{$power['PowerLevel']} is invalid\n");
 		}
 		else die("Invalid special {$id}: Invalid PowerUse array given\n");
 	}
@@ -495,6 +511,9 @@ foreach ($all_ships as $id => $ship) {
 	if (!isset($ship['SpecialWeapons'])) {
 		for ($j = 0; $j < 2; ++$j) write_word($output, 0);
 	}
+	else if ($ship['SpecialWeapons'] === 'Random') {
+		for ($j = 0; $j < 2; ++$j) write_word($output, 0xFFFF);
+	}
 	else {
 		for ($j = 0; $j < 2; ++$j) {
 			$temp = array_search($ship['SpecialWeapons'][$j], $special_ids);
@@ -505,6 +524,9 @@ foreach ($all_ships as $id => $ship) {
 
 	if (!isset($ship['PortWeapons'])) {
 		for ($j = 0; $j < 5; ++$j) write_word($output, 0);
+	}
+	else if ($ship['PortWeapons'] === 'Random') {
+		for ($j = 0; $j < 5; ++$j) write_word($output, 0xFFFF);
 	}
 	else {
 		for ($j = 0; $j < 5; ++$j) {
