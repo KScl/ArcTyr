@@ -1,0 +1,16 @@
+{
+	"Enemies":{
+		"Slot960":{ // Extra boss in MISTAKES
+			"Shots":[127],
+			"StartX":130,
+			"StartY":-13,
+			"StartXC":125,
+			"Health":255,
+			"ShapeBank":5,
+			"Graphics":[277,277,277,239,239,239,201,201,201,199,199,199,201,201,201,239,239,239],
+			"ExplosionType":10,
+			"Animate":1,
+			"Value":1000
+		}
+	}
+}

@@ -46,7 +46,7 @@ size_t num_options  = 0;
 size_t num_specials = 0;
 
 /* Enemy data */
-JE_EnemyDatType *enemyDat;
+JE_EnemyDatType enemyDat[T2KENEMY_NUM];
 
 /* EPISODE variables */
 JE_byte    initial_episode_num, episodeNum = 0;
@@ -331,6 +331,52 @@ void ADTA_loadOptions( void )
 	}
 }
 
+void ADTA_loadEnemies( void )
+{
+	JE_byte tmp_b;
+	FILE *f = dir_fopen_die(arcdata_dir(), "enemies.dta", "rb");
+
+	getc(f); // always 100
+	for (int i = 900; i <= 999; ++i)
+	{
+		efread(&enemyDat[i].ani,           sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].tur,           sizeof(JE_byte), 3, f);
+		efread(&enemyDat[i].freq,          sizeof(JE_byte), 3, f);
+		efread(&enemyDat[i].xmove,         sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].ymove,         sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].xaccel,        sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].yaccel,        sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].xcaccel,       sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].ycaccel,       sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].startx,        sizeof(JE_integer), 1, f);
+		efread(&enemyDat[i].starty,        sizeof(JE_integer), 1, f);
+		efread(&enemyDat[i].startxc,       sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].startyc,       sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].armor,         sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].esize,         sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].egraphic,      sizeof(JE_word), 20, f);
+		efread(&enemyDat[i].explosiontype, sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].animate,       sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].shapebank,     sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].xrev,          sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].yrev,          sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].dgr,           sizeof(JE_word), 1, f);
+		efread(&enemyDat[i].dlevel,        sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].dani,          sizeof(JE_shortint), 1, f);
+		efread(&enemyDat[i].elaunchfreq,   sizeof(JE_byte), 1, f);
+		efread(&enemyDat[i].elaunchtype,   sizeof(JE_word), 1, f);
+		efread(&enemyDat[i].value,         sizeof(JE_integer), 1, f);
+		efread(&enemyDat[i].eenemydie,     sizeof(JE_word), 1, f);
+
+		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
+		if (tmp_b != ';')
+		{
+			fprintf(stderr, "error: enemies array is bad at %x:%d: got %d\n", ftell(f), i, tmp_b);
+			JE_tyrianHalt(1);
+		}
+	}
+}
+
 void ADTA_loadShields( void )
 {
 	// We don't even load a file for this
@@ -382,6 +428,7 @@ void ADTA_loadItems( void )
 	sprintf(tmpBuf.l, "arcopt.dta: load OK (%zu items)", num_options);
 	ARC_IdentifyPrint(tmpBuf.l);
 
+	ADTA_loadEnemies();
 	ADTA_loadShields();
 }
 
@@ -459,12 +506,7 @@ void JE_loadItemDat( void )
 	// (we read from arcdata instead)
 	fseek(f, (isT2000) ? 0x1ddeb : 0xc7e3, SEEK_CUR);
 
-
-	const int enemy_num = (isT2000) ? T2KENEMY_NUM : ENEMY_NUM;
-	enemyDat = realloc(enemyDat, sizeof(JE_EnemyDatType) * (enemy_num + 1));
-
 	int i = 0, stop = ENEMY_NUM;
-
 	redoForT2KEnemies:
 	for (; i < stop + 1; ++i)
 	{

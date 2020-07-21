@@ -24,6 +24,8 @@
 #include "varz.h"
 #include "helptext.h"
 
+//#define EVENT_LOGGING
+
 void intro_logos( void );
 
 typedef struct

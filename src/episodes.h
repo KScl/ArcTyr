@@ -179,7 +179,7 @@ extern JE_ShipType       *ships; // dynamically allocated
 extern JE_OptionType     *options; // dynamically allocated
 extern JE_SpecialType    *special; // dynamically allocated
 
-extern JE_EnemyDatType   *enemyDat; // T2000: dynamically allocated
+extern JE_EnemyDatType   enemyDat[T2KENEMY_NUM];
 
 extern size_t num_ports, num_ships, num_options, num_specials;
 

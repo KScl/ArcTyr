@@ -1818,7 +1818,7 @@ redo:
 		const JE_byte chargeRates[11] = {23, 21, 19, 17, 15, 13, 12, 11, 10, 9, 8};
 
 		if (!twoPlayerLinked && chargeLevel > 0)
-			blit_sprite2(VGAScreen, this_player->x + (shipGr_ == 0) + 1, this_player->y - 13, iconShapes, 77 + chargeLevel + chargeGr * 19);
+			blit_sprite2(VGAScreen, this_player->x + (shipGr_ == 0) + 1, this_player->y - 13, iconShapes, 19 + (chargeLevel * 76) + (chargeGr * 19));
 
 		if (!chargeGrWait || !(--chargeGrWait))
 		{
@@ -2161,16 +2161,21 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						awardPoints = false;
 					}
 
-					if (evalue >= 32101 && evalue <= 32199)
+					if (evalue >= 32001 && evalue <= 32099)
+					{
+						uint pw = evalue - 32000;
+
+						this_player->items.weapon[this_player->port_mode] = pw;
+						PL_SwitchWeapon(this_player, this_player->port_mode, true);
+						this_player->cash += 1000;
+					}
+					else if (evalue >= 32101 && evalue <= 32199)
 					{
 						uint sw = evalue - 32100;
 
 						this_player->items.special[this_player->special_mode] = sw;
 						PL_SwitchSpecial(this_player, this_player->special_mode, true);
-						this_player->cash += 1000;
-
-						soundQueue[7] = S_POWERUP;
-						enemyAvail[z] = 1;						
+						this_player->cash += 1000;		
 					}
 					else if (evalue >= 30001 && evalue <= 30005)
 					{
@@ -2191,16 +2196,16 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 
 						if (awardPoints)
 							this_player->cash += 250;
-
-						soundQueue[7] = S_POWERUP;
-						enemyAvail[z] = 1;
 					}
 					else
 					{
 						// uncaught powerup
 						// formerly Purple Ball / Galaga DragonWing
-						soundQueue[7] = S_POWERUP;
+						continue;
 					}
+
+					soundQueue[7] = S_POWERUP;
+					enemyAvail[z] = 1;
 				}
 				else if (evalue > 20000)
 				{

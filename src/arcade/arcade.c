@@ -667,7 +667,7 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x )
 
 	if (this_player->is_dragonwing)
 	{
-		blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, 41);
+		blit_sprite2x2(VGAScreen, x + 1, 1, iconShapes, (twoPlayerLinked) ? 5 : 3);
 		if (twoPlayerLinkReady)
 		{
 			JE_textShade(VGAScreen, x + 8, 20, "OK!", 7, this_player->hud_ready_timer > 3 ? 0 : 6, FULL_SHADE);
@@ -753,6 +753,8 @@ void ARC_Timers( void )
 			JE_eventJump(levelTimerJumpTo);
 		else
 			timer = &levelTimerCountdown;
+
+		JE_textShade (VGAScreen, JE_fontCenter("Time Remaining", TINY_FONT) - 2, 4, "Time Remaining", 7, (*timer % 20) / 3, FULL_SHADE);
 	}
 	else // Hurry up timer
 	{    // No hurry up timer if there's already a level timer
@@ -774,7 +776,11 @@ void ARC_Timers( void )
 					PL_PlayerDamage(&player[1], DKILL);
 			}
 			else if (hurryUpTimer < 995)
+			{
 				timer = &hurryUpTimer;
+
+				JE_textShade (VGAScreen, JE_fontCenter("Hurry up!", TINY_FONT) - 2, 4, "Hurry up!", 7, (*timer % 20) / 3, FULL_SHADE);
+			}
 		}
 	}
 
@@ -793,7 +799,6 @@ void ARC_Timers( void )
 	{
 		JE_playSampleNumOnChannel(S_WARNING, SFXPRIORITY + 1);
 	}
-	JE_textShade (VGAScreen, JE_fontCenter("Time Remaining", TINY_FONT) - 2, 4, "Time Remaining", 7, (*timer % 20) / 3, FULL_SHADE);
 	sprintf(tmpBuf.s, "%d.%d", *timer / 100, (*timer / 10) % 10);
 	JE_dString (VGAScreen, JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES) - 2, 13, tmpBuf.s, SMALL_FONT_SHAPES);
 }
@@ -815,7 +820,7 @@ void ARC_DeathSprayWeapons( Player *this_player )
 
 	for (i = 0; i < spray; ++i)
 	{
-		b = JE_newEnemy(100, 603, 0);
+		b = JE_newEnemy(100, 999, 0);
 		if (b == 0)
 			return;
 		enemy[b-1].egr[1-1] = 7 + (this_player->port_mode * 2);

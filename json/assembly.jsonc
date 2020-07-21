@@ -25,7 +25,10 @@
 		"./Ships/Randomizer.jsonc",
 
 		// Powerup Weapons
-		"./Weapons/Vanilla/AtomicRailgun.jsonc"
+		"./Enemies/Pickups.jsonc",
+
+		// Extra enemies, bosses, etc.
+		"./Enemies/ExtraEnemies.jsonc"
 	],
 	"Info":{
 		"ShipOrder":[ // Order of ships in Ship Select
@@ -41,12 +44,6 @@
 			"Magma",
 			{"Secret":"Randomizer"},
 			{"Secret":"NortShip"}
-		],
-		"PortIndexMap":{ // For events in levels, etc.
-
-		},
-		"SpecialIndexMap":{ // For events in levels, etc.
-			"41":"SDFMainGun"
-		}
+		]
 	}
 }

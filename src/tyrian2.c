@@ -1715,7 +1715,7 @@ level_loop:
 
 										if (b != 0)
 										{
-											if (enemy[b-1].evalue > 30000)
+											if (enemy[b-1].evalue > 30000 && enemy[b-1].evalue < 32000)
 											{
 												JE_byte temp = SAPowerupBag[superArcadePowerUp++];
 												if (superArcadePowerUp == 5)
@@ -2274,13 +2274,18 @@ draw_player_shot_loop_end:
 
 	if (debug)
 	{
-		char buf[24];
-		snprintf(buf, sizeof(buf), "evnLoc: %d", eventLoc);
-		JE_textShade(VGAScreen, 32, 100, buf, 7, 2, FULL_SHADE);
-		snprintf(buf, sizeof(buf), "curLoc: %d", curLoc);
-		JE_textShade(VGAScreen, 32, 108, buf, 7, 2, FULL_SHADE);
-		snprintf(buf, sizeof(buf), "huryUp: %d", hurryUpTimer);
-		JE_textShade(VGAScreen, 32, 116, buf, 7, 2, FULL_SHADE);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "evnLoc: %d", eventLoc);
+		JE_textShade(VGAScreen, 32, 100, tmpBuf.s, 7, 2, FULL_SHADE);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "curLoc: %d", curLoc);
+		JE_textShade(VGAScreen, 32, 108, tmpBuf.s, 7, 2, FULL_SHADE);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "huryUp: %d", hurryUpTimer);
+		JE_textShade(VGAScreen, 32, 116, tmpBuf.s, 7, 2, FULL_SHADE);
+
+		memset(tmpBuf.s, 0, sizeof(tmpBuf.s));
+		for (temp = 0; temp < COUNTOF(globalFlags); ++temp)
+			tmpBuf.s[temp] = (globalFlags[temp]) ? 'T' : 'F';
+		snprintf(tmpBuf.l, sizeof(tmpBuf.l), "flags: %s", tmpBuf.s);
+		JE_textShade(VGAScreen, 32, 124, tmpBuf.l, 7, 2, FULL_SHADE);
 	}
 
 	// make sure we have a clean picture for the end level animation, if we need it
@@ -3584,7 +3589,6 @@ bool JE_searchFor/*enemy*/( JE_byte PLType, JE_byte* out_index )
 
 void JE_eventSystem( void )
 {
-//#define EVENT_LOGGING
 #ifdef EVENT_LOGGING
 	const JE_word prEventLoc = eventLoc;
 	printf("time %d, ev %d: %d ", curLoc, eventLoc, eventRec[eventLoc-1].eventtype);
@@ -4595,7 +4599,7 @@ void JE_eventSystem( void )
 		event_name("new_sky_enemy_powerup");
 		JE_createNewEventEnemy(0, 0, 0);
 		if (b > 0)
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 100) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 100) ? 999 : 533);
 		break;
 
 	case 102: // Ground enemy with normal powerup
@@ -4603,7 +4607,7 @@ void JE_eventSystem( void )
 		event_name("new_ground_enemy_powerup");
 		JE_createNewEventEnemy(0, 25, 0);
 		if (b > 0)
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 102) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 102) ? 999 : 533);
 		break;
 
 	case 104: // Top enemy with normal powerup
@@ -4611,7 +4615,7 @@ void JE_eventSystem( void )
 		event_name("new_top_enemy_powerup");
 		JE_createNewEventEnemy(0, 50, 0);
 		if (b > 0)
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 104) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 104) ? 999 : 533);
 		break;
 
 	case 106: // Ground2 enemy with normal powerup
@@ -4619,7 +4623,7 @@ void JE_eventSystem( void )
 		event_name("new_ground2_enemy_powerup");
 		JE_createNewEventEnemy(0, 75, 0);
 		if (b > 0)
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 106) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 106) ? 999 : 533);
 		break;
 
 	case 108: // Skybottom enemy with normal powerup
@@ -4629,7 +4633,7 @@ void JE_eventSystem( void )
 		if (b > 0)
 		{
 			enemy[b-1].ey = 190 + eventRec[eventLoc-1].eventdat5;
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 108) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 108) ? 999 : 533);
 		}
 		break;
 
@@ -4640,8 +4644,15 @@ void JE_eventSystem( void )
 		if (b > 0)
 		{
 			enemy[b-1].ey = 190 + eventRec[eventLoc-1].eventdat5;
-			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 110) ? 603 : 533);
+			enemy[b-1].enemydie = ((eventRec[eventLoc-1].eventtype == 110) ? 999 : 533);
 		}
+		break;
+
+	case 120:; // jump to random
+		event_name("jump_to_random");
+		JE_word new_time = eventRec[eventLoc-1].eventdat;
+		new_time += (eventRec[eventLoc-1].eventdat2 * (mt_rand() % eventRec[eventLoc-1].eventdat3));
+		JE_eventJump(new_time);
 		break;
 
 	case 254:; // ARC drop help powerup
@@ -4656,7 +4667,7 @@ void JE_eventSystem( void )
 		else
 			break;
 
-		b = JE_newEnemy(100, 603, 0);
+		b = JE_newEnemy(100, 999, 0);
 		if (b == 0)
 			break;
 

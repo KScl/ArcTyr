@@ -6,9 +6,6 @@
 		"./Weapons/Vanilla/Rear/HeavyMissiles.jsonc",
 		"./Weapons/Vanilla/Rear/SonicWave.jsonc"
 	],
-	"Info":{
-		// This is where info about DragonWing's specials WILL go
-	},
 	"Specials":{
 		"TwiddleCreateOptionLeft":{ // 31
 			"Name":"DragonOption Left",

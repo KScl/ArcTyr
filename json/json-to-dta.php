@@ -6,13 +6,10 @@ $dirsep = DIRECTORY_SEPARATOR;
 $assembly_file = './assembly.jsonc';
 $output_dir = '../arcdata/';
 
-function write_byte($f, $q) {
-	fwrite($f, pack('C', $q));
-}
-
-function write_word($f, $q) {
-	fwrite($f, pack('v', $q));
-}
+function write_char($f, $q) { fwrite($f, pack('c', $q)); }
+function write_byte($f, $q) { fwrite($f, pack('C', $q)); }
+function write_word($f, $q) { fwrite($f, pack('v', $q)); }
+function write_int($f, $q)  { fwrite($f, pack('v', (($q < 0) ? $q + 65536 : $q))); }
 
 // Ensure the first element is always "none"
 // because Tyrian assumes things start at 1, generally
@@ -21,12 +18,13 @@ $all_ships = array('__None__' => ['Name' => 'None']);
 $all_ports = array('__None__' => ['Name' => 'None']);
 $all_options = array('__None__' => ['Name' => 'None']);
 $all_specials = array('__None__' => ['Name' => 'None']);
+$all_enemies = array();
 $information = array();
 $files_to_load = array();
 
 function read_json($file) {
 	global $files_to_load, $output_dir;
-	global $all_shots, $all_ships, $all_ports, $all_options, $all_specials, $information;
+	global $all_shots, $all_ships, $all_ports, $all_options, $all_specials, $all_enemies, $information;
 	echo("Now reading {$file} ...\n");
 
 	$jsondata = file_get_contents($file, "r");
@@ -57,6 +55,11 @@ function read_json($file) {
 				$all_specials = array_merge($all_specials, $data);
 				printf(" * %d special%s loaded.\n", count($data), count($data) == 1 ? "" : "s");
 				break;
+			case 'Enemies':
+				$all_enemies = array_merge($all_enemies, $data);
+				printf(" * %d enem%s loaded.\n", count($data), count($data) == 1 ? "y" : "ies");
+				break;
+
 			// Meta types
 			case 'Info':
 				$information = array_merge($information, $data);
@@ -694,4 +697,105 @@ foreach ($all_options as $id => $option) {
 
 fclose($output);
 printf("arcopt.dta: write OK, %d entries\n", $entries);
+
+// ----------------------------------------------------------------------------
+
+$enemy_presets = [
+	'Power-Up' => [
+		'MoveX' => 4,
+		'MoveY' => 1,
+		'XCAccel' => 4,
+		'XRev' => 4,
+		'Health' => 0,
+		'ExplosionType' => 0,
+		'ShapeBank' => 26,
+		'Value' => 30001
+	]
+];
+
+$filled_slots = 0;
+$output = open_output('enemies.dta');
+$entries = 100; // Fixed length because it has to fit in slots 900-999
+write_byte($output, $entries);
+for ($id = 900; $id <= 999; ++$id)
+{
+	$slotname = "Slot{$id}";
+	if (isset($all_enemies[$slotname]))
+	{
+		$enemy = $all_enemies[$slotname];
+		if (isset($all_enemies[$slotname]['Preset'])) {
+			$preset = $all_enemies[$slotname]['Preset'];
+			if (isset($enemy_presets[$all_enemies[$slotname]['Preset']]))
+				$enemy = array_merge($enemy_presets[$all_enemies[$slotname]['Preset']], $enemy);
+			else die("Invalid enemy {$id}: No preset enemy named {$preset}\n"); 
+		}
+		++$filled_slots;
+	}
+	else
+		$enemy = array();
+
+	$graphics = get_default($enemy, 'Graphics', array(0));
+	write_byte($output, count($graphics));
+
+	if (isset($enemy['Shots'])) {
+		for ($i = 0; $i < 3; ++$i)
+			write_byte($output, get_default($enemy['Shots'], $i, 0));
+	}
+	else for ($i = 0; $i < 3; ++$i)
+		write_byte($output, 0);
+
+	if (isset($enemy['ShotFrequency'])) {
+		for ($i = 0; $i < 3; ++$i)
+			write_byte($output, get_default($enemy['ShotFrequency'], $i, 0));
+	}
+	else for ($i = 0; $i < 3; ++$i)
+		write_byte($output, 0);
+
+	write_char($output, get_default($enemy, 'MoveX', 0));
+	write_char($output, get_default($enemy, 'MoveY', 0));
+	write_char($output, get_default($enemy, 'XAccel', 0));
+	write_char($output, get_default($enemy, 'YAccel', 0));
+	write_char($output, get_default($enemy, 'XCAccel', 0));
+	write_char($output, get_default($enemy, 'YCAccel', 0));
+	write_int($output, get_default($enemy, 'StartX', 0));
+	write_int($output, get_default($enemy, 'StartY', 0));
+	write_char($output, get_default($enemy, 'StartXC', 0));
+	write_char($output, get_default($enemy, 'StartYC', 0));
+	write_byte($output, get_default($enemy, 'Health', 1));
+	write_byte($output, get_default($enemy, 'Size', 1));
+
+	for ($i = 0; $i < 20; ++$i)
+		write_word($output, get_default($graphics, $i, 0));
+
+	write_byte($output, get_default($enemy, 'ExplosionType', 30));
+	write_byte($output, get_default($enemy, 'Animate', 0));
+	write_byte($output, get_default($enemy, 'ShapeBank', 0));
+	write_char($output, get_default($enemy, 'XRev', 0));
+	write_char($output, get_default($enemy, 'YRev', 0));
+	write_word($output, get_default($enemy, 'DGR', 0));
+	write_char($output, get_default($enemy, 'DLevel', 0));
+	write_char($output, get_default($enemy, 'DAni', 0));
+	write_byte($output, get_default($enemy, 'ELaunchFreq', 0));
+	write_word($output, get_default($enemy, 'ELaunchType', 0));
+
+	if (isset($enemy['Value']) && is_array($enemy['Value'])) {
+		if (isset($enemy['Value']['GiveWeapon'])) {
+			$temp = array_search($enemy['Value']['GiveWeapon'], $port_ids);
+			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveWeapon']} doesn't match a port weapon\n");
+			$enemy['Value'] = 32000 + $temp;
+		}
+		elseif (isset($enemy['Value']['GiveSpecial'])) {
+			$temp = array_search($enemy['Value']['GiveSpecial'], $special_ids);
+			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveSpecial']} doesn't match a special\n");
+			$enemy['Value'] = 32100 + $temp;
+		}
+		else die("Invalid enemy {$id}: Invalid Value array given\n");
+	}
+	write_int($output, get_default($enemy, 'Value', 0));
+	write_word($output, get_default($enemy, 'EEnemyDie', 0));
+	write_byte($output, ord(';'));
+}
+
+fclose($output);
+printf("enemies.dta: write OK, %d/%d entries\n", $filled_slots, $entries);
 printf("All files written successfully!\n");

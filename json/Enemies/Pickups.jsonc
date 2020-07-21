@@ -1,0 +1,26 @@
+{
+	"Import":[
+		"./Weapons/Vanilla/AtomicRailgun.jsonc",
+		"./Weapons/Vanilla/Laser.jsonc"
+	],
+	"Enemies":{
+		"Slot901":{
+			"Preset":"Power-Up",
+			"Graphics":[115],
+			"Value":{"GiveWeapon":"AtomicRailgun"}
+		},
+		"Slot902":{
+			"Preset":"Power-Up",
+			"Graphics":[159],
+			"Value":{"GiveWeapon":"P4"}
+		},
+
+		// Because I can't guarantee that any given ID in the vanilla game contains a weapon powerup,
+		// and things like death-spray need a guaranteed enemy slot to point to, this sits here.
+		"Slot999":{
+			"Preset":"Power-Up",
+			"Graphics":[7],
+			"Value":30001
+		}
+	}
+}
