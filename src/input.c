@@ -251,6 +251,60 @@ void I_resetConfigAssignments( void )
 }
 
 
+// ------------
+// Input fuzzer
+// ------------
+
+bool inputFuzzing = false;
+
+#ifdef ENABLE_DEVTOOLS
+static int fuzzDelay = 0;
+
+static void I_fuzzInputs( void )
+{
+	if (--fuzzDelay < 0)
+	{
+		int rnd = mt_rand();
+		button_pressed[INPUT_P1_LEFT] = button_pressed[INPUT_P1_UP] = button_pressed[INPUT_P1_RIGHT] = button_pressed[INPUT_P1_DOWN] = false;
+		switch (rnd & 0x7)
+		{
+			case 0: case 4: case 7:                                break;
+			case 1: case 2: button_pressed[INPUT_P1_DOWN]  = true; break;
+			case 3:         button_pressed[INPUT_P1_UP]    = true; break;
+			case 5:         button_pressed[INPUT_P1_LEFT]  = true; break;
+			case 6:         button_pressed[INPUT_P1_RIGHT] = true; break;
+		}
+		button_pressed[INPUT_P1_FIRE] = (rnd & 0x18) ? true : false;
+		button_pressed[INPUT_P1_SKICK] = (rnd & 0x20) ? true : false;
+		button_pressed[INPUT_P1_MODE] = (rnd & 0x3FF0) ? false : true;
+		fuzzDelay += (rnd & 0xC000) >> 14;
+		rnd >>= 16;
+		button_pressed[INPUT_P2_LEFT] = button_pressed[INPUT_P2_UP] = button_pressed[INPUT_P2_RIGHT] = button_pressed[INPUT_P2_DOWN] = false;
+		switch (rnd & 0x7)
+		{
+			case 0: case 4: case 7:                                break;
+			case 1: case 2: button_pressed[INPUT_P2_DOWN]  = true; break;
+			case 3:         button_pressed[INPUT_P2_UP]    = true; break;
+			case 5:         button_pressed[INPUT_P2_LEFT]  = true; break;
+			case 6:         button_pressed[INPUT_P2_RIGHT] = true; break;
+		}
+		button_pressed[INPUT_P2_FIRE] = (rnd & 0x18) ? true : false;
+		button_pressed[INPUT_P2_SKICK] = (rnd & 0x20) ? true : false;
+		button_pressed[INPUT_P2_MODE] = (rnd & 0x3FF0) ? false : true;
+		fuzzDelay += (rnd & 0xC000) >> 14;			
+	}
+
+	for (int i = INPUT_P1_UP; i <= INPUT_P2_MODE; ++i)
+	{
+		if (button_pressed[i])
+			++button_time_held[i];
+		else
+			button_time_held[i] = 0;
+	}
+}
+#endif
+
+
 // -----------------
 // Joystick handling
 // -----------------
@@ -312,6 +366,17 @@ Uint8 keys_active[SDLK_LAST] = {false};
 
 void I_KEY_init( void )
 {
+	if (inputFuzzing)
+	{
+#ifdef ENABLE_DEVTOOLS
+		ARC_IdentifyPrint("");
+		ARC_IdentifyPrint("Fuzzing enabled: Player inputs will be randomly made.");
+#else
+		fprintf(stderr, "ArcTyr was compiled without devtools.\n");
+		JE_tyrianHalt(5);
+#endif		
+	}
+
 	// No builtin key repeat
 	SDL_EnableKeyRepeat(0, 0);
 
@@ -381,7 +446,15 @@ void I_checkButtons( void )
 	I_KEY_events();
 	SDL_JoystickUpdate();
 
-	for (i = 0; i < NUM_ASSIGNMENTS; ++i)
+	if (inputFuzzing && !inServiceMenu)
+	{
+		I_fuzzInputs();
+		i = INPUT_SERVICE_ENTER;
+	}
+	else
+		i = 0;
+
+	for (; i < NUM_ASSIGNMENTS; ++i)
 	{
 		pressed = 0;
 		for (j = 0; j < 4; ++j)

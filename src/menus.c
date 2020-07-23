@@ -220,12 +220,14 @@ void select_gameplay( void )
 #ifdef ENABLE_DEVTOOLS
 			case INPUT_P1_UP:
 			case INPUT_P2_UP:
-				mainLevel--;
+				if (!inputFuzzing)
+					mainLevel--;
 				JE_playSampleNum(S_CURSOR);
 				break;
 			case INPUT_P1_DOWN:
 			case INPUT_P2_DOWN:
-				mainLevel++;
+				if (!inputFuzzing)
+					mainLevel++;
 				JE_playSampleNum(S_CURSOR);
 				break;
 #endif
@@ -381,6 +383,12 @@ void select_episode( void )
 			selection_made = true;
 
 		uint button = 0;
+
+#ifdef ENABLE_DEVTOOLS
+		if (inputFuzzing)
+			selection_made = true;
+		else
+#endif
 		while (I_inputForMenu(&button, INPUT_P2_FIRE))
 		{
 			switch (button++)

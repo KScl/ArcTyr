@@ -61,6 +61,9 @@ typedef struct {
 
 Assignment button_assignments[NUM_ASSIGNMENTS][4];
 
+// Development tool
+bool inputFuzzing;
+
 void I_JOY_init( void );
 void I_JOY_close( void );
 

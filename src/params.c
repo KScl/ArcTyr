@@ -55,12 +55,13 @@ void JE_paramCheck( int argc, char *argv[] )
 		
 		{ 'X', 'X', "xmas",              false },
 		{ 'c', 'c', "constant",          false },
-		{ 'r', 'r', "record",            false },
 		{ 'l', 'l', "loot",              false },
 
 		{ 'z', 'z', "shutdown",          true },
 
 		{ 258, 0, "weapon-creator",      false },
+		{ 'r', 'r', "record",            false },
+		{ 'f', 'f', "fuzz",              false },
 		
 		{ 0, 0, NULL, false}
 	};
@@ -87,6 +88,7 @@ void JE_paramCheck( int argc, char *argv[] )
 			printf("Usage: %s [OPTION...]\n\n"
 			       "Options:\n"
 			       "  -h, --help                   Show help about options\n\n"
+			       "  -f, --fuzz                   Randomly fuzz player inputs for testing\n\n"
 			       "  -s, --no-sound               Disable audio\n"
 			       "  -x, --no-xmas                Disable Christmas mode\n\n"
 			       "  -t, --data=DIR               Set Tyrian data directory\n\n"
@@ -142,6 +144,11 @@ void JE_paramCheck( int argc, char *argv[] )
 		case 258:
 		{
 			goToWeaponCreator = true;
+			break;
+		}
+		case 'f':
+		{
+			inputFuzzing = true;
 			break;
 		}
 		default:
