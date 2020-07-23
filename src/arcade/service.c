@@ -375,7 +375,10 @@ void SRV_AudiovisualMenu( void )
 	SRVH_AdjustableByte("Attract Sound", false, &DIP.attractSound, 0, 2);
 
 	if (selectionType != __DISPLAY)
+	{
+		JE_calcFXVol();
 		set_volume(tyrMusicVolume, fxVolume);
+	}
 
 	optionY = 160;
 	SRVH_FunctionCall("Sound Test / Jukebox", SRVF_Jukebox);

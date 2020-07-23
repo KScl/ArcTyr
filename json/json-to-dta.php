@@ -782,12 +782,17 @@ for ($id = 900; $id <= 999; ++$id)
 		if (isset($enemy['Value']['GiveWeapon'])) {
 			$temp = array_search($enemy['Value']['GiveWeapon'], $port_ids);
 			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveWeapon']} doesn't match a port weapon\n");
-			$enemy['Value'] = 32000 + $temp;
+			$enemy['Value'] = 11000 + $temp;
+		}
+		elseif (isset($enemy['Value']['GiveOption'])) {
+			$temp = array_search($enemy['Value']['GiveOption'], $option_ids);
+			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveOption']} doesn't match an option\n");
+			$enemy['Value'] = 12000 + $temp;
 		}
 		elseif (isset($enemy['Value']['GiveSpecial'])) {
-			$temp = array_search($enemy['Value']['GiveSpecial'], $special_ids);
+			$temp = array_search($enemy['Value']['GiveSpecial'], $option_ids);
 			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveSpecial']} doesn't match a special\n");
-			$enemy['Value'] = 32100 + $temp;
+			$enemy['Value'] = 13000 + $temp;
 		}
 		else die("Invalid enemy {$id}: Invalid Value array given\n");
 	}

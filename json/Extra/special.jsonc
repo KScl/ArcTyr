@@ -132,7 +132,8 @@
 		"S22":{ // 22
 			"Name":"Drone **",
 			"Graphic":129,
-			"SpecialType":12,
+			"SpecialType":"InvulnerabilityShield",
+			"ShotData":{"Shot":"T707"},
 			"PowerUse":{"Shield":"All"}
 		},
 		"S23":{ // 23

@@ -752,9 +752,10 @@ void ARC_Timers( void )
 		if (levelTimerCountdown == 0)
 			JE_eventJump(levelTimerJumpTo);
 		else
+		{
 			timer = &levelTimerCountdown;
-
-		JE_textShade (VGAScreen, JE_fontCenter("Time Remaining", TINY_FONT) - 2, 4, "Time Remaining", 7, (*timer % 20) / 3, FULL_SHADE);
+			JE_textShade (VGAScreen, JE_fontCenter("Time Remaining", TINY_FONT) - 2, 4, "Time Remaining", 7, (*timer % 20) / 3, FULL_SHADE);
+		}
 	}
 	else // Hurry up timer
 	{    // No hurry up timer if there's already a level timer
@@ -778,7 +779,6 @@ void ARC_Timers( void )
 			else if (hurryUpTimer < 995)
 			{
 				timer = &hurryUpTimer;
-
 				JE_textShade (VGAScreen, JE_fontCenter("Hurry up!", TINY_FONT) - 2, 4, "Hurry up!", 7, (*timer % 20) / 3, FULL_SHADE);
 			}
 		}

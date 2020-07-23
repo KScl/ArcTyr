@@ -386,7 +386,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			this_player->invulnerable_ticks = twiddlePower * 10;
 			break;
 		case 12: // special invuln
-			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, 707, playerNum);
+			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, special[specialType].wpn, playerNum);
 			this_player->shot_repeat[shot_i] = 250;
 			this_player->invulnerable_ticks = 100;
 			break;
@@ -436,29 +436,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			// fall through
 		case 19:  // spawn sidekick (alternate sides)
 			soundQueue[3] = S_POWERUP;
-
-			JE_byte nOption = (this_player->last_opt_given == 1) ? 0 : 1;
-			if (this_player->items.sidekick[LEFT_SIDEKICK] == 0)
-				nOption = 0;
-			else if (this_player->items.sidekick[RIGHT_SIDEKICK] == 0)
-				nOption = 1;
-
-			this_player->items.sidekick[nOption] = special[specialType].wpn;
-			this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK + nOption] = 0;
-			this_player->shot_repeat[SHOT_LEFT_SIDEKICK + nOption] = 10;			
-			JE_updateOption(this_player, nOption);
-			this_player->last_opt_given = nOption;
-
-			{
-				char *wName = JE_trim(options[special[specialType].wpn].name);
-				if (PL_NumPlayers() == 2)
-					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu got", playerNum);
-				else
-					sprintf(tmpBuf.s, "You got");
-				sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^56", wName);
-				JE_drawTextWindowColorful(tmpBuf.l);				
-			}
-
+			PL_SwitchOption(this_player, ALTERNATE_SIDES, special[specialType].wpn, true);
 			if (shot_i == SHOT_SPECIAL)
 				this_player->shot_repeat[SHOT_SPECIAL] = 255;
 			break;
@@ -477,32 +455,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			}
 
 			soundQueue[3] = S_POWERUP;
-			if (special[specialType].wpn == 0)
-			{
-				this_player->items.sidekick[0] = spOption;
-				this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK] = 0;
-				this_player->shot_repeat[SHOT_LEFT_SIDEKICK] = 10;			
-				JE_updateOption(this_player, 0);
-				this_player->last_opt_given = 0;
-			}
-			else
-			{
-				this_player->items.sidekick[1] = spOption;
-				this_player->shot_multi_pos[SHOT_RIGHT_SIDEKICK] = 0;
-				this_player->shot_repeat[SHOT_RIGHT_SIDEKICK] = 10;			
-				JE_updateOption(this_player, 1);
-				this_player->last_opt_given = 1;
-			}
-
-			{
-				char *wName = JE_trim(options[spOption].name);
-				if (PL_NumPlayers() == 2)
-					snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Player %hhu got", playerNum);
-				else
-					sprintf(tmpBuf.s, "You got");
-				sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^56", wName);
-				JE_drawTextWindowColorful(tmpBuf.l);
-			}
+			PL_SwitchOption(this_player, special[specialType].wpn, spOption, true);
 			break;
 
 	}

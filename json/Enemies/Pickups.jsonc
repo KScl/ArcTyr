@@ -1,18 +1,36 @@
 {
 	"Import":[
 		"./Weapons/Vanilla/AtomicRailgun.jsonc",
-		"./Weapons/Vanilla/Laser.jsonc"
+		"./Weapons/Vanilla/Laser.jsonc",
+		"./Weapons/Vanilla/HotDog.jsonc",
+
+		"./Options/ArcTyr/SuperBomb.jsonc"
 	],
 	"Enemies":{
+		"Slot900":{
+			"MoveY":1,
+			"StartX":130,
+			"StartY":-13,
+			"StartXC":125,
+			"ShapeBank":21,
+			"Graphics":[89],
+			"Health":0,
+			"Value":{"GiveOption":"SuperBomb"}
+		},
 		"Slot901":{
 			"Preset":"Power-Up",
-			"Graphics":[115],
-			"Value":{"GiveWeapon":"AtomicRailgun"}
+			"Graphics":[159],
+			"Value":{"GiveWeapon":"P25"}
 		},
 		"Slot902":{
 			"Preset":"Power-Up",
 			"Graphics":[159],
 			"Value":{"GiveWeapon":"P4"}
+		},
+		"Slot903":{
+			"Preset":"Power-Up",
+			"Graphics":[115],
+			"Value":{"GiveWeapon":"AtomicRailgun"}
 		},
 
 		// Because I can't guarantee that any given ID in the vanilla game contains a weapon powerup,

@@ -700,7 +700,8 @@ void JE_loadMainShapeTables( const char *shpfile )
 	JE_longint shpPos[SHP_NUM + 1]; // +1 for storing file length
 	
 	efread(&shpNumb, sizeof(JE_word), 1, f);
-	assert(shpNumb + 1u == COUNTOF(shpPos));
+	// TODO This assert no longer holds
+	//assert(shpNumb + 1u == COUNTOF(shpPos));
 	
 	for (unsigned int i = 0; i < shpNumb; ++i)
 		efread(&shpPos[i], sizeof(JE_longint), 1, f);

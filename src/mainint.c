@@ -2150,60 +2150,36 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 			{   /*Collide*/
 				int evalue = enemy[z].evalue;
 
-				if (evalue >= 30000)
+				if (evalue >= 32101 && evalue <= 32199) // May potentially happen due to T2000, and needs to be handled
+					evalue -= 19100; // Convert to ArcTyr special change
+
+				if (evalue > 30000) // Normal weapon powerup
 				{
-					JE_boolean awardPoints = true;
+					JE_boolean awardPoints = (evalue <= 30005);
 
-					if (evalue >= 30011 && evalue <= 30015)
+					// Powerups aren't contactable until they start falling,
+					// so death-sprayed powerups don't get accidentally stolen
+					if (enemy[z].eycc)
+						continue;
+
+					uint pw = (evalue - 30001) % 5;
+					if (pw == this_player->port_mode)
 					{
-						// Death-dropped powerup, don't award score
-						evalue -= 10;
-						awardPoints = false;
-					}
-
-					if (evalue >= 32001 && evalue <= 32099)
-					{
-						uint pw = evalue - 32000;
-
-						this_player->items.weapon[this_player->port_mode] = pw;
-						PL_SwitchWeapon(this_player, this_player->port_mode, true);
-						this_player->cash += 1000;
-					}
-					else if (evalue >= 32101 && evalue <= 32199)
-					{
-						uint sw = evalue - 32100;
-
-						this_player->items.special[this_player->special_mode] = sw;
-						PL_SwitchSpecial(this_player, this_player->special_mode, true);
-						this_player->cash += 1000;		
-					}
-					else if (evalue >= 30001 && evalue <= 30005)
-					{
-						// Powerups aren't contactable until they start falling,
-						// so death-sprayed powerups don't get accidentally stolen
-						if (enemy[z].eycc)
-							continue;
-
-						uint pw = evalue - 30001;
-
-						if (pw == this_player->port_mode)
-						{
-							if (!PL_PowerUpWeapon(this_player, true) && awardPoints)
-								this_player->cash += 750;
-						}
-						else
-							PL_SwitchWeapon(this_player, pw, true);
-
-						if (awardPoints)
-							this_player->cash += 250;
+						if (!PL_PowerUpWeapon(this_player, true) && awardPoints)
+							this_player->cash += 750;
 					}
 					else
-					{
-						// uncaught powerup
-						// formerly Purple Ball / Galaga DragonWing
-						continue;
-					}
+						PL_SwitchWeapon(this_player, pw, true);
 
+					if (awardPoints)
+						this_player->cash += 250;
+
+					soundQueue[7] = S_POWERUP;
+					enemyAvail[z] = 1;
+				}
+				else if (evalue == 30000)
+				{
+					// Fallback?
 					soundQueue[7] = S_POWERUP;
 					enemyAvail[z] = 1;
 				}
@@ -2227,6 +2203,32 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 					}
 					enemyAvail[z] = 1;
 					JE_drawArmor();
+					soundQueue[7] = S_POWERUP;
+				}
+				else if (evalue > 13000)
+				{
+					// Switch player's special weapon
+					this_player->items.special[this_player->special_mode] = (evalue - 13000);
+					PL_SwitchSpecial(this_player, this_player->special_mode, true);
+					this_player->cash += 1000;
+					enemyAvail[z] = 1;
+					soundQueue[7] = S_POWERUP;
+				}
+				else if (evalue > 12000)
+				{
+					// Switch player's option
+					PL_SwitchOption(this_player, ALTERNATE_SIDES, (evalue - 12000), true);
+					this_player->cash += 1000;
+					enemyAvail[z] = 1;
+					soundQueue[7] = S_POWERUP;
+				}
+				else if (evalue > 11000)
+				{
+					// Switch player's port (normal) weapon
+					this_player->items.weapon[this_player->port_mode] = (evalue - 11000);
+					PL_SwitchWeapon(this_player, this_player->port_mode, true);
+					this_player->cash += 1000;
+					enemyAvail[z] = 1;
 					soundQueue[7] = S_POWERUP;
 				}
 				else if (evalue > 10000 && enemyAvail[z] == 2)
@@ -2278,37 +2280,16 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						// This is almost certainly a bad copy-paste
 						//shotAvail[z] = 0;
 					}
-					else if (evalue == -4)
+					else if (evalue > 0)
 					{
-						// NOTE -- Superbomb gives a Superbomb Sidekick now
-						soundQueue[7] = S_POWERUP;
-
-						JE_byte nOption = (this_player->last_opt_given == 1) ? 0 : 1;
-						if (this_player->items.sidekick[LEFT_SIDEKICK] == 0)
-							nOption = 0;
-						else if (this_player->items.sidekick[RIGHT_SIDEKICK] == 0)
-							nOption = 1;
-
-						this_player->items.sidekick[nOption] = 31; // Superbomb
-						this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK + nOption] = 0;
-						this_player->shot_repeat[SHOT_LEFT_SIDEKICK + nOption] = 10;			
-						JE_updateOption(this_player, nOption);
-						this_player->last_opt_given = nOption;
-					}
-					else if (evalue == -5)
-					{
-						this_player->items.weapon[this_player->port_mode] = 25;  // HOT DOG!
-						PL_SwitchWeapon(this_player, this_player->port_mode, true);
-					}
-					else if (twoPlayerLinked)
-					{
-						// players get equal share of pick-up cash when linked
-						for (uint i = 0; i < COUNTOF(player); ++i)
-							player[i].cash += evalue / COUNTOF(player);
-					}
-					else
-					{
-						this_player->cash += evalue;
+						if (twoPlayerLinked)
+						{
+							// players get equal share of pick-up cash when linked
+							for (uint i = 0; i < COUNTOF(player); ++i)
+								player[i].cash += evalue / COUNTOF(player);
+						}
+						else
+							this_player->cash += evalue;
 					}
 					JE_setupExplosion(enemy_screen_x, enemy[z].ey, 0, enemyDat[enemy[z].enemytype].explosiontype, true, false);
 				}

@@ -262,39 +262,43 @@ static int fuzzDelay = 0;
 
 static void I_fuzzInputs( void )
 {
+	int i;
 	if (--fuzzDelay < 0)
 	{
 		int rnd = mt_rand();
-		button_pressed[INPUT_P1_LEFT] = button_pressed[INPUT_P1_UP] = button_pressed[INPUT_P1_RIGHT] = button_pressed[INPUT_P1_DOWN] = false;
-		switch (rnd & 0x7)
+		memset(button_pressed, 0, sizeof(button_pressed));
+		for (i = 0; i < INPUT_P2_MODE; i += 7)
 		{
-			case 0: case 4: case 7:                                break;
-			case 1: case 2: button_pressed[INPUT_P1_DOWN]  = true; break;
-			case 3:         button_pressed[INPUT_P1_UP]    = true; break;
-			case 5:         button_pressed[INPUT_P1_LEFT]  = true; break;
-			case 6:         button_pressed[INPUT_P1_RIGHT] = true; break;
+			switch (rnd & 0x7)
+			{
+				case 0: case 4: case 7:                                    break;
+				case 1: case 2: button_pressed[INPUT_P1_DOWN + i]  = true; break;
+				case 3:         button_pressed[INPUT_P1_UP + i]    = true; break;
+				case 5:         button_pressed[INPUT_P1_LEFT + i]  = true; break;
+				case 6:         button_pressed[INPUT_P1_RIGHT + i] = true; break;
+			}
+			switch (player[i == 0 ? 0 : 1].player_status)
+			{
+				case STATUS_NAMEENTRY:
+					button_pressed[INPUT_P1_FIRE + i] = (rnd & 1) ? true : false;
+					break;
+				case STATUS_SELECT:
+					button_pressed[INPUT_P1_LEFT + i] = false;
+					button_pressed[INPUT_P1_RIGHT + i] = true;
+					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0xF) ? false : true;
+					break;
+				default:
+					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0x18) ? true : false;
+					button_pressed[INPUT_P1_SKICK + i] = (rnd & 0x20) ? true : false;
+					button_pressed[INPUT_P1_MODE + i] = (rnd & 0x3FF0) ? false : true;
+					break;
+			}
+			fuzzDelay += (rnd & 0xC000) >> 14;
+			rnd >>= 16;
 		}
-		button_pressed[INPUT_P1_FIRE] = (rnd & 0x18) ? true : false;
-		button_pressed[INPUT_P1_SKICK] = (rnd & 0x20) ? true : false;
-		button_pressed[INPUT_P1_MODE] = (rnd & 0x3FF0) ? false : true;
-		fuzzDelay += (rnd & 0xC000) >> 14;
-		rnd >>= 16;
-		button_pressed[INPUT_P2_LEFT] = button_pressed[INPUT_P2_UP] = button_pressed[INPUT_P2_RIGHT] = button_pressed[INPUT_P2_DOWN] = false;
-		switch (rnd & 0x7)
-		{
-			case 0: case 4: case 7:                                break;
-			case 1: case 2: button_pressed[INPUT_P2_DOWN]  = true; break;
-			case 3:         button_pressed[INPUT_P2_UP]    = true; break;
-			case 5:         button_pressed[INPUT_P2_LEFT]  = true; break;
-			case 6:         button_pressed[INPUT_P2_RIGHT] = true; break;
-		}
-		button_pressed[INPUT_P2_FIRE] = (rnd & 0x18) ? true : false;
-		button_pressed[INPUT_P2_SKICK] = (rnd & 0x20) ? true : false;
-		button_pressed[INPUT_P2_MODE] = (rnd & 0x3FF0) ? false : true;
-		fuzzDelay += (rnd & 0xC000) >> 14;			
 	}
 
-	for (int i = INPUT_P1_UP; i <= INPUT_P2_MODE; ++i)
+	for (i = INPUT_P1_UP; i <= INPUT_P2_MODE; ++i)
 	{
 		if (button_pressed[i])
 			++button_time_held[i];

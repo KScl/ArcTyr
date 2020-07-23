@@ -371,7 +371,7 @@ void ADTA_loadEnemies( void )
 		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
 		if (tmp_b != ';')
 		{
-			fprintf(stderr, "error: enemies array is bad at %x:%d: got %d\n", ftell(f), i, tmp_b);
+			fprintf(stderr, "error: enemies array is bad at %d: got %d\n", i, tmp_b);
 			JE_tyrianHalt(1);
 		}
 	}

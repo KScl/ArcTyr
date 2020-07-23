@@ -122,6 +122,41 @@ void PL_SwitchWeapon( Player *this_player, uint switchTo, bool inform )
 	}
 }
 
+void PL_SwitchOption( Player *this_player, int side, uint switchTo, bool inform )
+{
+	if (side != LEFT_SIDEKICK && side != RIGHT_SIDEKICK)
+	{
+		if (this_player->items.sidekick[LEFT_SIDEKICK] == 0)
+			side = LEFT_SIDEKICK;
+		else if (this_player->items.sidekick[RIGHT_SIDEKICK] == 0)
+			side = RIGHT_SIDEKICK;
+		else
+			side = (this_player->last_opt_given == RIGHT_SIDEKICK) ? LEFT_SIDEKICK : RIGHT_SIDEKICK;
+	}
+
+	this_player->items.sidekick[side] = switchTo;
+	this_player->shot_multi_pos[SHOT_LEFT_SIDEKICK + side] = 0;
+	this_player->shot_repeat[SHOT_LEFT_SIDEKICK + side] = 10;			
+	JE_updateOption(this_player, side);
+	this_player->last_opt_given = side;
+
+	if (inform)
+	{
+		char *wName = JE_trim(options[switchTo].name);
+
+		if (PL_NumPlayers() == 2)
+			sprintf(tmpBuf.s, "Player %d got", this_player == &player[0] ? 1 : 2);
+		else
+			sprintf(tmpBuf.s, "You got");
+
+		if (!strncmp(wName, "The", 3))
+			sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, "^26", wName);
+		else
+			sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^26", wName);
+		JE_drawTextWindowColorful(tmpBuf.l);
+	}
+}
+
 void PL_SwitchSpecial( Player *this_player, uint switchTo, bool inform )
 {
 	this_player->special_mode = switchTo;
@@ -140,9 +175,9 @@ void PL_SwitchSpecial( Player *this_player, uint switchTo, bool inform )
 			sprintf(tmpBuf.s, "You got");
 
 		if (!strncmp(wName, "The", 3))
-			sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, "^04", wName);
+			sprintf(tmpBuf.l, "%s %s%s", tmpBuf.s, "^56", wName);
 		else
-			sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^04", wName);
+			sprintf(tmpBuf.l, "%s the %s%s", tmpBuf.s, "^56", wName);
 		JE_drawTextWindowColorful(tmpBuf.l);
 	}
 }
@@ -293,6 +328,29 @@ JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt )
 		levelEnd = 40;
 		tempVolume = tyrMusicVolume;
 		soundQueue[1] = S_EXPLOSION_22;
+
+		// Reset any specials that were going on at the time of death
+		// (DragonWing doesn't have specials so we don't concern ourself with them)
+		this_player->specials.zinglon = 0;
+		if (this_player->specials.flare_time != 0)
+		{
+			this_player->specials.flare_time = 0;
+			this_player->shot_repeat[SHOT_SPECIAL] = this_player->specials.next_repeat;
+			this_player->hud_repeat_start = this_player->shot_repeat[SHOT_SPECIAL];
+
+			if ((&player[0] == this_player ? 1 : 2) == globalFlare)
+			{
+				globalFlare = 0;
+				if (levelFilter == globalFlareFilter)
+				{
+					levelFilter = -99;
+					levelBrightness = -99;
+					filterActive = false;
+				}
+				if (astralDuration > 0)
+					astralDuration = 0;
+			}
+		}
 	}
 	else if (shieldBurst)
 	{

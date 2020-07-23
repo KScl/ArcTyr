@@ -26,6 +26,7 @@
 
 enum
 {
+	ALTERNATE_SIDES = -1,
 	LEFT_SIDEKICK = 0,
 	RIGHT_SIDEKICK = 1
 };
@@ -246,6 +247,7 @@ void PL_Init( Player *this_player, uint ship, bool continuing );
 JE_boolean PL_ShotRepeat( Player *this_player, uint port );
 
 void PL_SwitchWeapon( Player *this_player, uint switchTo, bool inform );
+void PL_SwitchOption( Player *this_player, int side, uint switchTo, bool inform );
 void PL_SwitchSpecial( Player *this_player, uint switchTo, bool inform );
 bool PL_PowerUpWeapon( Player *this_player, bool inform );
 

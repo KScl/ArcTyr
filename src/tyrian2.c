@@ -1715,7 +1715,7 @@ level_loop:
 
 										if (b != 0)
 										{
-											if (enemy[b-1].evalue > 30000 && enemy[b-1].evalue < 32000)
+											if (enemy[b-1].evalue > 30000)
 											{
 												JE_byte temp = SAPowerupBag[superArcadePowerUp++];
 												if (superArcadePowerUp == 5)
@@ -3171,12 +3171,13 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shape
 	uint avail, i;
 	JE_byte shapeTableI;
 
-	// T2000 NOTE:
-	// 851 - 999 is technically a "gray area" when playing in T2000 mode.
-	// Nothing *should* be loaded there.
-
-	if (eDatI == 534) // Super Arcade mode only ... but we're always in that mode
-		eDatI = 533;
+	switch (enemyDat[eDatI].value)
+	{
+		case -5: eDatI = 901; break; // Switch old Hot Dog powerup drop
+		case -4: eDatI = 900; break; // Switch old SuperBomb powerup drop
+		case -2: eDatI = 533; break; // Make all shield powerups look the same
+		default: break;
+	}
 
 	switch ((shapeTableI = shapeTableOverride > 0 ? shapeTableOverride : enemyDat[eDatI].shapebank))
 	{

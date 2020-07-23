@@ -12,7 +12,7 @@
 		}
 	},
 	"Options":{
-		"O31":{ // 31 -- NEW
+		"SuperBomb":{ // 31 -- NEW
 			"Name":"SuperBomb (x1)",
 			"Shot":"T535",
 			"Ammo":1,
