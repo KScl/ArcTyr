@@ -327,7 +327,10 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 			if (shotAvail[shot_id] == 0)
 				break;
 		if (shot_id == MAX_PWEAPON)
+		{
+			printf("player_shot_create: no empty slots for piece %hu:%hhu\n", wpNum, *sMP);
 			return MAX_PWEAPON;
+		}
 
 		if (*sMP == weapon->max || *sMP > 8)
 			*sMP = 1;

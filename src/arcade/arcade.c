@@ -614,14 +614,12 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				JE_updateOption(pl, 0);
 				JE_updateOption(pl, 1);
 
-				pl->shot_multi_pos[SHOT_NORMAL] = 0;
+				memset(pl->shot_multi_pos, 0, sizeof(pl->shot_multi_pos));
+				memset(pl->shot_repeat, 1, sizeof(pl->shot_repeat));
 				pl->shot_repeat[SHOT_NORMAL] = 10;
-				if (pl->shot_repeat[SHOT_SPECIAL] == 0)
-				{
-					pl->shot_repeat[SHOT_SPECIAL] = 2;
-					pl->hud_ready_timer = 0;
-					pl->hud_repeat_start = 1;
-				}
+				pl->shot_repeat[SHOT_SPECIAL] = 2;
+				pl->hud_ready_timer = 0;
+				pl->hud_repeat_start = 1;
 
 				JE_drawShield();
 				JE_drawArmor();

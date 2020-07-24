@@ -267,27 +267,33 @@ static void I_fuzzInputs( void )
 	{
 		int rnd = mt_rand();
 		memset(button_pressed, 0, sizeof(button_pressed));
-		for (i = 0; i < INPUT_P2_MODE; i += 7)
+		for (uint pnum = 0; pnum < COUNTOF(player); ++pnum)
 		{
-			switch (rnd & 0x7)
-			{
-				case 0: case 4: case 7:                                    break;
-				case 1: case 2: button_pressed[INPUT_P1_DOWN + i]  = true; break;
-				case 3:         button_pressed[INPUT_P1_UP + i]    = true; break;
-				case 5:         button_pressed[INPUT_P1_LEFT + i]  = true; break;
-				case 6:         button_pressed[INPUT_P1_RIGHT + i] = true; break;
-			}
-			switch (player[i == 0 ? 0 : 1].player_status)
+			i = pnum*7;
+			switch (player[pnum].player_status)
 			{
 				case STATUS_NAMEENTRY:
-					button_pressed[INPUT_P1_FIRE + i] = (rnd & 1) ? true : false;
+					switch (rnd & 0x7)
+					{
+						case 0:  button_pressed[INPUT_P1_LEFT + i]  = true; break;
+						default: button_pressed[INPUT_P1_RIGHT + i] = true; break;
+					}
+					button_pressed[INPUT_P1_DOWN + i] = (rnd & 0x700) ? false : true;
+					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0x3000) ? false : true;
 					break;
 				case STATUS_SELECT:
-					button_pressed[INPUT_P1_LEFT + i] = false;
 					button_pressed[INPUT_P1_RIGHT + i] = true;
 					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0xF) ? false : true;
 					break;
 				default:
+					switch (rnd & 0x7)
+					{
+						case 0: case 4: case 7:                                    break;
+						case 1: case 2: button_pressed[INPUT_P1_DOWN + i]  = true; break;
+						case 3:         button_pressed[INPUT_P1_UP + i]    = true; break;
+						case 5:         button_pressed[INPUT_P1_LEFT + i]  = true; break;
+						case 6:         button_pressed[INPUT_P1_RIGHT + i] = true; break;
+					}
 					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0x18) ? true : false;
 					button_pressed[INPUT_P1_SKICK + i] = (rnd & 0x20) ? true : false;
 					button_pressed[INPUT_P1_MODE + i] = (rnd & 0x3FF0) ? false : true;
@@ -755,6 +761,6 @@ void I_demoKeysToInput(Player *pl, uint pNum)
 	pl->buttons[BUTTON_LEFT]  = (bool)(demo_keys[pNum] & (1 << 2));
 	pl->buttons[BUTTON_RIGHT] = (bool)(demo_keys[pNum] & (1 << 3));
 	pl->buttons[BUTTON_FIRE]  = (bool)(demo_keys[pNum] & (1 << 4));
-	pl->buttons[BUTTON_MODE]  = (bool)(demo_keys[pNum] & (1 << 5));
-	pl->buttons[BUTTON_SKICK] = (bool)(demo_keys[pNum] & (1 << 6));
+	pl->buttons[BUTTON_SKICK] = (bool)(demo_keys[pNum] & (1 << 5));
+	pl->buttons[BUTTON_MODE]  = (bool)(demo_keys[pNum] & (1 << 6));
 }

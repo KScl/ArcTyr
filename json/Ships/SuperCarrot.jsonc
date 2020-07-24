@@ -12,7 +12,19 @@
 		"./Weapons/Vanilla/Rear/BananaBlast.jsonc"
 	],
 	"Shots":{
-		"ShipSpecialOranges":{ // 749 Orange shield special
+		"ShipSpecialOranges":{
+			"Delay":140,
+			"Sound":26,
+			"Filter":32,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X":-12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X": 12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":246},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X": 12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X":-12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":206}
+			]
+		},
+		"ShipSpecialOrangesOld":{ // 749 Orange shield special
 			"Delay":4,
 			"Sound":26,
 			"Filter":32,
@@ -40,16 +52,22 @@
 	"Specials":{
 		"SpecialBananaBomb":{ // 11
 			"Name":"Banana Bomb",
-			"Graphic":"Unknown",
+			"Graphic":311,
 			"SpecialType":"FireOnce",
 			"ShotData":{"Shot":"T525"}, // Note: requires Banana Blast Rear
 			"PowerUse":20
 		},
 		"SpecialOrangeShield":{ // 16
 			"Name":"Orange Shield",
-			"Graphic":"Unknown",
+			"Graphic":313,
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"ShipSpecialOranges"}
+		},
+		"SpecialOrangeShieldOld":{ // 16
+			"Name":"Orange Shield",
+			"Graphic":313,
 			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"ShipSpecialOranges"},
+			"ShotData":{"Shot":"ShipSpecialOrangesOld"},
 			"PowerUse":80
 		},
 		"TwiddleHotDog":{ // 25

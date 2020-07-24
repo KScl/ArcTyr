@@ -3162,7 +3162,7 @@ Sint16 JE_newEnemy( int enemyOffset, Uint16 eDatI, JE_byte shapeTableOverride )
 			return i + 1;
 		}
 	}
-	printf("JE_newEnemy: failed\n");
+	printf("JE_newEnemy: no empty slots for enemy %hu\n", eDatI);
 	return 0;
 }
 

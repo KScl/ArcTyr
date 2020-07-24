@@ -545,7 +545,7 @@ bool load_next_demo( void )
 	printf("loaded demo '%s'\n", tmpBuf.s);
 
 	efread(tmpBuf.s, 1, 7, demo_file);
-	if (strncmp(tmpBuf.s, "TAVDM01", 7))
+	if (strncmp(tmpBuf.s, "TAVDM02", 7))
 		fprintf(stderr, "warning: wrong demo version\n");
 
 	difficultyLevel = 2; // TODO
@@ -2105,10 +2105,7 @@ void JE_mainGamePlayerFunctions( void )
 	if (cameraXFocus == -1) // First gameplay frame -- jump to focus target
 		cameraXFocus = cameraXFocusTarget;
 	else if (abs(cameraXFocus - cameraXFocusTarget) > 8)
-	{
-		printf("camera playing catchup: %d to %d\n", cameraXFocus, cameraXFocusTarget);
 		cameraXFocus = (cameraXFocus + cameraXFocusTarget) / 2;
-	}
 	else
 		cameraXFocus = cameraXFocusTarget;
 

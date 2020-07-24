@@ -183,7 +183,7 @@ foreach ($all_shots as $id => $shot) {
 					$sg[$max] = $temp;
 				}
 				elseif (isset($sg[$max]['ArcTyr'])) {
-					$temp = $sg[$max]['ArcTyr'] + 1000;
+					$temp = $sg[$max]['ArcTyr'];
 					$sg[$max] = $temp;
 				}
 				elseif (isset($sg[$max]['Tyrian2000'])) {

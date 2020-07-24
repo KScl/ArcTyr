@@ -473,7 +473,7 @@ void DEV_RecordDemoStart( void )
 	if (!demo_file)
 		exit(1);
 
-	efwrite("TAVDM01",   1,  7, demo_file);
+	efwrite("TAVDM02",   1,  7, demo_file);
 	efwrite(&episodeNum, 1,  1, demo_file);
 	efwrite(levelName,   1, 10, demo_file);
 	efwrite(&lvlFileNum, 1,  1, demo_file);
