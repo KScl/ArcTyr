@@ -28,7 +28,6 @@
 #include "picload.h"
 #include "sprite.h"
 #include "tyrian2.h"
-#include "xmas.h"
 #include "varz.h"
 #include "vga256d.h"
 #include "video.h"
@@ -299,32 +298,14 @@ int main( int argc, char *argv[] )
 
 	JE_loadConfiguration();
 
-	xmas = xmas_time();  // arg handler may override
-
 	JE_paramCheck(argc, argv);
 
 	JE_scanForEpisodes();
 
 	init_video();
 
-	if (xmas && (!dir_file_exists(data_dir(), "tyrianc.shp") || !dir_file_exists(data_dir(), "voicesc.snd")))
-	{
-		xmas = false;
-
-		fprintf(stderr, "warning: Christmas is missing.\n");
-	}
-
 	JE_loadPals();
-	JE_loadMainShapeTables(xmas ? "tyrianc.shp" : "tyrian.shp");
-
-/*	if (xmas && !xmas_prompt())
-	{
-		xmas = false;
-
-		free_main_shape_tables();
-		JE_loadMainShapeTables("tyrian.shp");
-	}*/
-
+	JE_loadMainShapeTables("tyrian.shp");
 
 	/* Default Options */
 	youAreCheating = false;
@@ -338,7 +319,7 @@ int main( int argc, char *argv[] )
 
 		load_music();
 
-		JE_loadSndFile("tyrian.snd", xmas ? "voicesc.snd" : "voices.snd");
+		JE_loadSndFile("tyrian.snd", "voices.snd");
 	}
 	else
 	{
