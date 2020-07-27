@@ -135,7 +135,7 @@
 		}
 	},
 	"Ports":{
-		"P13":{ // 13 [TX SilverCloud ~ B]
+		"FrontProtron":{ // 13 [TX SilverCloud ~ B]
 			"Name":"Protron",
 			"NormalShots":["T322","T323","T324","T325","T326","T327","T328","T329","T330","T331","T332"]
 		}

@@ -179,7 +179,7 @@
 		}
 	},
 	"Ports":{
-		"Starblast":{ // 44 -- NEW [Mag-Malice ~ A]
+		"StarScatter":{ // 44 -- NEW [Mag-Malice ~ A]
 			"Name":"Starblast",
 			"NormalShots":[
 				"Starblast1",

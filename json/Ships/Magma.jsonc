@@ -4,50 +4,25 @@
 		"./Weapons/Vanilla/WidgetBeam.jsonc",
 		"./Weapons/ArcTyr/CosmicNapalm.jsonc",
 		"./Weapons/Vanilla/MultiCannon.jsonc",
-		"./Weapons/Vanilla/Rear/Fireball.jsonc"
+		"./Weapons/Vanilla/Rear/Fireball.jsonc",
+
+		"./Specials/ArcTyr/MagmaExhaust.jsonc"
 	],
-	"Shots":{
-		"MagmaExhaust":{ // 781 -- NEW Exhaust Shot
-			"Delay":30,
-			"AnimFrames":9,
-			"Sound":22,
-			"Filter":112,
-			"PiecesPerFire":8,
-			"Pieces":[
-				{"Sprite":674,"AttackPower":{"Infinite":2},"Duration":9,"X":-6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":693,"AttackPower":{"Infinite":2},"Duration":9,"X":6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":712,"AttackPower":{"Infinite":3},"Duration":9,"X":-6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":731,"AttackPower":{"Infinite":3},"Duration":9,"X":6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":674,"AttackPower":{"Infinite":2},"Duration":9,"X":-2,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":693,"AttackPower":{"Infinite":2},"Duration":9,"X":10,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":712,"AttackPower":{"Infinite":3},"Duration":9,"X":-2,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":731,"AttackPower":{"Infinite":3},"Duration":9,"X":10,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245}
-			]
-		}
-	},
-	"Specials":{
-		"SpecialExhaustShot":{ // 47 -- NEW
-			"Name":"Exhaust Shot",
-			"Graphic":309,
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"MagmaExhaust"}
-		}
-	},
 	"Ships":{
 		"Magma":{
 			"Name":"Mag-Malice",
 			"Graphic":309,
 			"Armor":8,
 			"SpecialWeapons":[
-				"SpecialExhaustShot",
+				"SpecialMagmaExhaust",
 				"S6"
 			],
 			"PortWeapons":[
-				"Starblast",
-				"P40",
+				"StarScatter",
+				"WidgetBeam",
 				"CosmicNapalm",
-				"P18",
-				"P2"
+				"FireballTypeA",
+				"MultiCannon"
 			],
 			"Twiddles":[
 				["Left", "Right", "Down+Fire", {"Special":"S39"}]

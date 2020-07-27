@@ -128,7 +128,7 @@
 		}
 	},
 	"Ports":{
-		"P34":{ // 34 [Ninja Star ~ E]
+		"ProtronWave":{ // 34 [Ninja Star ~ E]
 			"Name":"Protron Wave",
 			"NormalShots":["T647","T648","T649","T650","T651","T652","T653","T654","T655","T656","T657"]
 		}

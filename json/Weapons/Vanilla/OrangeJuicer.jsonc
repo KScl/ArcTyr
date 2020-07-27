@@ -112,7 +112,7 @@
 		}
 	},
 	"Ports":{
-		"P35":{ // 35 [FoodShip Nine ~ B]
+		"OrangeJuicer":{ // 35 [FoodShip Nine ~ B]
 			"Name":"The Orange Juicer",
 			"NormalShots":["T659","T660","T661","T662","T663","T664","T665","T666","T667","T668","T669"]
 		}

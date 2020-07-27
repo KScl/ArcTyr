@@ -115,7 +115,7 @@
 		}
 	},
 	"Ports":{
-		"P27":{ // 27 [Microsol PQZ ~ A]
+		"HyperPulse":{ // 27 [Microsol PQZ ~ A]
 			"Name":"Hyper Pulse",
 			"NormalShots":["T565","T566","T567","T568","T569","T570","T571","T572","T573","T574","T575"]
 		}

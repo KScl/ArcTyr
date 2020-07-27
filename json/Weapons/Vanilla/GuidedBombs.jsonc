@@ -139,7 +139,7 @@
 		}
 	},
 	"Ports":{
-		"P31":{ // 31
+		"GuidedBombs":{ // 31
 			"Name":"Guided Bombs",
 			"NormalShots":["T609","T610","T611","T612","T613","T614","T615","T616","T617","T618","T619"]
 		}

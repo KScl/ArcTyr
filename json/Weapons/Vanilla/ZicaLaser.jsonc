@@ -153,7 +153,7 @@
 		}
 	},
 	"Ports":{
-		"P5":{ // 5 [Microsol PQZ]
+		"ZicaLaser":{ // 5 [Microsol PQZ]
 			"Name":"Zica Laser",
 			"NormalShots":["T199","T200","T201","T202","T203","T204","T205","T206","T207","T208","T209"]
 		}

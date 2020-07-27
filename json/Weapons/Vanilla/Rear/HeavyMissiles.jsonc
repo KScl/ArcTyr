@@ -199,7 +199,7 @@
 		}
 	},
 	"Ports":{
-		"P21":{ // 21 [TX DragonWing -- E]
+		"RearHeavyMissiles":{ // 21 [TX DragonWing -- E]
 			"Name":"Rear Heavy Missiles",
 			"NormalShots":["T422","T423","T424","T425","T426","T427","T428","T429","T430","T431","T432"],
 			"ChargeShots":["T495","T496","T497","T498","T499"]

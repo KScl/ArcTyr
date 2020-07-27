@@ -99,7 +99,7 @@
 				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2}
 			]
 		},
-		"T525":{ // 525 Banana Blast Rear Lv.9 \/ Banana Bomb special
+		"T525":{ // 525 Banana Blast Rear Lv.9
 			"Delay":30,
 			"AnimFrames":3,
 			"Sound":2,
@@ -149,7 +149,7 @@
 		}
 	},
 	"Ports":{
-		"P24":{ // 24
+		"RearBananaBlast":{ // 24
 			"Name":"Banana Blast Rear",
 			"NormalShots":["T517","T518","T519","T520","T521","T522","T523","T524","T525","T526","T527"]
 		}

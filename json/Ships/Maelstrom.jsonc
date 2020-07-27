@@ -16,11 +16,11 @@
 				"S22"
 			],
 			"PortWeapons":[
-				"P9",
-				"P31",
-				"P32",
-				"P33",
-				"P34"
+				"Starburst",
+				"GuidedBombs",
+				"ShurikenField",
+				"PoisonBomb",
+				"ProtronWave"
 			],
 			"Twiddles":[
 				["Down+Fire", "Left+Fire", "Up+Fire", "Right+Fire", "Down+Fire", "Left+Fire", "Up+Fire", {"Special":"S12"}]

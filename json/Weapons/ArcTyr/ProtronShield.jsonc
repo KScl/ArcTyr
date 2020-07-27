@@ -72,7 +72,7 @@
 		}
 	},
 	"Ports":{
-		"P12":{ // 12 [TX DragonWing ~ B]
+		"RearProtronTypeB":{ // 12 [TX DragonWing ~ B]
 			"Name":"Protron Shield",
 			"NormalShots":["T311","T312","T313","T314","T315","T316","T317","T318","T319","T320","T321"],
 			"ChargeShots":["T483","T484","T485","T486","T487"],

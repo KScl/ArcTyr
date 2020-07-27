@@ -167,7 +167,7 @@
 		}
 	},
 	"Ports":{
-		"P23":{ // 23 [FoodShip Nine ~ A]
+		"BananaBlast":{ // 23 [FoodShip Nine ~ A]
 			"Name":"Banana Blast",
 			"NormalShots":["T506","T507","T508","T509","T510","T511","T512","T513","T514","T515","T516"]
 		}

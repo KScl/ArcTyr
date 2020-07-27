@@ -16,11 +16,11 @@
 				"S9"
 			],
 			"PortWeapons":[
-				"P27",
-				"P5",
-				"P20",
+				"HyperPulse",
+				"ZicaLaser",
+				"HeavyMissiles",
 				"RetroBall",
-				"P31"
+				"GuidedBombs"
 			],
 			"Twiddles":[
 				["Left+Fire", "Right+Fire", {"Special":"S1"}],

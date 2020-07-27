@@ -127,7 +127,7 @@
 		}
 	},
 	"Ports":{
-		"P37":{ // 37 [NortShip Z ~ C]
+		"NSSpreaderTypeA":{ // 37 [NortShip Z ~ C]
 			"Name":"NortShip Spreader Alpha",
 			"NormalShots":["T684","T685","T686","T687","T688","T689","T690","T691","T692","T693","T694"]
 		}

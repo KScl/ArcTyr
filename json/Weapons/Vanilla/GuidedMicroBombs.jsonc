@@ -137,7 +137,7 @@
 		}
 	},
 	"Ports":{
-		"P28":{ // 28
+		"GuidedMicroBombs":{ // 28
 			"Name":"Guided Micro Bombs",
 			"NormalShots":["T576","T577","T578","T579","T580","T581","T582","T583","T584","T585","T586"]
 		}

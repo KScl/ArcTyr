@@ -195,7 +195,7 @@
 		}
 	},
 	"Ports":{
-		"P15":{ // 15
+		"RearVulcanCannon":{ // 15
 			"Name":"Rear Vulcan Cannon",
 			"NormalShots":["T355","T356","T357","T358","T359","T360","T361","T362","T363","T364","T365"],
 			"ChargeShots":["T471","T472","T473","T474","T475"]

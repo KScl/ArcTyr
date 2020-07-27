@@ -140,7 +140,7 @@
 		}
 	},
 	"Ports":{
-		"P30":{ // 30 [NortShip Z ~ D]
+		"ScatterWave":{ // 30 [NortShip Z ~ D]
 			"Name":"Scatter Wave",
 			"NormalShots":["T598","T599","T600","T601","T602","T603","T604","T605","T606","T607","T608"]
 		}

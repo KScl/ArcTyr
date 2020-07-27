@@ -16,11 +16,11 @@
 				"S14"
 			],
 			"PortWeapons":[
-				"P1",
-				"P13",
-				"P20",
-				"P7",
-				"P3"
+				"PulseCannon",
+				"FrontProtron",
+				"HeavyMissiles",
+				"VulcanCannon",
+				"MegaCannon"
 			],
 			"Twiddles":[
 				["Left", "Right", "Down+Fire", {"Special":"S39"}]

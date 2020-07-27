@@ -141,7 +141,7 @@
 		}
 	},
 	"Ports":{
-		"P41":{ // 41 [StormWind ~ D]
+		"SonicImpulse":{ // 41 [StormWind ~ D]
 			"Name":"Sonic Impulse",
 			"NormalShots":["T756","T757","T758","T759","T760","T761","T762","T763","T764","T765","T766"]
 		}

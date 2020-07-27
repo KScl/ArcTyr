@@ -319,12 +319,12 @@
 		}
 	},
 	"Ports":{
-		"SonicWaveA":{
+		"SonicWaveTypeA":{
 			"Name":"Sonic Wave Alpha",
 			"NormalShots":["T276","T277","T278","T279","T280","T281","T282","T283","T284","T285","T286"],
 			"ChargeShots":["T465","T466","T467","T468","T469"]
 		},
-		"P11":{ // 11 [TX DragonWing ~ D]
+		"SonicWaveTypeB":{ // 11 [TX DragonWing ~ D]
 			"Name":"Sonic Wave Beta",
 			"NormalShots":["T287","T288","T289","T290","T291","T292","T293","T294","T295","T296","T297"],
 			"ChargeShots":["T465","T466","T467","T468","T469"],

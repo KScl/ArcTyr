@@ -157,7 +157,7 @@
 		}
 	},
 	"Ports":{
-		"P32":{ // 32 [Ninja Star ~ C]
+		"ShurikenField":{ // 32 [Ninja Star ~ C]
 			"Name":"Shuriken Field",
 			"NormalShots":["T625","T626","T627","T628","T629","T630","T631","T632","T633","T634","T635"]
 		}

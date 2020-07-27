@@ -45,10 +45,10 @@
 			"Armor":16,
 			"PortWeapons":[
 				"TurboVulcan",
-				"P12",
+				"RearProtronTypeB",
 				"DWCrossCannon",
-				"P11",
-				"P21"
+				"SonicWaveTypeB",
+				"RearHeavyMissiles"
 			],
 			"Twiddles":[
 				["Down", "Left", "Down", "Left+Sidekick", {"Special":"TwiddleCreateOptionLeft"}],

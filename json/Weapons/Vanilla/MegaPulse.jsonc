@@ -95,7 +95,7 @@
 		}
 	},
 	"Ports":{
-		"P19":{ // 19 [StormWind ~ A]
+		"MegaPulse":{ // 19 [StormWind ~ A]
 			"Name":"Mega Pulse",
 			"NormalShots":["T400","T401","T402","T403","T404","T405","T406","T407","T408","T409","T410"]
 		}

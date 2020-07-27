@@ -173,7 +173,7 @@
 		}
 	},
 	"Ports":{
-		"P8":{ // 8 [StormWind ~ B]
+		"LightningCannon":{ // 8 [StormWind ~ B]
 			"Name":"Lightning Cannon",
 			"NormalShots":["T232","T233","T234","T235","T236","T237","T238","T239","T240","T241","T242"]
 		}

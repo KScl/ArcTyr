@@ -128,7 +128,7 @@
 		}
 	},
 	"Ports":{
-		"P29":{ // 29
+		"HeavyGuidedBombs":{ // 29
 			"Name":"Heavy Guided Bombs",
 			"NormalShots":["T587","T588","T589","T590","T591","T592","T593","T594","T595","T596","T597"]
 		}

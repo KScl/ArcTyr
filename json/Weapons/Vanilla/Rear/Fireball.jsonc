@@ -250,7 +250,7 @@
 		}
 	},
 	"Ports":{
-		"P18":{ // 18 [Mag-Malice ~ D]
+		"FireballTypeA":{ // 18 [Mag-Malice ~ D]
 			"Name":"Fireball",
 			"NormalShots":["T378","T379","T380","T381","T382","T383","T384","T385","T386","T387","T388"]
 		},

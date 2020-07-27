@@ -118,7 +118,7 @@
 		}
 	},
 	"Ports":{
-		"P17":{ // 17 [U-Ship ~ E]
+		"Missiles":{ // 17 [U-Ship ~ E]
 			"Name":"Light Missile Launcher",
 			"NormalShots":["T367","T368","T369","T370","T371","T372","T373","T374","T375","T376","T377"]
 		}

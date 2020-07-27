@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"OldOrangeShield":{ // 749 Orange shield special
+			"Delay":4,
+			"Sound":26,
+			"Filter":32,
+			"Pieces":[
+				{"Sprite":88,"AttackPower":3,"X":-24,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":168}
+			]
+		}
+	},
+	"Specials":{
+		"SpecialOldOrangeShield":{
+			"Name":"Classic Orange Shield",
+			"Graphic":"Unknown",
+			"SpecialType":"FireMultiple",
+			"ShotData":{"Shot":"OldOrangeShield"},
+			"PowerUse":80
+		}
+	}
+}

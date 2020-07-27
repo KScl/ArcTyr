@@ -6,8 +6,8 @@
 		"./Weapons/Vanilla/NortSpreadA.jsonc",
 		"./Weapons/Vanilla/NortSpreadB.jsonc",
 
-		"./Specials/Twiddles/Lightning.jsonc",
-		"./Specials/SDFMainGun.jsonc"
+		"./Specials/Vanilla/Twiddles/Lightning.jsonc",
+		"./Specials/Vanilla/SDFMainGun.jsonc"
 	],
 	"Ships":{
 		"NortShip":{
@@ -19,11 +19,11 @@
 				"S41"
 			],
 			"PortWeapons":[
-				"P4",
-				"P38",
-				"P37",
-				"P30",
-				"P36"
+				"Laser",
+				"NSSpreaderTypeB",
+				"NSSpreaderTypeA",
+				"ScatterWave",
+				"NSSuperPulse"
 			],
 			"Twiddles":[
 				["Release", "Up+Fire", {"Special":"TwiddleLightningUp"}],

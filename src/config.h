@@ -62,7 +62,7 @@ extern JE_byte secretHint;
 extern JE_byte background3over;
 extern JE_byte background2over;
 extern JE_byte gammaCorrection;
-extern JE_boolean explosionTransparent, youAreCheating, displayScore, background2, smoothScroll, wild, superWild, starActive, topEnemyOver, skyEnemyOverAll, background2notTransparent;
+extern JE_boolean explosionTransparent, youAreCheating, background2, smoothScroll, wild, superWild, starActive, topEnemyOver, skyEnemyOverAll, background2notTransparent;
 extern JE_byte fastPlay;
 extern JE_boolean pentiumMode;
 extern JE_byte gameSpeed;

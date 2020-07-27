@@ -118,7 +118,7 @@
 		}
 	},
 	"Ports":{
-		"P2":{ // 2 [Mag-Malice ~ E]
+		"MultiCannon":{ // 2 [Mag-Malice ~ E]
 			"Name":"Multi-Cannon",
 			"NormalShots":["T166","T167","T168","T169","T170","T171","T172","T173","T174","T175","T176"]
 		}

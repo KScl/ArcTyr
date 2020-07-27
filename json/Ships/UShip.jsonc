@@ -6,7 +6,7 @@
 		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
 		"./Weapons/Vanilla/Missiles.jsonc",
 
-		"./Specials/Twiddles/Lightning.jsonc"
+		"./Specials/Vanilla/Twiddles/Lightning.jsonc"
 	],
 	"Ships":{
 		"UShip":{
@@ -18,11 +18,11 @@
 				"S40"
 			],
 			"PortWeapons":[
-				"P7",
+				"VulcanCannon",
 				"NeedleLaser",
-				"P28",
-				"P22",
-				"P17"
+				"GuidedMicroBombs",
+				"RearMegaPulse",
+				"Missiles"
 			],
 			"Twiddles":[
 				["Down", "Up", "Down", "Up+Fire", {"Special":"S37"}],

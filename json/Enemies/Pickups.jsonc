@@ -20,12 +20,12 @@
 		"Slot901":{
 			"Preset":"Power-Up",
 			"Graphics":[159],
-			"Value":{"GiveWeapon":"P25"}
+			"Value":{"GiveWeapon":"HotDog"}
 		},
 		"Slot902":{
 			"Preset":"Power-Up",
 			"Graphics":[159],
-			"Value":{"GiveWeapon":"P4"}
+			"Value":{"GiveWeapon":"Laser"}
 		},
 		"Slot903":{
 			"Preset":"Power-Up",

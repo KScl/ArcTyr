@@ -130,7 +130,7 @@
 		}
 	},
 	"Ports":{
-		"P25":{ // 25 [FoodShip Nine ~ B]
+		"HotDog":{ // 25 [FoodShip Nine ~ B]
 			"Name":"HotDog Front",
 			"NormalShots":["T536","T537","T538","T539","T540","T541","T542","T543","T544","T545","T546"]
 		}

@@ -126,7 +126,7 @@
 		}
 	},
 	"Ports":{
-		"P40":{ // 40 [Mag-Malice ~ B]
+		"WidgetBeam":{ // 40 [Mag-Malice ~ B]
 			"Name":"Widget Beam",
 			"NormalShots":["T738","T739","T740","T741","T742","T743","T744","T745","T746","T747","T748"]
 		}

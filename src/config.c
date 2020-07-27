@@ -79,7 +79,6 @@ JE_byte background2over;
 JE_byte gammaCorrection;
 JE_boolean explosionTransparent,
            youAreCheating,
-           displayScore,
            background2, smoothScroll, wild, superWild, starActive,
            topEnemyOver,
            skyEnemyOverAll,
@@ -270,13 +269,11 @@ void JE_initProcessorType( void )
 	explosionTransparent = true;
 	filtrationAvail = false;
 	background2 = true;
-	displayScore = true;
 
 	switch (processorType)
 	{
 		case 1: /* 386 */
 			background2 = false;
-			displayScore = false;
 			explosionTransparent = false;
 			break;
 		case 2: /* 486 - Default */
@@ -376,14 +373,14 @@ const char *get_user_directory( void )
 		char *xdg_config_home = getenv("XDG_CONFIG_HOME");
 		if (xdg_config_home != NULL)
 		{
-			snprintf(user_dir, sizeof(user_dir), "%s/opentyrian", xdg_config_home);
+			snprintf(user_dir, sizeof(user_dir), "%s/arctyr", xdg_config_home);
 		}
 		else
 		{
 			char *home = getenv("HOME");
 			if (home != NULL)
 			{
-				snprintf(user_dir, sizeof(user_dir), "%s/.config/opentyrian-mod", home);
+				snprintf(user_dir, sizeof(user_dir), "%s/.config/arctyr", home);
 			}
 			else
 			{

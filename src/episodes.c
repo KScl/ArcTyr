@@ -46,7 +46,7 @@ size_t num_options  = 0;
 size_t num_specials = 0;
 
 /* Enemy data */
-JE_EnemyDatType enemyDat[T2KENEMY_NUM];
+JE_EnemyDatType enemyDat[T2KENEMY_NUM + 1];
 
 /* EPISODE variables */
 JE_byte    initial_episode_num, episodeNum = 0;

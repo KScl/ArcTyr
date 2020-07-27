@@ -46,9 +46,9 @@
 			"PortWeapons":[
 				"RedDragonFlame",
 				"RedDragonFrost",
-				"P19",
-				"P33",
-				"P22"
+				"MegaPulse",
+				"PoisonBomb",
+				"RearMegaPulse"
 			]
 		}
 	}

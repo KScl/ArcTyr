@@ -122,7 +122,7 @@
 		}
 	},
 	"Ports":{
-		"P3":{ // 3 [TX SilverCloud ~ E]
+		"MegaCannon":{ // 3 [TX SilverCloud ~ E]
 			"Name":"Mega Cannon",
 			"NormalShots":["T177","T178","T179","T180","T181","T182","T183","T184","T185","T186","T187"]
 		}

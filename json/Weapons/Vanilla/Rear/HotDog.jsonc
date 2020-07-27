@@ -221,7 +221,7 @@
 		}
 	},
 	"Ports":{
-		"P26":{ // 26
+		"HotDogRear":{ // 26
 			"Name":"HotDog Rear",
 			"NormalShots":["T547","T548","T549","T550","T551","T552","T553","T554","T555","T556","T557"],
 			"ChargeShots":["T559","T560","T561","T562","T563"]
