@@ -8,35 +8,47 @@
 	],
 	"Enemies":{
 		"Slot900":{
-			"MoveY":1,
-			"StartX":130,
-			"StartY":-13,
-			"StartXC":125,
-			"ShapeBank":21,
+			"Preset":"FallingPowerUp",
 			"Graphics":[89],
-			"Health":0,
 			"Value":{"GiveOption":"SuperBomb"}
 		},
 		"Slot901":{
-			"Preset":"Power-Up",
-			"Graphics":[159],
+			"Preset":"SwayingPowerUp",
+			"Graphics":[117],
 			"Value":{"GiveWeapon":"HotDog"}
 		},
 		"Slot902":{
-			"Preset":"Power-Up",
+			"Preset":"SwayingPowerUp",
 			"Graphics":[159],
 			"Value":{"GiveWeapon":"Laser"}
 		},
 		"Slot903":{
-			"Preset":"Power-Up",
+			"Preset":"SwayingPowerUp",
 			"Graphics":[115],
 			"Value":{"GiveWeapon":"AtomicRailgun"}
+		},
+
+		// Armor recovery ship drops: Hardcoded so that we can ensure they give consistent values
+		"Slot991":{
+			"Preset":"FallingPowerUp",
+			"Graphics":[127],
+			"Value":{"Armor":4}
+		},
+		"Slot992":{
+			"Preset":"FallingPowerUp",
+			"Graphics":[129],
+			"Value":{"Armor":8}
+		},
+		"Slot993":{
+			"Preset":"FallingPowerUp",
+			"Graphics":[131],
+			"Value":{"Armor":28}
 		},
 
 		// Because I can't guarantee that any given ID in the vanilla game contains a weapon powerup,
 		// and things like death-spray need a guaranteed enemy slot to point to, this sits here.
 		"Slot999":{
-			"Preset":"Power-Up",
+			"Preset":"SwayingPowerUp",
 			"Graphics":[7],
 			"Value":30001
 		}

@@ -7,13 +7,13 @@
 			"Filter":0,
 			"PiecesPerFire":7,
 			"Pieces":[
-				{"Sprite":9153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2},
-				{"Sprite": 153,"AttackPower":2,"MoveX":-7,"MoveY":1},
-				{"Sprite": 153,"AttackPower":2,"MoveX":7,"MoveY":1},
-				{"Sprite": 153,"AttackPower":2,"MoveX":-5,"MoveY":3},
-				{"Sprite": 153,"AttackPower":2,"MoveX":5,"MoveY":3},
-				{"Sprite": 153,"AttackPower":2,"MoveX":-8,"MoveY":2},
-				{"Sprite": 153,"AttackPower":2,"MoveX":8,"MoveY":2}
+				{"Sprite":153,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":2,"Trail":6},
+				{"Sprite":153,"AttackPower":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":7,"MoveY":1},
+				{"Sprite":153,"AttackPower":2,"MoveX":-5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":5,"MoveY":3},
+				{"Sprite":153,"AttackPower":2,"MoveX":-8,"MoveY":2},
+				{"Sprite":153,"AttackPower":2,"MoveX":8,"MoveY":2}
 			]
 		}
 	},

@@ -2081,7 +2081,7 @@ draw_player_shot_loop_end:
 			b = JE_newEnemy(50, tempW, 0);
 			if (b > 0)
 			{
-				enemy[b-1].enemydie = 560 + (mt_rand() % 3) + 1;
+				enemy[b-1].enemydie = 990 + (mt_rand() % 3) + 1;
 				enemy[b-1].eyc -= backMove3;
 				enemy[b-1].armorleft = 4;
 			}

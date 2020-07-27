@@ -701,7 +701,7 @@ printf("arcopt.dta: write OK, %d entries\n", $entries);
 // ----------------------------------------------------------------------------
 
 $enemy_presets = [
-	'Power-Up' => [
+	'SwayingPowerUp' => [
 		'MoveX' => 4,
 		'MoveY' => 1,
 		'XCAccel' => 4,
@@ -710,6 +710,16 @@ $enemy_presets = [
 		'ExplosionType' => 0,
 		'ShapeBank' => 26,
 		'Value' => 30001
+	],
+	'FallingPowerUp' => [
+		'MoveY' => 1,
+		'StartX' => 130,
+		'StartY' => -13,
+		'StartXC' => 125,
+		'Health' => 0,
+		'ExplosionType' => 0,
+		'ShapeBank' => 21,
+		'Value' => 20001
 	]
 ];
 
@@ -793,6 +803,9 @@ for ($id = 900; $id <= 999; ++$id)
 			$temp = array_search($enemy['Value']['GiveSpecial'], $option_ids);
 			if ($temp === FALSE) die("Invalid enemy {$id}: {$enemy['Value']['GiveSpecial']} doesn't match a special\n");
 			$enemy['Value'] = 13000 + $temp;
+		}
+		elseif (isset($enemy['Value']['Armor'])) {
+			$enemy['Value'] = $enemy['Value']['Armor'] + 20000;
 		}
 		else die("Invalid enemy {$id}: Invalid Value array given\n");
 	}

@@ -4,36 +4,10 @@
 		"./Weapons/Tyrian2000/DragonFrost.jsonc",
 		"./Weapons/Vanilla/MegaPulse.jsonc",
 		"./Weapons/Vanilla/PoisonBomb.jsonc",
-		"./Weapons/Vanilla/Rear/MegaPulse.jsonc"
+		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
+
+		"./Specials/Tyrian2000/DragonLightning.jsonc"
 	],
-	"Shots":{
-		"DragonSpecial":{ // T2K: 2-25
-			"Delay":3,
-			"AnimFrames":2,
-			"Sound":15,
-			"Filter":128,
-			"PiecesPerFire":4,
-			"Pieces":[
-				{"Sprite":210,"AttackPower":3,"Duration":{"SetAni":3},"X":-8,"Y":-22,"MoveY":22},
-				{"Sprite":229,"AttackPower":1,"Duration":{"SetAni":3},"X":-8,"Y":-8,"MoveY":22},
-				{"Sprite":248,"AttackPower":1,"Duration":{"SetAni":3},"X":-8,"Y":6,"MoveY":22},
-				{"Sprite":267,"AttackPower":1,"Duration":{"SetAni":3},"X":-8,"Y":20,"MoveY":22},
-				{"Sprite":210,"AttackPower":3,"Duration":{"SetAni":3},"X":8,"Y":-22,"MoveY":22},
-				{"Sprite":229,"AttackPower":1,"Duration":{"SetAni":3},"X":8,"Y":-8,"MoveY":22},
-				{"Sprite":248,"AttackPower":1,"Duration":{"SetAni":3},"X":8,"Y":6,"MoveY":22},
-				{"Sprite":267,"AttackPower":1,"Duration":{"SetAni":3},"X":8,"Y":20,"MoveY":22}
-			]
-		}
-	},
-	"Specials":{
-		"SpecialDragonLightning":{
-			"Name":"Dragon Lightning",
-			"Graphic":93,
-			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"DragonSpecial"},
-			"PowerUse":50
-		}
-	},
 	"Ships":{
 		"RedDragon":{
 			"Name":"Red Dragon",
