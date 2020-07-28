@@ -1,0 +1,24 @@
+{
+	"Shots":{
+		"T26":{ // 26 Mini-Missile
+			"Delay":2,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-2,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":2,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-3,"AccelY":1}
+			]
+		}
+	},
+	"Options":{
+		"O10":{ // 10
+			"Name":"Mini-Missile (x16)",
+			"Shot":"T26",
+			"Ammo":16,
+			"HUDIcon":5
+		}
+	}
+}

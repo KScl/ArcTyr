@@ -1,0 +1,23 @@
+{
+	"Shots":{
+		"T88":{ // 88 Plasma Storm
+			"Delay":3,
+			"Sound":6,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":{"Special":23},"AttackPower":20,"X":-32,"Y":-24,"MoveX":{"FollowX":0},"MoveY":10},
+				{"Sprite":{"Special":24},"AttackPower":20,"X":-32,"MoveX":{"FollowX":0},"MoveY":10},
+				{"Sprite":{"Special":25},"AttackPower":20,"X":-32,"Y":28,"MoveX":{"FollowX":0},"MoveY":10}
+			]
+		}
+	},
+	"Options":{
+		"O9":{ // 9
+			"Name":"Plasma Storm (x3)",
+			"Shot":"T88",
+			"Ammo":3,
+			"Graphics":[224,224,224,224,243,243,243,243,262,262,262,262,281,281,281,281,300,300,300,300],
+			"HUDIcon":7
+		}
+	}
+}

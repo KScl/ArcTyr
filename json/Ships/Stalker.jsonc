@@ -4,7 +4,9 @@
 		"./Weapons/Vanilla/ZicaLaser.jsonc",
 		"./Weapons/Vanilla/HeavyMissiles.jsonc",
 		"./Weapons/Vanilla/RetroBall.jsonc",
-		"./Weapons/Vanilla/GuidedBombs.jsonc"
+		"./Weapons/Vanilla/GuidedBombs.jsonc",
+
+		"./Specials/Vanilla/MineField.jsonc"
 	],
 	"Ships":{
 		"Stalker":{
@@ -13,7 +15,7 @@
 			"Armor":20,
 			"SpecialWeapons":[
 				"S15",
-				"S9"
+				"SpecialMineField"
 			],
 			"PortWeapons":[
 				"HyperPulse",

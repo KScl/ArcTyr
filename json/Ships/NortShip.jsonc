@@ -7,7 +7,9 @@
 		"./Weapons/Vanilla/NortSpreadB.jsonc",
 
 		"./Specials/Vanilla/Twiddles/Lightning.jsonc",
-		"./Specials/Vanilla/SDFMainGun.jsonc"
+		"./Specials/Vanilla/SDFMainGun.jsonc",
+
+		"./Options/Vanilla/QuicksilverShip.jsonc"
 	],
 	"Ships":{
 		"NortShip":{
@@ -33,8 +35,8 @@
 				["Up", "Right+Fire", {"Special":"TwiddleLightningUpRight"}]
 			],
 			"StartingOptions":{
-				"Left":"O24",
-				"Right":"O24"
+				"Left":"CSQuicksilver",
+				"Right":"CSQuicksilver"
 			}
 		}
 	}

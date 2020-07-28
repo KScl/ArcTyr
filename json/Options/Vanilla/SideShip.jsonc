@@ -1,0 +1,23 @@
+{
+	"Shots":{
+		"T122":{ // 122 Vulcan Side Ship
+			"Delay":3,
+			"Sound":1,
+			"Filter":112,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":107,"AttackPower":2,"MoveY":12},
+				{"Sprite":108,"AttackPower":1,"X":-6,"Y":4,"MoveY":12},
+				{"Sprite":108,"AttackPower":1,"X":5,"Y":4,"MoveY":12}
+			]
+		}
+	},
+	"Options":{
+		"O18":{ // 18
+			"Name":"Vulcan Side Ship",
+			"Shot":"T122",
+			"Graphics":[245,245,264,264,283,283,302,302,245,245,245],
+			"HUDIcon":3
+		}
+	}
+}

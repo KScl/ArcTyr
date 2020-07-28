@@ -415,12 +415,11 @@ void select_episode( void )
 			case INPUT_P1_UP:
 				if (in_control == 2)
 					break;
-				if (true) {} else // yes, this madness does actually work
-				// fall through
+				goto episode_cursor_up;
 			case INPUT_P2_UP:
 				if (in_control == 1)
 					break;
-
+			episode_cursor_up:
 				do
 				{
 					if (--episode < 1)
@@ -431,12 +430,11 @@ void select_episode( void )
 			case INPUT_P1_DOWN:
 				if (in_control == 2)
 					break;
-				if (true) {} else // yes, this madness does actually work
-				// fall through
+				goto episode_cursor_down;
 			case INPUT_P2_DOWN:
 				if (in_control == 1)
 					break;
-
+			episode_cursor_down:
 				do
 				{
 					if (++episode > episode_max)

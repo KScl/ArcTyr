@@ -45,9 +45,9 @@
 		// Giant Explosion
 		"BigExplosionShrapnel":{ // 87 Giant explosion graphic
 			"Delay":8,
-			"Sound":1,
+			"Sound":41,
 			"Pieces":[
-				{"Sprite":{"Special":34},"AttackPower":30,"Duration":4,"X":-40,"Y":-30,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0}}
+				{"Sprite":{"Special":34},"AttackPower":20,"Duration":4,"X":-40,"Y":-30,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0}}
 			]
 		},
 
@@ -340,6 +340,38 @@
 			"Pieces":[
 				{"Sprite":7,"AttackPower":{"Shrapnel":"T97"},"MoveX":12},
 				{"Sprite":7,"AttackPower":4,"Duration":"NoTrail","MoveX":6}
+			]
+		},
+
+		// Icebreaker
+		"IceShrapnelA":{
+			"Sound":41,
+			"Trail":11,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":-13,"MoveY":  0,"X":-7,"Y": 0},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":-12,"MoveY":  4,"X":-6,"Y":-2},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": -9,"MoveY":  8,"X":-4,"Y":-4},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": -5,"MoveY": 11,"X":-2,"Y":-6},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  0,"MoveY": 12,"X": 0,"Y":-7},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  5,"MoveY": 11,"X": 2,"Y":-6},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  9,"MoveY":  8,"X": 4,"Y":-4},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": 12,"MoveY":  4,"X": 6,"Y":-2}
+			]
+		},
+		"IceShrapnelB":{
+			"Sound":41,
+			"Trail":11,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": 13,"MoveY": -0,"X": 7,"Y": 0},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": 12,"MoveY": -4,"X": 6,"Y": 2},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  9,"MoveY": -8,"X": 4,"Y": 4},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  5,"MoveY":-11,"X": 2,"Y": 6},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":  0,"MoveY":-12,"X": 0,"Y": 7},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": -5,"MoveY":-11,"X":-2,"Y": 6},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX": -9,"MoveY": -8,"X":-4,"Y": 4},
+				{"Sprite":499,"AttackPower":98,"Duration":4,"MoveX":-12,"MoveY": -4,"X":-6,"Y": 2}
 			]
 		},
 

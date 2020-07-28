@@ -1,0 +1,26 @@
+{
+	"Shots":{
+		"T729":{ // 729 Battleship-Class Firebomb
+			"Delay":5,
+			"Sound":5,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":121,"AttackPower":4,"X":-5,"MoveX":-7,"MoveY":7},
+				{"Sprite":122,"AttackPower":4,"X":5,"MoveX":7,"MoveY":7},
+				{"Sprite":102,"AttackPower":4,"X":-5,"MoveX":-10},
+				{"Sprite":104,"AttackPower":4,"X":5,"MoveX":10},
+				{"Sprite":140,"AttackPower":4,"X":-5,"MoveX":-7,"MoveY":-7},
+				{"Sprite":141,"AttackPower":4,"X":5,"MoveX":7,"MoveY":-7}
+			]
+		}
+	},
+	"Options":{
+		"O22":{ // 22
+			"Name":"BattleShip-Class Firebomb",
+			"MovementType":"Front",
+			"Shot":"T729",
+			"Graphics":83,
+			"HUDIcon":2
+		}
+	}
+}

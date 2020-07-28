@@ -4,7 +4,9 @@
 		"./Weapons/Vanilla/Rear/VulcanCannon.jsonc",
 
 		// DragonWing options
-		"./Options/Vanilla/SatelliteMarlo.jsonc"
+		"./Options/Vanilla/SatelliteMarlo.jsonc",
+		"./Options/Vanilla/VulcanShot.jsonc",
+		"./Options/Vanilla/SideShip.jsonc"
 	],
 	"Shots":{
 		"TurboVulcan1":{ // 804 -- NEW Turbo Vulcan Lv.1

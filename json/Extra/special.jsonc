@@ -53,13 +53,6 @@
 			"ShotData":{"Shot":"T624"},
 			"PowerUse":20
 		},
-		"S9":{ // 9
-			"Name":"MineField",
-			"Graphic":283,
-			"SpecialType":"FlareZinglon",
-			"ShotData":{"Shot":"T29"},
-			"PowerUse":{"Armor":4}
-		},
 		"S10":{ // 10
 			"Name":"Dual Vulcan",
 			"Graphic":131,
@@ -152,12 +145,6 @@
 			"SpecialType":"Invulnerability",
 			"PowerUse":{"Shield":"All"}
 		},
-		"S38":{ // 38
-			"Name":"Atom Bomb",
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T19"},
-			"PowerUse":{"Armor":2}
-		},
 		"S39":{ // 39
 			"Name":"Seeker Bombs",
 			"SpecialType":"FireOnce",
@@ -187,13 +174,6 @@
 			"Graphic":273,
 			"SpecialType":"FireMultipleRandomX",
 			"ShotData":{"Shot":"T620"},
-			"PowerUse":10
-		},
-		"S45":{ // 45
-			"Name":"8-Way Microbomb",
-			"Graphic":129,
-			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"T29"},
 			"PowerUse":10
 		},
 		"S46":{ // 46

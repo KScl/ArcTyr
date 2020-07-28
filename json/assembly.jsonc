@@ -6,7 +6,6 @@
 		"./Weapons/Shrapnel.jsonc",
 
 		// Unsorted data.
-		"./Extra/option.jsonc",
 		"./Extra/shots.jsonc",
 		"./Extra/special.jsonc",
 

@@ -1,0 +1,25 @@
+{
+	"Shots":{
+		"T22":{ // 22 Phoenix Device
+			"Delay":50,
+			"Sound":11,
+			"Trail":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":75,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveY":6},
+				{"Sprite":56,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveX":-6},
+				{"Sprite":18,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveX":6},
+				{"Sprite":94,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveY":-6}
+			]
+		}
+	},
+	"Options":{
+		"O8":{ // 8
+			"Name":"Phoenix Device (x3)",
+			"Shot":"T22",
+			"Ammo":3,
+			"Graphics":[171,190,209,228,209,190],
+			"HUDIcon":4
+		}
+	}
+}

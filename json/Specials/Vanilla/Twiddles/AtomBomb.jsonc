@@ -1,0 +1,14 @@
+{
+	"Import":[
+		// Requires Atom Bombs (option)
+		"./Options/Vanilla/AtomBombs.jsonc"
+	],
+	"Specials":{
+		"TwiddleAtomBomb":{ // 38
+			"Name":"Atom Bomb",
+			"SpecialType":"FireOnce",
+			"ShotData":{"Shot":"T19"},
+			"PowerUse":{"Armor":2}
+		}
+	}
+}

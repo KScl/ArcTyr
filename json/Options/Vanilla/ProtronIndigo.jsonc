@@ -1,0 +1,30 @@
+{
+	"Shots":{
+		"T730":{ // 730 Protron Cannon Indigo
+			"Delay":4,
+			"Homing":7,
+			"Sound":5,
+			"Filter":32,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":247,"AttackPower":2,"X":-5,"MoveX":-7,"MoveY":7},
+				{"Sprite":247,"AttackPower":2,"X":5,"MoveX":7,"MoveY":7},
+				{"Sprite":247,"AttackPower":2,"X":-5,"MoveX":-5,"MoveY":9},
+				{"Sprite":247,"AttackPower":2,"X":5,"MoveX":5,"MoveY":9},
+				{"Sprite":247,"AttackPower":2,"X":-5,"MoveX":-7,"MoveY":7},
+				{"Sprite":247,"AttackPower":2,"X":5,"MoveX":7,"MoveY":7},
+				{"Sprite":247,"AttackPower":2,"X":-5,"MoveX":-9,"MoveY":5},
+				{"Sprite":247,"AttackPower":2,"X":5,"MoveX":9,"MoveY":5}
+			]
+		}
+	},
+	"Options":{
+		"O23":{ // 23
+			"Name":"Protron Cannon Indigo",
+			"MovementType":"Front",
+			"Shot":"T730",
+			"Graphics":45,
+			"HUDIcon":2
+		}
+	}
+}

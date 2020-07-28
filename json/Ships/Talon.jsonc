@@ -4,7 +4,9 @@
 		"./Weapons/Vanilla/LightningCannon.jsonc",
 		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
 		"./Weapons/Vanilla/SonicImpulse.jsonc",
-		"./Weapons/Vanilla/ProtronWave.jsonc"
+		"./Weapons/Vanilla/ProtronWave.jsonc",
+
+		"./Specials/Vanilla/Twiddles/AtomBomb.jsonc"
 	],
 	"Ships":{
 		"Talon":{
@@ -24,7 +26,7 @@
 			],
 			"Twiddles":[
 				["Down", "Up", "Down", "Up+Fire", {"Special":"S37"}],
-				["Right", "Left", "Down", "Up+Fire", {"Special":"S38"}],
+				["Right", "Left", "Down", "Up+Fire", {"Special":"TwiddleAtomBomb"}],
 				["Left", "Right", "Down", "Up+Fire", {"Special":"S42"}]
 			]
 		}

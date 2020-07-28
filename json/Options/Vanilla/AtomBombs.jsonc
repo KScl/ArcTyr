@@ -1,0 +1,23 @@
+{
+	"Shots":{
+		"T19":{ // 19 Atom Bomb
+			"Delay":10,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":142,"AttackPower":{"Shrapnel":"AtomBombShrapnelA"},"MoveX":1,"MoveY":7},
+				{"Sprite":142,"AttackPower":{"Shrapnel":"AtomBombShrapnelA"},"MoveX":-1,"MoveY":7}
+			]
+		}
+	},
+	"Options":{
+		"O7":{ // 7
+			"Name":"Atom Bombs (x3)",
+			"Shot":"T19",
+			"Ammo":3,
+			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
+			"HUDIcon":9
+		}
+	}
+}

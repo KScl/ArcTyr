@@ -1,0 +1,24 @@
+{
+	"Shots":{
+		"T719":{ // 719 Protron Cannon Tangerine
+			"Delay":5,
+			"Homing":7,
+			"Sound":26,
+			"PiecesPerFire":3,
+			"Pieces":[
+				{"Sprite":166,"AttackPower":3,"MoveY":-8},
+				{"Sprite":166,"AttackPower":3,"MoveX":-4,"MoveY":5},
+				{"Sprite":166,"AttackPower":3,"MoveX":4,"MoveY":5}
+			]
+		}
+	},
+	"Options":{
+		"O25":{ // 25
+			"Name":"Protron Cannon Tangerine",
+			"MovementType":"Front",
+			"Shot":"T719",
+			"Graphics":85,
+			"HUDIcon":2
+		}
+	}
+}

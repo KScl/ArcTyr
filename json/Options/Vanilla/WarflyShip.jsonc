@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T726":{ // 726 Companion Ship Warfly
+			"Delay":5,
+			"AnimFrames":1,
+			"Sound":26,
+			"Pieces":[
+				{"Sprite":50,"AttackPower":2,"MoveY":10}
+			]
+		}
+	},
+	"Options":{
+		"O19":{ // 19
+			"Name":"Companion Ship Warfly",
+			"MovementType":"BigFollower",
+			"Shot":"T726",
+			"Graphics":[87,89],
+			"HUDIcon":1
+		}
+	}
+}

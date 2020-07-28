@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T452":{ // 452 Mint-O-Ship
+			"Delay":4,
+			"Sound":13,
+			"Filter":192,
+			"Pieces":[
+				{"Sprite":27,"AttackPower":1,"MoveY":10}
+			]
+		}
+	},
+	"Options":{
+		"O16":{ // 16
+			"Name":"Mint-O-Ship",
+			"MovementType":"SmallFollower",
+			"Shot":"T452",
+			"Graphics":[112,112,112,112,131,131,131,131,150,150,150,150,131,131,131,131],
+			"HUDIcon":6
+		}
+	}
+}

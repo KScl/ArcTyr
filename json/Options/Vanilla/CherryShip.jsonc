@@ -1,0 +1,23 @@
+{
+	"Shots":{
+		"T453":{ // 453 Tropical Cherry Companion
+			"Delay":4,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":20,"AttackPower":1,"X":-4,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1,"X":4,"Y":12,"MoveY":10}
+			]
+		}
+	},
+	"Options":{
+		"O29":{ // 29
+			"Name":"Tropical Cherry Companion",
+			"MovementType":"SmallFollower",
+			"Shot":"T453",
+			"Graphics":[113,113,113,113,132,132,132,132,151,151,151,151,132,132,132,132],
+			"HUDIcon":6
+		}
+	}
+}

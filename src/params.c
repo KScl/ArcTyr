@@ -47,7 +47,7 @@ void JE_paramCheck( int argc, char *argv[] )
 
 		{ 'z', 'z', "shutdown",          true },
 
-		{ 'e', 'e', "shotedit",          false },
+		{ 'e', 'e', "shot-edit",         false },
 		{ 'r', 'r', "record",            false },
 		{ 'f', 'f', "fuzz",              false },
 		
@@ -80,7 +80,7 @@ void JE_paramCheck( int argc, char *argv[] )
 			       "  -t, --data=DIR               Set Tyrian data directory\n\n"
 			       "  -z, --shutdown               Send special exit code on exit\n\n"
 #ifdef ENABLE_DEVTOOLS
-			       "  -e, --shotedit               Open interactive shot editor\n"
+			       "  -e, --shot-edit              Open interactive shot viewer/editor\n"
 			       "  -r, --record                 Record demos\n"
 			       "  -f, --fuzz                   Randomly fuzz player inputs for testing\n"
 #endif

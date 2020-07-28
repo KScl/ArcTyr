@@ -4,8 +4,10 @@
 			"Delay":36,
 			"AnimFrames":15,
 			"Sound":26,
+			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":478,"AttackPower":"Ice","MoveY":1,"AccelY":23}
+				{"Sprite":478,"AttackPower":{"Shrapnel":"IceShrapnelB"},"MoveY":1,"AccelY":23},
+				{"Sprite":478,"AttackPower":{"Shrapnel":"IceShrapnelA"},"MoveY":1,"AccelY":23}
 			]
 		}
 	},

@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T94":{ // 94 Buster Rocket
+			"Delay":10,
+			"Sound":7,
+			"Trail":6,
+			"Pieces":[
+				{"Sprite":71,"AttackPower":{"Shrapnel":"T95"},"AccelY":1}
+			]
+		}
+	},
+	"Options":{
+		"O11":{ // 11
+			"Name":"Buster Rocket (x3)",
+			"Shot":"T94",
+			"Ammo":3,
+			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
+			"HUDIcon":5
+		}
+	}
+}

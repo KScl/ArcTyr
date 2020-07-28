@@ -1,0 +1,15 @@
+{
+	"Import":[
+		// Uses the Lightning Cannon shot
+		"./Weapons/Vanilla/LightningCannon.jsonc"
+	],
+	"Options":{
+		"CSQuicksilver":{ // 24
+			"Name":"Companion Ship Quicksilver",
+			"MovementType":"BigFollower",
+			"Shot":"T233",
+			"Graphics":47,
+			"HUDIcon":8
+		}
+	}
+}

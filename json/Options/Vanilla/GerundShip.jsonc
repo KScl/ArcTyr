@@ -1,0 +1,20 @@
+{
+	"Shots":{
+		"T728":{ // 728 Companion Ship Gerund
+			"Delay":4,
+			"Sound":13,
+			"Pieces":[
+				{"Sprite":48,"AttackPower":1,"MoveY":9}
+			]
+		}
+	},
+	"Options":{
+		"O21":{ // 21
+			"Name":"Companion Ship Gerund",
+			"MovementType":"BigFollower",
+			"Shot":"T728",
+			"Graphics":49,
+			"HUDIcon":2
+		}
+	}
+}

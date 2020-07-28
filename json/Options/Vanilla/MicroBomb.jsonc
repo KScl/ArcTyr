@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T29":{ // 29 MicroBomb
+			"Delay":20,
+			"AnimFrames":3,
+			"Sound":8,
+			"Pieces":[
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveY":1}
+			]
+		}
+	},
+	"Options":{
+		"O13":{ // 13
+			"Name":"MicroBomb (x5)",
+			"Shot":"T29",
+			"Ammo":5,
+			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
+			"HUDIcon":12
+		}
+	}
+}

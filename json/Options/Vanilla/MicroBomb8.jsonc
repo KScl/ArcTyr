@@ -1,0 +1,29 @@
+{
+	"Shots":{
+		"T298":{ // 298 Eight Way Microbomb
+			"Delay":20,
+			"AnimFrames":3,
+			"Sound":8,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveY":1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveY":-1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":1,"MoveY":1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-1,"MoveY":1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":1,"MoveY":-1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-1,"MoveY":-1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":1},
+				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-1}
+			]
+		}
+	},
+	"Options":{
+		"O14":{ // 14
+			"Name":"8-Way MicroBomb (x5)",
+			"Shot":"T298",
+			"Ammo":5,
+			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
+			"HUDIcon":13
+		}
+	}
+}

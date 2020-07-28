@@ -1,0 +1,27 @@
+{
+	"Shots":{
+		"T737":{ // 737 Beno Protron System
+			"Delay":30,
+			"Homing":7,
+			"Sound":13,
+			"Filter":112,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":28,"AttackPower":20,"MoveY":2},
+				{"Sprite":247,"AttackPower":2,"MoveX":-2,"MoveY":2},
+				{"Sprite":247,"AttackPower":2,"MoveX":2,"MoveY":2},
+				{"Sprite":247,"AttackPower":2,"MoveX":-3},
+				{"Sprite":247,"AttackPower":2,"MoveX":3}
+			]
+		}
+	},
+	"Options":{
+		"O28":{ // 28
+			"Name":"Beno Protron System",
+			"MovementType":"Front",
+			"Shot":"T737",
+			"Graphics":43,
+			"HUDIcon":2
+		}
+	}
+}

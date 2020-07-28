@@ -1,0 +1,15 @@
+{
+	"Import":[
+		// Requires MicroBomb
+		"./Options/Vanilla/MicroBomb.jsonc"
+	],
+	"Specials":{
+		"SpecialMineField":{ // 9
+			"Name":"MineField",
+			"Graphic":283,
+			"SpecialType":"FlareZinglon",
+			"ShotData":{"Shot":"T29"},
+			"PowerUse":{"Armor":4}
+		}
+	}
+}

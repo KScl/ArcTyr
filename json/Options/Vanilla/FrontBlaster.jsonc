@@ -1,0 +1,22 @@
+{
+	"Shots":{
+		"T727":{ // 727 Microsol FrontBlaster
+			"Delay":5,
+			"Sound":5,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":121,"AttackPower":1,"X":-5,"MoveX":-7,"MoveY":7},
+				{"Sprite":122,"AttackPower":1,"X":5,"MoveX":7,"MoveY":7}
+			]
+		}
+	},
+	"Options":{
+		"O20":{ // 20
+			"Name":"MicroSol FrontBlaster",
+			"MovementType":"Front",
+			"Shot":"T727",
+			"Graphics":83,
+			"HUDIcon":2
+		}
+	}
+}

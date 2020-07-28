@@ -1,0 +1,21 @@
+{
+	"Shots":{
+		"T736":{ // 736 Beno Wallop Beam
+			"Delay":20,
+			"Sound":13,
+			"Filter":112,
+			"Pieces":[
+				{"Sprite":30,"AttackPower":10,"MoveY":10}
+			]
+		}
+	},
+	"Options":{
+		"O27":{ // 27
+			"Name":"Beno Wallop Beam",
+			"MovementType":"Front",
+			"Shot":"T736",
+			"Graphics":43,
+			"HUDIcon":2
+		}
+	}
+}

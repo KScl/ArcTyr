@@ -1,7 +1,11 @@
 {
 	"Import":[
 		// TEMPORARY
-		"./Weapons/Vanilla/Rear/Protron.jsonc"
+		"./Weapons/Vanilla/Rear/Protron.jsonc",
+
+		"./Options/Vanilla/GerundShip.jsonc",
+		"./Options/Vanilla/WarflyShip.jsonc",
+		"./Options/Vanilla/BenoProtron.jsonc"
 	],
 	"Shots":{
 		"T832":{ // 832 -- NEW Protron Shield AimedLv.1

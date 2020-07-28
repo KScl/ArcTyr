@@ -1,0 +1,22 @@
+{
+	"Shots":{
+		"T718":{ // 718 MicroSol FrontBlaster II
+			"Delay":4,
+			"Sound":5,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":262,"AttackPower":2,"X":-8,"MoveY":12},
+				{"Sprite":262,"AttackPower":2,"X":10,"MoveY":12}
+			]
+		}
+	},
+	"Options":{
+		"O26":{ // 26
+			"Name":"MicroSol FrontBlaster II",
+			"MovementType":"Front",
+			"Shot":"T718",
+			"Graphics":83,
+			"HUDIcon":2
+		}
+	}
+}

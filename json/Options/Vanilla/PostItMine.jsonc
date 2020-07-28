@@ -1,0 +1,20 @@
+{
+	"Shots":{
+		"T86":{ // 86 Post-It Mine
+			"Delay":2,
+			"Sound":6,
+			"Pieces":[
+				{"Sprite":238,"AttackPower":{"Shrapnel":"T89"},"AccelY":1}
+			]
+		}
+	},
+	"Options":{
+		"O15":{ // 15
+			"Name":"Post-It Mine (x5)",
+			"Shot":"T86",
+			"Ammo":5,
+			"Graphics":[{"WaitUntilFire":243},243,262,262,281,281,300,300,281,281,262,262],
+			"HUDIcon":6
+		}
+	}
+}

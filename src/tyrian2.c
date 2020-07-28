@@ -1545,6 +1545,13 @@ level_loop:
 						goto draw_player_shot_loop_end;
 					}
 
+					if (damage == 98)
+					{
+						// Icebreaker
+						damage = 1;
+						doIced = enemy[b].iced = 100;
+						infiniteShot = true;
+					}
 					if (damage == 99)
 					{
 						damage = 0;

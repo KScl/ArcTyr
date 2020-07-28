@@ -1,0 +1,19 @@
+{
+	"Shots":{
+		"T11":{ // 11 Vulcan Shot Option
+			"Delay":2,
+			"Sound":28,
+			"Pieces":[
+				{"Sprite":148,"AttackPower":2,"MoveY":20,"AccelY":-1}
+			]
+		}
+	},
+	"Options":{
+		"O4":{ // 4
+			"Name":"Vulcan Shot Option",
+			"Shot":"T11",
+			"Graphics":[167,167,167,186,186,186,205,205,205],
+			"HUDIcon":3
+		}
+	}
+}

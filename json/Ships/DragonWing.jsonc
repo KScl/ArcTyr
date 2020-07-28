@@ -4,7 +4,11 @@
 		"./Weapons/ArcTyr/ProtronShield.jsonc",
 		"./Weapons/ArcTyr/CrossCannon.jsonc",
 		"./Weapons/Vanilla/Rear/HeavyMissiles.jsonc",
-		"./Weapons/Vanilla/Rear/SonicWave.jsonc"
+		"./Weapons/Vanilla/Rear/SonicWave.jsonc",
+
+		"./Options/Vanilla/PlasmaStorm.jsonc",
+		"./Options/Vanilla/PhoenixDevice.jsonc",
+		"./Options/Vanilla/MicroBomb8.jsonc"
 	],
 	"Specials":{
 		"TwiddleCreateOptionLeft":{ // 31

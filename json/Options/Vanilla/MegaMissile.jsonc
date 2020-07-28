@@ -1,0 +1,25 @@
+{
+	"Shots":{
+		"T15":{ // 15 MegaMissile
+			"Delay":8,
+			"Sound":7,
+			"Trail":6,
+			"PiecesPerFire":5,
+			"Pieces":[
+				{"Sprite":34,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"AccelY":1},
+				{"Sprite":34,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-4,"MoveY":-1,"AccelY":1},
+				{"Sprite":34,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":4,"MoveY":-1,"AccelY":1},
+				{"Sprite":34,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-7,"MoveY":-4,"AccelY":1},
+				{"Sprite":34,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":7,"MoveY":-4,"AccelY":1}
+			]
+		}
+	},
+	"Options":{
+		"O6":{ // 6
+			"Name":"MegaMissile (x1)",
+			"Shot":"T15",
+			"Ammo":1,
+			"HUDIcon":4
+		}
+	}
+}
