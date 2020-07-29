@@ -296,7 +296,7 @@ int main( int argc, char *argv[] )
 		return -1;
 	}
 
-	JE_loadConfiguration();
+	ArcTyr_loadConfig();
 
 	JE_paramCheck(argc, argv);
 
@@ -387,13 +387,15 @@ int main( int argc, char *argv[] )
 	{
 		JE_initPlayerData();
 
-		// quitting from title screen isn't possible
-		//intro_logos();
-		JE_titleScreen();
+		if (!JE_titleScreen())
+			ARC_NextIdleScreen();
 
-		isInGame = true;
-		JE_main();
-		isInGame = false;
+		if (gameLoaded)
+		{
+			isInGame = true;
+			JE_main();
+			isInGame = false;
+		}
 	}
 
 	JE_tyrianHalt(0);
@@ -404,6 +406,7 @@ int main( int argc, char *argv[] )
 __attribute__((noreturn)) void JE_tyrianHalt( JE_byte code )
 {
 	printf("Halting...\n");
+	ArcTyr_saveConfig();
 
 	deinit_audio();
 	deinit_video();
@@ -422,30 +425,8 @@ __attribute__((noreturn)) void JE_tyrianHalt( JE_byte code )
 			free(digiFx[i]);
 	}
 
-	if (code != 9)
-	{
-		/*
-		TODO?
-		JE_drawANSI("exitmsg.bin");
-		JE_gotoXY(1,22);*/
-
-		JE_saveConfiguration();
-	}
-
-	/* endkeyboard; */
-
-	if (code == 9)
-	{
-		/* OutputString('call=file0002.EXE' + #0'); TODO? */
-	}
-
-	if (code == 5)
-	{
-		code = 0;
-	}
-
 	free_pals();
 
 	SDL_Quit();
-	exit(code);
+	exit((code == 5) ? 0 : code);
 }

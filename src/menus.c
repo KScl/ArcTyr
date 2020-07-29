@@ -462,10 +462,11 @@ void select_episode( void )
 	}
 }
 
-void JE_titleScreen( void )
+bool JE_titleScreen( void )
 {
 	uint button;
 	int tyrY = 62, t2kY = 41;
+	bool fadeIn = true;
 
 	//const int menunum = 7;
 	skip_header_draw = false;
@@ -476,17 +477,8 @@ void JE_titleScreen( void )
 	JE_word waitForDemo;
 	JE_word oldCoins, curCoins;
 
-	//JE_byte menu = 0;
-	//JE_boolean redraw = true,
-	//           fadeIn = false;
-
 	play_demo = false;
-
-	//redraw = true;
-	bool fadeIn = true;
-
 	gameLoaded = false;
-	jumpSection = false;
 
 	set_volume(tyrMusicVolume, fxVolume);
 
@@ -509,7 +501,7 @@ void JE_titleScreen( void )
 	if (attractTic == 0)
 		attractTic = SDL_GetTicks();
 
-	if (true)
+	if (true) // Always move the logo up
 	{
 		tyrY = 61;
 		t2kY = 44;
@@ -631,14 +623,10 @@ void JE_titleScreen( void )
 			waitForDemo = (oldCoins >= DIP.coinsToStart) ? 35*10 : 35*5;
 		}
 		else
-		{
-			if (--waitForDemo == 0)
-			{
-				play_demo = true;	
-			}
-		}
+			--waitForDemo;
 	}
-	while (!(gameLoaded || jumpSection || play_demo));
+	while (!gameLoaded && waitForDemo);
 
 	fade_black(15);
+	return gameLoaded;
 }

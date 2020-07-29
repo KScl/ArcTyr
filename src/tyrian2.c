@@ -61,7 +61,7 @@ inline static void blit_enemy( SDL_Surface *surface, unsigned int i, signed int 
 boss_bar_t boss_bar[2];
 
 /* Level Event Data */
-JE_boolean quit, loadLevelOk;
+JE_boolean quit;
 
 struct JE_EventRecType eventRec[EVENT_MAXIMUM]; /* [1..eventMaximum] */
 JE_word levelEnemyMax;
@@ -69,10 +69,6 @@ JE_word levelEnemyFrequency;
 JE_word levelEnemy[40]; /* [1..40] */
 
 char tempStr[31];
-
-/* Data used for ItemScreen procedure to indicate items available */
-JE_byte itemAvail[9][10]; /* [1..9, 1..10] */
-JE_byte itemAvailMax[9]; /* [1..9] */
 
 static void init_saweapon_bag( void )
 {
@@ -1006,9 +1002,6 @@ start_level_first:
 	JE_drawShield();
 	JE_drawArmor();
 
-	/* Set cubes to 0 */
-	cubeMax = 0;
-
 	/* Secret Level Display */
 	secretLevelDisplayTime = 0;
 
@@ -1697,21 +1690,9 @@ level_loop:
 									{
 										assert((unsigned int) enemy[temp2].flagnum-1 < COUNTOF(globalFlags));
 										globalFlags[enemy[temp2].flagnum-1] = enemy[temp2].setto;
-										//printf("flag set: %d = %d\n", enemy[temp2].flagnum, enemy[temp2].setto);
 									}
 
-									//if (enemy[temp2].enemydie > 0)
-									//	printf("enemy die: %d\n", enemy[temp2].enemydie);
-
-									if (
-										(enemy[temp2].enemydie > 0) 
-										&&
-										!(
-											//(superArcadeMode != SA_NONE)
-											//&&
-											(enemyDat[enemy[temp2].enemydie].value == 30000)
-										)
-									)
+									if (enemy[temp2].enemydie > 0 && enemyDat[enemy[temp2].enemydie].value != 30000)
 									{
 										int temp_b = b;
 										// ---
@@ -1750,14 +1731,7 @@ level_loop:
 
 									if ((enemy[temp2].evalue > 0) && (enemy[temp2].evalue < 10000))
 									{
-										if (enemy[temp2].evalue == 1)
-										{
-											cubeMax++;
-										}
-										else
-										{
-											player[playerNum - 1].cash += enemy[temp2].evalue;
-										}
+										player[playerNum - 1].cash += enemy[temp2].evalue;
 									}
 
 									if ((enemy[temp2].edlevel == -1) && (temp == temp3))
@@ -2354,6 +2328,427 @@ draw_player_shot_loop_end:
 	goto level_loop;
 }
 
+static bool read_episode_sections( void )
+{
+	// Load LEVELS.DAT - Section = MAINLEVEL
+	FILE *ep_f = dir_fopen_die(data_dir(), episode_file, "rb");
+
+	char s[256];
+	Uint8 pic_buffer[320*200]; /* screen buffer, 8-bit specific */
+	Uint8 *vga, *pic, *vga2; /* screen pointer, 8-bit specific */
+
+	while (mainLevel != 0)
+	{
+		// Seek Section # Mainlevel
+		fseek(ep_f, 0, SEEK_SET);
+		int onSection = 0;
+		while (onSection < mainLevel)
+		{
+			read_encrypted_pascal_string(s, sizeof(s), ep_f);
+			if (s[0] == '*')
+			{
+				onSection++;
+				s[0] = ' ';
+			}
+			if (feof(ep_f))
+			{
+				fprintf(stderr, "error: requested section number %hu exceeds maximum of %d\n", mainLevel, onSection);
+				JE_tyrianHalt(1);
+			}
+		}
+		printf("on section number %d\n", onSection);
+
+		do
+		{
+			strcpy(s, " ");
+			read_encrypted_pascal_string(s, sizeof(s), ep_f);
+			printf("%s\n", s);
+
+			if (s[0] != ']')
+				continue;
+
+			switch (s[1])
+			{
+			case 'L':
+				nextLevel = atoi(s + 9);
+				if (nextLevel == 0)
+					nextLevel = mainLevel + 1;
+
+				SDL_strlcpy(levelName, s + 13, 10);
+				levelSong = atoi(s + 22);
+				lvlFileNum = atoi(s + 25);
+				bonusLevelCurrent = (strlen(s) > 28) & (s[28] == '$');
+				normalBonusLevelCurrent = (strlen(s) > 27) & (s[27] == '$');
+
+				fclose(ep_f);
+				return true; // level loaded
+
+			case 'A':
+				JE_playAnim("tyrend.anm", 0, 7);
+				break;
+
+			case 'G':
+				mapOrigin = atoi(s + 4);
+				mapPNum   = atoi(s + 7);
+				for (int i = 0; i < mapPNum; i++)
+				{
+					mapPlanet[i] = atoi(s + 1 + (i + 1) * 8);
+					mapSection[i] = atoi(s + 4 + (i + 1) * 8);
+				}
+				break;
+
+			case '?': // Data cubes -- ignore
+			case '!': // Data cubes -- ignore
+			case '+': // Data cubes -- ignore
+				break;
+
+			case 'g': // Galaga
+			case 'x': // Extra game
+			case 'e': // ENGAGE
+				printf("hit a sidegame mode flag -- ignoring\n");
+				break;
+
+			case 'J':  // section jump
+				mainLevel = atoi(s + 3);
+				break;
+
+			case '2':  // two-player section jump
+				printf("arcade section jump hit (always true)\n");
+				mainLevel = atoi(s + 3);
+				break;
+
+			case 'w':  // Stalker 21.126 section jump
+				printf("21.126 jump hit (always false)\n");
+				break;
+
+			case 't':
+				if (levelTimer && levelTimerCountdown == 0)
+				{
+					printf("timer check jump hit, jumping (failed last stage)\n");
+					mainLevel = atoi(s + 3);
+				}
+				else
+					printf("timer check jump hit, not jumping (completed last stage)\n");
+				break;
+
+			case 'l':
+				// note: this check was inverted, now succeeds if anyone is alive
+				if (all_players_dead())
+					mainLevel = atoi(s + 3);
+				break;
+
+			case 's': // store savepoint -- ignore
+			case 'b': // save game before start -- ignore
+			case 'i': // set buy song -- ignore
+				break;
+
+			case 'I': // Load Items Available Information
+				// We skip the item screen and just jump immediately
+				mainLevel = mapSection[mapPNum-1];
+				break;
+
+			case '@':
+				useLastBank = !useLastBank;
+				break;
+
+			case 'Q': // Episode end
+				play_song(18);
+
+				fade_black(15);
+				JE_clr256(VGAScreen);
+				memcpy(colors, palettes[6-1], sizeof(colors));
+				fade_palette(colors, 15, 0, 255);
+				JE_loadPCX(arcdata_dir(), "select.pcx");
+
+				temp = secretHint + (mt_rand() % 3) * 3;
+
+				JE_byte plrs = PL_WhosInGame();
+				levelWarningLines = 0;
+				if (plrs & 1)
+				{
+					snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
+						"%s %lu", miscText[40], player[0].cash);
+				}
+				if (plrs & 2)
+				{
+					snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
+						"%s %lu", miscText[40], player[1].cash);
+				}
+				strcpy(levelWarningText[levelWarningLines++], "");
+
+				for (int i = 0; i < temp - 1; i++)
+				{
+					do
+						read_encrypted_pascal_string(s, sizeof(s), ep_f);
+					while (s[0] != '#');
+				}
+
+				do
+				{
+					read_encrypted_pascal_string(s, sizeof(s), ep_f);
+					strcpy(levelWarningText[levelWarningLines], s);
+					levelWarningLines++;
+				}
+				while (s[0] != '#');
+				levelWarningLines--;
+
+				frameCountMax = 4;
+				JE_displayText();
+
+				fade_black(15);
+
+				// If out of episodes, play the credits and leave.
+				if (!JE_nextEpisode())
+				{
+					mainLevel = 0;
+					skip_header_draw = false;
+					JE_playCredits();
+				}
+				else
+				{
+					play_song(26);
+
+					JE_clr256(VGAScreen);
+					memcpy(colors, palettes[6-1], sizeof(colors));
+
+					JE_dString(VGAScreen, JE_fontCenter(episode_name[episodeNum], SMALL_FONT_SHAPES), 130, episode_name[episodeNum], SMALL_FONT_SHAPES);
+					JE_dString(VGAScreen, JE_fontCenter(miscText[5-1], SMALL_FONT_SHAPES), 185, miscText[5-1], SMALL_FONT_SHAPES);
+
+					JE_showVGA();
+					fade_palette(colors, 15, 0, 255);
+
+					do
+					{
+						SDL_Delay(16);
+					} while (!I_checkSkipScene());
+
+					fade_black(15);
+
+					mainLevel = FIRST_LEVEL;
+					fclose(ep_f); // Time to leave this episode behind us
+					return read_episode_sections(); // And go to the new one
+				}
+				break;
+
+			case 'P':
+				printf("pic P\n");
+				tempX = atoi(s + 3);
+				if (tempX > 900)
+				{
+					memcpy(colors, palettes[pcxpal[tempX-1 - 900]], sizeof(colors));
+					JE_clr256(VGAScreen);
+					JE_showVGA();
+					fade_palette(colors, 1, 0, 255);
+				}
+				else
+				{
+					if (tempX == 0)
+						JE_loadPCX(data_dir(), "tshp2.pcx");
+					else
+						JE_loadPic(VGAScreen, tempX, false);
+
+					JE_showVGA();
+					fade_palette(colors, 10, 0, 255);
+				}
+				break;
+
+			case 'U':
+				printf("pic U\n");
+				memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+				tempX = atoi(s + 3);
+				JE_loadPic(VGAScreen, tempX, false);
+				memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+				I_checkButtons();
+
+				for (int z = 0; z <= 199; z++)
+				{
+					if (true /* !newkey */)
+					{
+						vga = VGAScreen->pixels;
+						vga2 = VGAScreen2->pixels;
+						pic = pic_buffer + (199 - z) * 320;
+
+						setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+						for (y = 0; y <= 199; y++)
+						{
+							if (y <= z)
+							{
+								memcpy(vga, pic, 320);
+								pic += 320;
+							}
+							else
+							{
+								memcpy(vga, vga2, VGAScreen->pitch);
+								vga2 += VGAScreen->pitch;
+							}
+							vga += VGAScreen->pitch;
+						}
+
+						JE_showVGA();
+						service_wait_delay();
+					}
+				}
+
+				memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+				break;
+
+			case 'V':
+				printf("pic V\n");
+				memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+				tempX = atoi(s + 3);
+				JE_loadPic(VGAScreen, tempX, false);
+				memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+				I_checkButtons();
+				for (int z = 0; z <= 199; z++)
+				{
+					if (true /* !newkey */)
+					{
+						vga = VGAScreen->pixels;
+						vga2 = VGAScreen2->pixels;
+						pic = pic_buffer;
+
+						setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+						for (y = 0; y < 199; y++)
+						{
+							if (y <= 199 - z)
+							{
+								memcpy(vga, vga2, VGAScreen->pitch);
+								vga2 += VGAScreen->pitch;
+							}
+							else
+							{
+								memcpy(vga, pic, 320);
+								pic += 320;
+							}
+							vga += VGAScreen->pitch;
+						}
+
+						JE_showVGA();
+						service_wait_delay();
+					}
+				}
+
+				memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+				break;
+
+			case 'R':
+				printf("pic R\n");
+				memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+				tempX = atoi(s + 3);
+				JE_loadPic(VGAScreen, tempX, false);
+				memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
+
+				I_checkButtons();
+
+				for (int z = 0; z <= 318; z++)
+				{
+					if (true /* !newkey */)
+					{
+						vga = VGAScreen->pixels;
+						vga2 = VGAScreen2->pixels;
+						pic = pic_buffer;
+
+						setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
+
+						for(y = 0; y < 200; y++)
+						{
+							memcpy(vga, vga2 + z, 319 - z);
+							vga += 320 - z;
+							vga2 += VGAScreen2->pitch;
+							memcpy(vga, pic, z + 1);
+							vga += z;
+							pic += 320;
+						}
+
+						JE_showVGA();
+						service_wait_delay();
+					}
+				}
+
+				memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
+				break;
+
+			case 'C':
+				fade_black(10);
+				JE_clr256(VGAScreen);
+				JE_showVGA();
+				memcpy(colors, palettes[7], sizeof(colors));
+				set_palette(colors, 0, 255);
+				break;
+
+			case 'B':
+				fade_black(10);
+				break;
+			case 'F':
+				fade_white(100);
+				fade_black(30);
+				JE_clr256(VGAScreen);
+				JE_showVGA();
+				break;
+
+			case 'W':
+				if (true /* !ESCPressed */)
+				{
+					warningCol = 14 * 16 + 5;
+					warningColChange = 1;
+					warningSoundDelay = 0;
+					levelWarningDisplay = (s[2] == 'y');
+					levelWarningLines = 0;
+					frameCountMax = atoi(s + 4);
+					setjasondelay2(6);
+					warningRed = frameCountMax / 10;
+					frameCountMax = frameCountMax % 10;
+
+					do
+					{
+						read_encrypted_pascal_string(s, sizeof(s), ep_f);
+
+						if (s[0] != '#')
+							strncpy(levelWarningText[levelWarningLines++], s, 60);
+					}
+					while (!(s[0] == '#'));
+
+					JE_displayText();
+				}
+				break;
+
+			case 'H':
+				if (initialDifficulty < 3)
+				{
+					mainLevel = atoi(s + 4);
+				}
+				break;
+
+			case 'h':
+				if (initialDifficulty > 2)
+				{
+					read_encrypted_pascal_string(s, sizeof(s), ep_f);
+				}
+				break;
+
+			case 'S': // net only -- ignore
+			case 'n':
+				break;
+
+			case 'M':
+				temp = atoi(s + 3);
+				play_song(temp - 1);
+				break;
+			}
+		} while (onSection == mainLevel);
+	}
+
+	fclose(ep_f); // if quitting in any way, 
+	return false; // go back to title screen
+}
+
 /* --- Load Level/Map Data --- */
 void JE_loadMap( void )
 {
@@ -2363,548 +2758,22 @@ void JE_loadMap( void )
 	JE_integer yy;
 	JE_word mapSh[3][128]; /* [1..3, 0..127] */
 	JE_byte *ref[3][128]; /* [1..3, 0..127] */
-	char s[256];
 
 	JE_byte mapBuf[15 * 600]; /* [1..15 * 600] */
 	JE_word bufLoc;
 
-	//char buffer[256];
-	int i;
-	Uint8 pic_buffer[320*200]; /* screen buffer, 8-bit specific */
-	Uint8 *vga, *pic, *vga2; /* screen pointer, 8-bit specific */
-
-	lastCubeMax = cubeMax;
-
-	// Hide the header until we're in game
-	skip_header_draw = true;
-
-	/*Defaults*/
-	songBuy = DEFAULT_SONG_BUY;  /*Item Screen default song*/
-
-	/* Load LEVELS.DAT - Section = MAINLEVEL */
-	saveLevel = mainLevel;
-
-new_game:
 	useLastBank = false;
-
-	gameLoaded = false;
 
 	if (!play_demo)
 	{
-		do
-		{
-			FILE *ep_f = dir_fopen_die(data_dir(), episode_file, "rb");
-
-			jumpSection = false;
-			loadLevelOk = false;
-
-			/* Seek Section # Mainlevel */
-			int x = 0;
-			while (x < mainLevel)
-			{
-				read_encrypted_pascal_string(s, sizeof(s), ep_f);
-				if (s[0] == '*')
-				{
-					x++;
-					s[0] = ' ';
-				}
-				if (feof(ep_f))
-				{
-					fprintf(stderr, "error: requested section number %hu exceeds maximum of %d\n", mainLevel, x);
-					JE_tyrianHalt(1);
-				}
-			}
-
-			printf("on section number %d\n", x);
-
-			do
-			{
-				if (gameLoaded)
-				{
-					fclose(ep_f);
-
-					if (mainLevel == 0)  // if quit itemscreen
-						return;          // back to title screen
-					else
-						goto new_game;
-				}
-
-				strcpy(s, " ");
-				read_encrypted_pascal_string(s, sizeof(s), ep_f);
-				printf("%s\n", s);
-
-				if (s[0] == ']')
-				{
-					switch (s[1])
-					{
-					case 'A':
-						JE_playAnim("tyrend.anm", 0, 7);
-						break;
-
-					case 'G':
-						mapOrigin = atoi(s + 4);
-						mapPNum   = atoi(s + 7);
-						for (i = 0; i < mapPNum; i++)
-						{
-							mapPlanet[i] = atoi(s + 1 + (i + 1) * 8);
-							mapSection[i] = atoi(s + 4 + (i + 1) * 8);
-						}
-						break;
-
-					case '?':
-						temp = atoi(s + 4);
-						for (i = 0; i < temp; i++)
-						{
-							cubeList[i] = atoi(s + 3 + (i + 1) * 4);
-						}
-						if (cubeMax > temp)
-							cubeMax = temp;
-						break;
-
-					case '!':
-						cubeMax = atoi(s + 4);    /*Auto set CubeMax*/
-						break;
-
-					case '+':
-						temp = atoi(s + 4);
-						cubeMax += temp;
-						if (cubeMax > 4)
-							cubeMax = 4;
-						break;
-
-					case 'g':
-						printf("hit galaga mode -- ignoring\n");
-						break;
-
-					case 'x':
-						printf("hit extra game flag -- ignoring");
-						break;
-
-					case 'e': // ENGAGE mode, used for mini-games
-						printf("hit ENGAGE mode -- ignoring\n");
-						break;
-
-					case 'J':  // section jump
-						temp = atoi(s + 3);
-						mainLevel = temp;
-						jumpSection = true;
-						break;
-
-					case '2':  // two-player section jump
-						temp = atoi(s + 3);
-						printf("arcade section jump hit (always true)\n");
-
-						mainLevel = temp;
-						jumpSection = true;
-						break;
-
-					case 'w':  // Stalker 21.126 section jump
-						printf("21.126 jump hit (always false)\n");
-/*
-						temp = atoi(s + 3); // Allowed to go to Time War?
-						if (player[0].items.ship == 13)
-						{
-							mainLevel = temp;
-							jumpSection = true;
-						} */
-						break;
-
-					case 't':
-						temp = atoi(s + 3);
-						printf("hit timer check fail (fail jumps to %d) : %d %d\n", temp, levelTimer, levelTimerCountdown);
-						if (levelTimer && levelTimerCountdown == 0)
-						{
-							printf("... jumping\n");
-							mainLevel = temp;
-							jumpSection = true;
-						}
-						break;
-
-					case 'l':
-						temp = atoi(s + 3);
-						// note: this check was inverted, now succeeds if anyone is alive
-						if (all_players_dead())
-						{
-							mainLevel = temp;
-							jumpSection = true;
-						}
-						break;
-
-					case 's':
-						saveLevel = mainLevel;
-						break; /*store savepoint*/
-
-					case 'b':
-						// save game before start: stubbed
-						printf("Skipping save game opcode 'b'\n");
-						break;
-
-					case 'i':
-						temp = atoi(s + 3);
-						songBuy = temp - 1;
-						break;
-
-					case 'I': // Load Items Available Information
-						// Item screen is skipped now
-						// However we go through the loading motions
-						// to read off the same amount of data
-
-						memset(&itemAvail, 0, sizeof(itemAvail));
-
-						for (int i = 0; i < 9; ++i)
-						{
-							read_encrypted_pascal_string(s, sizeof(s), ep_f);
-
-							char buf[256];
-							strncpy(buf, (strlen(s) > 8) ? s + 8 : "", sizeof(buf));
-
-							int j = 0, temp;
-							while (str_pop_int(buf, &temp))
-								itemAvail[i][j++] = temp;
-							itemAvailMax[i] = j;
-						}
-
-						mainLevel = mapSection[mapPNum-1];
-						jumpSection = true;
-						break;
-
-					case 'L':
-						nextLevel = atoi(s + 9);
-						SDL_strlcpy(levelName, s + 13, 10);
-						levelSong = atoi(s + 22);
-						if (nextLevel == 0)
-						{
-							nextLevel = mainLevel + 1;
-						}
-						lvlFileNum = atoi(s + 25);
-						loadLevelOk = true;
-						bonusLevelCurrent = (strlen(s) > 28) & (s[28] == '$');
-						normalBonusLevelCurrent = (strlen(s) > 27) & (s[27] == '$');
-						gameJustLoaded = false;
-						break;
-
-					case '@':
-						useLastBank = !useLastBank;
-						break;
-
-					case 'Q':
-						play_song(18);
-
-						fade_black(15);
-						JE_clr256(VGAScreen);
-						memcpy(colors, palettes[6-1], sizeof(colors));
-						fade_palette(colors, 15, 0, 255);
-						JE_loadPCX(arcdata_dir(), "select.pcx");
-
-						temp = secretHint + (mt_rand() % 3) * 3;
-
-						JE_byte plrs = PL_WhosInGame();
-						levelWarningLines = 0;
-						if (plrs & 1)
-						{
-							snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
-								"%s %lu", miscText[40], player[0].cash);
-						}
-						if (plrs & 2)
-						{
-							snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
-								"%s %lu", miscText[40], player[1].cash);
-						}
-						strcpy(levelWarningText[levelWarningLines++], "");
-
-						for (x = 0; x < temp - 1; x++)
-						{
-							do
-								read_encrypted_pascal_string(s, sizeof(s), ep_f);
-							while (s[0] != '#');
-						}
-
-						do
-						{
-							read_encrypted_pascal_string(s, sizeof(s), ep_f);
-							strcpy(levelWarningText[levelWarningLines], s);
-							levelWarningLines++;
-						}
-						while (s[0] != '#');
-						levelWarningLines--;
-
-						frameCountMax = 4;
-						JE_displayText();
-
-						fade_black(15);
-
-						// If out of episodes, play the credits and leave.
-						if (!JE_nextEpisode())
-						{
-							mainLevel = 0;
-							skip_header_draw = false;
-
-							JE_playCredits();
-							return;
-						}
-						else
-						{
-							gameLoaded = true;
-							mainLevel = FIRST_LEVEL;
-							saveLevel = FIRST_LEVEL;
-
-							play_song(26);
-
-							JE_clr256(VGAScreen);
-							memcpy(colors, palettes[6-1], sizeof(colors));
-
-							JE_dString(VGAScreen, JE_fontCenter(episode_name[episodeNum], SMALL_FONT_SHAPES), 130, episode_name[episodeNum], SMALL_FONT_SHAPES);
-							JE_dString(VGAScreen, JE_fontCenter(miscText[5-1], SMALL_FONT_SHAPES), 185, miscText[5-1], SMALL_FONT_SHAPES);
-
-							JE_showVGA();
-							fade_palette(colors, 15, 0, 255);
-
-							do
-							{
-								SDL_Delay(16);
-							} while (!I_checkSkipScene());
-
-							fade_black(15);
-						}
-						break;
-
-					case 'P':
-						printf("pic P\n");
-						tempX = atoi(s + 3);
-						if (tempX > 900)
-						{
-							memcpy(colors, palettes[pcxpal[tempX-1 - 900]], sizeof(colors));
-							JE_clr256(VGAScreen);
-							JE_showVGA();
-							fade_palette(colors, 1, 0, 255);
-						}
-						else
-						{
-							if (tempX == 0)
-								JE_loadPCX(data_dir(), "tshp2.pcx");
-							else
-								JE_loadPic(VGAScreen, tempX, false);
-
-							JE_showVGA();
-							fade_palette(colors, 10, 0, 255);
-						}
-						break;
-
-					case 'U':
-						printf("pic U\n");
-						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-						tempX = atoi(s + 3);
-						JE_loadPic(VGAScreen, tempX, false);
-						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-						I_checkButtons();
-
-						for (int z = 0; z <= 199; z++)
-						{
-							if (true /* !newkey */)
-							{
-								vga = VGAScreen->pixels;
-								vga2 = VGAScreen2->pixels;
-								pic = pic_buffer + (199 - z) * 320;
-
-								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-								for (y = 0; y <= 199; y++)
-								{
-									if (y <= z)
-									{
-										memcpy(vga, pic, 320);
-										pic += 320;
-									}
-									else
-									{
-										memcpy(vga, vga2, VGAScreen->pitch);
-										vga2 += VGAScreen->pitch;
-									}
-									vga += VGAScreen->pitch;
-								}
-
-								JE_showVGA();
-								service_wait_delay();
-							}
-						}
-
-						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
-						break;
-
-					case 'V':
-						printf("pic V\n");
-						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-						tempX = atoi(s + 3);
-						JE_loadPic(VGAScreen, tempX, false);
-						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-						I_checkButtons();
-						for (int z = 0; z <= 199; z++)
-						{
-							if (true /* !newkey */)
-							{
-								vga = VGAScreen->pixels;
-								vga2 = VGAScreen2->pixels;
-								pic = pic_buffer;
-
-								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-								for (y = 0; y < 199; y++)
-								{
-									if (y <= 199 - z)
-									{
-										memcpy(vga, vga2, VGAScreen->pitch);
-										vga2 += VGAScreen->pitch;
-									}
-									else
-									{
-										memcpy(vga, pic, 320);
-										pic += 320;
-									}
-									vga += VGAScreen->pitch;
-								}
-
-								JE_showVGA();
-								service_wait_delay();
-							}
-						}
-
-						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
-						break;
-
-					case 'R':
-						printf("pic R\n");
-						memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-						tempX = atoi(s + 3);
-						JE_loadPic(VGAScreen, tempX, false);
-						memcpy(pic_buffer, VGAScreen->pixels, sizeof(pic_buffer));
-
-						I_checkButtons();
-
-						for (int z = 0; z <= 318; z++)
-						{
-							if (true /* !newkey */)
-							{
-								vga = VGAScreen->pixels;
-								vga2 = VGAScreen2->pixels;
-								pic = pic_buffer;
-
-								setjasondelay(1); /* attempting to emulate JE_waitRetrace();*/
-
-								for(y = 0; y < 200; y++)
-								{
-									memcpy(vga, vga2 + z, 319 - z);
-									vga += 320 - z;
-									vga2 += VGAScreen2->pitch;
-									memcpy(vga, pic, z + 1);
-									vga += z;
-									pic += 320;
-								}
-
-								JE_showVGA();
-								service_wait_delay();
-							}
-						}
-
-						memcpy(VGAScreen->pixels, pic_buffer, sizeof(pic_buffer));
-						break;
-
-					case 'C':
-						fade_black(10);
-						JE_clr256(VGAScreen);
-						JE_showVGA();
-						memcpy(colors, palettes[7], sizeof(colors));
-						set_palette(colors, 0, 255);
-						break;
-
-					case 'B':
-						fade_black(10);
-						break;
-					case 'F':
-						fade_white(100);
-						fade_black(30);
-						JE_clr256(VGAScreen);
-						JE_showVGA();
-						break;
-
-					case 'W':
-						if (true /* !ESCPressed */)
-						{
-							warningCol = 14 * 16 + 5;
-							warningColChange = 1;
-							warningSoundDelay = 0;
-							levelWarningDisplay = (s[2] == 'y');
-							levelWarningLines = 0;
-							frameCountMax = atoi(s + 4);
-							setjasondelay2(6);
-							warningRed = frameCountMax / 10;
-							frameCountMax = frameCountMax % 10;
-
-							do
-							{
-								read_encrypted_pascal_string(s, sizeof(s), ep_f);
-
-								if (s[0] != '#')
-									strncpy(levelWarningText[levelWarningLines++], s, 60);
-							}
-							while (!(s[0] == '#'));
-
-							JE_displayText();
-						}
-						break;
-
-					case 'H':
-						if (initialDifficulty < 3)
-						{
-							mainLevel = atoi(s + 4);
-							jumpSection = true;
-						}
-						break;
-
-					case 'h':
-						if (initialDifficulty > 2)
-						{
-							read_encrypted_pascal_string(s, sizeof(s), ep_f);
-						}
-						break;
-
-					case 'S':
-						/* no-op: net only */
-						break;
-
-					case 'n':
-						break;
-
-					case 'M':
-						temp = atoi(s + 3);
-						play_song(temp - 1);
-						break;
-					}
-				}
-
-			} while (!(loadLevelOk || jumpSection));
-
-			fclose(ep_f);
-
-		} while (!loadLevelOk);
-
-		fade_black(50);
-	}
-	else // play_demo
-	{
-		if (!load_next_demo())
-		{
-			mainLevel = 0;
-			skip_header_draw = false;
+		// Hide the header until we're in game
+		skip_header_draw = true;
+		if (!read_episode_sections())
 			return;
-		}
+		fade_black(50);
+		skip_header_draw = false;
 	}
 
-	skip_header_draw = false;
 	arcTextTimer = 0;
 
 	FILE *level_f = dir_fopen_die(data_dir(), levelFile, "rb");

@@ -50,6 +50,7 @@ void ARC_IdentifyEnd( void );
 void ARC_InsertCoin( void );
 JE_boolean ARC_CoinStart( Player *pl );
 JE_word ARC_GetCoins( void );
+void ARC_NextIdleScreen( void );
 
 //
 

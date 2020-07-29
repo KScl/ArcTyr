@@ -32,8 +32,6 @@
 
 #define MUSIC_NUM 41
 
-extern JE_byte songBuy;
-extern const char musicFile[MUSIC_NUM][13];
 extern const char musicTitle[MUSIC_NUM][48];
 extern JE_boolean musicFade;
 

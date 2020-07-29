@@ -100,9 +100,10 @@ void ARC_IdentifyEnd( void )
 		I_checkButtons();
 		SDL_Delay(1);
 	}
-	skip_header_draw = false;
 	inIdentify = false;
-	fade_black(1);
+	fade_black(10);
+	intro_logos();
+	skip_header_draw = false;
 }
 
 void ARC_InsertCoin( void )
@@ -154,6 +155,28 @@ JE_boolean ARC_CoinStart( Player *pl )
 JE_word ARC_GetCoins( void )
 {
 	return coins;
+}
+
+void ARC_NextIdleScreen( void )
+{
+	static bool demoThisTime = false;
+	if (!(demoThisTime = !demoThisTime))
+	{
+
+	}
+	else if (load_next_demo())
+	{
+		gameLoaded = true;
+		play_demo = true;
+	}
+	else // play intro logos instead
+	{
+		demoThisTime = false; // we didn't do the demo this time, so...
+
+		skip_header_draw = true;
+		intro_logos();
+		skip_header_draw = false;
+	}
 }
 
 

@@ -47,23 +47,17 @@ JE_boolean smoothies[9] = /* [1..9] */
 
 JE_byte starShowVGASpecialCode;
 
-/* CubeData */
-JE_word lastCubeMax, cubeMax;
-JE_word cubeList[4]; /* [1..4] */
-
 /* Difficulty */
 JE_shortint difficultyLevel, oldDifficultyLevel,
             initialDifficulty;  // can only get highscore on initial episode
 
 /* Level Data */
-char    lastLevelName[11], levelName[11]; /* string [10] */
-JE_byte mainLevel, nextLevel, saveLevel;   /*Current Level #*/
+char    levelName[11]; /* string [10] */
+JE_byte mainLevel, nextLevel;   /*Current Level #*/
 
 /* Configuration */
 JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 JE_boolean  filtrationAvail, filterActive, filterFade, filterFadeStart;
-
-JE_boolean gameJustLoaded;
 
 JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
 
@@ -71,7 +65,6 @@ JE_byte    SAPowerupBag[5];
 JE_byte    superArcadePowerUp;
 
 JE_real linkGunDirec;
-JE_byte inputDevice[2] = { 1, 2 }; // 0:any  1:keyboard  2:mouse  3+:joystick
 
 JE_byte secretHint;
 JE_byte background3over;
@@ -91,10 +84,41 @@ JE_boolean pentiumMode;
 JE_byte    gameSpeed;
 JE_byte    processorType;  /* 1=386 2=486 3=Pentium Hyper */
 
-Config opentyrian_config;  // implicitly initialized
 Config tav_config;
 
-static bool _TAV_loadConfig( void )
+const char *get_user_directory( void )
+{
+	static char user_dir[500] = "";
+	
+	if (strlen(user_dir) == 0)
+	{
+#ifndef TARGET_WIN32
+		char *xdg_config_home = getenv("XDG_CONFIG_HOME");
+		if (xdg_config_home != NULL)
+		{
+			snprintf(user_dir, sizeof(user_dir), "%s/arctyr", xdg_config_home);
+		}
+		else
+		{
+			char *home = getenv("HOME");
+			if (home != NULL)
+			{
+				snprintf(user_dir, sizeof(user_dir), "%s/.config/arctyr", home);
+			}
+			else
+			{
+				strcpy(user_dir, ".");
+			}
+		}
+#else
+		strcpy(user_dir, ".");
+#endif
+	}
+	
+	return user_dir;
+}
+
+bool ArcTyr_loadConfig( void )
 {
 	uint dummy;
 
@@ -198,7 +222,7 @@ static bool _TAV_loadConfig( void )
 	return true;
 }
 
-static bool _TAV_saveConfig( void )
+bool ArcTyr_saveConfig( void )
 {
 	ConfigSection *sec;
 
@@ -362,150 +386,3 @@ void JE_setNewGameSpeed( void )
   JE_resetTimerInt();
   JE_setTimerInt();
 }
-
-const char *get_user_directory( void )
-{
-	static char user_dir[500] = "";
-	
-	if (strlen(user_dir) == 0)
-	{
-#ifndef TARGET_WIN32
-		char *xdg_config_home = getenv("XDG_CONFIG_HOME");
-		if (xdg_config_home != NULL)
-		{
-			snprintf(user_dir, sizeof(user_dir), "%s/arctyr", xdg_config_home);
-		}
-		else
-		{
-			char *home = getenv("HOME");
-			if (home != NULL)
-			{
-				snprintf(user_dir, sizeof(user_dir), "%s/.config/arctyr", home);
-			}
-			else
-			{
-				strcpy(user_dir, ".");
-			}
-		}
-#else
-		strcpy(user_dir, ".");
-#endif
-	}
-	
-	return user_dir;
-}
-
-void JE_loadConfiguration( void )
-{
-	//int z;
-	_TAV_loadConfig();
-/*
-	FILE *fi;
-	JE_byte *p;
-	int y;
-	
-	fi = dir_fopen_warn(get_user_directory(), "tyrian.cfg", "rb");
-	if (fi && ftell_eof(fi) == 20 + sizeof(keySettings))
-	{
-		// SYN: I've hardcoded the sizes here because the .CFG file format is fixed
-		// anyways, so it's not like they'll change.
-		background2 = 0;
-		efread(&background2, 1, 1, fi);
-		efread(&gameSpeed, 1, 1, fi);
-		
-		efread(&inputDevice_, 1, 1, fi);
-		efread(&jConfigure, 1, 1, fi);
-		
-		efread(&versionNum, 1, 1, fi);
-		
-		efread(&processorType, 1, 1, fi);
-		efread(&midiPort, 1, 1, fi);
-		efread(&soundEffects, 1, 1, fi);
-		efread(&gammaCorrection, 1, 1, fi);
-		efread(&difficultyLevel, 1, 1, fi);
-		
-		efread(joyButtonAssign, 1, 4, fi);
-		
-		efread(&tyrMusicVolume, 2, 1, fi);
-		efread(&fxVolume, 2, 1, fi);
-		
-		efread(inputDevice, 1, 2, fi);
-		
-		efread(keySettings, sizeof(*keySettings), COUNTOF(keySettings), fi);
-		
-		fclose(fi);
-	}
-	else
-	{
-		printf("\nInvalid or missing TYRIAN.CFG! Continuing using defaults.\n\n");
-		
-		soundEffects = 1;
-		memcpy(&keySettings, &defaultKeySettings, sizeof(keySettings));
-		background2 = true;
-		tyrMusicVolume = fxVolume = 128;
-		gammaCorrection = 0;
-		processorType = 3;
-		gameSpeed = 4;
-	}
-	
-	load_opentyrian_config();
-	
-	if (tyrMusicVolume > 255)
-		tyrMusicVolume = 255;
-	if (fxVolume > 255)
-		fxVolume = 255;
-	
-	JE_calcFXVol();
-	
-	set_volume(tyrMusicVolume, fxVolume);
-
-	(void)p;
-*/
-}
-
-void JE_saveConfiguration( void )
-{
-	_TAV_saveConfig();
-/*
-	FILE *f;
-	JE_byte *p;
-	int z;
-
-	(void)p;
-	(void)z;
-*/
-/*
-	f = dir_fopen_warn(get_user_directory(), "tyrian.cfg", "wb");
-	if (f != NULL)
-	{
-		efwrite(&background2, 1, 1, f);
-		efwrite(&gameSpeed, 1, 1, f);
-		
-		efwrite(&inputDevice_, 1, 1, f);
-		efwrite(&jConfigure, 1, 1, f);
-		
-		efwrite(&versionNum, 1, 1, f);
-		efwrite(&processorType, 1, 1, f);
-		efwrite(&midiPort, 1, 1, f);
-		efwrite(&soundEffects, 1, 1, f);
-		efwrite(&gammaCorrection, 1, 1, f);
-		efwrite(&difficultyLevel, 1, 1, f);
-		efwrite(joyButtonAssign, 1, 4, f);
-		
-		efwrite(&tyrMusicVolume, 2, 1, f);
-		efwrite(&fxVolume, 2, 1, f);
-		
-		efwrite(inputDevice, 1, 2, f);
-		
-		efwrite(keySettings, sizeof(*keySettings), COUNTOF(keySettings), f);
-		
-#ifndef TARGET_WIN32
-		fsync(fileno(f));
-#endif
-		fclose(f);
-	}
-	
-	save_opentyrian_config();
-*/
-}
-

@@ -44,20 +44,16 @@ typedef JE_byte JE_EditorItemAvailType[100]; /* [1..100] */
 
 extern JE_boolean smoothies[9];
 extern JE_byte starShowVGASpecialCode;
-extern JE_word lastCubeMax, cubeMax;
-extern JE_word cubeList[4];
 extern JE_shortint difficultyLevel, oldDifficultyLevel, initialDifficulty;
 
-extern char lastLevelName[11], levelName[11];
-extern JE_byte mainLevel, nextLevel, saveLevel;
+extern char levelName[11];
+extern JE_byte mainLevel, nextLevel;
 extern JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 extern JE_boolean filtrationAvail, filterActive, filterFade, filterFadeStart;
-extern JE_boolean gameJustLoaded;
 extern JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
 extern JE_byte SAPowerupBag[5];
 extern JE_byte superArcadePowerUp;
 extern JE_real linkGunDirec;
-extern JE_byte inputDevice[2];
 extern JE_byte secretHint;
 extern JE_byte background3over;
 extern JE_byte background2over;
@@ -70,11 +66,11 @@ extern JE_byte processorType;
 
 extern Config opentyrian_config;
 
+bool ArcTyr_loadConfig( void );
+bool ArcTyr_saveConfig( void );
 void JE_initProcessorType( void );
 void JE_setNewGameSpeed( void );
 const char *get_user_directory( void );
-void JE_loadConfiguration( void );
-void JE_saveConfiguration( void );
 
 #endif /* CONFIG_H */
 

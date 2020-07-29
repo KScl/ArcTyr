@@ -26,7 +26,7 @@ extern char episode_name[6][31];
 //#define GAMEPLAY_NAME_COUNT 5
 //extern char difficulty_name[7][21], gameplay_name[GAMEPLAY_NAME_COUNT][26];
 
-void JE_titleScreen( void );
+bool JE_titleScreen( void );
 
 void select_gameplay( void );
 void select_episode( void );

@@ -304,8 +304,8 @@ bool player_shot_move_and_draw(
 JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word PY, JE_word mouseX, JE_word mouseY, JE_word wpNum, JE_byte playerNum )
 {
 	static const JE_byte soundChannel[2][NUM_SHOT_TYPES] = 
-		{{0, 0, 4, 4, 2, 1, 4, 1, 1, 1, 4},
-		 {2, 2, 4, 4, 2, 1, 4, 1, 1, 1, 4}};
+		{{0, 0, 1, 4, 4, 4, 1, 1, 1, 4},
+		 {2, 2, 1, 4, 4, 4, 1, 1, 1, 4}};
 
 	// Bounds check
 	if (portNum > num_ports || wpNum <= 0 || wpNum > num_pWeapons)
@@ -541,7 +541,7 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 
 		this_player->shot_repeat[bay_i] = weapon->shotrepeat;
 
-		if (bay_i == SHOT_AIMED)
+		if (bay_i == SHOT_DRAGONWING_AIMED)
 		{
 			shot->shotX = PX + roundf(
 				(weapon->bx[*sMP-1] +  1.0f) * cosf(-linkGunDirec) +

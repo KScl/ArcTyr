@@ -51,7 +51,7 @@ JE_EnemyDatType enemyDat[T2KENEMY_NUM + 1];
 /* EPISODE variables */
 JE_byte    initial_episode_num, episodeNum = 0;
 JE_boolean episodeAvail[EPISODE_MAX]; /* [1..episodemax] */
-char       episode_file[13], cube_file[13];
+char       episode_file[13];
 
 JE_longint episode1DataLoc;
 
@@ -559,7 +559,6 @@ void JE_initEpisode( JE_byte newEpisode )
 	episodeNum = newEpisode;
 	
 	snprintf(levelFile,    sizeof(levelFile),    "tyrian%d.lvl",  episodeNum);
-	snprintf(cube_file,    sizeof(cube_file),    "cubetxt%d.dat", episodeNum);
 	snprintf(episode_file, sizeof(episode_file), "levels%d.dat",  episodeNum);
 	
 	JE_analyzeLevel();
@@ -593,11 +592,8 @@ unsigned int JE_findNextEpisode( void )
 	return newEpisode;
 }
 
-
 bool JE_nextEpisode( void )
 {
-	strcpy(lastLevelName, "Completed");
-
 	unsigned int newEpisode = JE_findNextEpisode();
 
 	if (newEpisode == 1)

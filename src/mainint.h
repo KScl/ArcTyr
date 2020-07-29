@@ -26,8 +26,6 @@
 #include "sprite.h"
 
 extern JE_word textErase;
-extern JE_boolean performSave;
-extern JE_boolean jumpSection;
 extern JE_boolean useLastBank;
 
 extern int cameraXFocus;

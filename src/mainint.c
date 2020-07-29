@@ -57,8 +57,6 @@
 const JE_byte topicStart[TOPICS] = { 0, 1, 2, 3, 7, 255 };
 
 JE_word textErase;
-JE_boolean performSave;
-JE_boolean jumpSection;
 JE_boolean useLastBank; /* See if I want to use the last 16 colors for DisplayText */
 
 int cameraXFocus;
@@ -296,9 +294,6 @@ void JE_initPlayerData( void )
 	}
 
 	mainLevel = FIRST_LEVEL;
-	saveLevel = FIRST_LEVEL;
-
-	strcpy(lastLevelName, miscText[19]);
 }
 
 void JE_gammaCorrect_func( JE_byte *col, JE_real r )
@@ -536,11 +531,10 @@ bool load_next_demo( void )
 	demo_file = dir_fopen_warn(arcdata_dir(), tmpBuf.s, "rb");
 	if (!demo_file)
 	{
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "arcdemo.%d", demo_num = 1);
-		demo_file = dir_fopen_warn(arcdata_dir(), tmpBuf.s, "rb");
-	}
-	if (!demo_file)
+		// Play intro logos instead
+		demo_num = 0;
 		return false;
+	}
 
 	printf("loaded demo '%s'\n", tmpBuf.s);
 
@@ -801,7 +795,8 @@ void JE_playCredits( void )
 		if (PL_NumPotentialPlayers() == 0 && I_checkSkipSceneFromAnyone())
 			break;
 	}
-	
+
+	skip_header_draw = true; // to hide "Game Over"
 	playingCredits = false;
 
 	fade_black(10);
@@ -840,8 +835,6 @@ void JE_endLevelAni( void )
 		play_song(SONG_GAMEOVER);
 	else //if (!normalBonusLevelCurrent || !bonusLevelCurrent)
 		ARC_RankIncrease();	
-
-	strcpy(lastLevelName, levelName);
 
 	hasRequestedToSkip = false;
 	textGlowFont = SMALL_FONT_SHAPES;
@@ -1429,7 +1422,7 @@ redo:
 				twoPlayerLinkReady = false;	
 				JE_playSampleNumOnChannel(S_CLINK, SFXPRIORITY+4);	
 				linkGunDirec = M_PI;
-				this_player->shot_multi_pos[SHOT_AIMED] = 0;
+				this_player->shot_multi_pos[SHOT_DRAGONWING_AIMED] = 0;
 			}
 			else if (twoPlayerLinked)
 			{
@@ -1642,11 +1635,11 @@ redo:
 			this_player->x + 1 + roundf(sinf(linkGunDirec) * 26), this_player->y + roundf(cosf(linkGunDirec) * 26), 
 			*mouseX_, *mouseY_, PWPN_TURRET_BIG, playerNum_);
 
-		if (PL_ShotRepeat(this_player, SHOT_AIMED) && this_player->buttons[BUTTON_FIRE])
+		if (PL_ShotRepeat(this_player, SHOT_DRAGONWING_AIMED) && this_player->buttons[BUTTON_FIRE])
 		{
 			const uint item_power = (this_player->items.power_level - 1) >> 1;
 
-			b = player_shot_create(0, SHOT_AIMED, 
+			b = player_shot_create(0, SHOT_DRAGONWING_AIMED, 
 				this_player->x, this_player->y, *mouseX_, *mouseY_, 
 				weaponPort[this_player->cur_item.weapon].aimedOp[item_power], playerNum_);
 		}
@@ -1813,7 +1806,7 @@ redo:
 	}
 
 	/*Super Charge Weapons*/
-	if (this_player->is_dragonwing && PL_ShotRepeat(this_player, SHOT_CHARGE) && !twoPlayerLinked)
+	if (this_player->is_dragonwing && PL_ShotRepeat(this_player, SHOT_DRAGONWING_CHARGE) && !twoPlayerLinked)
 	{
 		const JE_byte chargeRates[11] = {23, 21, 19, 17, 15, 13, 12, 11, 10, 9, 8};
 
@@ -1845,8 +1838,8 @@ redo:
 		{
 			if (chargeLevel > 0)
 			{
-				this_player->shot_multi_pos[SHOT_CHARGE] = 0;
-				b = player_shot_create(16, SHOT_CHARGE,
+				this_player->shot_multi_pos[SHOT_DRAGONWING_CHARGE] = 0;
+				b = player_shot_create(16, SHOT_DRAGONWING_CHARGE,
 					this_player->x, this_player->y, *mouseX_, *mouseY_,
 					weaponPort[this_player->cur_item.weapon].chargeOp[chargeLevel - 1],
 					playerNum_);
@@ -2243,12 +2236,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 				{
 					enemyAvail[z] = 1;
 					soundQueue[7] = S_ITEM;
-					if (evalue == 1)
-					{
-						cubeMax++;
-						soundQueue[3] = V_DATA_CUBE;
-					}
-					else if (evalue == -1 || evalue == -2) // Shield powerup (formerly front/rear power)
+					if (evalue == -1 || evalue == -2) // Shield powerup (formerly front/rear power)
 					{
 						if (PL_NumPlayers() == 2)
 							sprintf(tmpBuf.s, "Player %d's s", playerNum_);
