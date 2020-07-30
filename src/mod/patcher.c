@@ -209,12 +209,15 @@ static const Patches _P4_SURFACE[] = {
 };
 
 static const Patches _P4_CORE[] = {
+	{652, false, {9999, 99, 1}}, // Remap old random explosion event to new one
+	{656, false, {10000, 99, 1}}, // Remap old random explosion event to new one
 	{661, true, {10090, 69, -1}}, // Second indefinite invuln, in case player is dead during the first one
 	{0},
 };
 
 static const Patches _P4_QTUNNELQ[] = {
 	{1, true, {0, 46, 3, 0, 3}}, // Greatly increase difficulty
+	{664, false, {4010, 99, 1}}, // Remap old random explosion event to new one
 	{716, false, {4300, 16, 8}}, // improper SFX callout changed to proper event
 	{0}, // End
 };
@@ -227,6 +230,11 @@ static const Patches _P4_UNDERDELI[] = {
 
 static const Patches _P4_ICE_EXIT[] = {
 	{524, false, {2550, 16, 1}}, // "Enemy approaching from behind." (already Danger! here, replaced)
+	{0}, // End
+};
+
+static const Patches _P4_BRAINIAC[] = {
+	{1952, false, {10000, 99, 1}}, // Remap old random explosion event to new one
 	{0}, // End
 };
 
@@ -257,6 +265,11 @@ static const Patches _P4_NOSE_DRIP[] = {
 // Episode 4 slightly differs in Tyrian 2000, so we need to take this into account
 
 static const Patches _P4T2K_CORE[] = {
+	// So, in a couple places I mentioned that the random explosions event got moved
+	// from 68 to 99 in Tyrian 2000. 68 became a replace enemies event instead.
+	// GUESS WHAT THEY FORGOT TO CHANGE?
+	{653, false, {9999, 99, 1}}, // Remap old random explosion event to new one
+	{657, false, {10000, 99, 1}}, // Remap old random explosion event to new one
 	{663, true, {10090, 69, -1}}, // Second indefinite invuln, in case player is dead during the first one
 	{0},
 };
@@ -346,6 +359,7 @@ void MOD_PatcherInit( JE_byte level )
 			case 7: curPatches = _P4T2K_UNDERDELI; return;
 			case 8: curPatches = _P4T2K_ICE_EXIT; return;
 			case 11: curPatches = _P4T2K_QTUNNELQ; return;
+			case 15: /* No patches */ return;
 		}
 		// fall through
 	case PATCH_EPISODE_4:
@@ -357,6 +371,7 @@ void MOD_PatcherInit( JE_byte level )
 			case 7: curPatches = _P4_UNDERDELI; return;
 			case 8: curPatches = _P4_ICE_EXIT; return;
 			case 11: curPatches = _P4_QTUNNELQ; return;
+			case 15: curPatches = _P4_BRAINIAC; return;
 			case 16: curPatches = _P4_NOSE_DRIP; return;
 		}
 	case PATCH_EPISODE_5_T2K:

@@ -3070,8 +3070,18 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shape
 
 	enemy->launchfreq = enemyDat[eDatI].elaunchfreq;
 	enemy->launchwait = enemyDat[eDatI].elaunchfreq;
-	enemy->launchtype = enemyDat[eDatI].elaunchtype % 1000;
-	enemy->launchspecial = enemyDat[eDatI].elaunchtype / 1000;
+
+	// T2000 ... Account for the second enemy bank only if we're creating something from it
+	if (eDatI > 1000)
+	{
+		enemy->launchtype = enemyDat[eDatI].elaunchtype;
+		enemy->launchspecial = 0;
+	}
+	else
+	{
+		enemy->launchtype = enemyDat[eDatI].elaunchtype % 1000;
+		enemy->launchspecial = enemyDat[eDatI].elaunchtype / 1000;
+	}
 
 	enemy->xaccel = enemyDat[eDatI].xaccel;
 	enemy->yaccel = enemyDat[eDatI].yaccel;
@@ -4194,13 +4204,14 @@ void JE_eventSystem( void )
 		break;
 
 	case 59: // T2000
+	case 68: // What the hell, Tyrian 2000? (See event 99)
 		event_name("t2k_replace_enemy");
 		{
 			Uint16 eDatI = eventRec[eventLoc-1].eventdat;
 
 			for (temp = 0; temp < 100; temp++)
 			{
-				if (!(eventRec[eventLoc-1].eventdat4 == 99 || enemy[temp].linknum == eventRec[eventLoc-1].eventdat4))
+				if (!(eventRec[eventLoc-1].eventdat4 == 0 || enemy[temp].linknum == eventRec[eventLoc-1].eventdat4))
 					continue;
 
 				const int enemy_offset = (enemyDat[eDatI].value > 30000) ? 100 : (temp - (temp % 25));
@@ -4212,9 +4223,6 @@ void JE_eventSystem( void )
 				}
 
 				enemyAvail[temp] = 1;
-				// I'm ... not actually sure if T2000 does this, but it *feels* right.
-				if (!enemy[temp].scoreitem)
-					--totalEnemy;
 			}			
 		}
 		break;
@@ -4278,11 +4286,6 @@ void JE_eventSystem( void )
 		levelTimer = (eventRec[eventLoc-1].eventdat == 1);
 		levelTimerCountdown = eventRec[eventLoc-1].eventdat3 * 100;
 		levelTimerJumpTo   = eventRec[eventLoc-1].eventdat2;
-		break;
-
-	case 68:
-		event_name("random_explosions");
-		randomExplosions = (eventRec[eventLoc-1].eventdat == 1);
 		break;
 
 	case 69:
@@ -4448,6 +4451,18 @@ void JE_eventSystem( void )
 	case 84: // T2000 Timed Battle parameters
 		event_name("t2k_timed_battle_params");
 		break; // Ignored -- no reason to do anything with these
+
+	case 85: // T2000 Timed Battle enemy from other enemies
+		event_name("t2k_tb_enemy_from_other_enemies");
+		break; // Ignored -- no reason to do anything with these
+
+	case 99:
+		event_name("random_explosions");
+		// So, random explosions is event 68 in Tyrian 2.1, but 99 in 2000, for some unknown reason.
+		// We decided to take the path of patching the 2.1 levels to use this event, instead of
+		// doing a whole bunch of nonsense that depended on whether Tyrian 2000 was loaded or not.
+		randomExplosions = (eventRec[eventLoc-1].eventdat == 1);
+		break;
 
 	case 100: // Sky enemy with normal powerup
 	case 101: // Sky enemy with shield powerup
