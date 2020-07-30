@@ -54,7 +54,7 @@
 			"PiecesPerFire":2,
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-8,"Y":-22,"MoveY":1,"CircleParams":4},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-7,"Y":-5,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":4}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-7,"Y":-5,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":4}
 			]
 		},
 		"T665":{ // 665 Orange Juicer Lv.7
@@ -64,7 +64,7 @@
 			"PiecesPerFire":2,
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-10,"Y":-18,"MoveY":1,"CircleParams":5},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-10,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":5}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-10,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":5}
 			]
 		},
 		"T666":{ // 666 Orange Juicer Lv.8
@@ -74,7 +74,7 @@
 			"PiecesPerFire":2,
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-14,"Y":-30,"MoveY":1,"CircleParams":6},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-13,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-13,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6}
 			]
 		},
 		"T667":{ // 667 Orange Juicer Lv.9
@@ -84,7 +84,7 @@
 			"PiecesPerFire":2,
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-30,"Y":-30,"MoveY":1,"CircleParams":7},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-20,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":7}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-20,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":7}
 			]
 		},
 		"T668":{ // 668 Orange Juicer Lv.10
@@ -94,8 +94,8 @@
 			"PiecesPerFire":3,
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-12,"Y":-30,"MoveY":1,"CircleParams":6},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226}
 			]
 		},
 		"T669":{ // 669 Orange Juicer Lv.11
@@ -106,8 +106,8 @@
 			"Pieces":[
 				{"Sprite":88,"AttackPower":3,"X":-24,"Y":-30,"MoveX":1,"MoveY":1,"CircleParams":6},
 				{"Sprite":88,"AttackPower":3,"X":24,"Y":-30,"MoveX":-1,"MoveY":1,"CircleParams":226},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":-7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
-				{"Sprite":88,"AttackPower":3,"Duration":192,"X":7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226}
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":-7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
+				{"Sprite":88,"AttackPower":3,"Duration":160,"X":7,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226}
 			]
 		}
 	},
