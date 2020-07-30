@@ -35,6 +35,7 @@ typedef struct {
 
 	JE_byte attractSound;
 
+	JE_byte enableFullDebugMenus;
 } DipSwitches;
 
 const DipSwitches DIP_Default;

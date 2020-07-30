@@ -169,8 +169,8 @@ bool ArcTyr_loadConfig( void )
 	{
 		get_byte_max(gammaCorrection, "gamma", 4);
 		get_byte_max(processorType, "processor", 6);
-		get_byte_max(gameSpeed, "speed", 5);
 		JE_initProcessorType();
+		JE_setNewGameSpeed();
 
 		config_get_bool_option(sec, "fullscreen", &fullscreen_enabled);
 		
@@ -211,6 +211,8 @@ bool ArcTyr_loadConfig( void )
 		get_byte_minmax(DIP.powerContinue, "power_continue", 1, 11);
 
 		get_byte_max(DIP.attractSound, "attract_sound", 2);
+
+		get_byte_max(DIP.enableFullDebugMenus, "enable_full_debug_menus", 1);
 	}
 
 #undef get_byte_max
@@ -258,6 +260,8 @@ bool ArcTyr_saveConfig( void )
 		config_set_uint_option(sec, "power_continue", DIP.powerContinue);
 
 		config_set_uint_option(sec, "attract_sound", DIP.attractSound);
+
+		config_set_uint_option(sec, "enable_full_debug_menus", DIP.enableFullDebugMenus);
 	}
 
 	I_saveConfigAssignments(&tav_config);

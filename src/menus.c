@@ -659,7 +659,6 @@ void ingame_debug_menu( void )
 	VGAScreen = VGAScreenSeg; /* side-effect of game_screen */
 
 	JE_byte sel = 1, plnum;
-	JE_boolean quit = false;
 	JE_boolean screenshot_pause = false;
 
 	// Stops input fuzzing
@@ -667,11 +666,15 @@ void ingame_debug_menu( void )
 
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
 
-	do
+	while (true)
 	{
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 
-		if (!screenshot_pause)
+		if (screenshot_pause)
+		{
+			// No-op
+		}
+		else if (DIP.enableFullDebugMenus)
 		{
 			JE_barShade(VGAScreen, 31, 53, 217+36, 182); /*Main Box*/
 			JE_barShade(VGAScreen, 33, 55, 215+36, 180);
@@ -679,19 +682,33 @@ void ingame_debug_menu( void )
 			for (x = 0; x < 5; x++)
 				JE_outTextAdjust(VGAScreen, 38, 60 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
 			for (x = 5; x < 9; x++)
-				JE_outTextAdjust(VGAScreen, 38, 64 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
+				JE_outTextAdjust(VGAScreen, 38, 62 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
 			for (x = 9; x < 14; x++)
-				JE_outTextAdjust(VGAScreen, 38, 68 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
+				JE_outTextAdjust(VGAScreen, 38, 64 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
 
 			JE_barDrawShadow(VGAScreen, 140, 60 + (1*8), 1, music_disabled ? 12 : 16, tyrMusicVolume / 12, 3, 6);
 			JE_barDrawShadow(VGAScreen, 140, 60 + (2*8), 1, samples_disabled ? 12 : 16, fxVolume / 12, 3, 6);
 			JE_outTextAdjust(VGAScreen, 140, 60 + (3*8), detailLevel[processorType-1], 15, ((sel == 4) << 1) + 2, TINY_FONT, true);
 			JE_outTextAdjust(VGAScreen, 140, 60 + (4*8), gameSpeedText[gameSpeed-1],   15, ((sel == 5) << 1) + 2, TINY_FONT, true);
 
-			JE_outTextAdjust(VGAScreen, 140, 64 + (5*8), weaponPort[player[0].cur_item.weapon].name, 15, ((sel == 6) << 1) + 2, TINY_FONT, true);
-			JE_barDrawShadow(VGAScreen, 140, 64 + (6*8), 1, player[0].player_status != STATUS_INGAME ? 12 : 16, player[0].items.power_level, 3, 6);
-			JE_outTextAdjust(VGAScreen, 140, 64 + (7*8), weaponPort[player[1].cur_item.weapon].name, 15, ((sel == 8) << 1) + 2, TINY_FONT, true);
-			JE_barDrawShadow(VGAScreen, 140, 64 + (8*8), 1, player[1].player_status != STATUS_INGAME ? 12 : 16, player[1].items.power_level, 3, 6);
+			JE_outTextAdjust(VGAScreen, 140, 62 + (5*8), weaponPort[player[0].cur_item.weapon].name, 15, ((sel == 6) << 1) + 2, TINY_FONT, true);
+			JE_barDrawShadow(VGAScreen, 140, 62 + (6*8), 1, player[0].player_status != STATUS_INGAME ? 12 : 16, player[0].items.power_level, 3, 6);
+			JE_outTextAdjust(VGAScreen, 140, 62 + (7*8), weaponPort[player[1].cur_item.weapon].name, 15, ((sel == 8) << 1) + 2, TINY_FONT, true);
+			JE_barDrawShadow(VGAScreen, 140, 62 + (8*8), 1, player[1].player_status != STATUS_INGAME ? 12 : 16, player[1].items.power_level, 3, 6);
+		}
+		else
+		{
+			JE_barShade(VGAScreen, 31, 131, 217+36, 182); /*Main Box*/
+			JE_barShade(VGAScreen, 33, 133, 215+36, 180);
+			JE_outTextAdjust(VGAScreen, 38, 138 + (0*8), menu_strings[0], 15,  ((sel == 1)  << 1) + 2, TINY_FONT, true);
+			JE_outTextAdjust(VGAScreen, 38, 138 + (1*8), menu_strings[1], 15,  ((sel == 2)  << 1) + 2, TINY_FONT, true);
+			JE_outTextAdjust(VGAScreen, 38, 138 + (2*8), menu_strings[2], 15,  ((sel == 3)  << 1) + 2, TINY_FONT, true);
+			JE_outTextAdjust(VGAScreen, 38, 138 + (3*8), menu_strings[3], 15,  ((sel == 4)  << 1) + 2, TINY_FONT, true);
+			JE_outTextAdjust(VGAScreen, 38, 138 + (4*8), menu_strings[13], 15, ((sel == 14) << 1) + 2, TINY_FONT, true);
+
+			JE_barDrawShadow(VGAScreen, 140, 138 + (1*8), 1, music_disabled ? 12 : 16, tyrMusicVolume / 12, 3, 6);
+			JE_barDrawShadow(VGAScreen, 140, 138 + (2*8), 1, samples_disabled ? 12 : 16, fxVolume / 12, 3, 6);
+			JE_outTextAdjust(VGAScreen, 140, 138 + (3*8), detailLevel[processorType-1], 15, ((sel == 4) << 1) + 2, TINY_FONT, true);
 		}
 
 		JE_showVGA();
@@ -731,23 +748,21 @@ void ingame_debug_menu( void )
 						levelTimerCountdown = 0;
 						endLevel = true;
 						levelEnd = 40;
-						quit = true;
-						break;
+						goto leave_ingame_menu;
 					case 14:
 						reallyEndLevel = true;
 						playerEndLevel = true;
-						quit = true;
-						break;
+						goto leave_ingame_menu;
 				}
 				break;
 			case INPUT_P1_UP:
-				if (--sel < 1)
-					sel = 14;
+				if (--sel < 1) sel = 14;
+				else if (!DIP.enableFullDebugMenus && sel >= 5 && sel <= 13) sel = 4;
 				JE_playSampleNum(S_CURSOR);
 				break;
 			case INPUT_P1_DOWN:
-				if (++sel > 14)
-					sel = 1;
+				if (++sel > 14) sel = 1;
+				else if (!DIP.enableFullDebugMenus && sel >= 5 && sel <= 13) sel = 14;
 				JE_playSampleNum(S_CURSOR);
 				break;
 			case INPUT_P1_LEFT:
@@ -767,17 +782,13 @@ void ingame_debug_menu( void )
 						break;
 					case 4:
 						if (--processorType < 1)
-						{
-							processorType = 6;
-						}
+							processorType = 1;
 						JE_initProcessorType();
 						JE_setNewGameSpeed();
 						break;
 					case 5:
 						if (--gameSpeed < 1)
-						{
-							gameSpeed = 6;
-						}
+							gameSpeed = 1;
 						JE_initProcessorType();
 						JE_setNewGameSpeed();
 						break;
@@ -821,17 +832,13 @@ void ingame_debug_menu( void )
 						break;
 					case 4:
 						if (++processorType > 6)
-						{
-							processorType = 1;
-						}
+							processorType = 6;
 						JE_initProcessorType();
 						JE_setNewGameSpeed();
 						break;
 					case 5:
 						if (++gameSpeed > 6)
-						{
-							gameSpeed = 1;
-						}
+							gameSpeed = 6;
 						JE_initProcessorType();
 						JE_setNewGameSpeed();
 						break;
@@ -859,16 +866,15 @@ void ingame_debug_menu( void )
 				}
 				break;
 			case INPUT_SERVICE_HOTDEBUG:
-				quit = true;
-				JE_playSampleNum(S_SPRING);
-				break;
+				goto leave_ingame_menu;
 			case INPUT_SERVICE_ENTER:
 				inServiceMenu = false;
 				ARC_EnterService(); // DOES NOT RETURN
 			}
 		}
-	} while (!quit);
+	}
 
+leave_ingame_menu:
 	VGAScreen = temp_surface; /* side-effect of game_screen */
 	inServiceMenu = false;
 }

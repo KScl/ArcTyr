@@ -368,6 +368,9 @@ void SRV_AudiovisualMenu( void )
 		JE_barDrawShadow(VGAScreen, 186, optionY, 1, 174, fxVolume / 12, 3, 13);
 	SRVH_AdjustableWord("SFX Volume", false, &fxVolume, 0, 255, 12);
 
+	SRVH_DispValue(detailLevel[processorType-1]);
+	SRVH_AdjustableByte("Detail Level", false, &processorType, 1, 6);
+
 	optionY += 16;
 
 	static const char *attSound[] = {"No", "For 5 Minutes", "Yes"};
@@ -570,7 +573,7 @@ void SRV_ServiceButtons( void )
 	SRVH_DispHeader("Service Buttons");
 	SRVH_ButtonAssignmentOption("Force Insert Coin", 17);
 	optionY += 12;
-	SRVH_ButtonAssignmentOption("Realtime Debugging", 16);
+	SRVH_ButtonAssignmentOption("Open In-Game Settings", 16);
 	SRVH_ButtonAssignmentOption("Enter Service Menu", 18);
 	optionY = 176;
 	SRVH_Back("Back");	
