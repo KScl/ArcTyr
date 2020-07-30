@@ -17,15 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include "arcade.h"
+#include "arcade/service.h"
+
 #include "config.h"
 #include "episodes.h"
 #include "file.h"
 #include "font.h"
 #include "fonthand.h"
+#include "helptext.h"
 #include "input.h"
 #include "mainint.h"
 #include "menus.h"
 #include "nortsong.h"
+#include "nortvars.h"
 #include "opentyr.h"
 #include "palette.h"
 #include "pcxload.h"
@@ -629,4 +633,242 @@ bool JE_titleScreen( void )
 
 	fade_black(15);
 	return gameLoaded;
+}
+
+void ingame_debug_menu( void )
+{
+	const char *menu_strings[] = {
+		"Screenshot Mode",
+		"Music Volume",
+		"Sound Volume",
+		"Detail Level",
+		"Game Speed",
+
+		"P1 Weapon",
+		"P1 Power",
+		"P2 Weapon",
+		"P2 Power",
+
+		"Debug Displays",
+		"Invulnerability",
+		"Skip Level",
+		"Skip Level (Fail)",
+		"Return to Title",
+	};
+	SDL_Surface *temp_surface = VGAScreen;
+	VGAScreen = VGAScreenSeg; /* side-effect of game_screen */
+
+	JE_byte sel = 1, plnum;
+	JE_boolean quit = false;
+	JE_boolean screenshot_pause = false;
+
+	// Stops input fuzzing
+	inServiceMenu = true;
+
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
+
+	do
+	{
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+		if (!screenshot_pause)
+		{
+			JE_barShade(VGAScreen, 31, 53, 217+36, 182); /*Main Box*/
+			JE_barShade(VGAScreen, 33, 55, 215+36, 180);
+
+			for (x = 0; x < 5; x++)
+				JE_outTextAdjust(VGAScreen, 38, 60 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
+			for (x = 5; x < 9; x++)
+				JE_outTextAdjust(VGAScreen, 38, 64 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
+			for (x = 9; x < 14; x++)
+				JE_outTextAdjust(VGAScreen, 38, 68 + (x*8), menu_strings[x], 15, ((sel == x+1) << 1) + 2, TINY_FONT, true);
+
+			JE_barDrawShadow(VGAScreen, 140, 60 + (1*8), 1, music_disabled ? 12 : 16, tyrMusicVolume / 12, 3, 6);
+			JE_barDrawShadow(VGAScreen, 140, 60 + (2*8), 1, samples_disabled ? 12 : 16, fxVolume / 12, 3, 6);
+			JE_outTextAdjust(VGAScreen, 140, 60 + (3*8), detailLevel[processorType-1], 15, ((sel == 4) << 1) + 2, TINY_FONT, true);
+			JE_outTextAdjust(VGAScreen, 140, 60 + (4*8), gameSpeedText[gameSpeed-1],   15, ((sel == 5) << 1) + 2, TINY_FONT, true);
+
+			JE_outTextAdjust(VGAScreen, 140, 64 + (5*8), weaponPort[player[0].cur_item.weapon].name, 15, ((sel == 6) << 1) + 2, TINY_FONT, true);
+			JE_barDrawShadow(VGAScreen, 140, 64 + (6*8), 1, player[0].player_status != STATUS_INGAME ? 12 : 16, player[0].items.power_level, 3, 6);
+			JE_outTextAdjust(VGAScreen, 140, 64 + (7*8), weaponPort[player[1].cur_item.weapon].name, 15, ((sel == 8) << 1) + 2, TINY_FONT, true);
+			JE_barDrawShadow(VGAScreen, 140, 64 + (8*8), 1, player[1].player_status != STATUS_INGAME ? 12 : 16, player[1].items.power_level, 3, 6);
+		}
+
+		JE_showVGA();
+
+		tempW = 0;
+		uint button = INPUT_P1_UP;
+		I_waitOnInputForMenu(button, INPUT_SERVICE_ENTER, 0);
+		while (I_inputForMenu(&button, INPUT_SERVICE_ENTER))
+		{
+			screenshot_pause = false;
+			plnum = 0;
+
+			switch (button++)
+			{
+			case INPUT_P1_FIRE:
+				JE_playSampleNum(S_SELECT);
+				switch (sel)
+				{
+					case 1: screenshot_pause = true; break;
+					case 2: music_disabled = !music_disabled; break;
+					case 3: samples_disabled = !samples_disabled; break;
+					case 11: youAreCheating = !youAreCheating; break;
+
+					case 10: 
+						debug = !debug;
+						debugHist = 1;
+						debugHistCount = 1;
+
+						/* YKS: clock ticks since midnight replaced by SDL_GetTicks */
+						lastDebugTime = SDL_GetTicks();
+						break;
+
+					case 13:
+						levelTimer = true; // incites fail
+						// fall through
+					case 12:
+						levelTimerCountdown = 0;
+						endLevel = true;
+						levelEnd = 40;
+						quit = true;
+						break;
+					case 14:
+						reallyEndLevel = true;
+						playerEndLevel = true;
+						quit = true;
+						break;
+				}
+				break;
+			case INPUT_P1_UP:
+				if (--sel < 1)
+					sel = 14;
+				JE_playSampleNum(S_CURSOR);
+				break;
+			case INPUT_P1_DOWN:
+				if (++sel > 14)
+					sel = 1;
+				JE_playSampleNum(S_CURSOR);
+				break;
+			case INPUT_P1_LEFT:
+				switch (sel)
+				{
+					case 2:
+						JE_changeVolume(&tyrMusicVolume, -12, &fxVolume, 0);
+						if (music_disabled)
+						{
+							music_disabled = false;
+							restart_song();
+						}
+						break;
+					case 3:
+						JE_changeVolume(&tyrMusicVolume, 0, &fxVolume, -12);
+						samples_disabled = false;
+						break;
+					case 4:
+						if (--processorType < 1)
+						{
+							processorType = 6;
+						}
+						JE_initProcessorType();
+						JE_setNewGameSpeed();
+						break;
+					case 5:
+						if (--gameSpeed < 1)
+						{
+							gameSpeed = 6;
+						}
+						JE_initProcessorType();
+						JE_setNewGameSpeed();
+						break;
+
+					case 8:
+						plnum = 1;
+						// fall through
+					case 6:
+						if (--player[plnum].port_mode == 255)
+							player[plnum].port_mode = 4;
+						PL_SwitchWeapon(&player[plnum], player[plnum].port_mode, false);
+						break;
+
+					case 9:
+						plnum = 1;
+						// fall through
+					case 7:
+						if (player[plnum].player_status == STATUS_INGAME && --player[plnum].items.power_level == 0)
+							player[plnum].items.power_level = 1;
+						break;
+				}
+				if (sel > 1 && sel < 10)
+				{
+					JE_playSampleNum(S_CURSOR);
+				}
+				break;
+			case INPUT_P1_RIGHT:
+				switch (sel)
+				{
+					case 2:
+						JE_changeVolume(&tyrMusicVolume, 12, &fxVolume, 0);
+						if (music_disabled)
+						{
+							music_disabled = false;
+							restart_song();
+						}
+						break;
+					case 3:
+						JE_changeVolume(&tyrMusicVolume, 0, &fxVolume, 12);
+						samples_disabled = false;
+						break;
+					case 4:
+						if (++processorType > 6)
+						{
+							processorType = 1;
+						}
+						JE_initProcessorType();
+						JE_setNewGameSpeed();
+						break;
+					case 5:
+						if (++gameSpeed > 6)
+						{
+							gameSpeed = 1;
+						}
+						JE_initProcessorType();
+						JE_setNewGameSpeed();
+						break;
+
+					case 8:
+						plnum = 1;
+						// fall through
+					case 6:
+						if (++player[plnum].port_mode > 4)
+							player[plnum].port_mode = 0;
+						PL_SwitchWeapon(&player[plnum], player[plnum].port_mode, false);
+						break;
+
+					case 9:
+						plnum = 1;
+						// fall through
+					case 7:
+						if (player[plnum].player_status == STATUS_INGAME && ++player[plnum].items.power_level > 11)
+							player[plnum].items.power_level = 11;
+						break;
+				}
+				if (sel > 1 && sel < 10)
+				{
+					JE_playSampleNum(S_CURSOR);
+				}
+				break;
+			case INPUT_SERVICE_HOTDEBUG:
+				quit = true;
+				JE_playSampleNum(S_SPRING);
+				break;
+			case INPUT_SERVICE_ENTER:
+				inServiceMenu = false;
+				ARC_EnterService(); // DOES NOT RETURN
+			}
+		}
+	} while (!quit);
+
+	VGAScreen = temp_surface; /* side-effect of game_screen */
+	inServiceMenu = false;
 }

@@ -22,8 +22,6 @@
 extern char pName[21][16];
 extern char miscText[HELPTEXT_MISCTEXT_COUNT][42];
 extern char outputs[9][31];
-extern char mainMenuHelp[34][66];
-extern char inGameText[6][21];
 extern char detailLevel[6][13];
 extern char gameSpeedText[6][13];
 extern char difficultyNameB[11][21];

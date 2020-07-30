@@ -32,7 +32,6 @@
 #include "menus.h"
 #include "mouse.h"
 #include "nortsong.h"
-#include "nortvars.h"
 #include "opentyr.h"
 #include "palette.h"
 #include "params.h"
@@ -60,8 +59,6 @@ JE_word textErase;
 JE_boolean useLastBank; /* See if I want to use the last 16 colors for DisplayText */
 
 int cameraXFocus;
-
-bool pause_pressed = false, ingamemenu_pressed = false;
 
 /* Draws a message at the bottom text window on the playing screen */
 void JE_drawTextWindow( const char *text )
@@ -262,8 +259,8 @@ void JE_initPlayerData( void )
 {
 	player[0].player_status = STATUS_NONE;
 	player[1].player_status = STATUS_NONE;
-	player[0].cashForNextLife = 50000;
-	player[1].cashForNextLife = 50000;
+	player[0].cashForNextLife = 0;
+	player[1].cashForNextLife = 0;
 	player[0].is_dragonwing = false;
 	player[1].is_dragonwing = false;
 
@@ -317,212 +314,6 @@ void JE_gammaCorrect( Palette *colorBuffer, JE_byte gamma )
 		JE_gammaCorrect_func(&(*colorBuffer)[x].g, r);
 		JE_gammaCorrect_func(&(*colorBuffer)[x].b, r);
 	}
-}
-
-JE_boolean JE_gammaCheck( void )
-{
-	bool temp = I_KEY_pressed(SDLK_F11);
-	if (temp)
-	{
-		gammaCorrection = (gammaCorrection + 1) % 4;
-		memcpy(colors, palettes[pcxpal[3-1]], sizeof(colors));
-		JE_gammaCorrect(&colors, gammaCorrection);
-		set_palette(colors, 0, 255);
-	}
-	return temp;
-}
-
-void JE_doInGameSetup( void )
-{
-	if (JE_inGameSetup())
-	{
-		reallyEndLevel = true;
-		playerEndLevel = true;
-	}
-
-	//skipStarShowVGA = true;
-}
-
-JE_boolean JE_inGameSetup( void )
-{
-	SDL_Surface *temp_surface = VGAScreen;
-	VGAScreen = VGAScreenSeg; /* side-effect of game_screen */
-
-	JE_boolean returnvalue = false;
-
-	const JE_byte help[6] /* [1..6] */ = {15, 15, 28, 29, 26, 27};
-	JE_byte  sel;
-	JE_boolean quit;
-
-	bool first = true;
-
-	//tempScreenSeg = VGAScreenSeg; /* <MXD> ? should work as VGAScreen */
-
-	quit = false;
-	sel = 1;
-
-	JE_barShade(VGAScreen, 3, 13, 217, 137); /*Main Box*/
-	JE_barShade(VGAScreen, 5, 15, 215, 135);
-
-	JE_barShade(VGAScreen, 3, 143, 257, 157); /*Help Box*/
-	JE_barShade(VGAScreen, 5, 145, 255, 155);
-	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
-
-	do
-	{
-		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
-
-		for (x = 0; x < 6; x++)
-		{
-			JE_outTextAdjust(VGAScreen, 10, (x + 1) * 20, inGameText[x], 15, ((sel == x+1) << 1) - 4, SMALL_FONT_SHAPES, true);
-		}
-
-		JE_outTextAdjust(VGAScreen, 120, 3 * 20, detailLevel[processorType-1], 15, ((sel == 3) << 1) - 4, SMALL_FONT_SHAPES, true);
-		JE_outTextAdjust(VGAScreen, 120, 4 * 20, gameSpeedText[gameSpeed-1],   15, ((sel == 4) << 1) - 4, SMALL_FONT_SHAPES, true);
-
-		JE_outTextAdjust(VGAScreen, 10, 147, mainMenuHelp[help[sel-1]-1], 14, 6, TINY_FONT, true);
-
-		JE_barDrawShadow(VGAScreen, 120, 20, 1, music_disabled ? 12 : 16, tyrMusicVolume / 12, 3, 13);
-		JE_barDrawShadow(VGAScreen, 120, 40, 1, samples_disabled ? 12 : 16, fxVolume / 12, 3, 13);
-
-		JE_showVGA();
-
-		if (first)
-		{
-			first = false;
-			//wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
-		}
-
-		tempW = 0;
-		uint button = INPUT_P1_UP;
-		I_waitOnInputForMenu(button, INPUT_P1_FIRE, 0);
-		while (I_inputForMenu(&button, INPUT_P1_MODE))
-		{
-			switch (button++)
-			{
-			case INPUT_P1_FIRE:
-				JE_playSampleNum(S_SELECT);
-				switch (sel)
-				{
-					case 1:
-						music_disabled = !music_disabled;
-						break;
-					case 2:
-						samples_disabled = !samples_disabled;
-						break;
-					case 3:
-					case 4:
-						sel = 5;
-						break;
-					case 5:
-						quit = true;
-						break;
-					case 6:
-						returnvalue = true;
-						quit = true;
-						break;
-				}
-				break;
-			case INPUT_P1_UP:
-				if (--sel < 1)
-				{
-					sel = 6;
-				}
-				JE_playSampleNum(S_CURSOR);
-				break;
-			case INPUT_P1_DOWN:
-				if (++sel > 6)
-				{
-					sel = 1;
-				}
-				JE_playSampleNum(S_CURSOR);
-				break;
-			case INPUT_P1_LEFT:
-				switch (sel)
-				{
-					case 1:
-						JE_changeVolume(&tyrMusicVolume, -12, &fxVolume, 0);
-						if (music_disabled)
-						{
-							music_disabled = false;
-							restart_song();
-						}
-						break;
-					case 2:
-						JE_changeVolume(&tyrMusicVolume, 0, &fxVolume, -12);
-						samples_disabled = false;
-						break;
-					case 3:
-						if (--processorType < 1)
-						{
-							processorType = 4;
-						}
-						JE_initProcessorType();
-						JE_setNewGameSpeed();
-						break;
-					case 4:
-						if (--gameSpeed < 1)
-						{
-							gameSpeed = 6;
-						}
-						JE_initProcessorType();
-						JE_setNewGameSpeed();
-						break;
-				}
-				if (sel < 5)
-				{
-					JE_playSampleNum(S_CURSOR);
-				}
-				break;
-			case INPUT_P1_RIGHT:
-				switch (sel)
-				{
-					case 1:
-						JE_changeVolume(&tyrMusicVolume, 12, &fxVolume, 0);
-						if (music_disabled)
-						{
-							music_disabled = false;
-							restart_song();
-						}
-						break;
-					case 2:
-						JE_changeVolume(&tyrMusicVolume, 0, &fxVolume, 12);
-						samples_disabled = false;
-						break;
-					case 3:
-						if (++processorType > 4)
-						{
-							processorType = 1;
-						}
-						JE_initProcessorType();
-						JE_setNewGameSpeed();
-						break;
-					case 4:
-						if (++gameSpeed > 6)
-						{
-							gameSpeed = 1;
-						}
-						JE_initProcessorType();
-						JE_setNewGameSpeed();
-						break;
-				}
-				if (sel < 5)
-				{
-					JE_playSampleNum(S_CURSOR);
-				}
-				break;
-			}
-		}
-
-//				quit = true;
-//				JE_playSampleNum(S_SPRING);
-//				break;
-
-	} while (!quit);
-
-	VGAScreen = temp_surface; /* side-effect of game_screen */
-
-	return returnvalue;
 }
 
 bool load_next_demo( void )
@@ -1124,103 +915,6 @@ void JE_inGameDisplays( void )
 	}
 }
 
-void JE_mainKeyboardInput( void )
-{
-	JE_gammaCheck();
-
-	/* { Network Request Commands } */
-
-	// Debug / Cheating
-	if (debug)
-	{
-		if (I_KEY_pressed(SDLK_F2))
-			youAreCheating = !youAreCheating;
-		if (I_KEY_pressed(SDLK_F3) || I_KEY_pressed(SDLK_F4))
-		{
-			levelTimer = I_KEY_pressed(SDLK_F3); // F3 for fail, F4 for success
-			levelTimerCountdown = 0;
-			endLevel = true;
-			levelEnd = 40;
-		}
-	}
-
-	// Enable Debug
-	if (I_KEY_pressed(SDLK_BACKSPACE))
-	{
-		debug = !debug;
-
-		debugHist = 1;
-		debugHistCount = 1;
-
-		/* YKS: clock ticks since midnight replaced by SDL_GetTicks */
-		lastDebugTime = SDL_GetTicks();
-	}
-
-	/* pause game */
-	pause_pressed = pause_pressed || I_KEY_pressed(SDLK_p);
-
-	/* in-game setup */
-	ingamemenu_pressed = ingamemenu_pressed || I_KEY_pressed(SDLK_ESCAPE);
-
-/*
-	if (debug)
-	{
-		// {SMOOTHIES}
-		if (I_KEY_pressed(SDLK_F12))
-		{
-			for (temp = SDLK_2; temp <= SDLK_9; temp++)
-			{
-				if (I_KEY_pressed(temp))
-					smoothies[temp-SDLK_2] = !smoothies[temp-SDLK_2];
-			}
-			if (I_KEY_pressed(SDLK_0))
-				smoothies[8] = !smoothies[8];
-		}
-
-		// {CYCLE THROUGH FILTER COLORS}
-		if (I_KEY_pressed(SDLK_MINUS))
-		{
-			if (levelFilter == -99)
-				levelFilter = 0;
-			else if (++levelFilter == 16)
-				levelFilter = -99;
-		}
-
-		// {HYPER-SPEED}
-		if (I_KEY_pressed(SDLK_1))
-		{
-			if (++fastPlay > 2)
-				fastPlay = 0;
-			JE_setNewGameSpeed();
-		}
-
-		// {IN-GAME RANDOM MUSIC SELECTION}
-		if (I_KEY_pressed(SDLK_SCROLLOCK))
-			play_song(mt_rand() % MUSIC_NUM);
-	}
-*/
-}
-
-void JE_pauseGame( void )
-{
-	//tempScreenSeg = VGAScreenSeg; // sega000
-
-	set_volume(tyrMusicVolume / 2, fxVolume);
-
-	//wait_noinput(false, false, true); // TODO: should up the joystick repeat temporarily instead
-
-	do
-	{
-		setjasondelay(2);
-		I_checkButtons();
-		wait_delay();
-	} while (!I_KEY_pressed(SDLK_p));
-
-	set_volume(tyrMusicVolume, fxVolume);
-
-	//skipStarShowVGA = true;
-}
-
 void JE_playerMovement( Player *this_player,
                         JE_byte playerNum_,
                         JE_word shipGr_,
@@ -1234,6 +928,9 @@ void JE_playerMovement( Player *this_player,
 		I_demoKeysToInput(this_player, playerNum_);
 	else // Game input
 		I_assignInput(this_player, playerNum_);
+
+	// Update lives/cap score
+	ARC_ScoreLife(this_player);
 
 redo:
 	mouseXC = 0;

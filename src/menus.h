@@ -32,5 +32,7 @@ void select_gameplay( void );
 void select_episode( void );
 void select_difficulty( void );
 
+void ingame_debug_menu( void );
+
 #endif /* MENUS_H */
 

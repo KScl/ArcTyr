@@ -102,9 +102,6 @@ JE_byte levelSong;
 JE_word mapOrigin, mapPNum;
 JE_byte mapPlanet[5], mapSection[5]; /* [1..5] */
 
-/* Interface Constants */
-JE_boolean skipStarShowVGA;
-
 /*EnemyData*/
 JE_MultiEnemyType enemy;
 JE_EnemyAvailType enemyAvail;  /* values: 0: used, 1: free, 2: secret pick-up */

@@ -31,7 +31,7 @@
 static const char *assignment_names[NUM_ASSIGNMENTS] = {
 	"p1_up", "p1_down", "p1_left", "p1_right", "p1_fire", "p1_sidekick", "p1_mode",
 	"p2_up", "p2_down", "p2_left", "p2_right", "p2_fire", "p2_sidekick", "p2_mode",
-	"coin_slot_p1", "coin_slot_p2", "coin_slot_service", "service_menu"
+	"coin_slot_p1", "coin_slot_p2", "service_hot_debug", "coin_slot_service", "service_menu"
 };
 
 // True if the assignment allows for repeated keys when held.
@@ -39,7 +39,7 @@ static const char *assignment_names[NUM_ASSIGNMENTS] = {
 static const bool assignment_can_repeat[NUM_ASSIGNMENTS] = {
 	true, true, true, true, false, false, false,
 	true, true, true, true, false, false, false,
-	false, false, false, false
+	false, false, false, false, false
 };
 
 // The default assignment set, used for new installs / resets.
@@ -62,11 +62,12 @@ static const Assignment default_assignments[NUM_ASSIGNMENTS][4] = {
 	{ {IT_KEY, SDLK_t}, {IT_JBTN, 1, 1} }, // INPUT_P2_SKICK,
 	{ {IT_KEY, SDLK_y}, {IT_JBTN, 2, 1} }, // INPUT_P2_MODE,
 
-	{ {IT_KEY, SDLK_F7}, {IT_JBTN, 4, 0} }, // INPUT_P1_COIN, (SDLK_F7 hardcoded)
-	{ {IT_KEY, SDLK_F8}, {IT_JBTN, 4, 1} }, // INPUT_P2_COIN, (SDLK_F8 hardcoded)
+	{ {IT_JBTN, 4, 0} }, // INPUT_P1_COIN,
+	{ {IT_JBTN, 4, 1} }, // INPUT_P2_COIN,
 
-	{ {IT_KEY, SDLK_F9 } }, // INPUT_SERVICE_COIN,  (SDLK_F9 hardcoded)
-	{ {IT_KEY, SDLK_F10} }, // INPUT_SERVICE_ENTER, (SDLK_F10 hardcoded)
+	{ {IT_KEY, SDLK_ESCAPE } }, // INPUT_SERVICE_HOTDEBUG,   (SDLK_ESCAPE hardcoded)
+	{ {IT_KEY, SDLK_F9     } }, // INPUT_SERVICE_COIN,       (SDLK_F9 hardcoded)
+	{ {IT_KEY, SDLK_F10    } }, // INPUT_SERVICE_ENTER,      (SDLK_F10 hardcoded)
 };
 
 // The current set of button assignments.
@@ -207,12 +208,12 @@ bool I_loadConfigAssignments( Config *config )
 		}
 	}
 
-	// F7-F10 are hardcoded
-	button_assignments[INPUT_P1_COIN][0].type = button_assignments[INPUT_P2_COIN][0].type = IT_KEY;
-	button_assignments[INPUT_P1_COIN][0].value = SDLK_F7;
-	button_assignments[INPUT_P2_COIN][0].value = SDLK_F8;
-	button_assignments[INPUT_SERVICE_COIN][0].type = button_assignments[INPUT_SERVICE_ENTER][0].type = IT_KEY;
+	// F9, F10, and ESCAPE are hardcoded
+	button_assignments[INPUT_SERVICE_HOTDEBUG][0].type = IT_KEY;
+	button_assignments[INPUT_SERVICE_HOTDEBUG][0].value = SDLK_ESCAPE;
+	button_assignments[INPUT_SERVICE_COIN][0].type = IT_KEY;
 	button_assignments[INPUT_SERVICE_COIN][0].value = SDLK_F9;
+	button_assignments[INPUT_SERVICE_ENTER][0].type = IT_KEY;
 	button_assignments[INPUT_SERVICE_ENTER][0].value = SDLK_F10;
 
 	return true;
@@ -438,12 +439,6 @@ static void I_KEY_events( void )
 	}
 }
 
-// Debugging stuff -- checks for even normally unmapped keys
-bool I_KEY_pressed( uint code )
-{
-	return keys_active_this_time[code];
-}
-
 // -
 //
 // -
@@ -459,7 +454,7 @@ void I_checkButtons( void )
 	if (inputFuzzing && !inServiceMenu)
 	{
 		I_fuzzInputs();
-		i = INPUT_SERVICE_ENTER;
+		i = INPUT_SERVICE_HOTDEBUG;
 	}
 	else
 		i = 0;
@@ -541,6 +536,13 @@ void I_assignInput(Player *pl, uint pNum)
 	memcpy(pl->buttons, &button_pressed[(pNum == 2) ? INPUT_P2_UP : INPUT_P1_UP], NUM_BUTTONS);
 }
 
+bool I_inputMade(uint i)
+{
+	if (button_time_held[i] == 1)
+		return true;
+	return (assignment_can_repeat[i] && button_time_held[i] > 15 && !(button_time_held[i] % 3));
+}
+
 bool I_inputForMenu(uint *i, uint stop)
 {
 	for (; *i <= stop; ++*i)
@@ -559,16 +561,16 @@ bool I_waitOnInputForMenu( uint start, uint stop, uint wait )
 
 	while (!wait || --wait)
 	{
+		// Wait a frame
+		JE_showVGA();
+		wait_delay();
+		setjasondelay(2);
+
 		I_checkButtons();
 
 		button = start;
 		if (I_inputForMenu(&button, stop))
 			return true;
-
-		// Wait a frame
-		JE_showVGA();
-		wait_delay();
-		setjasondelay(2);
 	}
 
 	return false;
@@ -635,7 +637,7 @@ static bool I_RemapInput( uint inputNum, uint subInput, Assignment *map )
 		button_assignments[inputNum][3].type = IT_NONE;
 		return true;
 	}
-	if (map->type == IT_KEY && map->value >= SDLK_F7 && map->value <= SDLK_F10)
+	if (map->type == IT_KEY && ((map->value >= SDLK_F9 && map->value <= SDLK_F10) || map->value == SDLK_ESCAPE))
 		return false;
 
 	button_assignments[inputNum][subInput].type = map->type;

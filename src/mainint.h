@@ -30,17 +30,12 @@ extern JE_boolean useLastBank;
 
 extern int cameraXFocus;
 
-extern bool pause_pressed, ingamemenu_pressed;
-
 void JE_drawTextWindow( const char *text );
 void JE_initPlayerData( void );
 void JE_gammaCorrect_func( JE_byte *col, JE_real r );
 void JE_gammaCorrect( Palette *colorBuffer, JE_byte gamma );
-JE_boolean JE_gammaCheck( void );
 void JE_loadOrderingInfo( void );
 bool JE_nextEpisode( void );
-void JE_doInGameSetup( void );
-JE_boolean JE_inGameSetup( void );
 
 bool load_next_demo( void );
 
@@ -52,8 +47,6 @@ void JE_endLevelAni( void );
 void JE_drawCube( SDL_Surface * screen, JE_word x, JE_word y, JE_byte filter, JE_byte brightness );
 bool str_pop_int( char *str, int *val );
 void JE_inGameDisplays( void );
-void JE_mainKeyboardInput( void );
-void JE_pauseGame( void );
 
 void JE_playerMovement( Player *this_player, JE_byte playerNum, JE_word shipGr, JE_word *mouseX, JE_word *mouseY );
 void JE_mainGamePlayerFunctions( void );

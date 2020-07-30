@@ -157,9 +157,8 @@ void JE_copyGameToVGA( void )
 
 	int x, y;
 
-	if (!playerEndLevel && !skipStarShowVGA)
+	if (!playerEndLevel)
 	{
-
 		s = VGAScreenSeg->pixels;
 		s += 28;
 
@@ -240,7 +239,6 @@ void JE_copyGameToVGA( void )
 			}
 		}
 	}
-	skipStarShowVGA = false;
 }
 
 inline static void blit_enemy( SDL_Surface *surface, unsigned int i, signed int x_offset, signed int y_offset, signed int sprite_offset )
@@ -1220,9 +1218,6 @@ level_loop:
 		if (textErase > 0 && --textErase == 0)
 			blit_sprite(VGAScreenSeg, 16, 189, OPTION_SHAPES, 36);  // in-game message area
 
-		ARC_ScoreLife(&player[0]);
-		ARC_ScoreLife(&player[1]);
-
 		// ----- Shield Regen ----
 		{
 			bool update_shields = false;
@@ -2199,8 +2194,7 @@ draw_player_shot_loop_end:
 	// time out, or button to return to title
 	if (!gameNotOverYet)
 	{
-		if ((player[0].buttons[BUTTON_FIRE] && !player[0].last_buttons[BUTTON_FIRE])
-		 || (player[1].buttons[BUTTON_FIRE] && !player[1].last_buttons[BUTTON_FIRE]))
+		if (I_inputMade(INPUT_P1_FIRE) || I_inputMade(INPUT_P2_FIRE))
 			reallyEndLevel = true;
 		else if (SDL_GetTicks() > exitGameTic)
 			reallyEndLevel = true;
@@ -2208,29 +2202,13 @@ draw_player_shot_loop_end:
 
 	if (play_demo) // input kills demo
 	{
-		uint tKey = INPUT_P1_FIRE, tKey2 = INPUT_P2_FIRE;
-		if (I_inputForMenu(&tKey, INPUT_P1_FIRE) || I_inputForMenu(&tKey2, INPUT_P2_FIRE))
+		if (I_inputMade(INPUT_P1_FIRE) || I_inputMade(INPUT_P2_FIRE))
 			reallyEndLevel = true;
 	}
-	else // input handling for pausing, menu, cheats
+	else // Check for hot debug menu
 	{
-		skipStarShowVGA = false;
-		JE_mainKeyboardInput();
-		if (skipStarShowVGA)
-			goto level_loop;
-
-		if (pause_pressed)
-		{
-			pause_pressed = false;
-			JE_pauseGame();
-		}
-
-		if (ingamemenu_pressed)
-		{
-			ingamemenu_pressed = false;
-			JE_doInGameSetup();
-			skipStarShowVGA = true;
-		}
+		if (I_inputMade(INPUT_SERVICE_HOTDEBUG))
+			ingame_debug_menu();
 	}
 
 	/** Test **/

@@ -743,21 +743,28 @@ JE_word hurryUpLevelLoc;
 
 void ARC_ScoreLife( Player *this_player )
 {
-	if (this_player->cash >= this_player->cashForNextLife)
-	{
-		soundQueue[6] = S_EXPLOSION_11;
-		soundQueue[7] = S_SOUL_OF_ZINGLON;
+	// Cap score at 1 billion -- realistically, this will never be hit.
+	// It just serves to make sure the loop below can never go infinite.
+	if (this_player->cash > 999999999)
+		this_player->cash = 999999999;
 
-		if (this_player->lives < 11)
-			++(this_player->lives);
+	while (this_player->cash >= this_player->cashForNextLife)
+	{
+		if (this_player->cashForNextLife != 0)
+		{
+			soundQueue[6] = S_EXPLOSION_11;
+			soundQueue[7] = S_SOUL_OF_ZINGLON;
+
+			if (this_player->lives < 11)
+				++(this_player->lives);			
+		}
 
 		switch (this_player->cashForNextLife)
 		{
-			case 50000:	 /*   100,000 */
-			case 100000: /*   200,000 */ this_player->cashForNextLife *= 2;      break;
-			case 200000: /*   500,000 */ this_player->cashForNextLife = 500000;  break;
-			default:     /* 1,000,000 ; 1,500,000 */
-			                             this_player->cashForNextLife += 500000; break;
+			// 100,000 - 200,000 - Every 200,000
+			case 0:
+			case 100000: this_player->cashForNextLife += 100000; break;
+			default:     this_player->cashForNextLife += 200000; break;
 		}
 	}
 }

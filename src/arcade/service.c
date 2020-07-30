@@ -457,7 +457,7 @@ static void SRV_ButtonAssignmentSubMenu( void )
 
 		// Actual input options (we just set them while making the big string)
 		sprintf(tmpBuf.s, "Input %d", i + 1);
-		if (lockOut || (i == 0 && curAssignmentNum >= INPUT_P1_COIN))
+		if (lockOut || (i == 0 && curAssignmentNum >= INPUT_SERVICE_HOTDEBUG))
 		{
 			if (selectionType == __DISPLAY)
 			{
@@ -568,8 +568,10 @@ void SRV_PlayerButtons( void )
 void SRV_ServiceButtons( void )
 {
 	SRVH_DispHeader("Service Buttons");
-	SRVH_ButtonAssignmentOption("Service Credit", 16);
-	SRVH_ButtonAssignmentOption("Enter Service Menu", 17);
+	SRVH_ButtonAssignmentOption("Force Insert Coin", 17);
+	optionY += 12;
+	SRVH_ButtonAssignmentOption("Realtime Debugging", 16);
+	SRVH_ButtonAssignmentOption("Enter Service Menu", 18);
 	optionY = 176;
 	SRVH_Back("Back");	
 }

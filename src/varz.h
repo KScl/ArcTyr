@@ -264,7 +264,6 @@ extern JE_boolean globalFlags[10];
 extern JE_byte levelSong;
 extern JE_word mapOrigin, mapPNum;
 extern JE_byte mapPlanet[5], mapSection[5];
-extern JE_boolean skipStarShowVGA;
 extern JE_MultiEnemyType enemy;
 extern JE_EnemyAvailType enemyAvail;
 extern JE_word enemyOffset;

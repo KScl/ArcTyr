@@ -73,7 +73,7 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 
 	this_player->player_status = STATUS_INGAME;
 	this_player->cash = 0;
-	this_player->cashForNextLife = 50000;
+	this_player->cashForNextLife = 0;
 }
 
 // Unused?

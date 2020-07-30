@@ -26,6 +26,7 @@ enum {
 	INPUT_P1_COIN,
 	INPUT_P2_COIN,
 
+	INPUT_SERVICE_HOTDEBUG,
 	INPUT_SERVICE_COIN,
 	INPUT_SERVICE_ENTER,
 
@@ -68,10 +69,10 @@ void I_JOY_init( void );
 void I_JOY_close( void );
 
 void I_KEY_init( void );
-bool I_KEY_pressed( uint code );
 
 void I_checkButtons( void );
 void I_assignInput( Player *pl, uint pNum );
+bool I_inputMade(uint i);
 bool I_inputForMenu( uint *i, uint stop );
 bool I_waitOnInputForMenu( uint start, uint stop, uint wait );
 
