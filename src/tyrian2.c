@@ -984,10 +984,7 @@ start_level_first:
 	uint old_weapon_num[2] = { 0, 0 };
 
 	/* Initial Text */
-	//if (superTyrian)
-	//	JE_drawTextWindow("Shields malfunctioning.");
-	//else
-		JE_drawTextWindow(miscText[20]);
+	JE_drawTextWindow(miscText[20]);
 
 	/* Setup Armor/Shield Data */
 	for (uint i = 0; i < COUNTOF(player); ++i)
@@ -1066,7 +1063,7 @@ start_level_first:
 	/* --- Clear Sound Queue --- */
 	memset(soundQueue,       0, sizeof(soundQueue));
 	if (can_play_audio())
-		JE_playSampleNumOnChannel((superTyrian) ? V_DANGER : V_GOOD_LUCK, SFXPRIORITY+2);
+		JE_playSampleNumOnChannel(V_GOOD_LUCK, SFXPRIORITY+2);
 
 	memset(enemyShapeTables, 0, sizeof(enemyShapeTables));
 	memset(enemy,            0, sizeof(enemy));
@@ -3958,28 +3955,15 @@ void JE_eventSystem( void )
 
 	case 33: /* Enemy From other Enemies */
 		event_name("enemy_from_other_enemies");
-		if (!((eventRec[eventLoc-1].eventdat == 512 || eventRec[eventLoc-1].eventdat == 513) && (onePlayerAction || superTyrian)))
-		{
-			if (eventRec[eventLoc-1].eventdat == 534)
-				eventRec[eventLoc-1].eventdat = 827;
-/*			else if (!superTyrian)
-			{
-				const uint lives = player[0].lives;
+		if (eventRec[eventLoc-1].eventdat == 512 || eventRec[eventLoc-1].eventdat == 513)
+			break; // ignore old data cubes
 
-				if (eventRec[eventLoc-1].eventdat == 533 && (lives == 11 || (mt_rand() % 15) < lives))
-				{
-					// enemy will drop random special weapon
-					eventRec[eventLoc-1].eventdat = 829 + (mt_rand() % 6);
-				}
-			}
-			if (eventRec[eventLoc-1].eventdat == 534 && superTyrian)
-				eventRec[eventLoc-1].eventdat = 828 + superTyrianSpecials[mt_rand() % 4];
-*/
-			for (temp = 0; temp < 100; temp++)
-			{
-				if (enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
-					enemy[temp].enemydie = eventRec[eventLoc-1].eventdat;
-			}
+		if (eventRec[eventLoc-1].eventdat == 534)
+			eventRec[eventLoc-1].eventdat = 827;
+		for (temp = 0; temp < 100; temp++)
+		{
+			if (enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
+				enemy[temp].enemydie = eventRec[eventLoc-1].eventdat;
 		}
 		break;
 
@@ -4076,22 +4060,11 @@ void JE_eventSystem( void )
 
 	case 45: /* arcade-only enemy from other enemies */
 		event_name("arcade_enemy_from_other_enemies");
-		if (!superTyrian)
+		// Guess what? We're always in arcade mode.
+		for (temp = 0; temp < 100; temp++)
 		{
-			//const uint lives = player[0].lives;
-
-			//if (eventRec[eventLoc-1].eventdat == 533 && (lives == 11 || (mt_rand() % 15) < lives))
-			//{
-			//	eventRec[eventLoc-1].eventdat = 829 + (mt_rand() % 6);
-			//}
-			if (onePlayerAction)
-			{
-				for (temp = 0; temp < 100; temp++)
-				{
-					if (enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
-						enemy[temp].enemydie = eventRec[eventLoc-1].eventdat;
-				}
-			}
+			if (enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
+				enemy[temp].enemydie = eventRec[eventLoc-1].eventdat;
 		}
 		break;
 
@@ -4099,13 +4072,7 @@ void JE_eventSystem( void )
 		event_name("difficulty_change");
 		if (eventRec[eventLoc-1].eventdat3 != 0)
 			damageRate = eventRec[eventLoc-1].eventdat3;
-
-		// always true
-		//if (eventRec[eventLoc-1].eventdat2 == 0 || onePlayerAction)
-		{
-			//printf("(%d) Difficulty level change: %d + %d\n", eventRec[eventLoc-1].eventdat2, difficultyLevel, eventRec[eventLoc-1].eventdat);
-			ARC_RankLevelAdjusts(eventRec[eventLoc-1].eventdat);
-		}
+		ARC_RankLevelAdjusts(eventRec[eventLoc-1].eventdat);
 		break;
 
 	case 47: /* Enemy Global AccelRev */
@@ -4127,14 +4094,15 @@ void JE_eventSystem( void )
 	case 51:
 	case 52:
 		event_name("new_event_enemy?");
-		tempDat2 = eventRec[eventLoc-1].eventdat;
+	{
+		JE_integer backupData1 = eventRec[eventLoc-1].eventdat;
+		JE_integer backupData3 = eventRec[eventLoc-1].eventdat3;
+		JE_integer backupData6 = eventRec[eventLoc-1].eventdat6;
 		eventRec[eventLoc-1].eventdat = 0;
-		tempDat = eventRec[eventLoc-1].eventdat3;
 		eventRec[eventLoc-1].eventdat3 = 0;
-		tempDat3 = eventRec[eventLoc-1].eventdat6;
 		eventRec[eventLoc-1].eventdat6 = 0;
-		enemyDat[0].armor = tempDat3;
-		enemyDat[0].egraphic[1-1] = tempDat2;
+		enemyDat[0].armor = backupData6;
+		enemyDat[0].egraphic[1-1] = backupData1;
 		switch (eventRec[eventLoc-1].eventtype - 48)
 		{
 		case 1:
@@ -4150,11 +4118,12 @@ void JE_eventSystem( void )
 			temp = 75;
 			break;
 		}
-		JE_createNewEventEnemy(0, temp, tempDat);
-		eventRec[eventLoc-1].eventdat = tempDat2;
-		eventRec[eventLoc-1].eventdat3 = tempDat;
-		eventRec[eventLoc-1].eventdat6 = tempDat3;
-		break;
+		JE_createNewEventEnemy(0, temp, backupData3);
+		eventRec[eventLoc-1].eventdat = backupData1;
+		eventRec[eventLoc-1].eventdat3 = backupData3;
+		eventRec[eventLoc-1].eventdat6 = backupData6;
+		break;		
+	}
 
 	case 53:
 		event_name("force_events");
@@ -4254,15 +4223,10 @@ void JE_eventSystem( void )
 
 	case 63:  // skip events if not in 2-player mode
 		event_name("jump_if_fullgame");
-		//printf("ignoring event type 63 (skip in full game mode)\n");
-		//if (!onePlayerAction)
-		//	eventLoc += eventRec[eventLoc-1].eventdat;
 		break;
 
 	case 64:
 		event_name("smoothies");
-		//printf("%d %d %d \n", eventRec[eventLoc-1].eventdat, eventRec[eventLoc-1].eventdat2, eventRec[eventLoc-1].eventdat3);
-
 		smoothies[eventRec[eventLoc-1].eventdat-1] = eventRec[eventLoc-1].eventdat2;
 		temp = eventRec[eventLoc-1].eventdat;
 		if (temp == 5)
@@ -4586,84 +4550,6 @@ void JE_eventSystem( void )
 #endif
 
 	eventLoc++;
-}
-
-void JE_whoa( unsigned int timer )
-{
-	unsigned int i, j, color, offset;
-	unsigned int screenSize, topBorder, bottomBorder;
-	Uint8 * TempScreen1, * TempScreen2, * TempScreenSwap;
-
-	/* 'whoa' gets us that nifty screen fade used when you type in
-	 * 'engage'.  We need two temporary screen buffers (char arrays can
-	 * work too, but these screens already exist) for our effect.
-	 * This could probably be a lot more efficient (there's probably a
-	 * way to get vgascreen as one of the temp buffers), but it's only called
-	 * once so don't worry about it. */
-
-	TempScreen1  = game_screen->pixels;
-	TempScreen2  = VGAScreen2->pixels;
-
-	screenSize   = VGAScreenSeg->h * VGAScreenSeg->pitch;
-	topBorder    = VGAScreenSeg->pitch * 4; /* Seems an arbitrary number of lines */
-	bottomBorder = VGAScreenSeg->pitch * 7;
-
-	/* Okay, one disadvantage to using other screens as temp buffers: they
-	 * need to be the right size.  I doubt they'l ever be anything but 320x200,
-	 * but just in case, these asserts will clue in whoever stumbles across
-	 * the problem.  You can fix it with the stack or malloc. */
-	assert( (unsigned)VGAScreen2->h *  VGAScreen2->pitch >= screenSize
-	    && (unsigned)game_screen->h * game_screen->pitch >= screenSize);
-
-
-	/* Clear the top and bottom borders.  We don't want to process
-	 * them and we don't want to draw them. */
-	memset((Uint8 *)VGAScreenSeg->pixels, 0, topBorder);
-	memset((Uint8 *)VGAScreenSeg->pixels + screenSize - bottomBorder, 0, bottomBorder);
-
-	/* Copy our test subject to one of the temporary buffers.  Blank the other */
-	memset(TempScreen1, 0, screenSize);
-	memcpy(TempScreen2, VGAScreenSeg->pixels, VGAScreenSeg->h * VGAScreenSeg->pitch);
-
-	I_checkButtons();
-
-	// timer = 300; /* About 300 rounds is enough to make the screen mostly black */
-
-	do
-	{
-		setjasondelay(1);
-
-		/* This gets us our 'whoa' effect with pixel bleeding magic.
-		 * I'm willing to bet the guy who originally wrote the asm was goofing
-		 * around on acid and thought this looked good enough to use. */
-		for (i = screenSize - bottomBorder, j = topBorder / 2; i > 0; i--, j++)
-		{
-			offset = j + i/8192 - 4;
-			color = (TempScreen2[offset                    ] * 12 +
-			         TempScreen1[offset-VGAScreenSeg->pitch]      +
-			         TempScreen1[offset-1                  ]      +
-			         TempScreen1[offset+1                  ]      +
-			         TempScreen1[offset+VGAScreenSeg->pitch]) / 16;
-
-			TempScreen1[j] = color;
-		}
-
-		/* Now copy that mess to the buffer. */
-		memcpy((Uint8 *)VGAScreenSeg->pixels + topBorder, TempScreen1 + topBorder, screenSize - bottomBorder);
-
-		JE_showVGA();
-
-		timer--;
-		wait_delay();
-
-		/* Flip the buffer. */
-		TempScreenSwap = TempScreen1;
-		TempScreen1    = TempScreen2;
-		TempScreen2    = TempScreenSwap;
-
-	} while (!(timer == 0 || I_checkSkipSceneFromAnyone()));
-
-	levelWarningLines = 4;
 }
 
 void JE_barX( JE_word x1, JE_word y1, JE_word x2, JE_word y2, JE_byte col )

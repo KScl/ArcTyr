@@ -303,8 +303,6 @@ void select_gameplay( void )
 		if (player[0].player_status != STATUS_SELECT && player[1].player_status != STATUS_SELECT)
 		{
 			fade_black(10);
-
-			onePlayerAction = true;
 			for (int i = 0; i < 2; ++i)
 			{
 				if (player[i].player_status == STATUS_INGAME)
@@ -607,12 +605,10 @@ bool JE_titleScreen( void )
 			select_episode();
 			select_gameplay();
 
-			currentRank = 0;
-			difficultyLevel = DIP.startingDifficulty;
 			// Start special mode!
-			onePlayerAction = true;
+			currentRank = 0;
+			initialDifficulty = difficultyLevel = DIP.startingDifficulty;
 			gameLoaded = true;
-			initialDifficulty = difficultyLevel;
 
 			for (int pNum = 0; pNum < 2; ++pNum)
 			{

@@ -221,7 +221,6 @@ typedef struct {
 	Uint8 color;
 } superpixel_type;
 
-extern JE_integer tempDat, tempDat2, tempDat3;
 extern const JE_byte randomEnemyLaunchSounds[3];
 extern JE_byte lvlFileNum;
 extern JE_word maxEvent, eventLoc;
@@ -288,7 +287,6 @@ extern JE_word tempW;
 extern JE_word x, y;
 extern JE_integer b;
 extern JE_byte **BKwrap1to, **BKwrap2to, **BKwrap3to, **BKwrap1, **BKwrap2, **BKwrap3;
-extern JE_word shipGr, shipGr2;
 
 static const int hud_sidekickX[2] = {   1, 293 };
 static const int hud_sidekickY[2] = {  69,  88 };

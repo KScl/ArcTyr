@@ -46,8 +46,6 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shape
 
 void JE_eventJump( JE_word jump );
 
-void JE_whoa( unsigned int timer );
-
 void JE_barX ( JE_word x1, JE_word y1, JE_word x2, JE_word y2, JE_byte col );
 
 Sint16 JE_newEnemy( int enemyOffset, Uint16 eDatI, JE_byte shapeTableOverride );

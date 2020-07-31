@@ -36,8 +36,6 @@
 
 #include "lib/mtrand.h"
 
-JE_integer tempDat, tempDat2, tempDat3;
-
 const JE_byte randomEnemyLaunchSounds[3] /* [1..3] */ = {13,6,26};
 
 /*Special General Data*/
@@ -102,7 +100,7 @@ JE_byte levelSong;
 JE_word mapOrigin, mapPNum;
 JE_byte mapPlanet[5], mapSection[5]; /* [1..5] */
 
-/*EnemyData*/
+/* Enemy Data */
 JE_MultiEnemyType enemy;
 JE_EnemyAvailType enemyAvail;  /* values: 0: used, 1: free, 2: secret pick-up */
 JE_word enemyOffset;
@@ -110,11 +108,9 @@ JE_word enemyOnScreen;
 JE_byte enemyShapeTables[4];
 JE_word superEnemy254Jump;
 
-/*EnemyShotData*/
+/* Enemy Shot Data*/
 JE_boolean enemyShotAvail[ENEMY_SHOT_MAX]; /* [1..Enemyshotmax] */
 EnemyShotType enemyShot[ENEMY_SHOT_MAX]; /* [1..Enemyshotmax]  */
-
-
 
 /* Player Shot Data */
 JE_byte     astralDuration;
@@ -154,14 +150,9 @@ JE_integer b;
 JE_byte **BKwrap1to, **BKwrap2to, **BKwrap3to,
         **BKwrap1, **BKwrap2, **BKwrap3;
 
-JE_word shipGr, shipGr2;
-
 void JE_getShipInfo( void )
 {
-	shipGr = ships[player[0].items.ship].shipgraphic;
 	player[0].armor = ships[player[0].items.ship].dmg;
-
-	shipGr2 = ships[player[1].items.ship].shipgraphic;
 	player[1].armor = ships[player[1].items.ship].dmg;
 
 	for (uint i = 0; i < COUNTOF(player); ++i)

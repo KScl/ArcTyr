@@ -455,8 +455,6 @@ void DEV_RecordDemoInit( void )
 	}
 
 	demoDifficulty = opt_difficulty;
-
-	onePlayerAction = true;
 }
 
 void DEV_RecordDemoStart( void )

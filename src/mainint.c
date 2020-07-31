@@ -51,10 +51,6 @@
 #include <ctype.h>
 #include <string.h>
 
-#define MAX_PAGE 8
-#define TOPICS 6
-const JE_byte topicStart[TOPICS] = { 0, 1, 2, 3, 7, 255 };
-
 JE_word textErase;
 JE_boolean useLastBank; /* See if I want to use the last 16 colors for DisplayText */
 
@@ -278,8 +274,6 @@ void JE_initPlayerData( void )
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
 	player[1].last_opt_given = player[1].last_opt_fired = 0;
 
-	superTyrian = false;
-
 	secretHint = (mt_rand() % 3) + 1;
 
 	for (uint p = 0; p < COUNTOF(player); ++p)
@@ -384,8 +378,6 @@ bool load_next_demo( void )
 		player[1].cur_item.weapon = player[1].items.weapon[player[1].port_mode];
 		player[1].cur_item.special = player[1].items.special[player[1].special_mode];
 	}
-
-	onePlayerAction = true;
 
 	demo_keys[0] = demo_keys[1] = 0;
 
@@ -823,36 +815,6 @@ void JE_endLevelAni( void )
 
 	fade_black(15);
 	JE_clr256(VGAScreen);
-}
-
-void JE_drawCube( SDL_Surface * screen, JE_word x, JE_word y, JE_byte filter, JE_byte brightness )
-{
-	blit_sprite_dark(screen, x + 4, y + 4, OPTION_SHAPES, 25, false);
-	blit_sprite_dark(screen, x + 3, y + 3, OPTION_SHAPES, 25, false);
-	blit_sprite_hv(screen, x, y, OPTION_SHAPES, 25, filter, brightness);
-}
-
-bool str_pop_int( char *str, int *val )
-{
-	bool success = false;
-
-	char buf[256];
-	assert(strlen(str) < sizeof(buf));
-
-	// grab the value from str
-	char *end;
-	*val = strtol(str, &end, 10);
-
-	if (end != str)
-	{
-		success = true;
-
-		// shift the rest to the beginning
-		strcpy(buf, end);
-		strcpy(str, buf);
-	}
-
-	return success;
 }
 
 void JE_inGameDisplays( void )
@@ -1758,6 +1720,8 @@ void JE_mainGamePlayerFunctions( void )
 {
 	/*PLAYER MOVEMENT/MOUSE ROUTINES*/
 	int cameraXFocusTarget = 160;
+	JE_word p1Gr = ships[player[0].items.ship].shipgraphic;
+	JE_word p2Gr = ships[player[1].items.ship].shipgraphic;
 
 	if (endLevel && levelEnd > 0)
 	{
@@ -1765,22 +1729,19 @@ void JE_mainGamePlayerFunctions( void )
 		levelEndWarp++;
 	}
 
-	shipGr = ships[player[0].items.ship].shipgraphic;
-	shipGr2 = ships[player[1].items.ship].shipgraphic;
-
 	if (PL_NumPlayers() == 2 && player[0].is_dragonwing)
 	{
 		// if Player 1 is a DragonWing, handle player 2 before player 1
 		// so P2's movement is updated first, drawn first, etc
-		JE_playerMovement(&player[1], 2, shipGr2, &mouseX, &mouseY);
-		JE_playerMovement(&player[0], 1, shipGr,  &mouseX, &mouseY);
+		JE_playerMovement(&player[1], 2, p2Gr, &mouseX, &mouseY);
+		JE_playerMovement(&player[0], 1, p1Gr, &mouseX, &mouseY);
 	}
 	else
 	{
 		if (player[0].player_status == STATUS_INGAME)
-			JE_playerMovement(&player[0], 1, shipGr,  &mouseX, &mouseY);
+			JE_playerMovement(&player[0], 1, p1Gr, &mouseX, &mouseY);
 		if (player[1].player_status == STATUS_INGAME)
-			JE_playerMovement(&player[1], 2, shipGr2, &mouseX, &mouseY);
+			JE_playerMovement(&player[1], 2, p2Gr, &mouseX, &mouseY);
 	}
 
 	/* == Parallax Map Scrolling == */

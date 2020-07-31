@@ -50,7 +50,7 @@ extern char levelName[11];
 extern JE_byte mainLevel, nextLevel;
 extern JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 extern JE_boolean filtrationAvail, filterActive, filterFade, filterFadeStart;
-extern JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
+extern JE_boolean twoPlayerLinked;
 extern JE_byte SAPowerupBag[5];
 extern JE_byte superArcadePowerUp;
 extern JE_real linkGunDirec;

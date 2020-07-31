@@ -59,7 +59,7 @@ JE_byte mainLevel, nextLevel;   /*Current Level #*/
 JE_shortint levelFilter, levelFilterNew, levelBrightness, levelBrightnessChg;
 JE_boolean  filtrationAvail, filterActive, filterFade, filterFadeStart;
 
-JE_boolean twoPlayerLinked, onePlayerAction, superTyrian;
+JE_boolean twoPlayerLinked;
 
 JE_byte    SAPowerupBag[5];
 JE_byte    superArcadePowerUp;
