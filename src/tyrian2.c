@@ -2792,6 +2792,7 @@ void JE_loadMap( void )
 		efread(&eventRec[x].eventdat4, sizeof(JE_byte), 1, level_f);
 	}
 	eventRec[x].eventtime = 65500;  /*Not needed but just in case*/
+	MOD_PatcherClose();
 
 	/*debuginfo('Level loaded.');*/
 
@@ -4446,6 +4447,24 @@ void JE_eventSystem( void )
 		PL_SwitchSpecial(&player[0], player[0].special_mode, false);
 		PL_SwitchSpecial(&player[1], player[1].special_mode, false);
 */
+		break;
+
+	case 83: // I don't know why T2K has a separate event for this but after random_explosions nothing surprises me
+		event_name("t2k_map_stop");
+		stopBackgrounds = true;
+		switch (eventRec[eventLoc-1].eventdat)
+		{
+		case 0:
+		case 1:
+			stopBackgroundNum = 1;
+			break;
+		case 2:
+			stopBackgroundNum = 2;
+			break;
+		case 3:
+			stopBackgroundNum = 3;
+			break;
+		}
 		break;
 
 	case 84: // T2000 Timed Battle parameters

@@ -40,6 +40,37 @@ static const Patches _P1_TYRIAN_HARD[] = {
 	{0},
 };
 
+static const Patches _P1_HOLES[] = {
+	// For whatever reason, Holes in 2.1 has a ton of random events with types that are either
+	// unknown or would later go on to be used in Tyrian 2000.
+	// T2000 changed all of these to level enemy frequency changes, but that results in
+	// so much enemy spam. Instead, we no-op all of the errant events.
+	// (We don't apply this patch in T2000 mode.)
+	{501, false, {1900, 0}},
+	{502, false, {1910, 0}},
+	{503, false, {1920, 0}},
+	{504, false, {1930, 0}},
+	{505, false, {1940, 0}},
+	{507, false, {1950, 0}},
+	{510, false, {1960, 0}},
+	{513, false, {1970, 0}},
+	{516, false, {1980, 0}},
+	{519, false, {1990, 0}},
+	{522, false, {2000, 0}},
+	{524, false, {2010, 0}},
+	{527, false, {2020, 0}},
+	{530, false, {2030, 0}},
+	{533, false, {2040, 0}},
+	{537, false, {2050, 0}},
+	{541, false, {2060, 0}},
+	{545, false, {2070, 0}},
+	{554, false, {2090, 0}},
+	{625, false, {2300, 0}},
+	{648, false, {2350, 0}},
+	{683, false, {2400, 0}},
+	{0}, // End
+};
+
 static const Patches _P2_GYGES[] = {
 	{7,  false, {2, 33, 533, 0, 0, 0, 0, 1}}, // restore shield powerup drop from early enemy
 	{0}, // End
@@ -292,6 +323,7 @@ static const Patches _P4T2K_ICE_EXIT[] = {
 };
 
 static const Patches *curPatches = NULL;
+static int num_patches_applied = 0;
 
 int patchSet = PATCH_DISABLED;
 
@@ -326,15 +358,24 @@ void MOD_PatcherSetup( const char *levelFile )
 void MOD_PatcherInit( JE_byte level )
 {
 	curPatches = NULL;
+	num_patches_applied = 0;
+
 	switch (patchSet)
 	{
 	default: 
 		return;
-	case PATCH_EPISODE_1:
 	case PATCH_EPISODE_1_T2K:
 		switch (level)
 		{
+			default: break;
+			case 11: /* No patches */ return;
+		}
+		// fall through
+	case PATCH_EPISODE_1:
+		switch (level)
+		{
 			default: return;
+			case 11: curPatches = _P1_HOLES; return;
 			case 15: curPatches = _P1_TYRIAN_HARD; return;
 		}
 	case PATCH_EPISODE_2:
@@ -386,7 +427,7 @@ bool MOD_Patcher( struct JE_EventRecType *allEvs, JE_word *ev )
 
 	while (*ev == curPatches->ev_num)
 	{
-		printf("PATCHER: patched event %d (%s)\n", *ev, curPatches->append ? "appended" : "replaced");
+		++num_patches_applied;
 		memcpy(&allEvs[*ev], &curPatches->new_ev, sizeof(struct JE_EventRecType));
 		if (!(curPatches++)->append)
 			return true;
@@ -400,5 +441,6 @@ bool MOD_Patcher( struct JE_EventRecType *allEvs, JE_word *ev )
 
 void MOD_PatcherClose( void )
 {
-	// currently a no-op
+	if (num_patches_applied > 0)
+		printf("patcher: applied %d patches to this level\n", num_patches_applied);
 }
