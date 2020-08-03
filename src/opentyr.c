@@ -387,7 +387,7 @@ int main( int argc, char *argv[] )
 	{
 		JE_initPlayerData();
 
-		if (!JE_titleScreen())
+		if (!Menu_titleScreen())
 			ARC_NextIdleScreen();
 
 		if (gameLoaded)

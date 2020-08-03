@@ -692,25 +692,24 @@ void blit_sprite2x2_darken( SDL_Surface *surface, int x, int y, Sprite2_array sp
 
 void JE_loadMainShapeTables( const char *shpfile )
 {
-	enum { SHP_NUM = 13 };
-
 	FILE *f = dir_fopen_die(data_dir(), shpfile, "rb");
-	
+
+	unsigned int i;
 	JE_word shpNumb;
-	JE_longint shpPos[SHP_NUM + 1]; // +1 for storing file length
+	JE_longint shpPos[14]; // +1 maximum possible
 	
 	efread(&shpNumb, sizeof(JE_word), 1, f);
-	// TODO This assert no longer holds
-	//assert(shpNumb + 1u == COUNTOF(shpPos));
-	
-	for (unsigned int i = 0; i < shpNumb; ++i)
+
+	// Detect T2000 by number of shapes / sprite banks, vanilla has 12, T2000 has 13
+	tyrian2000detected = (shpNumb != 12);
+
+	for (i = 0; i < shpNumb; ++i)
 		efread(&shpPos[i], sizeof(JE_longint), 1, f);
-	
+
 	fseek(f, 0, SEEK_END);
-	for (unsigned int i = shpNumb; i < COUNTOF(shpPos); ++i)
+	for (; i < COUNTOF(shpPos); ++i)
 		shpPos[i] = ftell(f);
-	
-	int i;
+
 	// fonts, interface, option sprites
 	for (i = 0; i < 7; i++)
 	{
@@ -718,16 +717,11 @@ void JE_loadMainShapeTables( const char *shpfile )
 		load_sprites(i, f);
 	}
 
-	// T2000 -- detection
-	// Check to see if the 2000(tm) logo is loaded or not
-	if (sprite_table[PLANET_SHAPES].count == 152)
-		tyrian2000detected = true;
-
 	// player shot sprites
 	loadCompShapesArc(&shotShapes[0], "a_shots1.shp");
 	// skip shapes in shpfile
 	i++;
-	
+
 	// player ship sprites
 	loadCompShapesArc(&shipShapes, "a_ships.shp");
 	// skip shapes in shpfile

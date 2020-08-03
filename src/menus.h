@@ -23,16 +23,8 @@
 
 extern char episode_name[6][31];
 
-//#define GAMEPLAY_NAME_COUNT 5
-//extern char difficulty_name[7][21], gameplay_name[GAMEPLAY_NAME_COUNT][26];
-
-bool JE_titleScreen( void );
-
-void select_gameplay( void );
-void select_episode( void );
-void select_difficulty( void );
-
-void ingame_debug_menu( void );
+bool Menu_titleScreen( void );
+void Menu_hotDebugScreen( void );
 
 #endif /* MENUS_H */
 

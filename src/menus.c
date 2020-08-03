@@ -42,22 +42,24 @@
 
 char episode_name[6][31];
 
-static const JE_shortint shipXpos[] = {
+static const JE_shortint _timeShipX[] = {
 	 0,  0,  0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 
 	30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50, 50, 50, 50, 50, 50, 50,
 	50, 50, 50, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22,
 	20, 18, 16, 14, 12, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0,  0,  0,  0,  0,  0,  0,  0,
 };
-static const JE_byte pcolor[] = {96+48, 96+16};
+static const JE_byte _playerHue[2]   = {9,      7     };
+static const JE_byte _playerColor[2] = {9 << 4, 7 << 4};
 
-static inline void outTextMirrorX( SDL_Surface * screen, int x, int y, const char *s, unsigned int filter, int brightness, unsigned int font, JE_boolean shadow, JE_byte p )
+static inline void _menuMirrorText( SDL_Surface * screen, int x, int y, int p, const char *s )
 {
-	JE_outTextAdjust(screen, 
-		(p == 0) ? x : (320 - x) - JE_textWidth(s, SMALL_FONT_SHAPES), y, 
-		s, filter, brightness, font, shadow);
+	if (p == 0)
+		draw_font_hv_shadow(screen, x,       y, s, normal_font, left_aligned,  15, -4, false, 2);
+	else
+		draw_font_hv_shadow(screen, 320 - x, y, s, normal_font, right_aligned, 15, -4, false, 2);
 }
 
-static void draw_shipGraphic( int x, int y, uint sGr, int facing )
+static void _drawShipGraphic( int x, int y, uint sGr, int facing )
 {
 	if (sGr == 0) // Dragonwing
 	{
@@ -78,30 +80,37 @@ static void draw_shipGraphic( int x, int y, uint sGr, int facing )
 		blit_sprite2x2(VGAScreen, x - 12, y, shipShapes, sGr + (facing * 2));
 }
 
-static void draw_PlayerStatusText( JE_byte p )
+static void _drawPlayerStatusText( JE_byte p )
 {
 	JE_word curCoins;
 	if (player[p].player_status == STATUS_SELECT)
 	{
-		outTextMirrorX(VGAScreen, 12, 136, "Wait For", 15, -4, SMALL_FONT_SHAPES, true, p);
-		outTextMirrorX(VGAScreen, 12, 152, "Other Player", 15, -4, SMALL_FONT_SHAPES, true, p);
+		_menuMirrorText(VGAScreen, 12, 136, p, "Wait For");
+		_menuMirrorText(VGAScreen, 12, 152, p, "Other Player");
 		return;
 	}
 
 	curCoins = ARC_GetCoins();
 
 	strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
-	outTextMirrorX(VGAScreen, 12, 136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
+	_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.s);
 
 	if (DIP.coinsToStart == 0)
 		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Free Play");
+	else if (DIP.coinsToStart == 1)
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", curCoins);
 	else
 		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", curCoins, DIP.coinsToStart);
 
-	outTextMirrorX(VGAScreen, 12, 152, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true, p);
+	_menuMirrorText(VGAScreen, 12, 152, p, tmpBuf.s);
 }
 
-void select_gameplay( void )
+// ----------
+// Game Menus
+// ----------
+
+// Only referenced from title screen
+static void Menu_selectShip( void )
 {
 	bool fade_in = true;
 
@@ -126,23 +135,24 @@ void select_gameplay( void )
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 		JE_dString(VGAScreen, JE_fontCenter("Select Ship", FONT_SHAPES), 20, "Select Ship", FONT_SHAPES);
 
+#ifdef ENABLE_DEVTOOLS
 		if (mainLevel != FIRST_LEVEL)
 		{
 			sprintf(tmpBuf.l, "DEBUG: Starting at ID %hu", mainLevel);
 			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 36, tmpBuf.l, 15, 3, FULL_SHADE);
 		}
+#endif
 
 		lastXofs = shipXofs;
-		if (++shipXofs >= sizeof(shipXpos))
+		if (++shipXofs >= sizeof(_timeShipX))
 			shipXofs = 0;
-		shipAngle = shipXpos[shipXofs] - shipXpos[lastXofs];
-		
+		shipAngle = _timeShipX[shipXofs] - _timeShipX[lastXofs];
 
 		for (int p = 0; p < 2; ++p)
 		{
 			if (player[p].player_status != STATUS_SELECT && player[p].player_status != STATUS_INGAME)
 			{
-				draw_PlayerStatusText(p);
+				_drawPlayerStatusText(p);
 				continue;
 			}
 
@@ -153,31 +163,31 @@ void select_gameplay( void )
 
 			if (ship_select[p] >= shiporder_nosecret) // On the Nortship
 			{
-				fill_rectangle_xy(VGAScreen,   0, y,  19, 90, pcolor[p] +5);
-				fill_rectangle_xy(VGAScreen, 300, y, 319, 90, pcolor[p] +5);
+				fill_rectangle_xy(VGAScreen,   0, y,  19, y + 40, _playerColor[p] +5);
+				fill_rectangle_xy(VGAScreen, 300, y, 319, y + 40, _playerColor[p] +5);
 			}
 			else
-				fill_rectangle_xy(VGAScreen, x, y, x + 39, y + 40, pcolor[p] +5);
+				fill_rectangle_xy(VGAScreen, x, y, x + 39, y + 40, _playerColor[p] +5);
 			if (p == 0)
-				JE_textShade(VGAScreen, x + 1, y + 1, "1P", pcolor[p]/16, 6, FULL_SHADE);
+				JE_textShade(VGAScreen, x + 1, y + 1, "1P", _playerHue[p], 6, FULL_SHADE);
 			else
-				JE_textShade(VGAScreen, x + 30, y + 34, "2P", pcolor[p]/16, 6, FULL_SHADE);
+				JE_textShade(VGAScreen, x + 30, y + 34, "2P", _playerHue[p], 6, FULL_SHADE);
 
-			outTextMirrorX(VGAScreen, 12, 136, tmpBuf.l, 15, -4, SMALL_FONT_SHAPES, true, p);
+			_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.l);
 
 			if (p == 0)
-				draw_shipGraphic(50  + shipXpos[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, shipAngle);
+				_drawShipGraphic(50  + _timeShipX[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, shipAngle);
 			else
-				draw_shipGraphic(270 - shipXpos[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, -shipAngle);
+				_drawShipGraphic(270 - _timeShipX[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, -shipAngle);
 
 			if (player[p].player_status == STATUS_INGAME)
-				outTextMirrorX(VGAScreen, 136, 182, "OK", 15, -4, SMALL_FONT_SHAPES, true, p);
+				_menuMirrorText(VGAScreen, 136, 182, p, "OK");
 		}
 		for (int i = 1; i <= shiporder_nosecret; ++i)
 		{
 			int x = xIncrease * i;
 			int y = 54 + ((i & 1) ? 0 : 40);
-			draw_shipGraphic(x, y, ships[shiporder[i - 1]].shipgraphic, 0);
+			_drawShipGraphic(x, y, ships[shiporder[i - 1]].shipgraphic, 0);
 		}
 
 		nTimer = tTimer - SDL_GetTicks();
@@ -313,7 +323,8 @@ void select_gameplay( void )
 	}
 }
 
-void select_episode( void )
+// Only referenced from title screen
+static void Menu_selectEpisode( void )
 {
 	bool selection_made = false;
 	JE_byte in_control = (player[0].player_status == STATUS_SELECT) ? 1 : 2;
@@ -344,7 +355,7 @@ void select_episode( void )
 		{
 			if (player[p].player_status != STATUS_SELECT || (p + 1) != in_control)
 			{
-				draw_PlayerStatusText(p);
+				_drawPlayerStatusText(p);
 				continue;
 			}
 		}
@@ -464,27 +475,22 @@ void select_episode( void )
 	}
 }
 
-bool JE_titleScreen( void )
+bool Menu_titleScreen( void )
 {
 	uint button;
 	int tyrY = 62, t2kY = 41;
 	bool fadeIn = true;
 
-	//const int menunum = 7;
-	skip_header_draw = false;
-	skip_header_undraw = false;
+	JE_word waitForDemo = 1; // will get overridden immediately
+	JE_word oldCoins = -1;
+	JE_word curCoins;
 
-	//unsigned int arcade_code_i[SA_ENGAGE] = { 0 };
-
-	JE_word waitForDemo;
-	JE_word oldCoins, curCoins;
-
+	skip_header_draw = skip_header_undraw = false;
 	play_demo = false;
 	gameLoaded = false;
 
-	set_volume(tyrMusicVolume, fxVolume);
-
 	// ARCADE TITLE SCREEN STARTUP
+	set_volume(tyrMusicVolume, fxVolume);
 	play_song_once(SONG_TITLE);
 	arcTextTimer = 0;
 
@@ -525,9 +531,6 @@ bool JE_titleScreen( void )
 		}
 	}
 
-	oldCoins = ARC_GetCoins();
-	waitForDemo = (oldCoins >= DIP.coinsToStart) ? 35*10 : 35*5;
-
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen2->pitch * VGAScreen2->h);
 	do
 	{
@@ -550,6 +553,8 @@ bool JE_titleScreen( void )
 
 		if (DIP.coinsToStart == 0)
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Free Play");
+		else if (DIP.coinsToStart == 1)
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", curCoins);
 		else
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", curCoins, DIP.coinsToStart);
 		draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
@@ -560,13 +565,10 @@ bool JE_titleScreen( void )
 
 		if (DIP.coinsToStart != DIP.coinsToContinue)
 		{
-			y += 16;
+			snprintf(tmpBuf.l, sizeof(tmpBuf.l), "%hu Credit%s To Start", DIP.coinsToStart, DIP.coinsToStart == 1 ? "" : "s");
+			draw_font_hv_full_shadow(VGAScreen, x, 186, tmpBuf.l, small_font, centered, 15, 2, true, 1);
 			snprintf(tmpBuf.l, sizeof(tmpBuf.l), "%hu Credit%s To Continue", DIP.coinsToContinue, DIP.coinsToContinue == 1 ? "" : "s");
-			draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.l, normal_font, centered, 15, -10);
-			draw_font_hv(VGAScreen, x + 1, y + 1, tmpBuf.l, normal_font, centered, 15, -10);
-			draw_font_hv(VGAScreen, x + 1, y - 1, tmpBuf.l, normal_font, centered, 15, -10);
-			draw_font_hv(VGAScreen, x - 1, y + 1, tmpBuf.l, normal_font, centered, 15, -10);
-			draw_font_hv(VGAScreen, x,     y,     tmpBuf.l, normal_font, centered, 15, -3);
+			draw_font_hv_full_shadow(VGAScreen, x, 193, tmpBuf.l, small_font, centered, 15, 2, true, 1);
 		}
 
 		if (fadeIn)
@@ -602,8 +604,8 @@ bool JE_titleScreen( void )
 		{
 			JE_playSampleNum(S_SELECT);
 			fade_black(10);
-			select_episode();
-			select_gameplay();
+			Menu_selectEpisode();
+			Menu_selectShip();
 
 			// Start special mode!
 			currentRank = 0;
@@ -617,9 +619,9 @@ bool JE_titleScreen( void )
 			}
 		}
 
-		if (oldCoins != ARC_GetCoins())
+		if (oldCoins != curCoins)
 		{
-			oldCoins = ARC_GetCoins();
+			oldCoins = curCoins;
 			waitForDemo = (oldCoins >= DIP.coinsToStart) ? 35*10 : 35*5;
 		}
 		else
@@ -631,7 +633,7 @@ bool JE_titleScreen( void )
 	return gameLoaded;
 }
 
-void ingame_debug_menu( void )
+void Menu_hotDebugScreen( void )
 {
 	const char *menu_strings[] = {
 		"Screenshot Mode",

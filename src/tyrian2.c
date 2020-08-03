@@ -2205,7 +2205,7 @@ draw_player_shot_loop_end:
 	else // Check for hot debug menu
 	{
 		if (I_inputMade(INPUT_SERVICE_HOTDEBUG))
-			ingame_debug_menu();
+			Menu_hotDebugScreen();
 	}
 
 	/** Test **/

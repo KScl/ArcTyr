@@ -213,7 +213,9 @@ void ARC_DISP_NoPlayerInSlot( uint pNum )
 	{
 		if (DIP.coinsToStart == 0)
 			strcpy(tmpBuf.s, "Free Play");
-		else
+		else if (DIP.coinsToStart == 1)
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", coins);
+		else		
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", coins, (JE_word)DIP.coinsToStart);
 	}
 
