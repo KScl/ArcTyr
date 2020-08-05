@@ -350,16 +350,6 @@ foreach ($all_specials as $id => $special) {
 	// Graphic "hacks"
 	$graphic = get_default($special, "Graphic", 0);
 	if ($graphic === 'Unknown') $graphic = 125;
-	elseif (is_array($graphic)) {
-		if (isset($graphic['ArcTyr'])) {
-			$temp = $graphic['ArcTyr'];
-			$graphic = $temp;
-		}
-		elseif (isset($graphic['Tyrian2000'])) {
-			$temp = $graphic['Tyrian2000'] + 1000;
-			$graphic = $temp;
-		}
-	}
 	if (!is_int($graphic))
 		die("Invalid special {$id}: Unknown value {$graphic}\n");
 
@@ -387,6 +377,7 @@ foreach ($all_specials as $id => $special) {
 		case 'Invulnerability':       $stype = 20; break;
 		case 'SpawnOptionFromWeapon': $stype = 21; break;
 		case 'SpawnRandomAmmoOption': $stype = 22; break;
+		case 'FireWhileButtonHeld':   $stype = 23; break;
 		default:
 			if (!is_int($stype))
 				die("Invalid special {$id}: Unknown value {$stype}\n");
@@ -419,14 +410,17 @@ foreach ($all_specials as $id => $special) {
 		die("Invalid special {$id}: Unknown value {$power}\n");
 
 	// Weapon data
-	$data = get_default($special, "ShotData", 0);
+	$shottype = get_default($special, "ShotType", 0);
+	if (!is_int($shottype))
+	{
+		$temp = array_search($shottype, $shot_ids);
+		if ($temp === FALSE) die("Invalid special {$id}: Shot:{$shottype} doesn't match a shot\n");
+		$shottype = $temp;
+	}
+
+	$data = get_default($special, "ExtraData", 0);
 	if (is_array($data)) {
-		if (isset($data['Shot'])) {
-			$temp = array_search($data['Shot'], $shot_ids);
-			if ($temp === FALSE) die("Invalid special {$id}: Shot:{$data['Shot']} doesn't match a shot\n");
-			$data = $temp;
-		}
-		elseif (isset($data['Option'])) {
+		if (isset($data['Option'])) {
 			$temp = array_search($data['Option'], $option_ids);
 			if ($temp === FALSE) die("Invalid special {$id}: Option:{$data['Option']} doesn't match an option\n");
 			$data = $temp;
@@ -436,7 +430,7 @@ foreach ($all_specials as $id => $special) {
 			elseif ($data['Side'] === "Right") $data = 1;
 			else die("Invalid special {$id}: Side:{$data['Side']} is invalid\n");
 		}
-		else die("Invalid special {$id}: Invalid ShotData array given\n");
+		else die("Invalid special {$id}: Invalid ExtraData array given\n");
 	}
 	if (!is_int($data))
 		die("Invalid special {$id}: Unknown value {$data}\n");
@@ -444,7 +438,8 @@ foreach ($all_specials as $id => $special) {
 	write_word($output, $graphic);
 	write_byte($output, $power);
 	write_byte($output, $stype);
-	write_word($output, $data);
+	write_word($output, $shottype);
+	write_byte($output, $data);
 
 	write_byte($output, ord(';'));
 }
@@ -579,19 +574,23 @@ foreach ($all_ships as $id => $ship) {
 					$twiddles[$twiddleNum][$commandNum] = $temp + 100;
 				}
 				else switch ($command) {
-					case 'Up':             $twiddles[$twiddleNum][$commandNum] = 1; break;
-					case 'Down':           $twiddles[$twiddleNum][$commandNum] = 2; break;
-					case 'Left':           $twiddles[$twiddleNum][$commandNum] = 3; break;
-					case 'Right':          $twiddles[$twiddleNum][$commandNum] = 4; break;
-					case 'Up+Fire':        $twiddles[$twiddleNum][$commandNum] = 5; break;
-					case 'Down+Fire':      $twiddles[$twiddleNum][$commandNum] = 6; break;
-					case 'Left+Fire':      $twiddles[$twiddleNum][$commandNum] = 7; break;
-					case 'Right+Fire':     $twiddles[$twiddleNum][$commandNum] = 8; break;
+					case 'Up':    $twiddles[$twiddleNum][$commandNum] = 1; break;
+					case 'Down':  $twiddles[$twiddleNum][$commandNum] = 2; break;
+					case 'Left':  $twiddles[$twiddleNum][$commandNum] = 3; break;
+					case 'Right': $twiddles[$twiddleNum][$commandNum] = 4; break;
+					case 'Up+Fire':    $twiddles[$twiddleNum][$commandNum] = 5; break;
+					case 'Down+Fire':  $twiddles[$twiddleNum][$commandNum] = 6; break;
+					case 'Left+Fire':  $twiddles[$twiddleNum][$commandNum] = 7; break;
+					case 'Right+Fire': $twiddles[$twiddleNum][$commandNum] = 8; break;
 					case 'Up+Sidekick':    $twiddles[$twiddleNum][$commandNum] = 9; break;
 					case 'Down+Sidekick':  $twiddles[$twiddleNum][$commandNum] = 10; break;
 					case 'Left+Sidekick':  $twiddles[$twiddleNum][$commandNum] = 11; break;
 					case 'Right+Sidekick': $twiddles[$twiddleNum][$commandNum] = 12; break;
-					case 'Release':        $twiddles[$twiddleNum][$commandNum] = 99; break;
+					case 'Up+Fire+Sidekick':    $twiddles[$twiddleNum][$commandNum] = 13; break;
+					case 'Down+Fire+Sidekick':  $twiddles[$twiddleNum][$commandNum] = 14; break;
+					case 'Left+Fire+Sidekick':  $twiddles[$twiddleNum][$commandNum] = 15; break;
+					case 'Right+Fire+Sidekick': $twiddles[$twiddleNum][$commandNum] = 16; break;
+					case 'Release': $twiddles[$twiddleNum][$commandNum] = 99; break;
 					default: die("Invalid ship {$id}: Invalid twiddle command {$command}\n");
 				}
 			}

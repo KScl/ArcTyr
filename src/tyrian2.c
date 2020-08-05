@@ -1220,11 +1220,17 @@ level_loop:
 			bool update_shields = false;
 			for (uint i = 0; i < 2; ++i)
 			{
-				if (player[i].shield_wait)
-					--player[i].shield_wait;
-				else if (PL_Alive(i) && player[i].shield < player[i].shield_max)
+				if (!PL_Alive(i) || player[i].shield >= player[i].shield_max)
+					continue;
+
+				// If a shield draining twiddle is active, don't replenish shields
+				else if (player[i].specials.flare_control != 0 && special[player[i].specials.flare_special].pwr < 100)
+					player[i].shield_wait = 16;
+
+				// If wait time exhausted, replenish
+				else if (!(--player[i].shield_wait))
 				{
-					player[i].shield_wait = 15;
+					player[i].shield_wait = 16;
 					++player[i].shield;
 					update_shields = true;
 				}

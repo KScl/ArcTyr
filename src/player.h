@@ -88,11 +88,14 @@ typedef struct
 		JE_byte next_repeat;
 
 		// flare and other repeat fire effects
-		JE_word flare_time;
+		JE_byte     flare_special;
+		JE_word     flare_time;
 		JE_shortint flare_freq;
-		JE_word flare_wpn;
-		JE_boolean flare_link;
-		JE_boolean flare_spray;
+		JE_boolean  flare_link;
+		JE_boolean  flare_spray;
+
+		// controllable flare effects
+		JE_byte     flare_control;
 
 		// soul of zinglon
 		JE_byte zinglon;

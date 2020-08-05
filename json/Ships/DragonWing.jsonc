@@ -14,31 +14,31 @@
 		"TwiddleCreateOptionLeft":{ // 31
 			"Name":"DragonOption Left",
 			"SpecialType":"SpawnOptionFromWeapon",
-			"ShotData":{"Side":"Left"},
+			"ExtraData":{"Side":"Left"},
 			"PowerUse":{"PowerLevel":1}
 		},
 		"TwiddleCreateOptionRight":{ // 36
 			"Name":"DragonOption Right",
 			"SpecialType":"SpawnOptionFromWeapon",
-			"ShotData":{"Side":"Right"},
+			"ExtraData":{"Side":"Right"},
 			"PowerUse":{"PowerLevel":1}
 		},
 		"TwiddleCreatePlasma":{ // 32
 			"Name":"Dragonwing EX Plasma",
 			"SpecialType":"SpawnOptionAlternate",
-			"ShotData":9,
+			"ExtraData":{"Option":"O9"},
 			"PowerUse":{"Shield":28}
 		},
 		"TwiddleCreatePhoenix":{ // 33
 			"Name":"Dragonwing EX Phoenix",
 			"SpecialType":"SpawnOptionAlternate",
-			"ShotData":8,
+			"ExtraData":{"Option":"O8"},
 			"PowerUse":{"Shield":18}
 		},
 		"TwiddleCreate8Way":{ // 34
 			"Name":"Dragonwing EX 8-Way",
 			"SpecialType":"SpawnOptionAlternate",
-			"ShotData":14,
+			"ExtraData":{"Option":"O14"},
 			"PowerUse":{"Shield":14}
 		}
 	},

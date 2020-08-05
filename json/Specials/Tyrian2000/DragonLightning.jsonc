@@ -23,7 +23,7 @@
 			"Name":"Dragon Lightning",
 			"Graphic":93,
 			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"DragonSpecial"},
+			"ShotType":"DragonSpecial",
 			"PowerUse":50
 		}
 	}

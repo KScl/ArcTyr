@@ -334,6 +334,8 @@ JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt )
 		this_player->specials.zinglon = 0;
 		if (this_player->specials.flare_time != 0)
 		{
+			this_player->specials.flare_special = 0;
+			this_player->specials.flare_control = 0;
 			this_player->specials.flare_time = 0;
 			this_player->shot_repeat[SHOT_SPECIAL] = this_player->specials.next_repeat;
 			this_player->hud_repeat_start = this_player->shot_repeat[SHOT_SPECIAL];

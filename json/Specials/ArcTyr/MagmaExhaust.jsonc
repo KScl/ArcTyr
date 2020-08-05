@@ -23,7 +23,7 @@
 			"Name":"Exhaust Shot",
 			"Graphic":309,
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"MagmaExhaust"}
+			"ShotType":"MagmaExhaust"
 		}
 	}
 }

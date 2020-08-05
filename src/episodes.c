@@ -206,11 +206,12 @@ void ADTA_loadSpecials( void )
 		efread(&special[i].pwr,         sizeof(JE_byte), 1, f);
 		efread(&special[i].stype,       sizeof(JE_byte), 1, f);
 		efread(&special[i].wpn,         sizeof(JE_word), 1, f);
+		efread(&special[i].extradata,   sizeof(JE_byte), 1, f);
 
 		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
 		if (tmp_b != ';')
 		{
-			fprintf(stderr, "error: ships array is bad at %zu: got %d\n", i, tmp_b);
+			fprintf(stderr, "error: specials array is bad at %zu: got %d\n", i, tmp_b);
 			JE_tyrianHalt(1);
 		}
 	}

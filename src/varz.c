@@ -308,14 +308,17 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 		case 10:
 		case 11:
 		case 16:
+		case 23:
+		case 24:
 			this_player->shot_repeat[SHOT_SPECIAL2] = 0;
 
 			uint powerMult = this_player->items.power_level;
 
-			this_player->specials.flare_wpn = special[specialType].wpn;
+			this_player->specials.flare_special = specialType;
 			this_player->specials.flare_freq = 8;
 			this_player->specials.flare_link = false;
 			this_player->specials.flare_spray = false;
+			this_player->specials.flare_control = 0;
 			this_player->specials.next_repeat = 200;
 
 			globalFlare = 0;
@@ -368,6 +371,16 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 					this_player->specials.flare_link = true;
 					this_player->specials.flare_spray = true;
 					break;
+				case 23: // Fire multiple while sidekick held (non global)
+					this_player->specials.flare_time = special[specialType].extradata;
+					this_player->specials.flare_link = true;
+					this_player->specials.flare_control = BUTTON_SKICK;
+					break;
+				case 24: // Fire multiple while fire held (non global)
+					this_player->specials.flare_time = special[specialType].extradata;
+					this_player->specials.flare_link = true;
+					this_player->specials.flare_control = BUTTON_FIRE;
+					break;
 			}
 			break;
 		case 20: // twiddle invuln
@@ -383,51 +396,19 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 
 			soundQueue[3] = S_POWERUP;
 			break;
-		case 14: // other player heal
-			// DUMMIED OUT
-			//player[(playerNum == 1) ? 1 : 0].armor += twiddlePower / 4 + 1;
-
-			//soundQueue[3] = S_POWERUP;
-			break;
-
-		case 17:  // spawn left or right sidekick
-			soundQueue[3] = S_POWERUP;
-
-			if (this_player->items.sidekick[LEFT_SIDEKICK] == special[specialType].wpn)
-			{
-				this_player->items.sidekick[RIGHT_SIDEKICK] = special[specialType].wpn;
-				this_player->shot_multi_pos[RIGHT_SIDEKICK] = 0;
-				JE_updateOption(this_player, 1);
-			}
-			else
-			{
-				this_player->items.sidekick[LEFT_SIDEKICK] = special[specialType].wpn;
-				this_player->shot_multi_pos[LEFT_SIDEKICK] = 0;
-				JE_updateOption(this_player, 0);
-			}
-
-			break;
-
-		case 18:  // spawn right sidekick
-			this_player->items.sidekick[RIGHT_SIDEKICK] = special[specialType].wpn;
-			JE_updateOption(this_player, 1);
-
-			soundQueue[4] = S_POWERUP;
-
-			this_player->shot_multi_pos[RIGHT_SIDEKICK] = 0;
-			break;
 
 		case 22:  // spawn random sidekick with ammo
 			do
-				special[specialType].wpn = (mt_rand() % num_options) + 1;
-			while (options[special[specialType].wpn].ammo == 0);
+				special[specialType].extradata = (mt_rand() % num_options) + 1;
+			while (options[special[specialType].extradata].ammo == 0);
 			// fall through
 		case 19:  // spawn sidekick (alternate sides)
 			soundQueue[3] = S_POWERUP;
-			PL_SwitchOption(this_player, ALTERNATE_SIDES, special[specialType].wpn, true);
+			PL_SwitchOption(this_player, ALTERNATE_SIDES, special[specialType].extradata, true);
 			if (shot_i == SHOT_SPECIAL)
 				this_player->shot_repeat[SHOT_SPECIAL] = 255;
 			break;
+
 		case 21:; // spawn sidekick from weapon
 			JE_byte whichOpt = 
 				(this_player->items.power_level >= 8) ? 2 :
@@ -436,14 +417,20 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 
 			// Fail if no option available
 			// Also, right only sidekicks fail if done on left
-			if (spOption == 0 || (options[spOption].tr == 2 && special[specialType].wpn == 0))
+			if (spOption == 0 || (options[spOption].tr == 2 && special[specialType].extradata == 0))
 			{
 				++this_player->items.power_level;
 				break;
 			}
 
 			soundQueue[3] = S_POWERUP;
-			PL_SwitchOption(this_player, special[specialType].wpn, spOption, true);
+			PL_SwitchOption(this_player, special[specialType].extradata, spOption, true);
+			break;
+
+		// old specials with removed behavior
+		case 14: // other player heal
+		case 17: // spawn left or right sidekick
+		case 18: // spawn right sidekick
 			break;
 
 	}
@@ -452,85 +439,100 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 		this_player->hud_repeat_start = this_player->shot_repeat[SHOT_SPECIAL];
 }
 
-void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
+bool can_afford_twiddle( JE_byte playerNum, JE_byte *powerUse )
+{
+	Player *this_player= &player[playerNum - 1];
+	bool can_afford = true;
+
+	if (*powerUse == 0) // no cost
+	{
+		// No-op
+	}
+	else if (*powerUse < 98)  // costs some shield
+	{
+		if (this_player->shield >= *powerUse)
+			this_player->shield -= *powerUse;
+		else
+			can_afford = false;
+	}
+	else if (*powerUse == 98)  // costs all shield
+	{
+		if (this_player->shield < 4)
+			can_afford = false;
+		*powerUse = this_player->shield;
+		this_player->shield = 0;
+	}
+	else if (*powerUse == 99)  // costs half shield
+	{
+		*powerUse = this_player->shield / 2;
+		this_player->shield = *powerUse;
+	}
+	else if (*powerUse < 200) // costs some armor
+	{
+		*powerUse -= 100;
+		if (this_player->armor > *powerUse)
+			this_player->armor -= *powerUse;
+		else
+			can_afford = false;
+	}
+	else // costs a power level
+	{
+		if (this_player->items.power_level <= 1)
+			can_afford = false;
+		else
+			--this_player->items.power_level;
+	}
+
+	JE_drawShield();
+	JE_drawArmor();
+	return can_afford;
+}
+
+void JE_doSpecialShot( JE_byte playerNum )
 {
 	Player *this_player = &player[playerNum - 1];
 
 	PL_ShotRepeat(this_player, SHOT_SPECIAL);
 	PL_ShotRepeat(this_player, SHOT_TWIDDLE);
 
-	//
+	// Can't start new twiddle or special if global flare, or local flare by this player
+	// The check is present in both, instead of *surrounding* both,
+	// because what if a twiddle starts a local flare?
+
 	// Twiddles
-	//
-	if (this_player->twiddle.execute > 0 && this_player->shot_repeat[SHOT_TWIDDLE] == 0
-		&& this_player->specials.flare_time == 0 && !globalFlare)
+	if (!globalFlare && this_player->specials.flare_time == 0
+		&& this_player->twiddle.execute > 0 && this_player->shot_repeat[SHOT_TWIDDLE] == 0)
 	{
 		JE_byte twiddlePower = special[this_player->twiddle.execute].pwr;
-
-		bool can_afford = true;
-
-		if (twiddlePower > 0)
-		{
-			if (twiddlePower < 98)  // costs some shield
-			{
-				if (*shield >= twiddlePower)
-					*shield -= twiddlePower;
-				else
-					can_afford = false;
-			}
-			else if (twiddlePower == 98)  // costs all shield
-			{
-				if (*shield < 4)
-					can_afford = false;
-				twiddlePower = *shield;
-				*shield = 0;
-			}
-			else if (twiddlePower == 99)  // costs half shield
-			{
-				twiddlePower = *shield / 2;
-				*shield = twiddlePower;
-			}
-			else if (twiddlePower < 200) // costs some armor
-			{
-				twiddlePower -= 100;
-				if (*armor > twiddlePower)
-					*armor -= twiddlePower;
-				else
-					can_afford = false;
-			}
-			else // costs a power level
-			{
-				if (this_player->items.power_level <= 1)
-					can_afford = false;
-				else
-					--this_player->items.power_level;
-			}
-		}
-
-		if (can_afford)
+		if (can_afford_twiddle(playerNum, &twiddlePower))
 			JE_specialComplete(playerNum, this_player->twiddle.execute, SHOT_TWIDDLE, twiddlePower);
-
-		JE_drawShield();
-		JE_drawArmor();
 	}
-	//
 	// End Twiddles
-	//
 
-	if (this_player->cur_item.special > 0)
-	{  /*Main Begin*/
-		if (this_player->buttons[BUTTON_FIRE] && !this_player->last_buttons[BUTTON_FIRE]
-			&& this_player->shot_repeat[SHOT_SPECIAL] == 0 && this_player->specials.flare_time == 0
-			&& !globalFlare)
-		{
-			JE_specialComplete(playerNum, this_player->cur_item.special, SHOT_SPECIAL, 0);
-		}
-
-	}  /*Main End*/
+	// Main
+	if (!globalFlare && this_player->specials.flare_time == 0
+		&& this_player->cur_item.special > 0 && this_player->shot_repeat[SHOT_SPECIAL] == 0
+		&& !this_player->last_buttons[BUTTON_FIRE] && this_player->buttons[BUTTON_FIRE])
+	{
+		JE_specialComplete(playerNum, this_player->cur_item.special, SHOT_SPECIAL, 0);
+	}
+	// End Main
 
 	// global astral background timer
 	if ((!globalFlare || playerNum == globalFlare) && astralDuration > 0)
 		astralDuration--;
+
+	if (this_player->specials.flare_control != 0)
+	{
+		if (!this_player->buttons[this_player->specials.flare_control])
+			this_player->specials.flare_time = 1;
+		else if (this_player->specials.flare_time == 1)
+		{
+			JE_byte dummyPower = special[this_player->specials.flare_special].pwr;
+			if (can_afford_twiddle(playerNum, &dummyPower))
+				this_player->specials.flare_time = special[this_player->specials.flare_special].extradata;
+		}
+	}
 
 	if (this_player->specials.flare_time > 1)
 	{
@@ -571,7 +573,7 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 				{
 					b = player_shot_create(0, SHOT_SPECIAL2, 
 						this_player->x, this_player->y, mouseX, mouseY, 
-						this_player->specials.flare_wpn, playerNum);
+						special[this_player->specials.flare_special].wpn, playerNum);
 				}
 			}
 			else
@@ -579,7 +581,7 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 				b = player_shot_create(0, SHOT_SPECIAL2, 
 					mt_rand() % 280, mt_rand() % 180, 
 					mouseX, mouseY, 
-					this_player->specials.flare_wpn, playerNum);
+					special[this_player->specials.flare_special].wpn, playerNum);
 			}
 
 			if (this_player->specials.flare_spray && b != MAX_PWEAPON)
@@ -597,10 +599,15 @@ void JE_doSpecialShot( JE_byte playerNum, uint *armor, uint *shield )
 	}
 	else if (this_player->specials.flare_time == 1)
 	{
+		this_player->specials.flare_special = 0;
 		this_player->specials.flare_time = 0;
-		this_player->shot_repeat[SHOT_SPECIAL] = this_player->specials.next_repeat;
-
-		this_player->hud_repeat_start = this_player->shot_repeat[SHOT_SPECIAL];
+		if (this_player->specials.flare_control)
+			this_player->specials.flare_control = 0;
+		else
+		{
+			this_player->shot_repeat[SHOT_SPECIAL] = this_player->specials.next_repeat;
+			this_player->hud_repeat_start = this_player->shot_repeat[SHOT_SPECIAL];
+		}
 
 		if (globalFlare == playerNum)
 		{

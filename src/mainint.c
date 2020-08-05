@@ -1450,7 +1450,7 @@ redo:
 	/* PLAYER SHOT Creation */
 
 	/*SpecialShot*/
-	JE_doSpecialShot(playerNum_, &this_player->armor, &this_player->shield);
+	JE_doSpecialShot(playerNum_);
 
 	/*Normal Main Weapons*/
 	if (!(twoPlayerLinked && this_player->is_dragonwing))

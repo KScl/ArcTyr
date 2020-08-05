@@ -18,7 +18,7 @@
 			"Name":"SDF Main Gun",
 			"Graphic":307,
 			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"T778"},
+			"ShotType":"T778",
 			"PowerUse":15
 		}
 	}

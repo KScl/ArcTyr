@@ -33,13 +33,13 @@
 		"TwiddleHotDog":{ // 25
 			"Name":"Hot Dog",
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"TwiddleHotDogBlast"},
+			"ShotType":"TwiddleHotDogBlast",
 			"PowerUse":{"Armor":1}
 		},
 		"TwiddleCreateIceCube":{ // 49 -- NEW
 			"Name":"Icemaker",
 			"SpecialType":"SpawnOptionAlternate",
-			"ShotData":{"Option":"IceCube"},
+			"ExtraData":{"Option":"IceCube"},
 			"PowerUse":{"Shield":8}
 		}
 	},

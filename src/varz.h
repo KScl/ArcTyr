@@ -297,7 +297,7 @@ void JE_updateOption( Player *this_player, uint i );
 void JE_updateAllOptions( void );
 
 void JE_specialComplete( JE_byte playernum, JE_byte specialType, uint shot_i, JE_byte twiddlePower );
-void JE_doSpecialShot( JE_byte playernum, uint *armor, uint *shield );
+void JE_doSpecialShot( JE_byte playernum );
 
 void JE_setupExplosion( signed int x, signed int y, signed int delta_y, unsigned int type, bool fixed_position, bool follow_player );
 void JE_setupExplosionLarge( JE_boolean enemyground, JE_byte explonum, JE_integer x, JE_integer y );

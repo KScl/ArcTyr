@@ -18,7 +18,7 @@
 			"Name":"Orange Shield",
 			"Graphic":313,
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"NewOrangeShield"}
+			"ShotType":"NewOrangeShield"
 		}
 	}
 }

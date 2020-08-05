@@ -85,6 +85,7 @@ typedef struct
 	JE_byte pwr;
 	JE_byte stype;
 	JE_word wpn;
+	JE_byte extradata;
 } JE_SpecialType; /* [0..specialnum] */
 
 typedef struct

@@ -22,7 +22,7 @@
 			"Name":"Banana Bomb",
 			"Graphic":311,
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"BananaBomb"},
+			"ShotType":"BananaBomb",
 			"PowerUse":20
 		}
 	}

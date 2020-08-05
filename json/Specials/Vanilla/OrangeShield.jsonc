@@ -14,7 +14,7 @@
 			"Name":"Classic Orange Shield",
 			"Graphic":"Unknown",
 			"SpecialType":"FireMultiple",
-			"ShotData":{"Shot":"OldOrangeShield"},
+			"ShotType":"OldOrangeShield",
 			"PowerUse":80
 		}
 	}

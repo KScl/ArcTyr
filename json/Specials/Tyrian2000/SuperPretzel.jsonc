@@ -18,7 +18,7 @@
 			"Name":"SuperPretzel",
 			"Graphic":"Unknown",
 			"SpecialType":"FireOnce",
-			"ShotData":{"Shot":"GiantPretzelSpecial"},
+			"ShotType":"GiantPretzelSpecial",
 			"PowerUse":10
 		}
 	}

@@ -6,7 +6,8 @@
 		"./Weapons/Vanilla/PoisonBomb.jsonc",
 		"./Weapons/Vanilla/Rear/MegaPulse.jsonc",
 
-		"./Specials/Tyrian2000/DragonLightning.jsonc"
+		"./Specials/Tyrian2000/DragonLightning.jsonc",
+		"./Specials/ArcTyr/Twiddles/DragonBreath.jsonc"
 	],
 	"Ships":{
 		"RedDragon":{
@@ -23,6 +24,10 @@
 				"MegaPulse",
 				"PoisonBomb",
 				"RearMegaPulse"
+			],
+			"Twiddles":[
+				["Up+Sidekick", {"Special":"TwiddleDragonBreath"}],
+				["Up+Fire+Sidekick", {"Special":"TwiddleDragonBreath"}]
 			]
 		}
 	}
