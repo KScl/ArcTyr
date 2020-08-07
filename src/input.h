@@ -1,6 +1,19 @@
-#include "config_file.h"
+/** OpenTyrian - Arcade Version
+ *
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2020       Kaito Sinclaire
+ *
+ * This program is free software distributed under the
+ * terms of the GNU General Public License, version 2.
+ * See the 'COPYING' file for further details.
+ */
+/// \file  input.h
+/// \brief Revised input mechanisms
+
 #include "opentyr.h"
 #include "player.h"
+
+#include "lib/config_file.h"
 
 #include "SDL.h"
 

@@ -19,8 +19,8 @@
 #include "../opentyr.h"
 #include "../palette.h"
 #include "../picload.h"
+#include "../playdata.h"
 #include "../player.h"
-#include "../sndmast.h"
 #include "../tyrian2.h"
 #include "../video.h"
 
@@ -45,10 +45,6 @@ static JE_word coins = 0;
 JE_boolean skipIdentify = false;
 static bool inIdentify = false;
 static int identifyStrY = 31;
-
-JE_byte shiporder_nosecret;
-JE_byte shiporder_count;
-JE_byte shiporder[16];
 
 bool attractAudioAllowed = true;
 
@@ -630,7 +626,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				ARC_RankCut();
 
 				pl->armor = pl->initial_armor = ships[pl->items.ship].dmg;
-				pl->shield_max = shields[pl->items.shield].mpwr * 2;
+				pl->shield_max = shield_power[pl->items.shield] * 2;
 				pl->shield = pl->shield_max / 2;
 
 				pl->y = 160;

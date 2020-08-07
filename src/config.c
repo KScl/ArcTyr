@@ -19,7 +19,6 @@
 
 #include "arcade.h"
 #include "config.h"
-#include "episodes.h"
 #include "file.h"
 #include "input.h"
 #include "loudness.h"

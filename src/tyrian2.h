@@ -28,6 +28,8 @@
 
 void intro_logos( void );
 
+#define EVENT_MAXIMUM 2500
+
 typedef struct
 {
 	Uint8 link_num;

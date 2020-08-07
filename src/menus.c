@@ -34,6 +34,7 @@
 #include "palette.h"
 #include "pcxload.h"
 #include "picload.h"
+#include "playdata.h"
 #include "player.h"
 #include "sprite.h"
 #include "varz.h"
@@ -468,7 +469,7 @@ static void Menu_selectEpisode( void )
 			JE_playSampleNum(S_SELECT);
 			fade_black(10);
 
-			JE_initEpisode(episode);
+			Episode_init(episode);
 			initial_episode_num = episodeNum;
 			return;
 		}

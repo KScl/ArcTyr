@@ -23,7 +23,6 @@
 #include "../palette.h"
 #include "../params.h"
 #include "../picload.h"
-#include "../sndmast.h"
 #include "../tyrian2.h"
 #include "../varz.h"
 #include "../video.h"

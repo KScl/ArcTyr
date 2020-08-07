@@ -29,9 +29,9 @@
 #include "../nortsong.h"
 #include "../palette.h"
 #include "../picload.h"
+#include "../playdata.h"
 #include "../player.h"
 #include "../shots.h"
-#include "../sndmast.h"
 #include "../varz.h"
 #include "../video.h"
 #include "../vga256d.h"
@@ -143,7 +143,7 @@ void DEV_RecordDemoInit( void )
 
 	fade_black(10);
 
-	play_song(DEFAULT_SONG_BUY);
+	play_song(SONG_BUY);
 
 	JE_loadPic(VGAScreen, 2, true);
 
@@ -402,7 +402,7 @@ void DEV_RecordDemoInit( void )
 			opt_level = mt_rand() % COUNTOF(official_levels);
 		while (!episodeAvail[official_levels[opt_level].ep]);
 	}
-	JE_initEpisode(official_levels[opt_level].ep);
+	Episode_init(official_levels[opt_level].ep);
 	mainLevel = official_levels[opt_level].lev;
 
 	if (opt_ship[0] != 254)

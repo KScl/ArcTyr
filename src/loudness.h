@@ -58,5 +58,24 @@ void set_volume( unsigned int music, unsigned int sample );
 
 void JE_multiSamplePlay(JE_byte *buffer, JE_word size, JE_byte chan, JE_byte vol);
 
+// musmast
+#define MUSIC_NUM 41
+
+enum
+{
+	SONG_BUY         = 2,
+	SONG_ENDGAME1    = 7,
+	SONG_CREDITS     = 8,
+	SONG_LEVELEND    = 9,
+	SONG_GAMEOVER    = 10,
+	SONG_EPISODEEND  = 18,
+	SONG_MAPVIEW     = 19,
+	SONG_FAILURE     = 21,
+	SONG_NEXTEPISODE = 26,
+	SONG_TITLE       = 29,
+	SONG_BONUSLEVEL  = 30,
+	SONG_ZANAC       = 31,
+};
+
 #endif /* LOUDNESS_H */
 

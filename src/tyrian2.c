@@ -27,16 +27,14 @@
 #include "input.h"
 #include "lds_play.h"
 #include "loudness.h"
-#include "lvllib.h"
 #include "menus.h"
 #include "mainint.h"
-#include "mouse.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "params.h"
 #include "pcxload.h"
-#include "pcxmast.h"
 #include "picload.h"
+#include "playdata.h"
 #include "shots.h"
 #include "sprite.h"
 #include "tyrian2.h"
@@ -69,6 +67,9 @@ JE_word levelEnemyFrequency;
 JE_word levelEnemy[40]; /* [1..40] */
 
 char tempStr[31];
+
+// formerly in musmast.c
+static JE_boolean musicFade;
 
 static void init_saweapon_bag( void )
 {
@@ -545,7 +546,7 @@ enemy_still_exists:
 							target_p = PL_RandomPlayer();
 
 						/*Rot*/
-							const JE_WeaponType *ewpn = &eWeapons[temp3];
+							const JE_EnemyWeaponType *ewpn = &eWeapons[temp3];
 							for (int tempCount = ewpn->multi; tempCount > 0; tempCount--)
 							{
 								for (b = 0; b < ENEMY_SHOT_MAX; b++)
@@ -936,7 +937,7 @@ start_level_first:
 	warningSoundDelay = 0;
 	armorShipDelay = 50;
 
-	bonusLevel = false;
+	goingToBonusLevel = false;
 	readyToEndLevel = false;
 	exitGameTic = 0;
 
@@ -990,7 +991,7 @@ start_level_first:
 	for (uint i = 0; i < COUNTOF(player); ++i)
 	{
 		player[i].shield_wait = 1;
-		player[i].shield      = shields[player[i].items.shield].mpwr;
+		player[i].shield      = shield_power[player[i].items.shield];
 		player[i].shield_max  = player[i].shield * 2;
 	}
 
@@ -1198,7 +1199,7 @@ level_loop:
 
 		if (levelEnd > 0 && endLevel && !all_players_dead())
 		{
-			play_song(9);
+			play_song(SONG_LEVELEND);
 			musicFade = false;
 		}
 		else if (!playing && gameNotOverYet)
@@ -1531,7 +1532,7 @@ level_loop:
 
 					if (chain > 0)
 					{
-						b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, mouseX, mouseY, chain, playerNum);
+						b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, chain, playerNum);
 						shotAvail[z] = 0;
 						goto draw_player_shot_loop_end;
 					}
@@ -2433,7 +2434,7 @@ static bool read_episode_sections( void )
 				break;
 
 			case 'Q': // Episode end
-				play_song(18);
+				play_song(SONG_EPISODEEND);
 
 				fade_black(15);
 				JE_clr256(VGAScreen);
@@ -2479,7 +2480,7 @@ static bool read_episode_sections( void )
 				fade_black(15);
 
 				// If out of episodes, play the credits and leave.
-				if (!JE_nextEpisode())
+				if (!Episode_next())
 				{
 					mainLevel = 0;
 					skip_header_draw = false;
@@ -2487,7 +2488,7 @@ static bool read_episode_sections( void )
 				}
 				else
 				{
-					play_song(26);
+					play_song(SONG_NEXTEPISODE);
 
 					JE_clr256(VGAScreen);
 					memcpy(colors, palettes[6-1], sizeof(colors));
@@ -2516,7 +2517,7 @@ static bool read_episode_sections( void )
 				tempX = atoi(s + 3);
 				if (tempX > 900)
 				{
-					memcpy(colors, palettes[pcxpal[tempX-1 - 900]], sizeof(colors));
+					memcpy(colors, palettes[pic_pal[tempX-1 - 900]], sizeof(colors));
 					JE_clr256(VGAScreen);
 					JE_showVGA();
 					fade_palette(colors, 1, 0, 255);
@@ -2757,7 +2758,7 @@ void JE_loadMap( void )
 
 	arcTextTimer = 0;
 
-	FILE *level_f = dir_fopen_die(data_dir(), levelFile, "rb");
+	FILE *level_f = dir_fopen_die(data_dir(), level_file, "rb");
 
 	printf("num: %d, location: $%x\n", lvlFileNum, lvlPos[(lvlFileNum-1) * 2]);
 	MOD_PatcherInit(lvlFileNum);
@@ -3671,17 +3672,31 @@ void JE_eventSystem( void )
 
 	case 16:
 		event_name("susan_callout");
-		if (eventRec[eventLoc-1].eventdat > 9)
 		{
-			fprintf(stderr, "warning: event 16: bad event data\n");
-		}
-		else
-		{
-			JE_drawTextWindow(outputs[eventRec[eventLoc-1].eventdat-1]);
+			const JE_byte windowTextSamples[9] =
+			{
+				V_DANGER,
+				V_BOSS,
+				V_ENEMIES,
+				V_CLEARED_PLATFORM,
+				V_DANGER,
+				V_SPIKES,
+				V_ACCELERATE,
+				V_DANGER,
+				V_ENEMIES
+			};
+			if (eventRec[eventLoc-1].eventdat > 9)
+			{
+				fprintf(stderr, "warning: event 16: bad event data\n");
+			}
+			else
+			{
+				JE_drawTextWindow(outputs[eventRec[eventLoc-1].eventdat-1]);
 
-			// Prioirity given to Susan's voice lines
-			if (can_play_audio())
-				JE_playSampleNumOnChannel(windowTextSamples[eventRec[eventLoc-1].eventdat-1], SFXPRIORITY+2);
+				// Prioirity given to Susan's voice lines
+				if (can_play_audio())
+					JE_playSampleNumOnChannel(windowTextSamples[eventRec[eventLoc-1].eventdat-1], SFXPRIORITY+2);
+			}
 		}
 		break;
 

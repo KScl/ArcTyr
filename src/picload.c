@@ -19,11 +19,14 @@
 #include "file.h"
 #include "opentyr.h"
 #include "palette.h"
-#include "pcxmast.h"
 #include "picload.h"
 #include "video.h"
 
 #include <string.h>
+
+const JE_byte pic_pal[] = {
+	0, 7, 5, 8, 10, 5, 18, 19, 19, 20, 21, 22, 5, /* T2000 */ 23
+};
 
 void JE_loadPic(SDL_Surface *screen, JE_byte PCXnumber, JE_boolean storepal )
 {
@@ -81,7 +84,7 @@ void JE_loadPic(SDL_Surface *screen, JE_byte PCXnumber, JE_boolean storepal )
 
 	free(buffer);
 
-	memcpy(colors, palettes[pcxpal[PCXnumber]], sizeof(colors));
+	memcpy(colors, palettes[pic_pal[PCXnumber]], sizeof(colors));
 
 	if (storepal)
 		set_palette(colors, 0, 255);

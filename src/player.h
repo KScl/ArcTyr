@@ -149,6 +149,7 @@ typedef struct
 	JE_byte port_mode;
 	
 	int x, y;
+	int initial_x, initial_y;
 	int old_x[20], old_y[20];
 	bool moved;
 	

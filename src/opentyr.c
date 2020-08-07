@@ -21,11 +21,11 @@
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
-#include "musmast.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "params.h"
 #include "picload.h"
+#include "playdata.h"
 #include "sprite.h"
 #include "tyrian2.h"
 #include "varz.h"
@@ -300,7 +300,7 @@ int main( int argc, char *argv[] )
 
 	JE_paramCheck(argc, argv);
 
-	JE_scanForEpisodes();
+	Episode_scan();
 
 	init_video();
 
@@ -347,7 +347,7 @@ int main( int argc, char *argv[] )
 	JE_loadHelpText();
 	/*debuginfo("Help text complete");*/
 
-	ADTA_loadItems();
+	PlayData_load();
 
 	ARC_IdentifyPrint("");
 	ARC_IdentifyPrint("All OK");
@@ -413,7 +413,7 @@ __attribute__((noreturn)) void JE_tyrianHalt( JE_byte code )
 
 	I_JOY_close();
 
-	/* TODO: NETWORK */
+	PlayData_free();
 
 	free_main_shape_tables();
 

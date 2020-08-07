@@ -1,140 +1,38 @@
-/* 
- * OpenTyrian: A modern cross-platform port of Tyrian
- * Copyright (C) 2007-2009  The OpenTyrian Development Team
+/** OpenTyrian - Arcade Version
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2020       Kaito Sinclaire
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * This program is free software distributed under the
+ * terms of the GNU General Public License, version 2.
+ * See the 'COPYING' file for further details.
  */
+/// \file  episodes.h
+/// \brief Loading and navigating the game's episodes
+
 #ifndef EPISODES_H
 #define EPISODES_H
 
 #include "opentyr.h"
 
-#include "lvlmast.h"
-
-
 /* Episodes and general data */
-
 #define FIRST_LEVEL 1
 #define EPISODE_MAX 5
 #define EPISODE_AVAILABLE 5
 
-// Removed
-/*
-typedef struct
-{
-	char        name[31]; // string[30]
-	JE_word     itemgraphic;
-	JE_byte     power;
-	JE_shortint speed;
-	JE_word     cost;
-} JE_PowerType[POWER_NUM + 1]; // [0..powernum]
-*/
+extern JE_longint globalDataLoc;
 
-typedef struct
-{
-	JE_byte     shotrepeat;
-	JE_byte     multi;
-	JE_word     weapani;
-	JE_byte     max;
-	JE_byte     tx, ty, aim;
-	JE_byte     attack[8], del[8]; /* [1..8] */
-	JE_shortint sx[8], sy[8]; /* [1..8] */
-	JE_shortint bx[8], by[8]; /* [1..8] */
-	JE_word     sg[8]; /* [1..8] */
-	JE_shortint acceleration[8], accelerationx[8];
-	JE_byte     circlesize[8];
-	JE_byte     sound;
-	JE_byte     trail;
-	JE_byte     shipblastfilter;
-} JE_WeaponType;
+extern JE_byte initial_episode_num, episodeNum;
+extern JE_boolean episodeAvail[EPISODE_MAX];
 
-typedef struct
-{
-	char    name[31]; // string[30]
-	JE_byte opnum;
+extern char episode_file[13];
+extern char level_file[13];
 
-	// note: replaces op[2][11] in vanilla, since second fire modes aren't used
-	JE_word normalOp[11]; // main weapon
-	JE_word chargeOp[5]; // dragonwing charged
-	JE_word aimedOp[6]; // dragonwing aimed
-	JE_byte dwSidekick[3]; // dragonwing sidekick given
+/* Level Data */
+extern JE_longint lvlPos[43];
+extern JE_word lvlNum;
 
-	JE_word cost;
-	JE_word itemgraphic;
-	JE_word poweruse;
-} JE_WeaponPortType;
-
-
-
-typedef struct
-{
-	char    name[31]; /* string [30] */
-	JE_word itemgraphic;
-	JE_byte pwr;
-	JE_byte stype;
-	JE_word wpn;
-	JE_byte extradata;
-} JE_SpecialType; /* [0..specialnum] */
-
-typedef struct
-{
-	char        name[31]; /* string [30] */
-	JE_byte     pwr;
-	JE_word     itemgraphic;
-	JE_word     cost;
-	JE_byte     tr, option;
-	JE_shortint opspd;
-	JE_byte     ani;
-	JE_word     gr[20]; /* [1..20] */
-	JE_byte     wport;
-	JE_word     wpnum;
-	JE_byte     ammo;
-	JE_boolean  stop;
-	JE_byte     icongr;
-} JE_OptionType;
-
-typedef struct
-{
-	char    name[31]; /* string [30] */
-	JE_byte tpwr;
-	JE_byte mpwr;
-	JE_word itemgraphic;
-	JE_word cost;
-} JE_ShieldType; /* [0..shieldnum] */
-
-typedef struct
-{
-	char        name[31]; /* string [30] */
-	JE_word     shipgraphic;
-	JE_word     itemgraphic;
-	JE_byte     ani;
-	JE_shortint spd;
-	JE_byte     dmg;
-	JE_word     cost;
-	JE_byte     bigshipgraphic;
-
-	// ARC data
-	JE_word     special_weapons[2];
-	JE_word     port_weapons[5];
-	JE_byte     sidekick_start[2];
-
-	JE_byte     numTwiddles;
-	JE_byte     twiddles[10][8];
-} JE_ShipType; /* [0..shipnum] */
-
-/* EnemyData */
+/* Enemy Data */
 typedef struct
 {
 	JE_byte     ani;
@@ -166,38 +64,30 @@ typedef struct
 	JE_word     eenemydie;
 } JE_EnemyDatType; /* [0..enemynum] */
 
-extern JE_WeaponType  eWeapons[256]; // fixed -- the first 256 shots in episode data / tyrian.hdt
-extern JE_WeaponType *pWeapons; // dynamically allocated
+// JE_WeaponType, except without the things enemies don't use
+typedef struct
+{
+	JE_byte     multi;
+	JE_word     weapani;
+	JE_byte     max;
+	JE_byte     tx, ty, aim;
+	JE_byte     attack[8], del[8]; /* [1..8] */
+	JE_shortint sx[8], sy[8]; /* [1..8] */
+	JE_shortint bx[8], by[8]; /* [1..8] */
+	JE_word     sg[8]; /* [1..8] */
+	JE_shortint acceleration[8], accelerationx[8];
+	JE_byte     sound;
+} JE_EnemyWeaponType;
 
-extern size_t num_pWeapons;
+#define ENEMY_NUM       850
+#define T2KENEMY_START 1001 // T2000 has a second enemy bank. Ughhhhhhh
+#define T2KENEMY_NUM   1851
 
-// Removed
-//extern JE_PowerType powerSys;
+extern JE_EnemyDatType    enemyDat[T2KENEMY_NUM + 1];
+extern JE_EnemyWeaponType eWeapons[256]; // fixed -- the first 256 shots in episode data / tyrian.hdt
 
-extern JE_ShieldType      shields[SHIELD_NUM + 1]; // NOT dynamically allocated, because this is totally fixed lol
-extern JE_WeaponPortType *weaponPort; // dynamically allocated
-extern JE_ShipType       *ships; // dynamically allocated
-extern JE_OptionType     *options; // dynamically allocated
-extern JE_SpecialType    *special; // dynamically allocated
-
-extern JE_EnemyDatType   enemyDat[T2KENEMY_NUM + 1];
-
-extern size_t num_ports, num_ships, num_options, num_specials;
-
-extern JE_byte initial_episode_num, episodeNum;
-extern JE_boolean episodeAvail[EPISODE_MAX];
-
-extern char episode_file[13];
-
-extern JE_longint episode1DataLoc;
-extern JE_boolean bonusLevel;
-
-void ADTA_loadItems( void );
-
-void JE_loadItemDat( void );
-void JE_initEpisode( JE_byte newEpisode );
-unsigned int JE_findNextEpisode( void );
-void JE_scanForEpisodes( void );
+void Episode_init( JE_byte newEpisode );
+void Episode_scan( void );
+bool Episode_next( void );
 
 #endif /* EPISODES_H */
-

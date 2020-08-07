@@ -34,7 +34,6 @@ void JE_drawTextWindow( const char *text );
 void JE_initPlayerData( void );
 void JE_gammaCorrect_func( JE_byte *col, JE_real r );
 void JE_gammaCorrect( Palette *colorBuffer, JE_byte gamma );
-bool JE_nextEpisode( void );
 
 bool load_next_demo( void );
 
@@ -45,7 +44,7 @@ void JE_playCredits( void );
 void JE_endLevelAni( void );
 void JE_inGameDisplays( void );
 
-void JE_playerMovement( Player *this_player, JE_byte playerNum, JE_word shipGr_, JE_word *mouseX, JE_word *mouseY );
+void JE_playerMovement( Player *this_player, JE_byte playerNum, JE_word shipGr_ );
 void JE_mainGamePlayerFunctions( void );
 
 void JE_playerCollide( Player *this_player, JE_byte playerNum );

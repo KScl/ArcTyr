@@ -17,11 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include "arcade.h"
-#include "episodes.h"
 #include "mainint.h"
 #include "nortsong.h"
+#include "playdata.h"
 #include "player.h"
-#include "sndmast.h"
 #include "varz.h"
 
 Player player[2];
@@ -387,7 +386,7 @@ void PL_Twiddle( Player *this_player )
 
 	this_player->twiddle.execute = 0;
 
-	// this uses buttons instead of PX/Y and mouseX/Y
+	// this uses buttons instead of PX/Y and MouseX/Y
 	// possibly more precise than before?
 	twidCheckDirs = (this_player->buttons[BUTTON_UP])   +  /*UP*/
 	                (this_player->buttons[BUTTON_DOWN]) +  /*DOWN*/

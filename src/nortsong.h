@@ -21,10 +21,10 @@
 
 #include "opentyr.h"
 
-#include "musmast.h"
-#include "sndmast.h"
-
 #include "SDL.h"
+
+// sndmast
+#define SAMPLE_COUNT 64
 
 #define SFXPRIORITY 8 // channel number for priority sfx
 // SFXPRIORITY  : Timer clicks
@@ -71,5 +71,53 @@ void JE_loadSndFile( const char *effects_sndfile, const char *voices_sndfile );
 void JE_playSampleNum( JE_byte samplenum );
 void JE_playSampleNumOnChannel( JE_byte samplenum, JE_byte chan );
 
-#endif /* NORTSONG_H */
+// sndmast
+enum
+{
+	S_NONE             =  0,
+	S_WEAPON_1         =  1,
+	S_WEAPON_2         =  2,
+	S_ENEMY_HIT        =  3,
+	S_EXPLOSION_4      =  4,
+	S_WEAPON_5         =  5,
+	S_WEAPON_6         =  6,
+	S_WEAPON_7         =  7,
+	S_SELECT           =  8,
+	S_EXPLOSION_8      =  8,
+	S_EXPLOSION_9      =  9,
+	S_WEAPON_10        = 10,
+	S_EXPLOSION_11     = 11,
+	S_EXPLOSION_12     = 12,
+	S_WEAPON_13        = 13,
+	S_WEAPON_14        = 14,
+	S_WEAPON_15        = 15,
+	S_SPRING           = 16,
+	S_WARNING          = 17,
+	S_ITEM             = 18,
+	S_HULL_HIT         = 19,
+	S_MACHINE_GUN      = 20,
+	S_SOUL_OF_ZINGLON  = 21,
+	S_EXPLOSION_22     = 22,
+	S_CLINK            = 23,
+	S_CLICK            = 24,
+	S_WEAPON_25        = 25,
+	S_WEAPON_26        = 26,
+	S_SHIELD_HIT       = 27,
+	S_CURSOR           = 28,
+	S_POWERUP          = 29,
+	S_WEAPON_30        = 30, // T2000
+	S_WEAPON_31        = 31, // T2000
+	V_CLEARED_PLATFORM = 32,  // "Cleared enemy platform."
+	V_BOSS             = 33,  // "Large enemy approaching."
+	V_ENEMIES          = 34,  // "Enemies ahead."
+	V_GOOD_LUCK        = 35,  // "Good luck."
+	V_LEVEL_END        = 36,  // "Level completed."
+	V_DANGER           = 37,  // "Danger."
+	V_SPIKES           = 38,  // "Warning: spikes ahead."
+	V_DATA_CUBE        = 39,  // "Data acquired."
+	V_ACCELERATE       = 40,  // "Unexplained speed increase."
+	S_EXPLOSION_41     = 41,
+	S_WEAPON_42        = 42,
+};
 
+#endif /* NORTSONG_H */

@@ -17,7 +17,6 @@
 #include "../arcade.h"
 #include "../backgrnd.h"
 #include "../config.h"
-#include "../episodes.h"
 #include "../file.h"
 #include "../fonthand.h"
 #include "../helptext.h"
@@ -27,9 +26,9 @@
 #include "../nortsong.h"
 #include "../palette.h"
 #include "../picload.h"
+#include "../playdata.h"
 #include "../player.h"
 #include "../shots.h"
-#include "../sndmast.h"
 #include "../video.h"
 #include "../vga256d.h"
 
@@ -54,7 +53,7 @@ void JE_weaponViewFrame( void )
 	// create shots in weapon simulator
 	if (PL_ShotRepeat(&player[0], SHOT_NORMAL))
 	{
-		player_shot_create(1, SHOT_NORMAL, player[0].x, player[0].y, player[0].x, player[0].y, (isSelecting) ? selectWeapon : useWeapon, 1);
+		player_shot_create(1, SHOT_NORMAL, player[0].x, player[0].y, (isSelecting) ? selectWeapon : useWeapon, 1);
 	}
 
 	simulate_player_shots();

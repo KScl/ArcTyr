@@ -19,7 +19,6 @@
 #ifndef VARZ_H
 #define VARZ_H
 
-#include "episodes.h"
 #include "loudness.h"
 #include "opentyr.h"
 #include "player.h"
@@ -245,6 +244,7 @@ extern struct JE_MegaDataType1 megaData1;
 extern struct JE_MegaDataType2 megaData2;
 extern struct JE_MegaDataType3 megaData3;
 extern JE_byte secretLevelDisplayTime;
+extern JE_boolean goingToBonusLevel;
 
 extern JE_byte soundQueue[STANDARD_SFX_CHANNELS];
 extern JE_boolean enemyContinualDamage;

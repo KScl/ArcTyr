@@ -19,11 +19,9 @@
 #include "file.h"
 #include "input.h"
 #include "loudness.h"
-#include "musmast.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "params.h"
-#include "sndmast.h"
 #include "vga256d.h"
 
 #include "SDL.h"

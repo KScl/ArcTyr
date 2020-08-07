@@ -16,7 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
 #include "config.h"
+#include "playdata.h"
 #include "player.h"
 #include "shots.h"
 #include "sprite.h"
@@ -301,7 +303,7 @@ bool player_shot_move_and_draw(
 	return true;
 }
 
-JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word PY, JE_word mouseX, JE_word mouseY, JE_word wpNum, JE_byte playerNum )
+JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word PY, JE_word wpNum, JE_byte playerNum )
 {
 	static const JE_byte soundChannel[2][NUM_SHOT_TYPES] = 
 		{{0, 0, 1, 4, 4, 4, 1, 1, 1, 4},
@@ -472,7 +474,7 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 
 		if (del == 99 || del == 98)
 		{
-			tmp_by = PX - mouseX;
+			tmp_by = PX - this_player->initial_x;
 			if (tmp_by < -5)
 				tmp_by = -5;
 			else if (tmp_by > 5)
@@ -482,7 +484,7 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 
 		if (del == 99 || del == 100)
 		{
-			tmp_by = PY - mouseY - weapon->sy[*sMP-1];
+			tmp_by = PY - this_player->initial_y - weapon->sy[*sMP-1];
 			if (tmp_by < -4)
 				tmp_by = -4;
 			else if (tmp_by > 4)

@@ -19,15 +19,14 @@
 
 #include "arcade.h"
 #include "config.h"
-#include "episodes.h"
 #include "fonthand.h"
 #include "lds_play.h"
 #include "loudness.h"
 #include "mainint.h"
-#include "mouse.h"
 #include "nortsong.h"
 #include "nortvars.h"
 #include "opentyr.h"
+#include "playdata.h"
 #include "shots.h"
 #include "sprite.h"
 #include "varz.h"
@@ -73,6 +72,7 @@ struct JE_MegaDataType2 megaData2;
 struct JE_MegaDataType3 megaData3;
 
 /* Secret Level Display */
+JE_boolean goingToBonusLevel;
 JE_byte secretLevelDisplayTime;
 
 /* Sound Effects Queue */
@@ -254,7 +254,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 	{
 		/*Weapon*/
 		case 1: // 2P OK
-			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, special[specialType].wpn, playerNum);
+			b = player_shot_create(0, shot_i, this_player->x, this_player->y, special[specialType].wpn, playerNum);
 			break;
 		/*Repulsor*/
 		case 2: // 2P OK
@@ -387,7 +387,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			this_player->invulnerable_ticks = twiddlePower * 10;
 			break;
 		case 12: // special invuln
-			b = player_shot_create(0, shot_i, this_player->x, this_player->y, mouseX, mouseY, special[specialType].wpn, playerNum);
+			b = player_shot_create(0, shot_i, this_player->x, this_player->y, special[specialType].wpn, playerNum);
 			this_player->shot_repeat[shot_i] = 250;
 			this_player->invulnerable_ticks = 100;
 			break;
@@ -572,15 +572,14 @@ void JE_doSpecialShot( JE_byte playerNum )
 				if (this_player->shot_repeat[SHOT_SPECIAL2] == 0)
 				{
 					b = player_shot_create(0, SHOT_SPECIAL2, 
-						this_player->x, this_player->y, mouseX, mouseY, 
+						this_player->x, this_player->y,
 						special[this_player->specials.flare_special].wpn, playerNum);
 				}
 			}
 			else
 			{
 				b = player_shot_create(0, SHOT_SPECIAL2, 
-					mt_rand() % 280, mt_rand() % 180, 
-					mouseX, mouseY, 
+					mt_rand() % 280, mt_rand() % 180,
 					special[this_player->specials.flare_special].wpn, playerNum);
 			}
 

@@ -1,471 +1,71 @@
-/* 
- * OpenTyrian: A modern cross-platform port of Tyrian
- * Copyright (C) 2007-2009  The OpenTyrian Development Team
+/** OpenTyrian - Arcade Version
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2020       Kaito Sinclaire
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * This program is free software distributed under the
+ * terms of the GNU General Public License, version 2.
+ * See the 'COPYING' file for further details.
  */
-#include "arcade.h"
-#include "config.h"
+/// \file  episodes.c
+/// \brief Loading and navigating the game's episodes
+
 #include "episodes.h"
 #include "file.h"
-#include "lvllib.h"
-#include "lvlmast.h"
 #include "opentyr.h"
-#include "varz.h"
 
 #include "mod/patcher.h"
 
-/* MAIN Weapons Data */
-JE_WeaponType  eWeapons[256];
-JE_WeaponType *pWeapons = NULL; // dynamically allocated
-
-size_t num_pWeapons = 0;
-
-/* Items */
-JE_ShieldType      shields[SHIELD_NUM + 1];
-JE_WeaponPortType *weaponPort = NULL; // dynamically allocated
-JE_ShipType       *ships = NULL; // dynamically allocated
-JE_OptionType     *options = NULL; // dynamically allocated
-JE_SpecialType    *special = NULL; // dynamically allocated
-
-size_t num_ports    = 0;
-size_t num_ships    = 0;
-size_t num_options  = 0;
-size_t num_specials = 0;
-
 /* Enemy data */
-JE_EnemyDatType enemyDat[T2KENEMY_NUM + 1];
+JE_EnemyWeaponType eWeapons[256];
+JE_EnemyDatType    enemyDat[T2KENEMY_NUM + 1];
 
 /* EPISODE variables */
 JE_byte    initial_episode_num, episodeNum = 0;
 JE_boolean episodeAvail[EPISODE_MAX]; /* [1..episodemax] */
 char       episode_file[13];
+char       level_file[13];
 
-JE_longint episode1DataLoc;
+// Location of enemy data inside global (non-episode) files
+JE_longint globalDataLoc;
 
-/* Tells the game whether the level currently loaded is a bonus level. */
-JE_boolean bonusLevel;
+// Level data positions
+JE_longint lvlPos[43];
+JE_word lvlNum;
 
-//
-// Arcade data
-//
-
-void ADTA_loadShots( void )
+// Formerly in lvllib.c, moved here because it relates to loading episodes and nothing else
+static void _analyzeLevel( void )
 {
-	FILE *f = NULL;
-	size_t shotSize;
-	JE_byte tmp_b;
-
-	f = dir_fopen_die(arcdata_dir(), "arcshot.dta", "rb");
-
-	efread(&num_pWeapons, sizeof(JE_word), 1, f);
-	shotSize = sizeof(JE_WeaponType) * (num_pWeapons + 1);
-	pWeapons = realloc(pWeapons, shotSize);
-	memset(pWeapons, 0, shotSize);
-
-	for (size_t i = 0; i < num_pWeapons + 1; ++i)
-	{
-		// tx and ty are not used for player shots
-		efread(&pWeapons[i].shotrepeat,      sizeof(JE_byte), 1, f);
-		efread(&pWeapons[i].weapani,         sizeof(JE_word), 1, f);
-		efread(&pWeapons[i].aim,             sizeof(JE_byte), 1, f);
-
-		// max top four bits, multi bottom four bits
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		pWeapons[i].multi = (tmp_b & 0x0F);
-		pWeapons[i].max   = (tmp_b & 0xF0) >> 4;
-
-		// bits set for repeated data, 1 for repeated, 0 for not
-		// this is for all multi-shot vars except sx and sy, which
-		// are the most likely to vary
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-
-		if (pWeapons[i].max > 0)
-		{
-			efread(&pWeapons[i].attack,          sizeof(JE_byte),     (tmp_b & 0x01) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].del,             sizeof(JE_byte),     (tmp_b & 0x02) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].sx,              sizeof(JE_shortint),                      pWeapons[i].max, f);
-			efread(&pWeapons[i].sy,              sizeof(JE_shortint),                      pWeapons[i].max, f);
-			efread(&pWeapons[i].bx,              sizeof(JE_shortint), (tmp_b & 0x04) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].by,              sizeof(JE_shortint), (tmp_b & 0x08) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].sg,              sizeof(JE_word),     (tmp_b & 0x10) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].acceleration,    sizeof(JE_shortint), (tmp_b & 0x20) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].accelerationx,   sizeof(JE_shortint), (tmp_b & 0x40) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].circlesize,      sizeof(JE_byte),     (tmp_b & 0x80) ? 1 : pWeapons[i].max, f);
-		}
-		if (pWeapons[i].max > 1 && tmp_b)
-		{
-			// if bit set for repeated data, fill all remaining values with the first entry
-			if (tmp_b & 0x01) 
-				memset(&pWeapons[i].attack,        pWeapons[i].attack[0],        sizeof(JE_byte) * 8);
-			if (tmp_b & 0x02)
-				memset(&pWeapons[i].del,           pWeapons[i].del[0],           sizeof(JE_byte) * 8);
-			if (tmp_b & 0x04)
-				memset(&pWeapons[i].bx,            pWeapons[i].bx[0],            sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x08)
-				memset(&pWeapons[i].by,            pWeapons[i].by[0],            sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x10)
-			{
-				// the odd one out -- can't just do memset for something that's a word
-				pWeapons[i].sg[1] = pWeapons[i].sg[0];
-				memcpy(&pWeapons[i].sg[2], &pWeapons[i].sg[0], sizeof(JE_word) * 2);
-				memcpy(&pWeapons[i].sg[4], &pWeapons[i].sg[0], sizeof(JE_word) * 4);
-			}
-			if (tmp_b & 0x20)
-				memset(&pWeapons[i].acceleration,  pWeapons[i].acceleration[0],  sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x40)
-				memset(&pWeapons[i].accelerationx, pWeapons[i].accelerationx[0], sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x80)
-				memset(&pWeapons[i].circlesize,    pWeapons[i].circlesize[0],    sizeof(JE_byte) * 8);
-		}
-
-		efread(&pWeapons[i].sound,           sizeof(JE_byte), 1, f);
-		efread(&pWeapons[i].trail,           sizeof(JE_byte), 1, f);
-		efread(&pWeapons[i].shipblastfilter, sizeof(JE_byte), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: shots array is bad at %zu: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
+	FILE *f = dir_fopen_die(data_dir(), level_file, "rb");
+	
+	efread(&lvlNum, sizeof(JE_word), 1, f);
+	
+	for (int x = 0; x < lvlNum; x++)
+		efread(&lvlPos[x], sizeof(JE_longint), 1, f);
+	
+	lvlPos[lvlNum] = ftell_eof(f);
+	
+	fclose(f);
 }
 
-void ADTA_loadPorts( void )
+// Loads all data for enemies
+// This also used to load player items as well, but that's been separated away
+static void _loadEnemyData( void )
 {
-	FILE *f = NULL;
-	size_t portSize;
-	JE_byte tmp_b;
-
-	f = dir_fopen_die(arcdata_dir(), "arcport.dta", "rb");
-
-	efread(&num_ports, sizeof(JE_byte), 1, f);
-	portSize = sizeof(JE_WeaponPortType) * (num_ports + 1);
-	weaponPort = realloc(weaponPort, portSize);
-	memset(weaponPort, 0, portSize);
-
-	for (size_t i = 0; i < num_ports + 1; ++i)
-	{
-		efread(&tmp_b,                     sizeof(JE_byte), 1, f);
-		efread(&weaponPort[i].name,        1, tmp_b, f);
-		weaponPort[i].name[tmp_b] = 0;
-
-		efread(&tmp_b,                     sizeof(JE_byte), 1, f);
-		efread(&weaponPort[i].normalOp,    sizeof(JE_word), 11, f);
-		if (tmp_b == 2)
-		{			
-			efread(&weaponPort[i].chargeOp,    sizeof(JE_word), 5, f);
-			efread(&weaponPort[i].aimedOp,     sizeof(JE_word), 6, f);
-			efread(&weaponPort[i].dwSidekick,  sizeof(JE_byte), 3, f);
-		}
-		efread(&weaponPort[i].cost,        sizeof(JE_word), 1, f);
-		efread(&weaponPort[i].itemgraphic, sizeof(JE_word), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: ports array is bad at %zu: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
-}
-
-void ADTA_loadSpecials( void )
-{
-	FILE *f = NULL;
-	size_t specSize;
-	JE_byte tmp_b;
-
-	f = dir_fopen_die(arcdata_dir(), "arcspec.dta", "rb");
-
-	efread(&num_specials, sizeof(JE_byte), 1, f);
-	specSize = sizeof(JE_SpecialType) * (num_specials + 1);
-	special = realloc(special, specSize);
-	memset(special, 0, specSize);
-
-	for (size_t i = 0; i < num_specials + 1; ++i)
-	{
-		fseek(f, 1, SEEK_CUR); // skip string length
-		efread(&special[i].name,        1, 30, f);
-		special[i].name[30] = '\0';
-
-		efread(&special[i].itemgraphic, sizeof(JE_word), 1, f);
-		efread(&special[i].pwr,         sizeof(JE_byte), 1, f);
-		efread(&special[i].stype,       sizeof(JE_byte), 1, f);
-		efread(&special[i].wpn,         sizeof(JE_word), 1, f);
-		efread(&special[i].extradata,   sizeof(JE_byte), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: specials array is bad at %zu: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
-}
-
-void ADTA_loadShips( void )
-{
-	FILE *f = NULL;
-	size_t i, shipSize;
-	JE_byte tmp_b;
-
-	f = dir_fopen_die(arcdata_dir(), "arcship.dta", "rb");
-
-	efread(&num_ships, sizeof(JE_byte), 1, f);
-	shipSize = sizeof(JE_ShipType) * (num_ships + 1);
-	ships = realloc(ships, shipSize);
-	memset(ships, 0, shipSize);
-
-	// Order of display on Ship Select
-	efread(&shiporder_count, sizeof(JE_byte), 1, f);
-	memset(shiporder, 0, sizeof(shiporder));
-	for (i = 0; i < shiporder_count; ++i) {
-		efread(&shiporder[i], sizeof(JE_byte), 1, f);
-		if ((shiporder[i] & 0x40) && !tyrian2000detected)
-		{ // T2000 only ship?
-			--i;
-			--shiporder_count;
-			continue;
-		}
-		if (!(shiporder[i] & 0x80))
-			++shiporder_nosecret;
-		shiporder[i] &= 0x3F;
-	}
-
-	efread(&tmp_b, sizeof(JE_byte), 1, f);
-	if (tmp_b != ';')
-	{
-		fprintf(stderr, "error: ships array is bad at <shiporder>: got %d\n", tmp_b);
-		JE_tyrianHalt(1);
-	}
-
-	for (i = 0; i < num_ships + 1; ++i)
-	{
-		fseek(f, 1, SEEK_CUR); 
-		efread(&ships[i].name,           1, 30, f);
-		ships[i].name[30] = '\0';
-		//printf("%s\n", ships[i].name);
-		efread(&ships[i].shipgraphic,    sizeof(JE_word), 1, f);
-		efread(&ships[i].itemgraphic,    sizeof(JE_word), 1, f);
-		efread(&ships[i].ani,            sizeof(JE_byte), 1, f);
-		efread(&ships[i].spd,            sizeof(JE_shortint), 1, f);
-		efread(&ships[i].dmg,            sizeof(JE_byte), 1, f);
-		efread(&ships[i].cost,           sizeof(JE_word), 1, f);
-		efread(&ships[i].bigshipgraphic, sizeof(JE_byte), 1, f);
-
-		for (int j = 0; j < 2; ++j)
-			efread(&ships[i].special_weapons[j], sizeof(JE_word), 1, f);
-		for (int j = 0; j < 5; ++j)
-			efread(&ships[i].port_weapons[j],    sizeof(JE_word), 1, f);
-		for (int j = 0; j < 2; ++j)
-			efread(&ships[i].sidekick_start[j],  sizeof(JE_byte), 1, f);
-
-		efread(&ships[i].numTwiddles,            sizeof(JE_byte), 1, f);
-		for (int j = 0; j < ships[i].numTwiddles; ++j)
-			for (int k = 0; k < 8; ++k)
-				efread(&ships[i].twiddles[j][k], sizeof(JE_byte), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: ships array is bad at %zu: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
-}
-
-void ADTA_loadOptions( void )
-{
-	FILE *f = NULL;
-	size_t optSize;
-	JE_byte tmp_b;
-
-	f = dir_fopen_die(arcdata_dir(), "arcopt.dta", "rb");
-
-	efread(&num_options, sizeof(JE_byte), 1, f);
-	optSize = sizeof(JE_OptionType) * (num_options + 1);
-	options = realloc(options, optSize);
-	memset(options, 0, optSize);
-
-	for (size_t i = 0; i < num_options + 1; ++i)
-	{
-		fseek(f, 1, SEEK_CUR); 
-		efread(&options[i].name,        1, 30, f);
-		options[i].name[30] = '\0';
-
-		efread(&options[i].itemgraphic, sizeof(JE_word), 1, f);
-		efread(&options[i].cost,        sizeof(JE_word), 1, f);
-		efread(&options[i].pwr,         sizeof(JE_byte), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		options[i].tr     = (tmp_b & 0x0F);
-		options[i].option = (tmp_b & 0xF0) >> 4;
-
-		efread(&options[i].ani,         sizeof(JE_byte), 1, f);
-		if (options[i].ani)
-			efread(&options[i].gr,          sizeof(JE_word), options[i].ani, f);
-
-		efread(&options[i].wpnum,       sizeof(JE_word), 1, f);
-		efread(&options[i].ammo,        sizeof(JE_byte), 1, f);
-		efread(&options[i].icongr,      sizeof(JE_byte), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: options array is bad at %zu: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
-}
-
-void ADTA_loadEnemies( void )
-{
-	JE_byte tmp_b;
-	FILE *f = dir_fopen_die(arcdata_dir(), "enemies.dta", "rb");
-
-	getc(f); // always 100
-	for (int i = 900; i <= 999; ++i)
-	{
-		efread(&enemyDat[i].ani,           sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].tur,           sizeof(JE_byte), 3, f);
-		efread(&enemyDat[i].freq,          sizeof(JE_byte), 3, f);
-		efread(&enemyDat[i].xmove,         sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].ymove,         sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].xaccel,        sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].yaccel,        sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].xcaccel,       sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].ycaccel,       sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].startx,        sizeof(JE_integer), 1, f);
-		efread(&enemyDat[i].starty,        sizeof(JE_integer), 1, f);
-		efread(&enemyDat[i].startxc,       sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].startyc,       sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].armor,         sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].esize,         sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].egraphic,      sizeof(JE_word), 20, f);
-		efread(&enemyDat[i].explosiontype, sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].animate,       sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].shapebank,     sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].xrev,          sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].yrev,          sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].dgr,           sizeof(JE_word), 1, f);
-		efread(&enemyDat[i].dlevel,        sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].dani,          sizeof(JE_shortint), 1, f);
-		efread(&enemyDat[i].elaunchfreq,   sizeof(JE_byte), 1, f);
-		efread(&enemyDat[i].elaunchtype,   sizeof(JE_word), 1, f);
-		efread(&enemyDat[i].value,         sizeof(JE_integer), 1, f);
-		efread(&enemyDat[i].eenemydie,     sizeof(JE_word), 1, f);
-
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-		if (tmp_b != ';')
-		{
-			fprintf(stderr, "error: enemies array is bad at %d: got %d\n", i, tmp_b);
-			JE_tyrianHalt(1);
-		}
-	}
-}
-
-void ADTA_loadShields( void )
-{
-	// We don't even load a file for this
-	char n[31] = "Shield Power Level 1          ";
-
-	memset(shields, 0, sizeof(shields));
-
-	for (size_t i = 1; i < SHIELD_NUM + 1; ++i)
-	{
-		memcpy(shields[i].name, n, sizeof(shields[i].name));
-		//printf("%s\n", shields[i].name);
-		shields[i].tpwr = 0;
-		shields[i].mpwr = (4 + i);
-		shields[i].itemgraphic = 167;
-		shields[i].cost = 1000;
-		if (i + 1 < 10)
-			n[19] = '0' + (i + 1);
-		else
-		{
-			n[19] = '1';
-			n[20] = '0' + ((i + 1) % 10);
-		}
-
-	}
-}
-
-void ADTA_loadItems( void )
-{
-	// Unlike the original game, these are loaded once on startup and never again
-	ARC_IdentifyPrint("");
-
-	ADTA_loadShots();
-	sprintf(tmpBuf.l, "arcshot.dta: load OK (%zu items)", num_pWeapons);
-	ARC_IdentifyPrint(tmpBuf.l);
-
-	ADTA_loadPorts();
-	sprintf(tmpBuf.l, "arcport.dta: load OK (%zu items)", num_ports);
-	ARC_IdentifyPrint(tmpBuf.l);
-
-	ADTA_loadSpecials();
-	sprintf(tmpBuf.l, "arcspec.dta: load OK (%zu items)", num_specials);
-	ARC_IdentifyPrint(tmpBuf.l);
-
-	ADTA_loadShips();
-	sprintf(tmpBuf.l, "arcship.dta: load OK (%zu items)", num_ships);
-	ARC_IdentifyPrint(tmpBuf.l);
-
-	ADTA_loadOptions();
-	sprintf(tmpBuf.l, "arcopt.dta: load OK (%zu items)", num_options);
-	ARC_IdentifyPrint(tmpBuf.l);
-
-	ADTA_loadEnemies();
-	ADTA_loadShields();
-}
-
-
-void JE_loadItemDat( void )
-{
-	FILE *f = NULL;
+	FILE *f = dir_fopen_die(data_dir(), level_file, "rb");
 	bool isT2000 = false;
 
-	f = dir_fopen_die(data_dir(), levelFile, "rb");
 	if (lvlPos[lvlNum-1] == ftell_eof(f))
 	{
 		// this episode uses the global data files
 		fclose(f);
 
 		f = dir_fopen_die(data_dir(), "tyrian.hdt", "rb");
-		efread(&episode1DataLoc, sizeof(JE_longint), 1, f);
-		fseek(f, episode1DataLoc, SEEK_SET);
+		efread(&globalDataLoc, sizeof(JE_longint), 1, f);
+		fseek(f, globalDataLoc, SEEK_SET);
 	}
 	else
 		fseek(f, lvlPos[lvlNum-1], SEEK_SET);
-
-/*
-	if (episodeNum <= 3)
-	{
-		f = dir_fopen_die(data_dir(), "tyrian.hdt", "rb");
-		efread(&episode1DataLoc, sizeof(JE_longint), 1, f);
-		fseek(f, episode1DataLoc, SEEK_SET);
-	}
-	else
-	{
-		// episode 4 stores item data in the level file
-		f = dir_fopen_die(data_dir(), levelFile, "rb");
-		fseek(f, lvlPos[lvlNum-1], SEEK_SET);
-	}
-*/
 
 	JE_word itemNum[7]; /* [1..7] */
 	efread(&itemNum, sizeof(JE_word), 7, f);
@@ -552,32 +152,7 @@ void JE_loadItemDat( void )
 	fclose(f);
 }
 
-void JE_initEpisode( JE_byte newEpisode )
-{
-	if (newEpisode == episodeNum)
-		return;
-	
-	episodeNum = newEpisode;
-	
-	snprintf(levelFile,    sizeof(levelFile),    "tyrian%d.lvl",  episodeNum);
-	snprintf(episode_file, sizeof(episode_file), "levels%d.dat",  episodeNum);
-	
-	JE_analyzeLevel();
-	JE_loadItemDat();
-	MOD_PatcherSetup(levelFile);
-}
-
-void JE_scanForEpisodes( void )
-{
-	for (int i = 0; i < EPISODE_MAX; ++i)
-	{
-		char ep_file[20];
-		snprintf(ep_file, sizeof(ep_file), "tyrian%d.lvl", i + 1);
-		episodeAvail[i] = dir_file_exists(data_dir(), ep_file);
-	}
-}
-
-unsigned int JE_findNextEpisode( void )
+static unsigned int _getNextEpisode( void )
 {
 	unsigned int newEpisode = episodeNum;
 	
@@ -593,15 +168,40 @@ unsigned int JE_findNextEpisode( void )
 	return newEpisode;
 }
 
-bool JE_nextEpisode( void )
+
+void Episode_init( JE_byte newEpisode )
 {
-	unsigned int newEpisode = JE_findNextEpisode();
+	if (newEpisode == episodeNum)
+		return;
+	
+	episodeNum = newEpisode;
+	
+	snprintf(level_file,   sizeof(level_file),   "tyrian%d.lvl",  episodeNum);
+	snprintf(episode_file, sizeof(episode_file), "levels%d.dat",  episodeNum);
+	
+	_analyzeLevel();
+	_loadEnemyData();
+	MOD_PatcherSetup(level_file);
+}
+
+void Episode_scan( void )
+{
+	for (int i = 0; i < EPISODE_MAX; ++i)
+	{
+		char ep_file[20];
+		snprintf(ep_file, sizeof(ep_file), "tyrian%d.lvl", i + 1);
+		episodeAvail[i] = dir_file_exists(data_dir(), ep_file);
+	}
+}
+
+bool Episode_next( void )
+{
+	unsigned int newEpisode = _getNextEpisode();
 
 	if (newEpisode == 1)
 		return false;
 
 	if (newEpisode != episodeNum)
-		JE_initEpisode(newEpisode);
+		Episode_init(newEpisode);
 	return true;
 }
-

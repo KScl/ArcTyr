@@ -73,7 +73,7 @@ void skip_strings_until_blank( FILE *f )
 void JE_loadHelpText( void )
 {	
 	FILE *f = dir_fopen_die(data_dir(), "tyrian.hdt", "rb");
-	efread(&episode1DataLoc, sizeof(JE_longint), 1, f);
+	efread(&globalDataLoc, sizeof(JE_longint), 1, f);
 
 	skip_strings_until_blank(f); // Skipped: Online Help
 

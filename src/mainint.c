@@ -30,16 +30,14 @@
 #include "loudness.h"
 #include "mainint.h"
 #include "menus.h"
-#include "mouse.h"
 #include "nortsong.h"
 #include "opentyr.h"
 #include "palette.h"
 #include "params.h"
-#include "pcxmast.h"
 #include "picload.h"
+#include "playdata.h"
 #include "player.h"
 #include "shots.h"
-#include "sndmast.h"
 #include "sprite.h"
 #include "varz.h"
 #include "vga256d.h"
@@ -331,7 +329,7 @@ bool load_next_demo( void )
 	bonusLevelCurrent = false;
 
 	Uint8 temp = fgetc(demo_file);
-	JE_initEpisode(temp);
+	Episode_init(temp);
 	efread(levelName, 1, 10, demo_file); levelName[10] = '\0';
 	lvlFileNum = fgetc(demo_file);
 	levelSong = fgetc(demo_file);
@@ -422,7 +420,7 @@ void JE_playCredits( void )
 
 	setjasondelay2(1000);
 
-	play_song(8);
+	play_song(SONG_CREDITS);
 	
 	// load credits text
 	FILE *f = dir_fopen_die(data_dir(), "tyrian.cdt", "rb");
@@ -560,7 +558,7 @@ void JE_playCredits( void )
 		if (ticks == ticks_max - 1)
 		{
 			--ticks;
-			play_song(9);
+			play_song(SONG_LEVELEND);
 		}
 		
 		// Credits runs at 70fps; only handle input half the time
@@ -626,13 +624,13 @@ void JE_endLevelAni( void )
 	set_colors(white, 254, 254);
 
 	if (episodeNum == 4 && levelTimer && (levelTimerCountdown <= 0 || allPlayersGone))
-		play_song(21);
+		play_song(SONG_FAILURE);
 	else
 		JE_playSampleNumOnChannel(V_LEVEL_END, SFXPRIORITY + 2);	
 
 	// ---
 
-	if (bonusLevel)
+	if (goingToBonusLevel)
 		strcpy(tempStr, miscText[17-1]);
 	else if (episodeNum == 4 && levelTimer && (levelTimerCountdown <= 0 || allPlayersGone))
 		sprintf(tempStr, "%s %s", "Failed:", levelName);
@@ -877,10 +875,7 @@ void JE_inGameDisplays( void )
 	}
 }
 
-void JE_playerMovement( Player *this_player,
-                        JE_byte playerNum_,
-                        JE_word shipGr_,
-                        JE_word *mouseX_, JE_word *mouseY_ )
+void JE_playerMovement( Player *this_player, JE_byte playerNum_, JE_word shipGr_ )
 {
 	JE_integer mouseXC, mouseYC;
 	JE_integer accelXC, accelYC;
@@ -962,7 +957,7 @@ redo:
 					//twoPlayerLinked = false;
 
 					this_player->armor = this_player->initial_armor;
-					this_player->shield_max = shields[this_player->items.shield].mpwr * 2;
+					this_player->shield_max = shield_power[this_player->items.shield] * 2;
 					this_player->shield = this_player->shield_max / 2;
 
 					this_player->y = 160;
@@ -1012,8 +1007,8 @@ redo:
 
 	if (!endLevel)
 	{
-		*mouseX_ = this_player->x;
-		*mouseY_ = this_player->y;
+		this_player->initial_x = this_player->x;
+		this_player->initial_y = this_player->y;
 
 		/* --- Movement Routine Beginning --- */
 		if (this_player->buttons[BUTTON_UP])
@@ -1028,12 +1023,12 @@ redo:
 
 		if (smoothies[9-1])
 		{
-			*mouseY_ = this_player->y - (*mouseY_ - this_player->y);
+			this_player->initial_y = this_player->y - (this_player->initial_y - this_player->y);
 			mouseYC = -mouseYC;
 		}
 
-		accelXC += this_player->x - *mouseX_;
-		accelYC += this_player->y - *mouseY_;
+		accelXC += this_player->x - this_player->initial_x;
+		accelYC += this_player->y - this_player->initial_y;
 
 		if (mouseXC > 30)
 			mouseXC = 30;
@@ -1092,19 +1087,19 @@ redo:
 
 		// Move the dragonwing's gun
 		if (twoPlayerLinked && this_player->is_dragonwing
-		    && (this_player->x != *mouseX_ || this_player->y != *mouseY_))
+		    && (this_player->x != this_player->initial_x || this_player->y != this_player->initial_y))
 		{
 			JE_real tempR;
 
-			if (this_player->x == *mouseX_)
-				tempR = (this_player->y - *mouseY_ > 0) ? 0 : M_PI;
-			else if (this_player->y == *mouseY_)
-				tempR = (this_player->x - *mouseX_ > 0) ? M_PI_2 : (M_PI + M_PI_2);
+			if (this_player->x == this_player->initial_x)
+				tempR = (this_player->y - this_player->initial_y > 0) ? 0 : M_PI;
+			else if (this_player->y == this_player->initial_y)
+				tempR = (this_player->x - this_player->initial_x > 0) ? M_PI_2 : (M_PI + M_PI_2);
 			else // diagonal
 			{
-				tempR =  (this_player->x - *mouseX_ > 0) ?  M_PI_4 : (2 * M_PI) - M_PI_4;
-				if (this_player->y - *mouseY_ < 0)
-					tempR += (this_player->x - *mouseX_ > 0) ?  M_PI_2 : -M_PI_2;
+				tempR =  (this_player->x - this_player->initial_x > 0) ?  M_PI_4 : (2 * M_PI) - M_PI_4;
+				if (this_player->y - this_player->initial_y < 0)
+					tempR += (this_player->x - this_player->initial_x > 0) ?  M_PI_2 : -M_PI_2;
 			}
 
 			if (fabsf(linkGunDirec - tempR) < 0.3f)
@@ -1191,14 +1186,14 @@ redo:
 	{
 		if (this_player->sidekick[LEFT_SIDEKICK].style == 0)
 		{
-			this_player->sidekick[LEFT_SIDEKICK].x = *mouseX_ - 14;
-			this_player->sidekick[LEFT_SIDEKICK].y = *mouseY_;
+			this_player->sidekick[LEFT_SIDEKICK].x = this_player->initial_x - 14;
+			this_player->sidekick[LEFT_SIDEKICK].y = this_player->initial_y;
 		}
 
 		if (this_player->sidekick[RIGHT_SIDEKICK].style == 0)
 		{
-			this_player->sidekick[RIGHT_SIDEKICK].x = *mouseX_ + 16;
-			this_player->sidekick[RIGHT_SIDEKICK].y = *mouseY_;
+			this_player->sidekick[RIGHT_SIDEKICK].x = this_player->initial_x + 16;
+			this_player->sidekick[RIGHT_SIDEKICK].y = this_player->initial_y;
 		}
 	}
 
@@ -1244,7 +1239,7 @@ redo:
 		this_player->y += this_player->y_velocity;
 
 		// if player moved, add new ship x, y history entry
-		if (this_player->x - *mouseX_ != 0 || this_player->y - *mouseY_ != 0)
+		if (this_player->x - this_player->initial_x != 0 || this_player->y - this_player->initial_y != 0)
 		{
 			for (uint i = 1; i < COUNTOF(player->old_x); ++i)
 			{
@@ -1286,20 +1281,20 @@ redo:
 		// turret direction marker/shield
 		b = player_shot_create(0, SHOT_MISC, 
 			this_player->x + 1 + roundf(sinf(linkGunDirec + 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec + 0.2f) * 26), 
-			*mouseX_, *mouseY_, PWPN_TURRET_SMALL, playerNum_);
+			PWPN_TURRET_SMALL, playerNum_);
 		b = player_shot_create(0, SHOT_MISC, 
 			this_player->x + 1 + roundf(sinf(linkGunDirec - 0.2f) * 26), this_player->y + roundf(cosf(linkGunDirec - 0.2f) * 26), 
-			*mouseX_, *mouseY_, PWPN_TURRET_SMALL, playerNum_);
+			PWPN_TURRET_SMALL, playerNum_);
 		b = player_shot_create(0, SHOT_MISC, 
 			this_player->x + 1 + roundf(sinf(linkGunDirec) * 26), this_player->y + roundf(cosf(linkGunDirec) * 26), 
-			*mouseX_, *mouseY_, PWPN_TURRET_BIG, playerNum_);
+			PWPN_TURRET_BIG, playerNum_);
 
 		if (PL_ShotRepeat(this_player, SHOT_DRAGONWING_AIMED) && this_player->buttons[BUTTON_FIRE])
 		{
 			const uint item_power = (this_player->items.power_level - 1) >> 1;
 
 			b = player_shot_create(0, SHOT_DRAGONWING_AIMED, 
-				this_player->x, this_player->y, *mouseX_, *mouseY_, 
+				this_player->x, this_player->y, 
 				weaponPort[this_player->cur_item.weapon].aimedOp[item_power], playerNum_);
 		}
 	}
@@ -1324,7 +1319,7 @@ redo:
 		this_player->y = 10;
 
 	// Determines the ship banking sprite to display, depending on horizontal velocity and acceleration
-	int ship_banking = this_player->x_velocity / 2 + (this_player->x - *mouseX_) / 6;
+	int ship_banking = this_player->x_velocity / 2 + (this_player->x - this_player->initial_x) / 6;
 	ship_banking = MAX(-2, MIN(ship_banking, 2));
 
 	int ship_sprite = ship_banking * 2 + shipGr_;
@@ -1415,7 +1410,7 @@ redo:
 	if (this_player->is_nortship && PL_ShotRepeat(this_player, SHOT_NORTSPARKS) && ship_banking != 0)
 	{
 		tempW = (ship_banking > 0) ? this_player->x - 7 : this_player->x + 9;
-		b = player_shot_create(0, SHOT_NORTSPARKS, tempW + (mt_rand() % 8) - 4, this_player->y + (mt_rand() % 8) - 4, *mouseX_, *mouseY_, PWPN_NORTSPARKS, 1);
+		b = player_shot_create(0, SHOT_NORTSPARKS, tempW + (mt_rand() % 8) - 4, this_player->y + (mt_rand() % 8) - 4, PWPN_NORTSPARKS, 1);
 		this_player->shot_repeat[SHOT_NORTSPARKS] = abs(ship_banking) - 1;
 	}
 
@@ -1460,7 +1455,7 @@ redo:
 			const uint item = this_player->cur_item.weapon;
 			const uint item_power = this_player->items.power_level - 1;
 
-			b = player_shot_create(item, SHOT_NORMAL, this_player->x, this_player->y, *mouseX_, *mouseY_, weaponPort[item].normalOp[item_power], playerNum_);
+			b = player_shot_create(item, SHOT_NORMAL, this_player->x, this_player->y, weaponPort[item].normalOp[item_power], playerNum_);
 		}
 	}
 
@@ -1499,7 +1494,7 @@ redo:
 			{
 				this_player->shot_multi_pos[SHOT_DRAGONWING_CHARGE] = 0;
 				b = player_shot_create(16, SHOT_DRAGONWING_CHARGE,
-					this_player->x, this_player->y, *mouseX_, *mouseY_,
+					this_player->x, this_player->y,
 					weaponPort[this_player->cur_item.weapon].chargeOp[chargeLevel - 1],
 					playerNum_);
 			}
@@ -1646,7 +1641,7 @@ redo:
 						(!this_player->sidekick[i].ammo || (!this_player->last_buttons[BUTTON_SKICK] && !this_player->twiddle.execute && !fired_ammo_opt))
 					))
 				{
-					b = player_shot_create(this_option->wport, shot_i, this_player->sidekick[i].x, this_player->sidekick[i].y, *mouseX_, *mouseY_, this_option->wpnum + this_player->sidekick[i].charge, playerNum_);
+					b = player_shot_create(this_option->wport, shot_i, this_player->sidekick[i].x, this_player->sidekick[i].y, this_option->wpnum + this_player->sidekick[i].charge, playerNum_);
 
 					if (this_player->sidekick[i].charge > 0)
 					{
@@ -1733,15 +1728,15 @@ void JE_mainGamePlayerFunctions( void )
 	{
 		// if Player 1 is a DragonWing, handle player 2 before player 1
 		// so P2's movement is updated first, drawn first, etc
-		JE_playerMovement(&player[1], 2, p2Gr, &mouseX, &mouseY);
-		JE_playerMovement(&player[0], 1, p1Gr, &mouseX, &mouseY);
+		JE_playerMovement(&player[1], 2, p2Gr);
+		JE_playerMovement(&player[0], 1, p1Gr);
 	}
 	else
 	{
 		if (player[0].player_status == STATUS_INGAME)
-			JE_playerMovement(&player[0], 1, p1Gr, &mouseX, &mouseY);
+			JE_playerMovement(&player[0], 1, p1Gr);
 		if (player[1].player_status == STATUS_INGAME)
-			JE_playerMovement(&player[1], 2, p2Gr, &mouseX, &mouseY);
+			JE_playerMovement(&player[1], 2, p2Gr);
 	}
 
 	/* == Parallax Map Scrolling == */
@@ -1881,10 +1876,10 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 				}
 				else if (evalue > 10000 && enemyAvail[z] == 2)
 				{
-					if (!bonusLevel)
+					if (!goingToBonusLevel)
 					{
-						play_song(30);  /*Zanac*/
-						bonusLevel = true;
+						play_song(SONG_BONUSLEVEL);
+						goingToBonusLevel = true;
 						nextLevel = evalue - 10000;
 						enemyAvail[z] = 1;
 						secretLevelDisplayTime = 150;
@@ -1901,7 +1896,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						else
 							strcpy(tmpBuf.s, "S");
 
-						if (this_player->items.shield >= SHIELD_NUM)
+						if (this_player->items.shield >= num_shields)
 							sprintf(tmpBuf.l, "%shield power is maxed!", tmpBuf.s);
 						else
 						{
@@ -1910,7 +1905,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 						}
 						JE_drawTextWindow(tmpBuf.l);
 
-						this_player->shield_max = shields[this_player->items.shield].mpwr * 2;
+						this_player->shield_max = shield_power[this_player->items.shield] * 2;
 
 						soundQueue[7] = S_POWERUP;
 
@@ -1919,7 +1914,7 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 					else if (evalue == -3)
 					{
 						// picked up orbiting asteroid killer
-						b = player_shot_create(0, SHOT_MISC, this_player->x, this_player->y, mouseX, mouseY, PWPN_ASTEROID_KILLER, playerNum_);
+						b = player_shot_create(0, SHOT_MISC, this_player->x, this_player->y, PWPN_ASTEROID_KILLER, playerNum_);
 						// This is almost certainly a bad copy-paste
 						//shotAvail[z] = 0;
 					}

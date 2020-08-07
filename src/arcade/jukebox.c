@@ -27,6 +27,101 @@
 #include <stdio.h>
 
 //
+// Jukebox Text (music and sound names)
+//
+static const char musicTitle[MUSIC_NUM][48] =
+{
+	"Asteroid Dance Part 2",
+	"Asteroid Dance Part 1",
+	"Buy/Sell Music",
+	"CAMANIS",
+	"CAMANISE",
+	"Deli Shop Quartet",
+	"Deli Shop Quartet No. 2",
+	"Ending Number 1",
+	"Ending Number 2",
+	"End of Level",
+	"Game Over Solo",
+	"Gryphons of the West",
+	"Somebody pick up the Gryphone",
+	"Gyges, Will You Please Help Me?",
+	"I speak Gygese",
+	"Halloween Ramble",
+	"Tunneling Trolls",
+	"Tyrian, The Level",
+	"The MusicMan",
+	"The Navigator",
+	"Come Back to Me, Savara",
+	"Come Back again to Savara",
+	"Space Journey 1",
+	"Space Journey 2",
+	"The final edge",
+	"START5",
+	"Parlance",
+	"Torm - The Gathering",
+	"TRANSON",
+	"Tyrian: The Song",
+	"ZANAC3",
+	"ZANACS",
+	"Return me to Savara",
+	"High Score Table",
+	"One Mustn't Fall",
+	"Sarah's Song",
+	"A Field for Mag",
+	"Rock Garden",
+	"Quest for Peace",
+	"Composition in Q",
+	"BEER"
+};
+
+static const char soundTitle[SAMPLE_COUNT][9] = /* [1..soundnum + 9] of string [8] */
+{
+	"SCALEDN2", /*1*/
+	"F2",       /*2*/
+	"TEMP10",
+	"EXPLSM",
+	"PASS3",    /*5*/
+	"TEMP2",
+	"BYPASS1",
+	"EXP1RT",
+	"EXPLLOW",
+	"TEMP13",   /*10*/
+	"EXPRETAP",
+	"MT2BOOM",
+	"TEMP3",
+	"LAZB",     /*28K*/
+	"LAZGUN2",  /*15*/
+	"SPRING",
+	"WARNING",
+	"ITEM",
+	"HIT2",     /*14K*/
+	"MACHNGUN", /*20*/
+	"HYPERD2",
+	"EXPLHUG",
+	"CLINK1",
+	"CLICK",
+	"SCALEDN1", /*25*/
+	"TEMP11",
+	"TEMP16",
+	"SMALL1",
+	"POWERUP",
+	"MARS3", // T2000 /*30*/
+	"NEEDLE2", // T2000
+	"VOICE1",
+	"VOICE2",
+	"VOICE3",
+	"VOICE4",
+	"VOICE5",
+	"VOICE6",
+	"VOICE7",
+	"VOICE8",
+	"VOICE9",
+	"F1",
+	"MISSLE",
+};
+
+
+//
 // Jukebox palette
 //
 
@@ -466,11 +561,11 @@ void jukebox( void )
 
 			case INPUT_P2_UP:
 			case INPUT_P2_LEFT:
-				do { --fx_num; } while (!digiFx[fx_num]);
+				do { --fx_num; } while (fx_num > SAMPLE_COUNT || !digiFx[fx_num]);
 				break;
 			case INPUT_P2_RIGHT:
 			case INPUT_P2_DOWN:
-				do { ++fx_num; } while (!digiFx[fx_num]);
+				do { ++fx_num; } while (fx_num > SAMPLE_COUNT || !digiFx[fx_num]);
 				break;
 			case INPUT_P2_FIRE:
 				JE_playSampleNum(fx_num + 1);

@@ -96,10 +96,6 @@ void ARC_HUD_ReadyingBar( Player *this_player, JE_integer x );
 // Gameplay Elements
 //
 
-extern JE_byte shiporder_nosecret;
-extern JE_byte shiporder_count;
-extern JE_byte shiporder[16];
-
 JE_word hurryUpTimer;
 JE_word hurryUpLevelLoc;
 

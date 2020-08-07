@@ -20,7 +20,8 @@
 #define CONFIG_H
 
 #include "opentyr.h"
-#include "config_file.h"
+
+#include "lib/config_file.h"
 
 #include <stdio.h>
 #include "SDL.h"
