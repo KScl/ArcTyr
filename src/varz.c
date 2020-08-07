@@ -178,33 +178,9 @@ void JE_getShipInfo( void )
 			continue;
 
 		if (ships[player[i].items.ship].special_weapons[0] == 0xFFFF)
-		{
-			do // randomize special weapon 1
-				player[i].items.special[0] = (mt_rand() % num_specials) + 1;
-			while (special[player[i].items.special[0]].itemgraphic == 0);
-
-			do // randomize special weapon 2
-				player[i].items.special[1] = (mt_rand() % num_specials) + 1;
-			while (player[i].items.special[0] == player[i].items.special[1]
-				|| special[player[i].items.special[1]].itemgraphic == 0);			
-		}
-
-		// randomize port weapons
+			PL_RandomRollSpecials(&player[i]);
 		if (ships[player[i].items.ship].port_weapons[0] == 0xFFFF)
-		{
-			for (int wp = 0; wp < 5; ++wp)
-			{
-				retry:
-				player[i].items.weapon[wp] = (mt_rand() % num_ports) + 1;
-				for (int ck = wp - 1; ck >= 0; --ck)
-				{
-					if (player[i].items.weapon[wp] == player[i].items.weapon[ck])
-						goto retry; // ensure no duplicates
-				}
-			}
-			player[i].cur_item.weapon = player[i].items.weapon[player[i].port_mode];
-			player[i].cur_item.special = player[i].items.special[player[i].special_mode];
-		}
+			PL_RandomRollWeapons(&player[i]);
 	}
 }
 
@@ -804,6 +780,12 @@ void JE_drawArmor( void )
 		}
 
 		JE_dBar3(VGAScreenSeg, (i == 0) ? 16 : 308, 194 - 15, player[i].armor, 224);
+
+		if (player[i].armor != player[i].initial_armor)
+		{
+			const uint y = (193 - 15) - (player[i].initial_armor * 2);
+			JE_rectangle(VGAScreenSeg, (i == 0) ? 16 : 308, y, (i == 0) ? 24 : 316, y, 68);
+		}
 	}
 }
 

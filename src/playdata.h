@@ -138,6 +138,7 @@ extern const JE_byte shield_power[SHIELD_NUM + 1];
 extern JE_byte shiporder_nosecret;
 extern JE_byte shiporder_count;
 extern JE_byte shiporder[16];
+extern JE_byte reverse_shiporder[16];
 
 void PlayData_load( void );
 void PlayData_free( void );

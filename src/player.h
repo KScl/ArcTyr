@@ -131,6 +131,7 @@ typedef struct
 	
 	bool is_dragonwing; // requires a bunch of special cases
 	bool is_nortship; // same as above
+	bool is_secret; // locks out high scores
 	uint lives;
 	
 	// calculatable
@@ -257,5 +258,8 @@ bool PL_PowerUpWeapon( Player *this_player, bool inform );
 JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt );
 
 void PL_Twiddle( Player *this_player );
+
+void PL_RandomRollSpecials( Player *this_player );
+void PL_RandomRollWeapons( Player *this_player );
 
 #endif // PLAYER_H

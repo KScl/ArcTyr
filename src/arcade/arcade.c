@@ -254,7 +254,7 @@ void ARC_DISP_InGameDisplay( uint pNum )
 
 	sprintf(tmpBuf.s, "%lu", player[pNum - 1].cash);
 	x = (pNum == 2) ? 264 - JE_textWidth(tmpBuf.s, TINY_FONT) : 58;
-	JE_textShade(VGAScreen, x, 13, tmpBuf.s, HighScore_Leading(player[pNum -1].cash) ? 15 : 2, 4, FULL_SHADE);
+	JE_textShade(VGAScreen, x, 13, tmpBuf.s, HighScore_Leading(player) ? 15 : 2, 4, FULL_SHADE);
 }
 
 void ARC_DISP_HighScoreEntry( uint pNum )
@@ -391,20 +391,13 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 	case STATUS_SELECT:
 		pl->arc.timer = 20;
 
-		// if continuing: quickly find what our current ship is and preselect it
+		// if continuing: quickly find what our current ship is and preselect it if possible
+		pl->arc.cursor = 0xFF;
 		if (pl->player_status == STATUS_CONTINUE)
-		{
-			for (uint i = 0; i < shiporder_count; ++i)
-			{
-				if (shiporder[i] == pl->items.ship)
-				{
-					pl->arc.cursor = i;
-					break;
-				}
-			}
-			// ERROR?
-		}
-		else // if not: select the first ship (or the second, if the first is in use)
+			pl->arc.cursor = reverse_shiporder[pl->items.ship];
+
+		// if we didn't do that (or it failed?): select the first ship (or the second, if the first is in use)
+		if (pl->arc.cursor == 0xFF)
 		{
 			Player *otherPl = PL_OtherPlayer(pl);
 			pl->items.ship = shiporder[(pl->arc.cursor = 0)];
@@ -751,8 +744,8 @@ void ARC_ScoreLife( Player *this_player )
 	{
 		if (this_player->cashForNextLife != 0)
 		{
-			soundQueue[6] = S_EXPLOSION_11;
-			soundQueue[7] = S_SOUL_OF_ZINGLON;
+			JE_playSampleNumOnChannel(S_EXPLOSION_11,    SFXPRIORITY+5);
+			JE_playSampleNumOnChannel(S_SOUL_OF_ZINGLON, SFXPRIORITY+7);
 
 			if (this_player->lives < 11)
 				++(this_player->lives);			

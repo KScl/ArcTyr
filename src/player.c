@@ -40,6 +40,11 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 	this_player->items.sidekick[0] = ships[ship].sidekick_start[0];
 	this_player->items.sidekick[1] = ships[ship].sidekick_start[1];
 
+	if (this_player->items.weapon[0] == 0xFFFF)
+		PL_RandomRollWeapons(this_player);
+	if (this_player->items.special[0] == 0xFFFF)
+		PL_RandomRollSpecials(this_player);
+
 	this_player->cur_item.weapon = this_player->items.weapon[0];
 	this_player->cur_item.special = this_player->items.special[0];
 
@@ -54,37 +59,13 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 		this_player->lives = DIP.livesContinue;		
 	}
 
-	switch (ships[ship].shipgraphic)
-	{
-	case 0: // Dragonwing
-		this_player->is_dragonwing = true;
-		this_player->is_nortship = false;
-		break;
-	case 1: // Nortship
-		this_player->is_dragonwing = false;
-		this_player->is_nortship = true;
-		break;
-	default:
-		this_player->is_dragonwing = false;
-		this_player->is_nortship = false;
-		break;
-	}
+	this_player->is_dragonwing = (ships[ship].shipgraphic == 0);
+	this_player->is_nortship   = (ships[ship].shipgraphic == 1);
+	this_player->is_secret     = (reverse_shiporder[ship] >= shiporder_nosecret);
 
 	this_player->player_status = STATUS_INGAME;
 	this_player->cash = 0;
 	this_player->cashForNextLife = 0;
-}
-
-// Unused?
-void PL_CleanupLeavingPlayer( Player *this_player )
-{
-	if (this_player->player_status == STATUS_INGAME)
-		return; // ???
-
-	this_player->cash = 0;
-	this_player->is_dragonwing = false;
-	this_player->cur_item.weapon = 0;
-	this_player->cur_item.special = 0;
 }
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port )
@@ -443,4 +424,35 @@ void PL_Twiddle( Player *this_player )
 			}
 		}
 	}
+}
+
+//
+// Randomizer nonsense
+//
+void PL_RandomRollSpecials( Player *this_player )
+{
+	do // randomize special weapon 1
+		this_player->items.special[0] = (mt_rand() % num_specials) + 1;
+	while (special[this_player->items.special[0]].itemgraphic == 0);
+
+	do // randomize special weapon 2
+		this_player->items.special[1] = (mt_rand() % num_specials) + 1;
+	while (this_player->items.special[0] == this_player->items.special[1]
+		|| special[this_player->items.special[1]].itemgraphic == 0);	
+}
+
+void PL_RandomRollWeapons( Player *this_player )
+{
+	for (int wp = 0; wp < 5; ++wp)
+	{
+		retry:
+		this_player->items.weapon[wp] = (mt_rand() % num_ports) + 1;
+		for (int ck = wp - 1; ck >= 0; --ck)
+		{
+			if (this_player->items.weapon[wp] == this_player->items.weapon[ck])
+				goto retry; // ensure no duplicates
+		}
+	}
+	this_player->cur_item.weapon = this_player->items.weapon[this_player->port_mode];
+	this_player->cur_item.special = this_player->items.special[this_player->special_mode];
 }

@@ -32,7 +32,7 @@
 // SFXPRIORITY+2: Susan's voice lines
 //
 // SFXPRIORITY+4: Dragonwing link sounds
-//
+// SFXPRIORITY+5: 1UP sounds
 // SFXPRIORITY+6: Inserting coin
 // SFXPRIORITY+7: Misc display sounds
 

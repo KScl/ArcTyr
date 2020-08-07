@@ -37,13 +37,16 @@ HighScoreEntry highScores[20] = {
 	{"Devan    ",   1000, 2, false},
 };
 
-JE_boolean HighScore_Leading( uint cash )
+JE_boolean HighScore_Leading( Player *pl )
 {
-	return (cash >= highScores[0].cash);
+	return (!pl->is_secret && pl->cash >= highScores[0].cash);
 }
 
 JE_boolean HighScore_InsertName( Player *pl )
 {
+	if (pl->is_secret)
+		return false;
+
 	for (int i = 0; i < 20; ++i)
 	{
 		if (pl->cash >= highScores[i].cash)

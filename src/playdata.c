@@ -44,7 +44,8 @@ JE_ShipType *ships      = NULL; // dynamically allocated
 // Ship selection organization
 JE_byte shiporder_nosecret;
 JE_byte shiporder_count;
-JE_byte shiporder[16];
+JE_byte shiporder[16];         // [index] -> ship#
+JE_byte reverse_shiporder[16]; // [ship#] -> index
 
 
 //
@@ -222,7 +223,10 @@ static void _loadShips( const char *dataFile )
 	// Order of display on Ship Select
 	efread(&shiporder_count, sizeof(JE_byte), 1, f);
 	memset(shiporder, 0, sizeof(shiporder));
-	for (i = 0; i < shiporder_count; ++i) {
+	memset(reverse_shiporder, 0xFF, sizeof(reverse_shiporder));
+
+	for (i = 0; i < shiporder_count; ++i)
+	{
 		efread(&shiporder[i], sizeof(JE_byte), 1, f);
 		if ((shiporder[i] & 0x40) && !tyrian2000detected)
 		{ // T2000 only ship?
@@ -233,6 +237,7 @@ static void _loadShips( const char *dataFile )
 		if (!(shiporder[i] & 0x80))
 			++shiporder_nosecret;
 		shiporder[i] &= 0x3F;
+		reverse_shiporder[shiporder[i]] = i;
 	}
 
 	efread(&tmp_b, sizeof(JE_byte), 1, f);

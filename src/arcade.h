@@ -62,7 +62,7 @@ typedef struct {
 } HighScoreEntry;
 
 HighScoreEntry highScores[20];
-JE_boolean HighScore_Leading( uint cash );
+JE_boolean HighScore_Leading( Player *pl );
 JE_boolean HighScore_InsertName( Player *pl );
 
 //
