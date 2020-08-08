@@ -1,14 +1,14 @@
-/** OpenTyrian - Arcade Version
+/**** ArcTyr - OpenTyrianArcade ****
  *
- * Copyright          (C) 2007-2019  The OpenTyrian Development Team
- * Portions copyright (C) 2019       Kaito Sinclaire
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2019-2020  Kaito Sinclaire
  *
  * This program is free software distributed under the
  * terms of the GNU General Public License, version 2.
  * See the 'COPYING' file for further details.
  */
-/// \file  devextra.c
-/// \brief Extra menus and functions to aide in development
+/// \file  dev/weapon.c
+/// \brief Weapon visualizer devtool
 
 #include "../opentyr.h"
 
@@ -16,10 +16,7 @@
 
 #include "../arcade.h"
 #include "../backgrnd.h"
-#include "../config.h"
-#include "../file.h"
 #include "../fonthand.h"
-#include "../helptext.h"
 #include "../input.h"
 #include "../loudness.h"
 #include "../mainint.h"
@@ -31,10 +28,6 @@
 #include "../shots.h"
 #include "../video.h"
 #include "../vga256d.h"
-
-#include "../lib/mtrand.h"
-
-#include <time.h>
 
 static int useWeapon = 0;
 static int selectWeapon = 1, origWeapon = 0;
@@ -73,8 +66,8 @@ void JE_initWeaponView( void )
 {
 	fill_rectangle_xy(VGAScreen, 0, 0, 160, 183, 0);
 
-	player[0].x = 72;
-	player[0].y = 110;
+	player[0].x = player[0].initial_x = 72;
+	player[0].y = player[0].initial_y = 110;
 	player[0].delta_x_shot_move = 0;
 	player[0].delta_y_shot_move = 0;
 	player[0].last_x_explosion_follow = 72;

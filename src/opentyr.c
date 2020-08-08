@@ -1,7 +1,7 @@
-/** OpenTyrian - Arcade Version
+/**** ArcTyr - OpenTyrianArcade ****
  *
- * Copyright          (C) 2007-2019  The OpenTyrian Development Team
- * Portions copyright (C) 2019       Kaito Sinclaire
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2019-2020  Kaito Sinclaire
  *
  * This program is free software distributed under the
  * terms of the GNU General Public License, version 2.
@@ -16,7 +16,6 @@
 #include "file.h"
 #include "font.h"
 #include "helptext.h"
-#include "hg_revision.h"
 #include "input.h"
 #include "loudness.h"
 #include "mainint.h"
@@ -51,7 +50,7 @@
 #include <time.h>
 
 const char *opentyrian_str = "ArcTyr",
-           *opentyrian_version = HG_REV,
+           *opentyrian_version = "unknown", // TODO replace with git
            *opentyrian_date = __DATE__,
            *opentyrian_time = __TIME__;
 

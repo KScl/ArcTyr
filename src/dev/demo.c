@@ -1,14 +1,14 @@
-/** OpenTyrian - Arcade Version
+/**** ArcTyr - OpenTyrianArcade ****
  *
- * Copyright          (C) 2007-2019  The OpenTyrian Development Team
- * Portions copyright (C) 2019       Kaito Sinclaire
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2019-2020  Kaito Sinclaire
  *
  * This program is free software distributed under the
  * terms of the GNU General Public License, version 2.
  * See the 'COPYING' file for further details.
  */
-/// \file  devextra.c
-/// \brief Extra menus and functions to aide in development
+/// \file  dev/demo.c
+/// \brief Demo recorder devtool
 
 #include "../opentyr.h"
 
@@ -17,8 +17,6 @@
 #include "../arcade/service.h"
 
 #include "../arcade.h"
-#include "../backgrnd.h"
-#include "../config.h"
 #include "../episodes.h"
 #include "../file.h"
 #include "../fonthand.h"
@@ -31,10 +29,8 @@
 #include "../picload.h"
 #include "../playdata.h"
 #include "../player.h"
-#include "../shots.h"
 #include "../varz.h"
 #include "../video.h"
-#include "../vga256d.h"
 
 #include "../lib/mtrand.h"
 

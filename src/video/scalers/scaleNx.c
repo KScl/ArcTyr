@@ -1,7 +1,7 @@
-/** OpenTyrian - Arcade Version
+/**** ArcTyr - OpenTyrianArcade ****
  *
- * Copyright          (C) 2007-2019  The OpenTyrian Development Team
- * Portions copyright (C) 2019       Kaito Sinclaire
+ * Copyright          (C) 2007-2020  The OpenTyrian Development Team
+ * Portions copyright (C) 2019-2020  Kaito Sinclaire
  *
  * Scale2x, Scale3x
  * Copyright          (C) 2001-2004  Andrea Mazzoleni

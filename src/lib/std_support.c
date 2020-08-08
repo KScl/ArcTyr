@@ -1,4 +1,4 @@
-/** OpenTyrian - Arcade Version
+/**** ArcTyr - OpenTyrianArcade ****
  *
  * Copyright          (C) 2007-2019  The OpenTyrian Development Team
  * Portions copyright (C) 2019       Kaito Sinclaire
