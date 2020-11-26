@@ -34,7 +34,7 @@
 
 const DipSwitches DIP_Default = {
 	3, 2, 6, 0, 
-	2, 3, 3, 3, 3, 
+	2, 3, 3, 3, 3, 3,
 	2,
 	0
 };
@@ -825,10 +825,10 @@ void ARC_Timers( void )
 
 void ARC_DeathSprayWeapons( Player *this_player )
 {
-	const uint spray = (this_player->items.power_level >= 6) ? 5 : this_player->items.power_level - 1;
+	const JE_byte loseOnDeath[] = {0, 2, 4, 5, 7, 11};
 	const JE_integer sys[5] = {-16, -8, -8, 0, 0};
 	const JE_integer sxcs[5] = {0, -1, 1, -2, 2};
-	uint i, powerItemNo;
+	uint i, powerItemNo, numToSpray;
 
 	if (normalBonusLevelCurrent || bonusLevelCurrent)
 		return; // don't spray in bonus stages (they end on any death)
@@ -837,8 +837,14 @@ void ARC_DeathSprayWeapons( Player *this_player )
 	ARC_RankCut();
 
 	powerItemNo = 30011 + this_player->port_mode;
+	numToSpray = (this_player->items.power_level >= DIP.powerLoss) ? DIP.powerLoss : this_player->items.power_level - 1;
 
-	for (i = 0; i < spray; ++i)
+	if (this_player->items.power_level > loseOnDeath[DIP.powerLoss])
+		this_player->items.power_level -= loseOnDeath[DIP.powerLoss];
+	else
+		this_player->items.power_level = 1;
+
+	for (i = 0; i < numToSpray; ++i)
 	{
 		b = JE_newEnemy(100, 999, 0);
 		if (b == 0)

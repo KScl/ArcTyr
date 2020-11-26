@@ -32,6 +32,7 @@ typedef struct {
 	JE_byte livesContinue;
 	JE_byte powerStart;
 	JE_byte powerContinue;
+	JE_byte powerLoss;
 
 	JE_byte attractSound;
 

@@ -344,13 +344,18 @@ void SRV_MoneyMenu( void )
 	else
 		SRVH_AdjustableByte("Credits to Continue", true, &DIP.coinsToContinue, 1, DIP.coinsToStart);
 
-	optionY += 16;
+	optionY += 12;
 
 	SRVH_AdjustableByte("Lives - first credit", true, &DIP.livesStart, 1, 11);
 	SRVH_AdjustableByte("Lives - continues", true, &DIP.livesContinue, 1, 11);
 
 	SRVH_AdjustableByte("Power - first credit", true, &DIP.powerStart, 1, 11);
 	SRVH_AdjustableByte("Power - continues", true, &DIP.powerContinue, 1, 11);
+
+	optionY += 12;
+	static const char *powerLossNames[] = {"None", "Minimal", "Minor", "Standard", "Harsh", "Harshest"};
+	SRVH_DispValue(powerLossNames[DIP.powerLoss]);
+	SRVH_AdjustableByte("Death Penalty", false, &DIP.powerLoss, 0, 5);
 
 	optionY = 176;
 	SRVH_Back("Back");	

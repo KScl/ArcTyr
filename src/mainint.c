@@ -932,10 +932,9 @@ redo:
 			}
 			else
 			{
-				this_player->items.power_level = 1;
 				this_player->shot_multi_pos[SHOT_NORMAL] = 0;
 				this_player->shot_repeat[SHOT_NORMAL] = 10;
-				this_player->items.shield = 1;		
+				this_player->items.shield = 1;
 
 				if (this_player->shot_repeat[SHOT_SPECIAL] == 0)
 				{

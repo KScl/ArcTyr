@@ -201,6 +201,7 @@ bool ArcTyr_loadConfig( void )
 		get_byte_minmax(DIP.livesContinue, "lives_continue", 1, 11);
 		get_byte_minmax(DIP.powerStart, "power_start", 1, 11);
 		get_byte_minmax(DIP.powerContinue, "power_continue", 1, 11);
+		get_byte_max(DIP.powerLoss, "power_loss", 5);
 
 		get_byte_max(DIP.attractSound, "attract_sound", 2);
 
@@ -250,6 +251,7 @@ bool ArcTyr_saveConfig( void )
 		config_set_uint_option(sec, "lives_continue", DIP.livesContinue);
 		config_set_uint_option(sec, "power_start", DIP.powerStart);
 		config_set_uint_option(sec, "power_continue", DIP.powerContinue);
+		config_set_uint_option(sec, "power_loss", DIP.powerLoss);
 
 		config_set_uint_option(sec, "attract_sound", DIP.attractSound);
 
