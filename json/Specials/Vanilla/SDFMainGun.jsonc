@@ -6,10 +6,10 @@
 			"Sound":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":558,"AttackPower":{"Infinite":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
-				{"Sprite":561,"AttackPower":{"Infinite":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14},
-				{"Sprite":559,"AttackPower":{"Infinite":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
-				{"Sprite":562,"AttackPower":{"Infinite":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14}
+				{"Sprite":558,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":561,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":559,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":10,"MoveX":"FollowShip","MoveY":14},
+				{"Sprite":562,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":10,"MoveX":"FollowShip","MoveY":14}
 			]
 		}
 	},

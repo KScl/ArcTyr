@@ -7,14 +7,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-14,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X": 8,"Y":-14,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
-				{"Sprite":710,"AttackPower":{"Infinite":0},"Duration":11,"X":-4,"Y":  0,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
-				{"Sprite":729,"AttackPower":{"Infinite":0},"Duration":11,"X": 8,"Y":  0,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-14,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X": 8,"Y":-14,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
-				{"Sprite":710,"AttackPower":{"Infinite":0},"Duration":11,"X":-4,"Y":  0,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
-				{"Sprite":729,"AttackPower":{"Infinite":0},"Duration":11,"X": 8,"Y":  0,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223}
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":-14,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X": 8,"Y":-14,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
+				{"Sprite":710,"AttackPower":{"Infinite":true},"Duration":11,"X":-4,"Y":  0,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
+				{"Sprite":729,"AttackPower":{"Infinite":true},"Duration":11,"X": 8,"Y":  0,"MoveX": 1,"MoveY":4,"AccelY":18,"CircleParams":3},
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":-14,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X": 8,"Y":-14,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
+				{"Sprite":710,"AttackPower":{"Infinite":true},"Duration":11,"X":-4,"Y":  0,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223},
+				{"Sprite":729,"AttackPower":{"Infinite":true},"Duration":11,"X": 8,"Y":  0,"MoveX":-1,"MoveY":4,"AccelY":18,"CircleParams":223}
 			]
 		}
 	},

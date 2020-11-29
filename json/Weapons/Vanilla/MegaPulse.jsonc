@@ -5,7 +5,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T49"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelA"},"MoveY":6}
 			]
 		},
 		"T401":{ // 401
@@ -13,7 +13,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T49"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelA"},"MoveY":6}
 			]
 		},
 		"T402":{ // 402
@@ -21,7 +21,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelB"},"Duration":{"Carry":"X"},"MoveY":6}
 			]
 		},
 		"T403":{ // 403
@@ -29,7 +29,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelB"},"Duration":{"Carry":"X"},"MoveY":6}
 			]
 		},
 		"T404":{ // 404
@@ -37,7 +37,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T50"},"Duration":{"Carry":"X"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelB"},"Duration":{"Carry":"X"},"MoveY":6}
 			]
 		},
 		"T405":{ // 405
@@ -45,7 +45,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T51"},"Duration":{"Carry":"X"},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelC"},"Duration":{"Carry":"X"},"MoveY":6}
 			]
 		},
 		"T406":{ // 406
@@ -53,7 +53,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelD"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
 			]
 		},
 		"T407":{ // 407
@@ -61,7 +61,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelE"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
 			]
 		},
 		"T408":{ // 408
@@ -69,7 +69,7 @@
 			"AnimFrames":3,
 			"Sound":1,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T54"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelF"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
 			]
 		},
 		"T409":{ // 409
@@ -78,8 +78,8 @@
 			"Sound":1,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-7,"MoveX":{"FollowX":0},"MoveY":6},
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":7,"MoveX":{"FollowX":0},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelD"},"Duration":{"Carry":"X"},"X":-7,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelD"},"Duration":{"Carry":"X"},"X":7,"MoveX":{"FollowX":0},"MoveY":6}
 			]
 		},
 		"T410":{ // 410
@@ -88,9 +88,77 @@
 			"Sound":1,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":-9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T52"},"Duration":{"Carry":"X"},"X":9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
-				{"Sprite":7035,"AttackPower":{"Shrapnel":"T53"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelD"},"Duration":{"Carry":"X"},"X":-9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelD"},"Duration":{"Carry":"X"},"X":9,"Y":6,"MoveX":{"FollowX":0},"MoveY":6},
+				{"Sprite":7035,"AttackPower":{"Shrapnel":"MegaPulseShrapnelE"},"Duration":{"Carry":"X"},"MoveX":{"FollowX":0},"MoveY":6}
+			]
+		},
+
+		// Shrapnel
+		"MegaPulseShrapnelA":{ // 49 Mega Pulse Shrapnel
+			"Delay":4,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":39,"AttackPower":1,"MoveX":-10},
+				{"Sprite":1,"AttackPower":1,"MoveX":10}
+			]
+		},
+		"MegaPulseShrapnelB":{ // 50
+			"Delay":6,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":281,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":282,"AttackPower":1,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":301,"AttackPower":1,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":300,"AttackPower":1,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"MegaPulseShrapnelC":{ // 51
+			"Delay":6,
+			"Sound":8,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":163,"AttackPower":1,"MoveX":-6,"MoveY":6},
+				{"Sprite":164,"AttackPower":1,"MoveX":6,"MoveY":6},
+				{"Sprite":183,"AttackPower":1,"MoveX":6,"MoveY":-6},
+				{"Sprite":182,"AttackPower":1,"MoveX":-6,"MoveY":-6},
+				{"Sprite":39,"AttackPower":1,"MoveX":-9},
+				{"Sprite":1,"AttackPower":1,"MoveX":9},
+				{"Sprite":58,"AttackPower":1,"MoveY":9},
+				{"Sprite":77,"AttackPower":1,"MoveY":-9}
+			]
+		},
+		"MegaPulseShrapnelD":{ // 52
+			"Delay":6,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":277,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":2},
+				{"Sprite":278,"AttackPower":2,"X":2,"MoveX":9,"MoveY":2},
+				{"Sprite":297,"AttackPower":2,"X":2,"MoveX":9,"MoveY":-2},
+				{"Sprite":296,"AttackPower":2,"X":-2,"MoveX":-9,"MoveY":-2}
+			]
+		},
+		"MegaPulseShrapnelE":{ // 53
+			"Delay":6,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":102,"AttackPower":3,"MoveX":-10},
+				{"Sprite":104,"AttackPower":3,"MoveX":10}
+			]
+		},
+		"MegaPulseShrapnelF":{ // 54
+			"Delay":6,
+			"Sound":8,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":121,"AttackPower":3,"MoveX":-6,"MoveY":6},
+				{"Sprite":122,"AttackPower":3,"MoveX":6,"MoveY":6},
+				{"Sprite":141,"AttackPower":3,"MoveX":6,"MoveY":-6},
+				{"Sprite":140,"AttackPower":3,"MoveX":-6,"MoveY":-6}
 			]
 		}
 	},

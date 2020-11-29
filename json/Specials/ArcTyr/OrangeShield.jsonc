@@ -6,10 +6,10 @@
 			"Filter":32,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X":-12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
-				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X": 12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":246},
-				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X": 12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226},
-				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":1},"X":-12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":206}
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":true,"Damage":1},"X":-12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":6},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":true,"Damage":1},"X": 12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":246},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":true,"Damage":1},"X": 12,"Y": 15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":226},
+				{"Duration":140,"Sprite":7088,"AttackPower":{"Infinite":true,"Damage":1},"X":-12,"Y":-15,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0},"CircleParams":206}
 			]
 		}
 	},

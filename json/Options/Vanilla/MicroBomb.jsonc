@@ -5,7 +5,7 @@
 			"AnimFrames":3,
 			"Sound":8,
 			"Pieces":[
-				{"Sprite":271,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveY":1}
+				{"Sprite":271,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveY":1}
 			]
 		}
 	},

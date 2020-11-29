@@ -6,10 +6,24 @@
 			"Trail":1,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":75,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveY":6},
-				{"Sprite":56,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveX":-6},
-				{"Sprite":18,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveX":6},
-				{"Sprite":94,"AttackPower":{"Shrapnel":"PhoenixShrapnelA"},"MoveY":-6}
+				{"Sprite":75,"AttackPower":{"Shrapnel":"PhoenixShrapnel"},"MoveY":6},
+				{"Sprite":56,"AttackPower":{"Shrapnel":"PhoenixShrapnel"},"MoveX":-6},
+				{"Sprite":18,"AttackPower":{"Shrapnel":"PhoenixShrapnel"},"MoveX":6},
+				{"Sprite":94,"AttackPower":{"Shrapnel":"PhoenixShrapnel"},"MoveY":-6}
+			]
+		},
+		"PhoenixShrapnel":{ // 36 Phoenix Device shrapnel phase 1
+			"Delay":50,
+			"Sound":11,
+			"Trail":1,
+			"PiecesPerFire":6,
+			"Pieces":[
+				{"Sprite":102,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":-8,"MoveX":-6},
+				{"Sprite":104,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":8,"MoveX":6},
+				{"Sprite":122,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":5,"Y":5,"MoveX":5,"MoveY":5},
+				{"Sprite":121,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":-5,"Y":5,"MoveX":-5,"MoveY":5},
+				{"Sprite":141,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":5,"Y":-5,"MoveX":5,"MoveY":-5},
+				{"Sprite":140,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"X":-5,"Y":-5,"MoveX":-5,"MoveY":-5}
 			]
 		}
 	},

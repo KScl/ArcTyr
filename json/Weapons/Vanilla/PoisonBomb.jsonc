@@ -1,125 +1,143 @@
 {
 	"Shots":{
-		"T636":{ // 636 Poison Bomb Lv.1
+		"PoisonBomb1":{ // 636 Poison Bomb Lv.1
 			"Delay":12,
 			"Sound":10,
 			"Filter":240,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
 			]
 		},
-		"T637":{ // 637 Poison Bomb Lv.2
+		"PoisonBomb2":{ // 637 Poison Bomb Lv.2
 			"Delay":10,
 			"Sound":10,
 			"Filter":240,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
 			]
 		},
-		"T638":{ // 638 Poison Bomb Lv.3
+		"PoisonBomb3":{ // 638 Poison Bomb Lv.3
 			"Delay":8,
 			"Sound":10,
 			"Filter":240,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
 			]
 		},
-		"T639":{ // 639 Poison Bomb Lv.4
+		"PoisonBomb4":{ // 639 Poison Bomb Lv.4
 			"Delay":8,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"MoveX":-1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"MoveX":1,"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"MoveX":-1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"MoveX":1,"AccelY":1}
 			]
 		},
-		"T640":{ // 640 Poison Bomb Lv.5
+		"PoisonBomb5":{ // 640 Poison Bomb Lv.5
 			"Delay":6,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"MoveX":-1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"MoveX":1,"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"MoveX":-1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"MoveX":1,"AccelY":1}
 			]
 		},
-		"T641":{ // 641 Poison Bomb Lv.6
+		"PoisonBomb6":{ // 641 Poison Bomb Lv.6
 			"Delay":6,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
 			]
 		},
-		"T642":{ // 642 Poison Bomb Lv.7
+		"PoisonBomb7":{ // 642 Poison Bomb Lv.7
 			"Delay":5,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-4,"MoveX":-1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":4,"MoveX":1,"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":4,"MoveX":1,"AccelY":1}
 			]
 		},
-		"T643":{ // 643 Poison Bomb Lv.8
+		"PoisonBomb8":{ // 643 Poison Bomb Lv.8
 			"Delay":7,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-4,"MoveX":-1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":4,"MoveX":1,"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-1,"MoveX":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-1,"MoveX":2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-4,"MoveX":-1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":4,"MoveX":1,"AccelY":1}
 			]
 		},
-		"T644":{ // 644 Poison Bomb Lv.9
+		"PoisonBomb9":{ // 644 Poison Bomb Lv.9
 			"Delay":5,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-1,"MoveX":-1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-1,"MoveX":1,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-1,"MoveX":-1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-1,"MoveX":1,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
 			]
 		},
-		"T645":{ // 645 Poison Bomb Lv.10
+		"PoisonBomb10":{ // 645 Poison Bomb Lv.10
 			"Delay":5,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-10,"Y":-4,"MoveX":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":10,"Y":-4,"MoveX":2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-2,"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-10,"Y":-4,"MoveX":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":10,"Y":-4,"MoveX":2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-2,"AccelY":1}
 			]
 		},
-		"T646":{ // 646 Poison Bomb Lv.11
+		"PoisonBomb11":{ // 646 Poison Bomb Lv.11
 			"Delay":5,
 			"Sound":10,
 			"Filter":240,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-10,"Y":-4,"MoveX":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":10,"Y":-4,"MoveX":2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":-6,"Y":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"X":6,"Y":-2,"AccelY":1},
-				{"Sprite":103,"AttackPower":{"Shrapnel":"T71"},"AccelY":1}
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-10,"Y":-4,"MoveX":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":10,"Y":-4,"MoveX":2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":-6,"Y":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"X":6,"Y":-2,"AccelY":1},
+				{"Sprite":103,"AttackPower":{"Shrapnel":"PoisonBombShrapnel"},"AccelY":1}
+			]
+		},
+		"PoisonBombShrapnel":{ // 71
+			"Delay":0,
+			"AnimFrames":3,
+			"Sound":12,
+			"Trail":12,
+			"Filter":112,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":2,"Y":2,"MoveX":2,"MoveY":2},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":-2,"Y":2,"MoveX":-2,"MoveY":2},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":2,"Y":-2,"MoveX":2,"MoveY":-2},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":-2,"Y":-2,"MoveX":-2,"MoveY":-2},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":3,"MoveX":3},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"X":-3,"MoveX":-3},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"Y":3,"MoveY":3},
+				{"Sprite":214,"AttackPower":1,"Duration":8,"Y":-3,"MoveY":-3}
 			]
 		}
 	},
 	"Ports":{
 		"PoisonBomb":{ // 33 [Ninja Star - D]
 			"Name":"Poison Bomb",
-			"NormalShots":["T636","T637","T638","T639","T640","T641","T642","T643","T644","T645","T646"]
+			"NormalShots":["PoisonBomb1","PoisonBomb2","PoisonBomb3","PoisonBomb4","PoisonBomb5","PoisonBomb6","PoisonBomb7","PoisonBomb8","PoisonBomb9","PoisonBomb10","PoisonBomb11"]
 		}
 	}
 }

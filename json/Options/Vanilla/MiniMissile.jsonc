@@ -5,11 +5,11 @@
 			"Sound":7,
 			"Trail":6,
 			"Pieces":[
-				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveY":-3,"AccelY":1},
-				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-2,"MoveY":-3,"AccelY":1},
-				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":2,"MoveY":-3,"AccelY":1},
-				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-3,"AccelY":1},
-				{"Sprite":52,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-3,"AccelY":1}
+				{"Sprite":52,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-2,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":2,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-3,"AccelY":1},
+				{"Sprite":52,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-3,"AccelY":1}
 			]
 		}
 	},

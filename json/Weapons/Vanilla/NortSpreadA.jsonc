@@ -1,4 +1,7 @@
 {
+	"Import":[
+		"./Weapons/Vanilla/NortSuperPulse.jsonc" // identical shrapnel
+	],
 	"Shots":{
 		"T684":{ // 684 NortShip Spreader A Lv.1
 			"Delay":3,
@@ -111,8 +114,8 @@
 			"Sound":8,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveX":6,"MoveY":6}
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":15,"MoveX":6,"MoveY":6}
 			]
 		},
 		"T694":{ // 694 NortShip Spreader A Lv.11
@@ -120,9 +123,9 @@
 			"Sound":8,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveX":6,"MoveY":6},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"MoveY":-7}
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"MoveY":-7}
 			]
 		}
 	},

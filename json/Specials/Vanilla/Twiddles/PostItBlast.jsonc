@@ -1,0 +1,26 @@
+{
+	"Shots":{
+		"PostItBlast":{ // 708 Post-It Blast
+			"Delay":2,
+			"Sound":6,
+			"PiecesPerFire":7,
+			"Pieces":[
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveY":1,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":-1,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":1,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":-2,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":2,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":-3,"MoveY":-1,"AccelY":1},
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"MoveX":3,"MoveY":-1,"AccelY":1}
+			]
+		}
+	},
+	"Specials":{
+		"S21":{ // 21
+			"Name":"Post-It Blast",
+			"SpecialType":"FireOnce",
+			"ShotType":"PostItBlast",
+			"PowerUse":{"Armor":5}
+		}
+	}
+}

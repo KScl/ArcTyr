@@ -105,8 +105,8 @@
 			"Pieces":[
 				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
 				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
-				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
-				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7}
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":true,"Damage":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":true,"Damage":1},"Y":8,"MoveY":7}
 			]
 		},
 		"DragonFrost10":{ // T2K: 1-815
@@ -118,8 +118,8 @@
 			"Pieces":[
 				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-4,"MoveY":6},
 				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":4,"MoveY":6},
-				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
-				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7},
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":true,"Damage":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":true,"Damage":1},"Y":8,"MoveY":7},
 				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-5,"MoveY":5},
 				{"Sprite":{"Tyrian2000":523},"AttackPower":3,"MoveX":5,"MoveY":5}
 			]
@@ -133,8 +133,8 @@
 			"Pieces":[
 				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-3,"MoveY":6},
 				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":3,"MoveY":6},
-				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":1},"Y":-6,"MoveY":7},
-				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":1},"Y":8,"MoveY":7},
+				{"Sprite":{"Tyrian2000":527},"AttackPower":{"Infinite":true,"Damage":1},"Y":-6,"MoveY":7},
+				{"Sprite":{"Tyrian2000":546},"AttackPower":{"Infinite":true,"Damage":1},"Y":8,"MoveY":7},
 				{"Sprite":{"Tyrian2000":540},"AttackPower":5,"MoveX":-5,"MoveY":5},
 				{"Sprite":{"Tyrian2000":542},"AttackPower":5,"MoveX":5,"MoveY":5},
 				{"Sprite":{"Tyrian2000":521},"AttackPower":3,"MoveX":-7,"MoveY":4},

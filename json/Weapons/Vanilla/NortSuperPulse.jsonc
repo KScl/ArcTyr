@@ -105,7 +105,7 @@
 			"Pieces":[
 				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"Y":-4,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"Y":-4,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":-16,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":15,"MoveY":8},
 				{"Sprite":77,"AttackPower":1,"Y":4,"MoveY":-8}
@@ -116,8 +116,8 @@
 			"Sound":8,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":-16,"MoveY":8},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"X":15,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":-16,"MoveY":8},
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"X":15,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":-5,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":4,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":-5,"MoveY":8},
@@ -135,7 +135,24 @@
 				{"Sprite":58,"AttackPower":1,"X":18,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":-15,"Y":-2,"MoveY":8},
 				{"Sprite":58,"AttackPower":1,"X":14,"Y":-2,"MoveY":8},
-				{"Sprite":241,"AttackPower":{"Shrapnel":"T73"},"Y":-4,"MoveY":8}
+				{"Sprite":241,"AttackPower":{"Shrapnel":"NortPulseShrapnel"},"Y":-4,"MoveY":8}
+			]
+		},
+		"NortPulseShrapnel":{ // 73
+			"Delay":2,
+			"AnimFrames":9,
+			"Sound":0,
+			"Filter":112,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":-9,"MoveY":6},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":9,"MoveY":-6},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":-9,"MoveY":-6},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":9,"MoveY":6},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":-10,"MoveY":-3},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":10,"MoveY":3},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":-10,"MoveY":3},
+				{"Sprite":172,"AttackPower":2,"Duration":10,"MoveX":10,"MoveY":-3}
 			]
 		}
 	},

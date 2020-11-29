@@ -4,8 +4,8 @@
 			"Delay":5,
 			"Sound":8,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6}
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6}
 			]
 		},
 		"T696":{ // 696 NortShip Spreader B Lv.2
@@ -13,8 +13,8 @@
 			"Sound":8,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6}
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6}
 			]
 		},
 		"T697":{ // 697 NortShip Spreader B Lv.3
@@ -22,8 +22,8 @@
 			"Sound":8,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"MoveY":-8}
 			]
 		},
@@ -32,8 +32,8 @@
 			"Sound":8,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"X":-15,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":14,"MoveX":6,"MoveY":-6}
 			]
@@ -43,8 +43,8 @@
 			"Sound":8,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"X":-15,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":14,"MoveX":6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"MoveY":-8}
@@ -55,8 +55,8 @@
 			"Sound":8,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"X":-15,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":14,"MoveX":6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":-4,"MoveY":-8},
@@ -68,8 +68,8 @@
 			"Sound":8,
 			"PiecesPerFire":7,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"X":-15,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":14,"MoveX":6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":-9,"MoveX":-3,"MoveY":-7},
@@ -82,8 +82,8 @@
 			"Sound":8,
 			"PiecesPerFire":7,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"X":-15,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":14,"MoveX":6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":-9,"MoveX":-3,"MoveY":-7},
@@ -96,10 +96,10 @@
 			"Sound":8,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"MoveY":-8}
 			]
 		},
@@ -108,10 +108,10 @@
 			"Sound":8,
 			"PiecesPerFire":7,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"MoveY":8},
 				{"Sprite":111,"AttackPower":1,"X":-9,"MoveX":-3,"MoveY":-7},
 				{"Sprite":111,"AttackPower":1,"X":8,"MoveX":3,"MoveY":-7}
@@ -122,14 +122,32 @@
 			"Sound":8,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-16,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":15,"MoveX":6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T74"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
-				{"Sprite":255,"AttackPower":{"Shrapnel":"T75"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-16,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":15,"MoveX":6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"X":-19,"Y":12,"MoveX":-6,"MoveY":6},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"X":18,"Y":12,"MoveX":6,"MoveY":6},
 				{"Sprite":111,"AttackPower":1,"MoveY":8},
 				{"Sprite":111,"AttackPower":1,"X":-9,"MoveX":-6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"X":8,"MoveX":6,"MoveY":-6},
 				{"Sprite":111,"AttackPower":1,"MoveY":-8}
+			]
+		},
+		"SpreaderBounceRight":{ // 74
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":246,"AttackPower":1,"X":2,"MoveX":-7,"MoveY":1},
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceLeft"},"MoveX":6,"MoveY":6}
+			]
+		},
+		"SpreaderBounceLeft":{ // 75
+			"Delay":3,
+			"Sound":8,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":255,"AttackPower":{"Shrapnel":"SpreaderBounceRight"},"MoveX":-6,"MoveY":6},
+				{"Sprite":246,"AttackPower":1,"X":-2,"MoveX":7,"MoveY":1}
 			]
 		}
 	},

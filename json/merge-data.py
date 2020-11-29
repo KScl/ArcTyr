@@ -293,13 +293,9 @@ def iter_shots():
 	defaults_piece = {'AttackPower': 0, 'Duration': 255, 'MoveX': 0, 'MoveY': 0,
 	                  'X': 0, 'Y': 0, 'Sprite': 0, 'AccelY': 0, 'AccelX': 0,
 	                  'CircleParams': 0}
+	defaults_apwr = {'Damage': 0, 'Ice': 0, 'Shrapnel': 0, 'Infinite': False}
 
 	yield (len(TyrianData.Shots) - 1).to_bytes(2, signed=False, byteorder='little')
-
-	# Too complex for lambda
-	def find_shrapnel(x):
-		shot_id = find_shot_id(x, is_complex = True)
-		return 100 + shot_id if 0 <= shot_id <= 99 else invalid('Out of range')
 
 	for shot_id in TyrianData.Shots:
 		_currentStruct = 'Shots:%s' % shot_id
@@ -310,11 +306,22 @@ def iter_shots():
 		for piece in shot['Pieces']:
 			piece = {**defaults_piece, **piece}
 
+			# AttackPower can be a structure of its own (oof!)
+			if type(piece['AttackPower']) is collections.OrderedDict:
+				apwr = {**defaults_apwr, **piece['AttackPower']}
+				if int(apwr['Damage'] * 100).bit_length() > 14 or int(apwr['Ice']).bit_length() > 4:
+					raise ElementError('Out of range')
+
+				piece['AttackPower'] = int(apwr['Damage'] * 100) \
+					| (apwr['Ice'] << 14) \
+					| (find_shot_id(apwr['Shrapnel']) << 18) \
+					| (0x80000000 if apwr['Infinite'] else 0)
+			else:
+				if int(piece['AttackPower'] * 100).bit_length() > 14:
+					raise ElementError('Out of range')
+				piece['AttackPower'] = int(piece['AttackPower'] * 100)
+
 			# Resolve complex piece info
-			piece['AttackPower'] = resolve_complex_element(piece['AttackPower'], {
-				'Ice': 99,
-				'Infinite': lambda x: 250 + x if 0 <= x <= 5 else invalid('Out of range'),
-				'Shrapnel': find_shrapnel })
 			piece['Duration'] = resolve_complex_element(piece['Duration'], {
 				'NoTrail': 121,
 				'Carry': lambda x: {'X': 98, 'Y': 100, 'XY': 99}[x],
@@ -336,8 +343,7 @@ def iter_shots():
 		s.AppendUint16(shot['AnimFrames'])
 		s.AppendUint8(shot['Homing'])
 		s.AppendUint8(shot['PiecesPerFire'] | len(shot['Pieces']) << 4)
-		s.AppendUint8(0) # Formerly 'uniques' but we don't do that anymore
-		[s.AppendUint8(i) for i in [p['AttackPower'] for p in pieces]]
+		[s.AppendUint32(i) for i in [p['AttackPower'] for p in pieces]]
 		[s.AppendUint8(i) for i in [p['Duration'] for p in pieces]]
 		[s.AppendSint8(i) for i in [p['MoveX'] for p in pieces]]
 		[s.AppendSint8(i) for i in [p['MoveY'] for p in pieces]]

@@ -1,18 +1,50 @@
 {
 	"Shots":{
-		"T94":{ // 94 Buster Rocket
+		"BusterRocket":{ // 94 Buster Rocket
 			"Delay":10,
 			"Sound":7,
 			"Trail":6,
 			"Pieces":[
-				{"Sprite":71,"AttackPower":{"Shrapnel":"T95"},"AccelY":1}
+				{"Sprite":71,"AttackPower":{"Shrapnel":"BusterRocketHit"},"AccelY":1}
+			]
+		},
+		"BusterRocketHit":{ // 95 Buster Rocket shrapnel phase 1
+			"Delay":10,
+			"Sound":27,
+			"Trail":1,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":45,"AttackPower":{"Shrapnel":"BusterRocketHit2Left"},"MoveX":-12},
+				{"Sprite":7,"AttackPower":{"Shrapnel":"BusterRocketHit2Right"},"MoveX":12},
+				{"Sprite":45,"AttackPower":4,"Duration":"NoTrail","MoveX":-6},
+				{"Sprite":7,"AttackPower":4,"Duration":"NoTrail","MoveX":6}
+			]
+		},
+		"BusterRocketHit2Left":{ // 96 Buster Rocket shrapnel phase 2a
+			"Delay":10,
+			"Sound":27,
+			"Trail":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":45,"AttackPower":{"Shrapnel":"BusterRocketHit2Left"},"MoveX":-12},
+				{"Sprite":45,"AttackPower":4,"Duration":"NoTrail","MoveX":-6}
+			]
+		},
+		"BusterRocketHit2Right":{ // 97 Buster Rocket shrapnel phase 2b
+			"Delay":10,
+			"Sound":27,
+			"Trail":1,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":7,"AttackPower":{"Shrapnel":"BusterRocketHit2Right"},"MoveX":12},
+				{"Sprite":7,"AttackPower":4,"Duration":"NoTrail","MoveX":6}
 			]
 		}
 	},
 	"Options":{
 		"O11":{ // 11
 			"Name":"Buster Rocket (x3)",
-			"Shot":"T94",
+			"Shot":"BusterRocket",
 			"Ammo":3,
 			"Graphics":[{"WaitUntilFire":165},184,184,203,203,184,184],
 			"HUDIcon":5

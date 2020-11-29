@@ -7,14 +7,14 @@
 			"Filter":112,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":674,"AttackPower":{"Infinite":2},"Duration":9,"X":-6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":693,"AttackPower":{"Infinite":2},"Duration":9,"X":6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":712,"AttackPower":{"Infinite":3},"Duration":9,"X":-6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":731,"AttackPower":{"Infinite":3},"Duration":9,"X":6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
-				{"Sprite":674,"AttackPower":{"Infinite":2},"Duration":9,"X":-2,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":693,"AttackPower":{"Infinite":2},"Duration":9,"X":10,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":712,"AttackPower":{"Infinite":3},"Duration":9,"X":-2,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245},
-				{"Sprite":731,"AttackPower":{"Infinite":3},"Duration":9,"X":10,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245}
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":-6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":6,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":205},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":-6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":6,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":205},
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":-2,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":10,"Y":-7,"MoveY":-8,"AccelY":1,"CircleParams":245},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":-2,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":2.56},"Duration":9,"X":10,"Y":7,"MoveY":-8,"AccelY":1,"CircleParams":245}
 			]
 		}
 	},

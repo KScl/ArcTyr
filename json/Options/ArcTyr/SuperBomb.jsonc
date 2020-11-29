@@ -1,20 +1,39 @@
 {
+	"Import":[
+		"./Common.jsonc", // Shrapnel
+		"./Options/Vanilla/AtomBombs.jsonc" // Shrapnel
+	],
 	"Shots":{
-		"T535":{ // 535 SuperBomb
+		"SuperBomb":{ // 535 SuperBomb
 			"Delay":10,
 			"Sound":14,
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":90,"AttackPower":{"Shrapnel":"T66"},"MoveY":7},
-				{"Sprite":90,"AttackPower":{"Shrapnel":"T66"},"MoveY":7}
+				{"Sprite":90,"AttackPower":{"Shrapnel":"SuperBombShrapnel"},"MoveY":7},
+				{"Sprite":90,"AttackPower":{"Shrapnel":"SuperBombShrapnel"},"MoveY":7}
+			]
+		},
+		"SuperBombShrapnel":{ // 66 SuperBomb Shrapnel oh my god holy fuck
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveY":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"AtomBombShrapnelB"},"MoveY":1},
+				{"Sprite":100,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"MoveY":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"X":-12,"Y":20,"MoveX":-1,"MoveY":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"X":12,"Y":20,"MoveX":1,"MoveY":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"Y":-20,"MoveY":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"X":20,"Y":-10,"MoveX":1},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"BigExplosionShrapnel"},"X":-20,"Y":-10,"MoveX":-1}
 			]
 		}
 	},
 	"Options":{
 		"SuperBomb":{ // 31 -- NEW
 			"Name":"SuperBomb (x1)",
-			"Shot":"T535",
+			"Shot":"SuperBomb",
 			"Ammo":1,
 			"Graphics":2,
 			"HUDIcon":5

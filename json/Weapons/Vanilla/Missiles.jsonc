@@ -5,7 +5,7 @@
 			"Sound":7,
 			"Trail":6,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"AccelY":1}
 			]
 		},
 		"T368":{ // 368 Missile Launcher Lv.2
@@ -14,8 +14,8 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-1,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-1,"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-1,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-1,"AccelY":1}
 			]
 		},
 		"T369":{ // 369 Missile Launcher Lv.3
@@ -24,9 +24,9 @@
 			"Trail":6,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-1,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-1,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-1,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-1,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"AccelY":1}
 			]
 		},
 		"T370":{ // 370 Missile Launcher Lv.4
@@ -35,10 +35,10 @@
 			"Trail":6,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-2,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-2,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-2,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-2,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"AccelY":1}
 			]
 		},
 		"T371":{ // 371 Missile Launcher Lv.5
@@ -46,7 +46,7 @@
 			"Sound":7,
 			"Trail":6,
 			"Pieces":[
-				{"Sprite":32,"AttackPower":{"Shrapnel":"PhoenixShrapnelB"},"MoveY":-2,"AccelY":1}
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"MoveY":-2,"AccelY":1}
 			]
 		},
 		"T372":{ // 372 Missile Launcher Lv.6
@@ -55,10 +55,10 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-3,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"PhoenixShrapnelB"},"MoveY":-2,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-3,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"PhoenixShrapnelB"},"MoveY":-2,"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-3,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"MoveY":-2,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-3,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"MoveY":-2,"AccelY":1}
 			]
 		},
 		"T373":{ // 373 Missile Launcher Lv.7
@@ -67,9 +67,9 @@
 			"Trail":6,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-3,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"PhoenixShrapnelB"},"MoveY":-2,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-3,"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-3,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelLow"},"MoveY":-2,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-3,"AccelY":1}
 			]
 		},
 		"T374":{ // 374 Missile Launcher Lv.8
@@ -78,9 +78,9 @@
 			"Trail":6,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-4,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveY":-3,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-4,"AccelY":1}
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-4,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveY":-3,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-4,"AccelY":1}
 			]
 		},
 		"T375":{ // 375 Missile Launcher Lv.9
@@ -89,8 +89,8 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":32,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":-6,"MoveY":-4,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":6,"MoveY":-4,"AccelY":1}
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":-6,"MoveY":-4,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":6,"MoveY":-4,"AccelY":1}
 			]
 		},
 		"T376":{ // 376 Missile Launcher Lv.10
@@ -99,10 +99,10 @@
 			"Trail":6,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":32,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":-6,"MoveY":-4,"AccelY":1},
-				{"Sprite":32,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":6,"MoveY":-4,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-1,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-1,"AccelY":1}
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":-6,"MoveY":-4,"AccelY":1},
+				{"Sprite":32,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":6,"MoveY":-4,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-1,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-1,"AccelY":1}
 			]
 		},
 		"T377":{ // 377 Missile Launcher Lv.11
@@ -111,9 +111,9 @@
 			"Trail":6,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":33,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveY":-4,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":1,"MoveY":-1,"AccelY":1},
-				{"Sprite":31,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveX":-1,"MoveY":-1,"AccelY":1}
+				{"Sprite":33,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveY":-4,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":1,"MoveY":-1,"AccelY":1},
+				{"Sprite":31,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveX":-1,"MoveY":-1,"AccelY":1}
 			]
 		}
 	},

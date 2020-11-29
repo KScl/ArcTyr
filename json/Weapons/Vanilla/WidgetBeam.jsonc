@@ -5,7 +5,7 @@
 			"Sound":13,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"MoveY":10}
 			]
 		},
 		"T739":{ // 739 Widget Beam Lv.2
@@ -14,8 +14,8 @@
 			"Filter":112,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":9,"Y":12,"MoveY":10}
 			]
 		},
 		"T740":{ // 740 Widget Beam Lv.3
@@ -24,8 +24,8 @@
 			"Filter":112,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"X":-3,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":3,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"X":-3,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":3,"MoveY":10}
 			]
 		},
 		"T741":{ // 741 Widget Beam Lv.4
@@ -34,9 +34,9 @@
 			"Filter":112,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":9,"Y":12,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"MoveY":10}
 			]
 		},
 		"T742":{ // 742 Widget Beam Lv.5
@@ -45,9 +45,9 @@
 			"Filter":112,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"X":-15,"Y":14,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":15,"Y":14,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"X":-15,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":15,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"MoveY":10}
 			]
 		},
 		"T743":{ // 743 Widget Beam Lv.6
@@ -56,10 +56,10 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":20,"AttackPower":1,"X":-11,"Y":14,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":11,"Y":14,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"X":-4,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"X":4,"MoveY":10}
+				{"Sprite":20,"AttackPower":1.0,"X":-11,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":11,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"X":-4,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"X":4,"MoveY":10}
 			]
 		},
 		"T744":{ // 744 Widget Beam Lv.7
@@ -68,10 +68,10 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":21,"AttackPower":1,"X":-17,"Y":14,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"X":17,"Y":14,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"X":-4,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"X":4,"MoveY":10}
+				{"Sprite":21,"AttackPower":1.4,"X":-17,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"X":17,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"X":-4,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"X":4,"MoveY":10}
 			]
 		},
 		"T745":{ // 745 Widget Beam Lv.8
@@ -80,9 +80,9 @@
 			"Filter":112,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":22,"AttackPower":1,"X":-18,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":18,"Y":14,"MoveY":10},
-				{"Sprite":21,"AttackPower":1,"MoveY":10}
+				{"Sprite":22,"AttackPower":1.8,"X":-18,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":18,"Y":14,"MoveY":10},
+				{"Sprite":21,"AttackPower":1.4,"MoveY":10}
 			]
 		},
 		"T746":{ // 746 Widget Beam Lv.9
@@ -91,10 +91,10 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+				{"Sprite":22,"AttackPower":1.8,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":9,"Y":12,"MoveY":10}
 			]
 		},
 		"T747":{ // 747 Widget Beam Lv.10
@@ -103,11 +103,11 @@
 			"Filter":112,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":-16,"Y":12,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":16,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"MoveY":10}
+				{"Sprite":22,"AttackPower":1.8,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":-16,"Y":12,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":16,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"MoveY":10}
 			]
 		},
 		"T748":{ // 748 Widget Beam Lv.11
@@ -116,12 +116,12 @@
 			"Filter":112,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":22,"AttackPower":1,"X":-22,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":22,"Y":14,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":-16,"Y":12,"MoveY":10},
-				{"Sprite":22,"AttackPower":1,"X":16,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":-9,"Y":12,"MoveY":10},
-				{"Sprite":20,"AttackPower":1,"X":9,"Y":12,"MoveY":10}
+				{"Sprite":22,"AttackPower":1.8,"X":-22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":22,"Y":14,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":-16,"Y":12,"MoveY":10},
+				{"Sprite":22,"AttackPower":1.8,"X":16,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":-9,"Y":12,"MoveY":10},
+				{"Sprite":20,"AttackPower":1.0,"X":9,"Y":12,"MoveY":10}
 			]
 		}
 	},

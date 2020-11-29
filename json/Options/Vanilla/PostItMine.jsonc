@@ -1,17 +1,27 @@
 {
 	"Shots":{
-		"T86":{ // 86 Post-It Mine
+		"PostItMine":{ // 86 Post-It Mine
 			"Delay":2,
 			"Sound":6,
 			"Pieces":[
-				{"Sprite":238,"AttackPower":{"Shrapnel":"T89"},"AccelY":1}
+				{"Sprite":238,"AttackPower":{"Shrapnel":"PostItRepeat"},"AccelY":1}
+			]
+		},
+		"PostItRepeat":{ // 89 Post-It Shrapnel
+			"Delay":2,
+			"AnimFrames":3,
+			"Sound":6,
+			"PiecesPerFire":2,
+			"Pieces":[
+				{"Sprite":107,"AttackPower":{"Shrapnel":"PostItRepeat"},"Y":-1,"MoveY":-1,"AccelY":-1},
+				{"Sprite":107,"AttackPower":1,"Y":-1,"MoveY":-1,"AccelY":-1}
 			]
 		}
 	},
 	"Options":{
-		"O15":{ // 15
+		"PostItMine":{ // 15
 			"Name":"Post-It Mine (x5)",
-			"Shot":"T86",
+			"Shot":"PostItMine",
 			"Ammo":5,
 			"Graphics":[{"WaitUntilFire":243},243,262,262,281,281,300,300,281,281,262,262],
 			"HUDIcon":6

@@ -5,8 +5,8 @@
 			"Sound":7,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-6,"MoveY":6},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-6,"MoveY":6},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T423":{ // 423
@@ -14,8 +14,8 @@
 			"Sound":7,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-6,"MoveY":6},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-6,"MoveY":6},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T424":{ // 424
@@ -24,8 +24,8 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-6,"MoveY":6},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-6,"MoveY":6},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T425":{ // 425
@@ -34,10 +34,10 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-5,"MoveY":7},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":5,"MoveY":7},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":5},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":7,"MoveY":5}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-5,"MoveY":7},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":5,"MoveY":7},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":5},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":7,"MoveY":5}
 			]
 		},
 		"T426":{ // 426
@@ -46,10 +46,10 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-5,"MoveY":7},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":5,"MoveY":7},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":5},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":7,"MoveY":5}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-5,"MoveY":7},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":5,"MoveY":7},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":5},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":7,"MoveY":5}
 			]
 		},
 		"T427":{ // 427
@@ -58,12 +58,12 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-5,"MoveY":7},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":5,"MoveY":7},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":5},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":7,"MoveY":5},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-6,"MoveY":6},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-5,"MoveY":7},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":5,"MoveY":7},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":5},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":7,"MoveY":5},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-6,"MoveY":6},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T428":{ // 428
@@ -72,12 +72,12 @@
 			"Trail":98,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-5,"MoveY":7},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":5,"MoveY":7},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":5},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":7,"MoveY":5},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-6,"MoveY":6},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-5,"MoveY":7},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":5,"MoveY":7},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":5},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":7,"MoveY":5},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-6,"MoveY":6},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T429":{ // 429
@@ -86,12 +86,12 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-5,"MoveY":7},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":5,"MoveY":7},
-				{"Sprite":13,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":5},
-				{"Sprite":14,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":7,"MoveY":5},
-				{"Sprite":96,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":-6,"MoveY":6},
-				{"Sprite":115,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":6,"MoveY":6}
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-5,"MoveY":7},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":5,"MoveY":7},
+				{"Sprite":13,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":5},
+				{"Sprite":14,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":7,"MoveY":5},
+				{"Sprite":96,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":-6,"MoveY":6},
+				{"Sprite":115,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":6,"MoveY":6}
 			]
 		},
 		"T430":{ // 430
@@ -100,10 +100,10 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":96,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":-6,"MoveY":6},
-				{"Sprite":115,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":6,"MoveY":6},
-				{"Sprite":96,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":-7,"MoveY":5},
-				{"Sprite":115,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"MoveX":7,"MoveY":5}
+				{"Sprite":96,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":-6,"MoveY":6},
+				{"Sprite":115,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":6,"MoveY":6},
+				{"Sprite":96,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":-7,"MoveY":5},
+				{"Sprite":115,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"MoveX":7,"MoveY":5}
 			]
 		},
 		"T431":{ // 431
@@ -112,8 +112,8 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":15,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":-7,"MoveY":7},
-				{"Sprite":53,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":7,"MoveY":7}
+				{"Sprite":15,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":-7,"MoveY":7},
+				{"Sprite":53,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":7,"MoveY":7}
 			]
 		},
 		"T432":{ // 432
@@ -122,14 +122,14 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":15,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":-7,"MoveY":7},
-				{"Sprite":53,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":7,"MoveY":7},
-				{"Sprite":15,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":-9,"MoveY":5},
-				{"Sprite":53,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":9,"MoveY":5},
-				{"Sprite":15,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":-8,"MoveY":6},
-				{"Sprite":53,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":8,"MoveY":6},
-				{"Sprite":15,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":-6,"MoveY":8},
-				{"Sprite":53,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"MoveX":6,"MoveY":8}
+				{"Sprite":15,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":-7,"MoveY":7},
+				{"Sprite":53,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":7,"MoveY":7},
+				{"Sprite":15,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":-9,"MoveY":5},
+				{"Sprite":53,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":9,"MoveY":5},
+				{"Sprite":15,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":-8,"MoveY":6},
+				{"Sprite":53,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":8,"MoveY":6},
+				{"Sprite":15,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":-6,"MoveY":8},
+				{"Sprite":53,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"MoveX":6,"MoveY":8}
 			]
 		},
 
@@ -138,7 +138,7 @@
 			"Sound":7,
 			"Trail":6,
 			"Pieces":[
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"AccelY":1}
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"AccelY":1}
 			]
 		},
 		"T495":{ // 495 Rear Heavy Missile L. DragonWing ChargeLv.1
@@ -147,8 +147,8 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":9,"MoveY":-1,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-9,"MoveY":-1,"AccelY":1}
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-9,"MoveY":-1,"AccelY":1}
 			]
 		},
 		"T496":{ // 496 Rear Heavy Missile L. DragonWing ChargeLv.2
@@ -157,8 +157,8 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":9,"MoveY":-1,"AccelY":1},
-				{"Sprite":76,"AttackPower":{"Shrapnel":"MissileShrapnelHigh"},"X":-9,"MoveY":-1,"AccelY":1}
+				{"Sprite":76,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":76,"AttackPower":{"Shrapnel":"GenericShrapnelHigh"},"X":-9,"MoveY":-1,"AccelY":1}
 			]
 		},
 		"T497":{ // 497 Rear Heavy Missile L. DragonWing ChargeLv.3
@@ -167,8 +167,8 @@
 			"Trail":6,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1}
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1}
 			]
 		},
 		"T498":{ // 498 Rear Heavy Missile L. DragonWing ChargeLv.4
@@ -177,10 +177,10 @@
 			"Trail":6,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":16,"MoveY":-2,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-16,"MoveY":-2,"AccelY":1}
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":16,"MoveY":-2,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-16,"MoveY":-2,"AccelY":1}
 			]
 		},
 		"T499":{ // 499 Rear Heavy Missile L. DragonWing ChargeLv.5
@@ -189,12 +189,12 @@
 			"Trail":6,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
-				{"Sprite":95,"AttackPower":{"Shrapnel":"MissileShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":16,"MoveY":-2,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-16,"MoveY":-2,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":30,"AccelY":1},
-				{"Sprite":57,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-30,"AccelY":1}
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":9,"MoveY":-1,"AccelY":1},
+				{"Sprite":95,"AttackPower":{"Shrapnel":"GenericShrapnelMega"},"X":-9,"MoveY":-1,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":16,"MoveY":-2,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-16,"MoveY":-2,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":30,"AccelY":1},
+				{"Sprite":57,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-30,"AccelY":1}
 			]
 		}
 	},

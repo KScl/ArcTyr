@@ -6,8 +6,38 @@
 			"Sound":26,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":478,"AttackPower":{"Shrapnel":"IceShrapnelB"},"MoveY":1,"AccelY":23},
-				{"Sprite":478,"AttackPower":{"Shrapnel":"IceShrapnelA"},"MoveY":1,"AccelY":23}
+				{"Sprite":478,"AttackPower":{"Shrapnel":"IcebreakerShrapnelB"},"MoveY":1,"AccelY":23},
+				{"Sprite":478,"AttackPower":{"Shrapnel":"IcebreakerShrapnelA"},"MoveY":1,"AccelY":23}
+			]
+		},
+		"IcebreakerShrapnelA":{
+			"Sound":41,
+			"Trail":11,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":-13,"MoveY":  0,"X":-7,"Y": 0},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":-12,"MoveY":  4,"X":-6,"Y":-2},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": -9,"MoveY":  8,"X":-4,"Y":-4},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": -5,"MoveY": 11,"X":-2,"Y":-6},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  0,"MoveY": 12,"X": 0,"Y":-7},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  5,"MoveY": 11,"X": 2,"Y":-6},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  9,"MoveY":  8,"X": 4,"Y":-4},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": 12,"MoveY":  4,"X": 6,"Y":-2}
+			]
+		},
+		"IcebreakerShrapnelB":{
+			"Sound":41,
+			"Trail":11,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": 13,"MoveY": -0,"X": 7,"Y": 0},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": 12,"MoveY": -4,"X": 6,"Y": 2},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  9,"MoveY": -8,"X": 4,"Y": 4},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  5,"MoveY":-11,"X": 2,"Y": 6},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":  0,"MoveY":-12,"X": 0,"Y": 7},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": -5,"MoveY":-11,"X":-2,"Y": 6},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX": -9,"MoveY": -8,"X":-4,"Y": 4},
+				{"Sprite":499,"AttackPower":{"Ice":10,"Damage":0.2,"Infinite":true},"Duration":4,"MoveX":-12,"MoveY": -4,"X":-6,"Y": 2}
 			]
 		}
 	},

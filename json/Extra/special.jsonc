@@ -116,12 +116,6 @@
 			"ShotType":"T710",
 			"PowerUse":{"Armor":4}
 		},
-		"S21":{ // 21
-			"Name":"Post-It Blast",
-			"SpecialType":"FireOnce",
-			"ShotType":"T708",
-			"PowerUse":{"Armor":5}
-		},
 		"S22":{ // 22
 			"Name":"Drone **",
 			"Graphic":129,

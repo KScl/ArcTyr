@@ -7,14 +7,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":676,"AttackPower":{"Infinite":1},"Duration":7,"X":-4,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1},
-				{"Sprite":695,"AttackPower":{"Infinite":0},"Duration":7,"X":8,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1},
-				{"Sprite":714,"AttackPower":{"Infinite":0},"Duration":7,"X":-4,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1},
-				{"Sprite":733,"AttackPower":{"Infinite":0},"Duration":7,"X":8,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1},
-				{"Sprite":676,"AttackPower":{"Infinite":0},"Duration":7,"X":-4,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1},
-				{"Sprite":695,"AttackPower":{"Infinite":1},"Duration":7,"X":8,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1},
-				{"Sprite":714,"AttackPower":{"Infinite":0},"Duration":7,"X":-4,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1},
-				{"Sprite":733,"AttackPower":{"Infinite":0},"Duration":7,"X":8,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1}
+				{"Sprite":676,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":-4,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1},
+				{"Sprite":695,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":8,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1},
+				{"Sprite":714,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":-4,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1},
+				{"Sprite":733,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":8,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1},
+				{"Sprite":676,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":-4,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1},
+				{"Sprite":695,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":8,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1},
+				{"Sprite":714,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":-4,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1},
+				{"Sprite":733,"AttackPower":{"Infinite":true,"Damage":0.25},"Duration":7,"X":8,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1}
 			]
 		},
 		"CosmicNapalm2":{ // 783 -- NEW Cosmic Napalm Lv.2
@@ -24,14 +24,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":675,"AttackPower":{"Infinite":1},"Duration":8,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":694,"AttackPower":{"Infinite":0},"Duration":8,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":713,"AttackPower":{"Infinite":0},"Duration":8,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":732,"AttackPower":{"Infinite":0},"Duration":8,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":675,"AttackPower":{"Infinite":0},"Duration":8,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":694,"AttackPower":{"Infinite":1},"Duration":8,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":713,"AttackPower":{"Infinite":0},"Duration":8,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":732,"AttackPower":{"Infinite":0},"Duration":8,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
+				{"Sprite":675,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":694,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":713,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":732,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":675,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":694,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":713,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":732,"AttackPower":{"Infinite":true,"Damage":0.3},"Duration":8,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
 			]
 		},
 		"CosmicNapalm3":{ // 784 -- NEW Cosmic Napalm Lv.3
@@ -41,14 +41,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":674,"AttackPower":{"Infinite":1},"Duration":9,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":693,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":674,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":693,"AttackPower":{"Infinite":1},"Duration":9,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.35},"Duration":9,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
 			]
 		},
 		"CosmicNapalm4":{ // 785 -- NEW Cosmic Napalm Lv.4
@@ -58,14 +58,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":674,"AttackPower":{"Infinite":1},"Duration":9,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":693,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
-				{"Sprite":674,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":693,"AttackPower":{"Infinite":1},"Duration":9,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1},
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.4},"Duration":9,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1}
 			]
 		},
 		"CosmicNapalm5":{ // 786 -- NEW Cosmic Napalm Lv.5
@@ -75,14 +75,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":674,"AttackPower":{"Infinite":1},"Duration":9,"X":-4,"Y":-7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
-				{"Sprite":693,"AttackPower":{"Infinite":1},"Duration":9,"X":8,"Y":-7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
-				{"Sprite":674,"AttackPower":{"Infinite":1},"Duration":9,"X":-4,"Y":-7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
-				{"Sprite":693,"AttackPower":{"Infinite":1},"Duration":9,"X":8,"Y":-7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
-				{"Sprite":712,"AttackPower":{"Infinite":0},"Duration":9,"X":-4,"Y":7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
-				{"Sprite":731,"AttackPower":{"Infinite":0},"Duration":9,"X":8,"Y":7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224}
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":-4,"Y":-7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":8,"Y":-7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":-4,"Y":7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":8,"Y":7,"MoveX":1,"MoveY":10,"AccelY":-1,"CircleParams":4},
+				{"Sprite":674,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":-4,"Y":-7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
+				{"Sprite":693,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":8,"Y":-7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
+				{"Sprite":712,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":-4,"Y":7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224},
+				{"Sprite":731,"AttackPower":{"Infinite":true,"Damage":0.5},"Duration":9,"X":8,"Y":7,"MoveX":-1,"MoveY":10,"AccelY":-1,"CircleParams":224}
 			]
 		},
 		"CosmicNapalm6":{ // 787 -- NEW Cosmic Napalm Lv.6
@@ -92,14 +92,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
-				{"Sprite":711,"AttackPower":{"Infinite":0},"Duration":10,"X":-4,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
-				{"Sprite":730,"AttackPower":{"Infinite":0},"Duration":10,"X":8,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
-				{"Sprite":711,"AttackPower":{"Infinite":0},"Duration":10,"X":-4,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
-				{"Sprite":730,"AttackPower":{"Infinite":0},"Duration":10,"X":8,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224}
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":-4,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":8,"Y":-7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":-4,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":8,"Y":7,"MoveX":1,"MoveY":11,"AccelY":-1,"CircleParams":4},
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":-4,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":8,"Y":-7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":-4,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.55},"Duration":10,"X":8,"Y":7,"MoveX":-1,"MoveY":11,"AccelY":-1,"CircleParams":224}
 			]
 		},
 		"CosmicNapalm7":{ // 788 -- NEW Cosmic Napalm Lv.7
@@ -109,14 +109,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":711,"AttackPower":{"Infinite":0},"Duration":10,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":730,"AttackPower":{"Infinite":0},"Duration":10,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":711,"AttackPower":{"Infinite":0},"Duration":10,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":730,"AttackPower":{"Infinite":0},"Duration":10,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224}
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.6},"Duration":10,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224}
 			]
 		},
 		"CosmicNapalm8":{ // 789 -- NEW Cosmic Napalm Lv.8
@@ -126,14 +126,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":710,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":729,"AttackPower":{"Infinite":0},"Duration":11,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":710,"AttackPower":{"Infinite":0},"Duration":11,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
-				{"Sprite":729,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224}
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":-4,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":8,"Y":-7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":-4,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":8,"Y":7,"MoveX":2,"MoveY":12,"AccelY":-1,"CircleParams":4},
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":-4,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":8,"Y":-7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":-4,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":0.75},"Duration":11,"X":8,"Y":7,"MoveX":-2,"MoveY":12,"AccelY":-1,"CircleParams":224}
 			]
 		},
 		"CosmicNapalm9":{ // 790 -- NEW Cosmic Napalm Lv.9
@@ -143,14 +143,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":205},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":205},
-				{"Sprite":711,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":205},
-				{"Sprite":730,"AttackPower":{"Infinite":0},"Duration":10,"X":8,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":205},
-				{"Sprite":673,"AttackPower":{"Infinite":1},"Duration":10,"X":-4,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":245},
-				{"Sprite":692,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":245},
-				{"Sprite":711,"AttackPower":{"Infinite":0},"Duration":10,"X":-4,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":245},
-				{"Sprite":730,"AttackPower":{"Infinite":1},"Duration":10,"X":8,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":245}
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":-4,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":205},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":8,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":205},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":-4,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":205},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":8,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":205},
+				{"Sprite":673,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":-4,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":245},
+				{"Sprite":692,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":8,"Y":-7,"MoveY":15,"AccelY":-1,"CircleParams":245},
+				{"Sprite":711,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":-4,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":245},
+				{"Sprite":730,"AttackPower":{"Infinite":true,"Damage":0.8},"Duration":10,"X":8,"Y":7,"MoveY":15,"AccelY":-1,"CircleParams":245}
 			]
 		},
 		"CosmicNapalm10":{ // 791 -- NEW Cosmic Napalm Lv.10
@@ -160,14 +160,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
-				{"Sprite":710,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
-				{"Sprite":729,"AttackPower":{"Infinite":0},"Duration":11,"X":8,"Y":7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
-				{"Sprite":710,"AttackPower":{"Infinite":0},"Duration":11,"X":-4,"Y":7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
-				{"Sprite":729,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246}
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":-4,"Y":-7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":8,"Y":-7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":-4,"Y":7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":8,"Y":7,"MoveX":-1,"MoveY":16,"AccelY":-1,"CircleParams":206},
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":-4,"Y":-7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":8,"Y":-7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":-4,"Y":7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":0.9},"Duration":11,"X":8,"Y":7,"MoveX":1,"MoveY":16,"AccelY":-1,"CircleParams":246}
 			]
 		},
 		"CosmicNapalm11":{ // 792 -- NEW Cosmic Napalm Lv.11
@@ -177,14 +177,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
-				{"Sprite":710,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
-				{"Sprite":729,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
-				{"Sprite":672,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":-7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
-				{"Sprite":691,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":-7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
-				{"Sprite":710,"AttackPower":{"Infinite":1},"Duration":11,"X":-4,"Y":7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
-				{"Sprite":729,"AttackPower":{"Infinite":1},"Duration":11,"X":8,"Y":7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246}
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":-7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":8,"Y":-7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":8,"Y":7,"MoveX":4,"MoveY":16,"AccelX":-1,"AccelY":-1,"CircleParams":206},
+				{"Sprite":672,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":-7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
+				{"Sprite":691,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":8,"Y":-7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
+				{"Sprite":710,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":-4,"Y":7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246},
+				{"Sprite":729,"AttackPower":{"Infinite":true,"Damage":1},"Duration":11,"X":8,"Y":7,"MoveX":-4,"MoveY":16,"AccelX":1,"AccelY":-1,"CircleParams":246}
 			]
 		}
 	},

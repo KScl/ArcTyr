@@ -1,9 +1,8 @@
 {
 	"Output":"../arcdata/",
 	"Import":[
-		// Needs to be loaded first, to ensure shrapnel shots
-		// are in a position that works for Tyrian
-		"./Weapons/Shrapnel.jsonc",
+		// Needs to be loaded first, hardcoded data (at least for now)
+		"./Common.jsonc",
 
 		// Unsorted data.
 		"./Extra/shots.jsonc",

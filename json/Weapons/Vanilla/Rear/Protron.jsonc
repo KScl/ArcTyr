@@ -290,10 +290,10 @@
 			"Sound":26,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":683,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":2},
-				{"Sprite":702,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":2},
-				{"Sprite":721,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":2},
-				{"Sprite":740,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":2}
+				{"Sprite":683,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":2},
+				{"Sprite":702,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":2},
+				{"Sprite":721,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":2},
+				{"Sprite":740,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":2}
 			]
 		}
 	},

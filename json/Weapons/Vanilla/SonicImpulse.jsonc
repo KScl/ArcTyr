@@ -5,8 +5,8 @@
 			"Sound":13,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
 			]
 		},
 		"T757":{ // 757 Sonic Impulse Lv.2
@@ -14,10 +14,10 @@
 			"Sound":13,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28}
 			]
 		},
 		"T758":{ // 758 Sonic Impulse Lv.3
@@ -25,10 +25,10 @@
 			"Sound":13,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28}
 			]
 		},
 		"T759":{ // 759 Sonic Impulse Lv.4
@@ -36,10 +36,10 @@
 			"Sound":13,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":748,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-18,"MoveY":28},
-				{"Sprite":749,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
-				{"Sprite":750,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28},
-				{"Sprite":751,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":18,"MoveY":28}
+				{"Sprite":748,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-18,"MoveY":28},
+				{"Sprite":749,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
+				{"Sprite":750,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28},
+				{"Sprite":751,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":18,"MoveY":28}
 			]
 		},
 		"T760":{ // 760 Sonic Impulse Lv.5
@@ -47,10 +47,10 @@
 			"Sound":13,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"Y":14,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"Y":14,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"Y":14,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"Y":14,"MoveY":28}
 			]
 		},
 		"T761":{ // 761 Sonic Impulse Lv.6
@@ -58,12 +58,12 @@
 			"Sound":13,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-14,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-14,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":14,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":14,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-14,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-14,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":14,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":14,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
 			]
 		},
 		"T762":{ // 762 Sonic Impulse Lv.7
@@ -71,12 +71,12 @@
 			"Sound":13,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-14,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-14,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":14,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":14,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-14,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-14,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":14,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":14,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28}
 			]
 		},
 		"T763":{ // 763 Sonic Impulse Lv.8
@@ -84,14 +84,14 @@
 			"Sound":13,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-20,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-20,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":20,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":20,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-20,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-20,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":20,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":20,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28}
 			]
 		},
 		"T764":{ // 764 Sonic Impulse Lv.9
@@ -99,14 +99,14 @@
 			"Sound":13,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-20,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-20,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":20,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":20,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":4,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":4,"MoveY":28},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-4,"MoveY":28},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-4,"MoveY":28}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-20,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-20,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":20,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":20,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":4,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":4,"MoveY":28},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-4,"MoveY":28},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-4,"MoveY":28}
 			]
 		},
 		"T765":{ // 765 Sonic Impulse Lv.10
@@ -114,14 +114,14 @@
 			"Sound":13,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28,"AccelY":1},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28,"AccelY":1},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"AccelY":1},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"AccelY":1}
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"MoveY":28,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"MoveY":28,"AccelY":1},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"MoveY":28,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"MoveY":28,"AccelY":1},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":8,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":8,"AccelY":1},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-8,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-8,"AccelY":1}
 			]
 		},
 		"T766":{ // 766 Sonic Impulse Lv.11
@@ -129,14 +129,14 @@
 			"Sound":13,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":748,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-18,"MoveY":28,"AccelY":1},
-				{"Sprite":749,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28,"AccelY":1},
-				{"Sprite":750,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28,"AccelY":1},
-				{"Sprite":751,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":18,"MoveY":28,"AccelY":1},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":6,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":6,"AccelY":1},
-				{"Sprite":143,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-6,"AccelY":1},
-				{"Sprite":144,"AttackPower":{"Infinite":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-6,"AccelY":1}
+				{"Sprite":748,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-18,"MoveY":28,"AccelY":1},
+				{"Sprite":749,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveY":28,"AccelY":1},
+				{"Sprite":750,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveY":28,"AccelY":1},
+				{"Sprite":751,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":18,"MoveY":28,"AccelY":1},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":6,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":6,"AccelY":1},
+				{"Sprite":143,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":-6,"MoveX":-6,"AccelY":1},
+				{"Sprite":144,"AttackPower":{"Infinite":true,"Damage":1},"Duration":{"Carry":"X"},"X":6,"MoveX":-6,"AccelY":1}
 			]
 		}
 	},

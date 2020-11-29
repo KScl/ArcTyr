@@ -9,6 +9,32 @@
 				{"Sprite":142,"AttackPower":{"Shrapnel":"AtomBombShrapnelA"},"MoveX":1,"MoveY":7},
 				{"Sprite":142,"AttackPower":{"Shrapnel":"AtomBombShrapnelA"},"MoveX":-1,"MoveY":7}
 			]
+		},
+		"AtomBombShrapnelA":{ // 20 Atom Bomb shrapnel phase 1
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":4,
+			"Pieces":[
+				{"Sprite":100,"AttackPower":{"Shrapnel":"AtomBombShrapnelB"},"MoveX":4,"MoveY":4},
+				{"Sprite":100,"AttackPower":{"Shrapnel":"AtomBombShrapnelB"},"MoveX":-4,"MoveY":4},
+				{"Sprite":100,"AttackPower":{"Shrapnel":"AtomBombShrapnelB"},"MoveX":4,"MoveY":-4},
+				{"Sprite":100,"AttackPower":{"Shrapnel":"AtomBombShrapnelB"},"MoveX":-4,"MoveY":-4}
+			]
+		},
+		"AtomBombShrapnelB":{ // 21 Atom Bomb shrapnel phase 2
+			"Delay":0,
+			"Sound":6,
+			"PiecesPerFire":8,
+			"Pieces":[
+				{"Sprite":99,"AttackPower":1,"MoveX":3,"MoveY":3},
+				{"Sprite":99,"AttackPower":1,"MoveX":-3,"MoveY":3},
+				{"Sprite":99,"AttackPower":1,"MoveX":3,"MoveY":-3},
+				{"Sprite":99,"AttackPower":1,"MoveX":-3,"MoveY":-3},
+				{"Sprite":99,"AttackPower":1,"MoveX":5},
+				{"Sprite":99,"AttackPower":1,"MoveX":-5},
+				{"Sprite":99,"AttackPower":1,"MoveY":5},
+				{"Sprite":99,"AttackPower":1,"MoveY":-5}
+			]
 		}
 	},
 	"Options":{

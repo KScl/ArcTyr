@@ -6,10 +6,10 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":610},"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":611},"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":629},"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":630},"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":5}
+				{"Sprite":{"Tyrian2000":610},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":611},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":629},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":5},
+				{"Sprite":{"Tyrian2000":630},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":5}
 			]
 		}
 	},

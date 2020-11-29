@@ -1119,7 +1119,7 @@
 			"AnimFrames":3,
 			"Sound":0,
 			"Pieces":[
-				{"Sprite":263,"AttackPower":"Ice","X":-20,"Y":20,"MoveX":{"FollowX":0},"MoveY":2,"CircleParams":160}
+				{"Sprite":263,"AttackPower":{"Ice":4},"X":-20,"Y":20,"MoveX":{"FollowX":0},"MoveY":2,"CircleParams":160}
 			]
 		},
 		"T444":{ // 444
@@ -1172,7 +1172,7 @@
 			"Sound":7,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveX":-7,"MoveY":20}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveX":-7,"MoveY":20}
 			]
 		},
 		"T451":{ // 451

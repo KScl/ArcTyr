@@ -4,7 +4,7 @@
 			"Delay":8,
 			"Sound":10,
 			"Pieces":[
-				{"Sprite":65,"AttackPower":{"Infinite":1},"MoveY":2,"AccelY":1}
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"MoveY":2,"AccelY":1}
 			]
 		},
 		"T178":{ // 178 Mega Cannon Lv.2
@@ -12,15 +12,15 @@
 			"Sound":10,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":2,"MoveX":-1,"MoveY":2,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":2,"MoveX":1,"MoveY":2,"AccelY":1}
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":2,"MoveX":-1,"MoveY":2,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":2,"MoveX":1,"MoveY":2,"AccelY":1}
 			]
 		},
 		"T179":{ // 179 Mega Cannon Lv.3
 			"Delay":8,
 			"Sound":10,
 			"Pieces":[
-				{"Sprite":64,"AttackPower":{"Infinite":2},"MoveY":4,"AccelY":1}
+				{"Sprite":64,"AttackPower":{"Infinite":true,"Damage":2},"MoveY":4,"AccelY":1}
 			]
 		},
 		"T180":{ // 180 Mega Cannon Lv.4
@@ -28,9 +28,9 @@
 			"Sound":10,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":-10,"MoveX":-2,"MoveY":2,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":10,"MoveX":2,"MoveY":2,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"MoveY":2,"AccelY":1}
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":-10,"MoveX":-2,"MoveY":2,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":10,"MoveX":2,"MoveY":2,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"MoveY":2,"AccelY":1}
 			]
 		},
 		"T181":{ // 181 Mega Cannon Lv.5
@@ -38,8 +38,8 @@
 			"Sound":10,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":75,"AttackPower":{"Infinite":2},"X":-7,"Y":9,"MoveX":-1,"MoveY":2,"AccelY":1},
-				{"Sprite":75,"AttackPower":{"Infinite":2},"X":7,"Y":9,"MoveX":1,"MoveY":2,"AccelY":1}
+				{"Sprite":75,"AttackPower":{"Infinite":true,"Damage":2},"X":-7,"Y":9,"MoveX":-1,"MoveY":2,"AccelY":1},
+				{"Sprite":75,"AttackPower":{"Infinite":true,"Damage":2},"X":7,"Y":9,"MoveX":1,"MoveY":2,"AccelY":1}
 			]
 		},
 		"T182":{ // 182 Mega Cannon Lv.6
@@ -47,10 +47,10 @@
 			"Sound":10,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":598,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":599,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":617,"AttackPower":{"Infinite":0},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":618,"AttackPower":{"Infinite":0},"X":6,"Y":7,"MoveY":3,"AccelY":1}
+				{"Sprite":598,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":599,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":617,"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":618,"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":3,"AccelY":1}
 			]
 		},
 		"T183":{ // 183 Mega Cannon Lv.7
@@ -58,12 +58,12 @@
 			"Sound":10,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":598,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":599,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":617,"AttackPower":{"Infinite":0},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":618,"AttackPower":{"Infinite":0},"X":6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":-14,"MoveX":-1,"MoveY":2,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":14,"MoveX":1,"MoveY":2,"AccelY":1}
+				{"Sprite":598,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":599,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":617,"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":618,"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":-14,"MoveX":-1,"MoveY":2,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":14,"MoveX":1,"MoveY":2,"AccelY":1}
 			]
 		},
 		"T184":{ // 184 Mega Cannon Lv.8
@@ -71,14 +71,14 @@
 			"Sound":10,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":598,"AttackPower":{"Infinite":1},"X":-18,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":599,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":617,"AttackPower":{"Infinite":0},"X":-18,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":618,"AttackPower":{"Infinite":0},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":598,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":599,"AttackPower":{"Infinite":1},"X":18,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":617,"AttackPower":{"Infinite":0},"X":6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":618,"AttackPower":{"Infinite":0},"X":18,"Y":7,"MoveY":3,"AccelY":1}
+				{"Sprite":598,"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":599,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":617,"AttackPower":{"Infinite":true},"X":-18,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":618,"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":598,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":599,"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":617,"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":618,"AttackPower":{"Infinite":true},"X":18,"Y":7,"MoveY":3,"AccelY":1}
 			]
 		},
 		"T185":{ // 185 Mega Cannon Lv.9
@@ -86,10 +86,10 @@
 			"Sound":10,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":596,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":597,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":615,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":616,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":3,"AccelY":1}
+				{"Sprite":596,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":597,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":615,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":616,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":3,"AccelY":1}
 			]
 		},
 		"T186":{ // 186 Mega Cannon Lv.10
@@ -97,12 +97,12 @@
 			"Sound":10,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":596,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":597,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":615,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":616,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":-14,"MoveX":-1,"MoveY":2,"AccelY":1},
-				{"Sprite":65,"AttackPower":{"Infinite":1},"X":14,"MoveX":1,"MoveY":2,"AccelY":1}
+				{"Sprite":596,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":597,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":615,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":616,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":-14,"MoveX":-1,"MoveY":2,"AccelY":1},
+				{"Sprite":65,"AttackPower":{"Infinite":true,"Damage":1},"X":14,"MoveX":1,"MoveY":2,"AccelY":1}
 			]
 		},
 		"T187":{ // 187 Mega Cannon Lv.11
@@ -110,14 +110,14 @@
 			"Sound":10,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":596,"AttackPower":{"Infinite":1},"X":-18,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":597,"AttackPower":{"Infinite":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":615,"AttackPower":{"Infinite":1},"X":-18,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":616,"AttackPower":{"Infinite":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":596,"AttackPower":{"Infinite":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":597,"AttackPower":{"Infinite":1},"X":18,"Y":-7,"MoveY":3,"AccelY":1},
-				{"Sprite":615,"AttackPower":{"Infinite":1},"X":6,"Y":7,"MoveY":3,"AccelY":1},
-				{"Sprite":616,"AttackPower":{"Infinite":1},"X":18,"Y":7,"MoveY":3,"AccelY":1}
+				{"Sprite":596,"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":597,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":615,"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":616,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":596,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":597,"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":-7,"MoveY":3,"AccelY":1},
+				{"Sprite":615,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":3,"AccelY":1},
+				{"Sprite":616,"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":7,"MoveY":3,"AccelY":1}
 			]
 		}
 	},

@@ -6,7 +6,7 @@
 			"Sound":26,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveY":-3}
 			]
 		},
 		"T577":{ // 577
@@ -15,7 +15,7 @@
 			"Sound":26,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"MoveY":-3}
 			]
 		},
 		"T578":{ // 578
@@ -24,7 +24,7 @@
 			"Sound":26,
 			"Trail":98,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"MoveY":-3}
 			]
 		},
 		"T579":{ // 579
@@ -34,8 +34,8 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-6,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":6,"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-6,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":6,"MoveY":-3}
 			]
 		},
 		"T580":{ // 580
@@ -45,8 +45,8 @@
 			"Trail":98,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-6,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":6,"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-6,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":6,"MoveY":-3}
 			]
 		},
 		"T581":{ // 581
@@ -56,9 +56,9 @@
 			"Trail":98,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"Y":-3,"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"Y":-3,"MoveY":-3}
 			]
 		},
 		"T582":{ // 582
@@ -68,10 +68,10 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3}
 			]
 		},
 		"T583":{ // 583
@@ -81,10 +81,10 @@
 			"Trail":98,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3}
 			]
 		},
 		"T584":{ // 584
@@ -94,12 +94,12 @@
 			"Trail":98,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":3,"MoveX":3,"MoveY":3}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":3,"MoveX":3,"MoveY":3}
 			]
 		},
 		"T585":{ // 585
@@ -109,13 +109,13 @@
 			"Trail":98,
 			"PiecesPerFire":7,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":3,"MoveX":3,"MoveY":3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"Y":-4,"MoveY":-4}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":3,"MoveX":3,"MoveY":3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"Y":-4,"MoveY":-4}
 			]
 		},
 		"T586":{ // 586
@@ -125,14 +125,14 @@
 			"Trail":98,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":-5,"MoveX":-5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MicroBombShrapnel"},"X":5,"MoveX":5},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"X":3,"Y":3,"MoveX":3,"MoveY":3},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"Y":-4,"MoveY":-4},
-				{"Sprite":171,"AttackPower":{"Shrapnel":"MissileShrapnelLow"},"Y":6,"MoveY":6}
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":-5,"MoveX":-5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMicro"},"X":5,"MoveX":5},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":-3,"MoveX":-3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":-3,"MoveX":3,"MoveY":-3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":-3,"Y":3,"MoveX":-3,"MoveY":3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"X":3,"Y":3,"MoveX":3,"MoveY":3},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"Y":-4,"MoveY":-4},
+				{"Sprite":171,"AttackPower":{"Shrapnel":"GenericShrapnelMedium"},"Y":6,"MoveY":6}
 			]
 		}
 	},
