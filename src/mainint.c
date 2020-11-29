@@ -1923,41 +1923,34 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 					}
 					JE_setupExplosion(enemy_screen_x, enemy[z].ey, 0, enemyDat[enemy[z].enemytype].explosiontype, true, false);
 				}
-				else if (this_player->invulnerable_ticks == 0 && enemyAvail[z] == 0 &&
+				else if (this_player->invulnerable_ticks == 0 && enemyAvail[z] == 0 && enemy[z].ehealth > 0 &&
 				         (enemyDat[enemy[z].enemytype].explosiontype & 1) == 0) // explosiontype & 1 == 0: not ground enemy
 				{
-					int armorleft = enemy[z].armorleft;
-					if (armorleft > damageRate)
-						armorleft = damageRate;
-
-					PL_PlayerDamage(this_player, armorleft);
+					// Change from vanilla: player always gets full damage from collision regardless of enemy health
+					PL_PlayerDamage(this_player, damageRate);
 
 					// player ship gets push-back from collision
-					if (enemy[z].armorleft > 0)
-					{
-						this_player->x_velocity += (enemy[z].exc * enemy[z].armorleft) / 2;
-						this_player->y_velocity += (enemy[z].eyc * enemy[z].armorleft) / 2;
-					}
-
-					int armorleft2 = enemy[z].armorleft;
-					if (armorleft2 == 255)
-						armorleft2 = 30000;
-
-					temp = enemy[z].linknum;
-					if (temp == 0)
-						temp = 255;
+					this_player->x_velocity += (enemy[z].exc * damageRate) / 2;
+					this_player->y_velocity += (enemy[z].eyc * damageRate) / 2;
 
 					b = z;
 
-					if (armorleft2 > armorleft)
+					// TODO merge enemy death functions to fix vanilla bugs
+					if (enemy[z].ehealth == ENEMY_INVULNERABLE)
 					{
-						// damage enemy
-						if (enemy[z].armorleft != 255)
-							enemy[z].armorleft -= armorleft;
 						soundQueue[5] = S_ENEMY_HIT;
+					}
+					else if (enemy[z].ehealth > (Uint32)damageRate * 90) // slightly nerfed enemy damage
+					{
+						soundQueue[5] = S_ENEMY_HIT;
+						enemy[z].ehealth -= (Uint32)damageRate * 90; // damage enemy
 					}
 					else
 					{
+						temp = enemy[z].linknum;
+						if (temp == 0)
+							temp = 255;
+
 						// kill enemy
 						for (temp2 = 0; temp2 < 100; temp2++)
 						{
@@ -1996,4 +1989,3 @@ void JE_playerCollide( Player *this_player, JE_byte playerNum_ )
 		}
 	}
 }
-

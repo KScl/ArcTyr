@@ -247,7 +247,7 @@ static const Patches _P4_CORE[] = {
 };
 
 static const Patches _P4_QTUNNELQ[] = {
-	{1, true, {0, 46, 3, 0, 3}}, // Greatly increase difficulty
+	{1, true, {0, 46, 1, 0, 2}}, // Increase difficulty
 	{664, false, {4010, 99, 1}}, // Remap old random explosion event to new one
 	{716, false, {4300, 16, 8}}, // improper SFX callout changed to proper event
 	{0}, // End

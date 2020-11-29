@@ -25,7 +25,10 @@ typedef struct
 	JE_word     weapani;
 	JE_byte     max;
 	JE_byte     tx, ty, aim;
-	JE_byte     attack[8], del[8]; /* [1..8] */
+	JE_word     dmgAmount[8], dmgChain[8];
+	JE_byte     dmgIce[8];
+	JE_boolean  dmgInfinite[8];
+	JE_byte     del[8]; /* [1..8] */
 	JE_shortint sx[8], sy[8]; /* [1..8] */
 	JE_shortint bx[8], by[8]; /* [1..8] */
 	JE_word     sg[8]; /* [1..8] */

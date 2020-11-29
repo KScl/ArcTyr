@@ -57,6 +57,7 @@ static void _loadPWeapons( const char *dataFile )
 	FILE *f = NULL;
 	size_t shotSize;
 	JE_byte tmp_b;
+	Uint32 tmp_int[8];
 
 	f = dir_fopen_die(arcdata_dir(), dataFile, "rb");
 
@@ -77,48 +78,25 @@ static void _loadPWeapons( const char *dataFile )
 		pWeapons[i].multi = (tmp_b & 0x0F);
 		pWeapons[i].max   = (tmp_b & 0xF0) >> 4;
 
-		// bits set for repeated data, 1 for repeated, 0 for not
-		// this is for all multi-shot vars except sx and sy, which
-		// are the most likely to vary
-		efread(&tmp_b,                       sizeof(JE_byte), 1, f);
-
 		if (pWeapons[i].max > 0)
 		{
-			efread(&pWeapons[i].attack,          sizeof(JE_byte),     (tmp_b & 0x01) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].del,             sizeof(JE_byte),     (tmp_b & 0x02) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].sx,              sizeof(JE_shortint),                      pWeapons[i].max, f);
-			efread(&pWeapons[i].sy,              sizeof(JE_shortint),                      pWeapons[i].max, f);
-			efread(&pWeapons[i].bx,              sizeof(JE_shortint), (tmp_b & 0x04) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].by,              sizeof(JE_shortint), (tmp_b & 0x08) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].sg,              sizeof(JE_word),     (tmp_b & 0x10) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].acceleration,    sizeof(JE_shortint), (tmp_b & 0x20) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].accelerationx,   sizeof(JE_shortint), (tmp_b & 0x40) ? 1 : pWeapons[i].max, f);
-			efread(&pWeapons[i].circlesize,      sizeof(JE_byte),     (tmp_b & 0x80) ? 1 : pWeapons[i].max, f);
-		}
-		if (pWeapons[i].max > 1 && tmp_b)
-		{
-			// if bit set for repeated data, fill all remaining values with the first entry
-			if (tmp_b & 0x01) 
-				memset(&pWeapons[i].attack,        pWeapons[i].attack[0],        sizeof(JE_byte) * 8);
-			if (tmp_b & 0x02)
-				memset(&pWeapons[i].del,           pWeapons[i].del[0],           sizeof(JE_byte) * 8);
-			if (tmp_b & 0x04)
-				memset(&pWeapons[i].bx,            pWeapons[i].bx[0],            sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x08)
-				memset(&pWeapons[i].by,            pWeapons[i].by[0],            sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x10)
+			efread(tmp_int,                      sizeof(Uint32),      pWeapons[i].max, f);
+			for (size_t j = 0; j < pWeapons[i].max; ++j)
 			{
-				// the odd one out -- can't just do memset for something that's a word
-				pWeapons[i].sg[1] = pWeapons[i].sg[0];
-				memcpy(&pWeapons[i].sg[2], &pWeapons[i].sg[0], sizeof(JE_word) * 2);
-				memcpy(&pWeapons[i].sg[4], &pWeapons[i].sg[0], sizeof(JE_word) * 4);
+				pWeapons[i].dmgAmount[j] = tmp_int[j] & 0x00003FFF;
+				pWeapons[i].dmgIce[j] = (tmp_int[j] & 0x0003C000) >> 14;
+				pWeapons[i].dmgChain[j] = (tmp_int[j] & 0x7FFC0000) >> 18;
+				pWeapons[i].dmgInfinite[j] = (tmp_int[j] & 0x80000000) ? 1 : 0;
 			}
-			if (tmp_b & 0x20)
-				memset(&pWeapons[i].acceleration,  pWeapons[i].acceleration[0],  sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x40)
-				memset(&pWeapons[i].accelerationx, pWeapons[i].accelerationx[0], sizeof(JE_shortint) * 8);
-			if (tmp_b & 0x80)
-				memset(&pWeapons[i].circlesize,    pWeapons[i].circlesize[0],    sizeof(JE_byte) * 8);
+			efread(&pWeapons[i].del,             sizeof(JE_byte),     pWeapons[i].max, f);
+			efread(&pWeapons[i].sx,              sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].sy,              sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].bx,              sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].by,              sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].sg,              sizeof(JE_word),     pWeapons[i].max, f);
+			efread(&pWeapons[i].acceleration,    sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].accelerationx,   sizeof(JE_shortint), pWeapons[i].max, f);
+			efread(&pWeapons[i].circlesize,      sizeof(JE_byte),     pWeapons[i].max, f);
 		}
 
 		efread(&pWeapons[i].sound,           sizeof(JE_byte), 1, f);

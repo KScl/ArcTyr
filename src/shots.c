@@ -143,8 +143,6 @@ static void player_shot_set_direction( JE_integer shot_id, JE_real direction )
 bool player_shot_move_and_draw(
 		int shot_id, bool* out_is_special,
 		int* out_shotx, int* out_shoty,
-		JE_integer* out_shot_damage, JE_byte* out_blast_filter,
-		JE_byte* out_chain, JE_byte* out_playerNum,
 		JE_word* out_special_radiusw, JE_word* out_special_radiush )
 {
 	PlayerShotDataType* shot = &playerShotData[shot_id];
@@ -258,11 +256,6 @@ bool player_shot_move_and_draw(
 	if (++shot->shotAni == shot->shotAniMax)
 		shot->shotAni = 0;
 
-	*out_shot_damage = shot->shotDmg;
-	*out_blast_filter = shot->shotBlastFilter;
-	*out_chain = shot->chainReaction;
-	*out_playerNum = shot->playerNumber;
-
 	*out_is_special = sprite_frame > 60000;
 
 	if (*out_is_special)
@@ -333,7 +326,6 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 			(*sMP)++;
 
 		PlayerShotDataType* shot = &playerShotData[shot_id];
-		shot->chainReaction = 0;
 
 		shot->playerNumber = playerNum;
 
@@ -399,15 +391,10 @@ JE_integer player_shot_create( JE_word portNum, uint bay_i, JE_word PX, JE_word 
 
 		shot->shotTrail = weapon->trail;
 
-		if (weapon->attack[*sMP-1] > 99 && weapon->attack[*sMP-1] < 250)
-		{
-			shot->chainReaction = weapon->attack[*sMP-1] - 100;
-			shot->shotDmg = 1;
-		}
-		else
-		{
-			shot->shotDmg = weapon->attack[*sMP-1];
-		}
+		shot->shotDmg = weapon->dmgAmount[*sMP-1];
+		shot->shrapnel = weapon->dmgChain[*sMP-1];
+		shot->ice = weapon->dmgIce[*sMP-1];
+		shot->infinite = weapon->dmgInfinite[*sMP-1];
 
 		shot->shotBlastFilter = weapon->shipblastfilter;
 

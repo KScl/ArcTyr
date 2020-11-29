@@ -466,13 +466,19 @@ enemy_still_exists:
 
 					if (--enemy[i].eshotwait[j-1] == 0 && temp3)
 					{
-						enemy[i].eshotwait[j-1] = enemy[i].freq[j-1];
-						if (difficultyLevel > 2)
+						switch (difficultyLevel)
 						{
-							enemy[i].eshotwait[j-1] = (enemy[i].eshotwait[j-1] / 2) + 1;
-							if (difficultyLevel > 7)
-								enemy[i].eshotwait[j-1] = (enemy[i].eshotwait[j-1] / 2) + 1;
+							default: enemy[i].eshotwait[j-1] = enemy[i].freq[j-1]; break;
+							case 3: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 2) + 1; break;
+							case 4:
+							case 5: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 2); break;
+							case 6:
+							case 7: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] * 2) / 3; break;
+							case 8: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 3); break;
+							case 9: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 4); break;
 						}
+						if (enemy[i].eshotwait[j-1] == 0)
+							enemy[i].eshotwait[j-1] = 1;
 
 						// formerly galaga:
 						//if (galagaMode && (enemy[i].eyc == 0 || (mt_rand() % 400) >= galagaRandomShotChance))
@@ -1468,24 +1474,37 @@ level_loop:
 	{
 		bool is_special = false;
 		int tempShotX = 0, tempShotY = 0;
-		JE_byte chain;
-		JE_byte playerNum;
 		JE_word tempX2, tempY2;
+		JE_byte filter, doIced, playerNum;
 		JE_integer damage;
+		JE_word shrapnel;
+		JE_boolean infiniteShot;
 
 		if (z >= MAX_PWEAPON)
 		{
 			zinglon_player = (z - MAX_PWEAPON);
 			if (!player[zinglon_player].specials.zinglon)
 				continue;
+
+			filter = 0;
+			playerNum = zinglon_player;
+			damage = 1000; // note: soul of zinglon does not deal damage -- it kills enemies that are weak
+			doIced = 0;
+			infiniteShot = false;
+			shrapnel = 0;
 		}
-		else if (shotAvail[z] == 0 ||
-			!player_shot_move_and_draw(
-				z, &is_special, &tempShotX, &tempShotY, 
-				&damage, &temp2, &chain, &playerNum, 
-				&tempX2, &tempY2)
-			)
-			continue;
+		else
+		{
+			if (shotAvail[z] == 0 || !player_shot_move_and_draw(z, &is_special, &tempShotX, &tempShotY, &tempX2, &tempY2))
+				continue;
+
+			filter = playerShotData[z].shotBlastFilter;
+			playerNum = playerShotData[z].playerNumber;
+			damage = playerShotData[z].shotDmg;
+			shrapnel = playerShotData[z].shrapnel;
+			infiniteShot = playerShotData[z].infinite;
+			doIced = playerShotData[z].ice * 10;			
+		}
 
 		for (b = 0; b < 100; b++)
 		{
@@ -1497,9 +1516,6 @@ level_loop:
 				{
 					temp = 25 - abs(player[zinglon_player].specials.zinglon - 25);
 					collided = abs(enemy[b].ex + enemy[b].mapoffset - (player[zinglon_player].x + 7)) < temp;
-					temp2 = 0;
-					chain = 0;
-					damage = 10; // note: soul of zinglon does not deal damage -- it kills enemies that are weak
 				}
 				else if (is_special)
 				{
@@ -1520,48 +1536,20 @@ level_loop:
 
 				if (collided)
 				{
-					JE_byte doIced = 0;
-					JE_boolean infiniteShot = false;
-
-					if (chain > 0)
-					{
-						b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, chain, playerNum);
-						shotAvail[z] = 0;
-						goto draw_player_shot_loop_end;
-					}
-
-					if (damage == 98)
-					{
-						// Icebreaker
-						damage = 1;
-						doIced = enemy[b].iced = 100;
-						infiniteShot = true;
-					}
-					if (damage == 99)
-					{
-						damage = 0;
-						doIced = enemy[b].iced = 40;
-					}
-					else if (damage >= 250)
-					{
-						damage -= 250;
-						infiniteShot = true;
-					}
-
-					int armorleft = enemy[b].armorleft;
+					int orig_health = enemy[b].ehealth;
 
 					temp = enemy[b].linknum;
 					if (temp == 0)
 						temp = 255;
 
-					if (enemy[b].armorleft < 255)
+					if (damage > 0 && enemy[b].ehealth != ENEMY_INVULNERABLE)
 					{
 						for (unsigned int i = 0; i < COUNTOF(boss_bar); i++)
 							if (temp == boss_bar[i].link_num)
 								boss_bar[i].color = 6;
 
 						if (enemy[b].enemyground)
-							enemy[b].filter = temp2;
+							enemy[b].filter = filter;
 
 						for (unsigned int e = 0; e < COUNTOF(enemy); e++)
 						{
@@ -1571,29 +1559,29 @@ level_loop:
 							{
 								if (doIced)
 									enemy[e].iced = doIced;
-								enemy[e].filter = temp2;
+								enemy[e].filter = filter;
 							}
 						}
 					}
 
-					if (armorleft > damage)
+					if (orig_health > damage)
 					{
 						if (zinglon_player == 0xFF)
 						{
-							if (enemy[b].armorleft != 255)
+							if (enemy[b].ehealth != ENEMY_INVULNERABLE)
 							{
-								enemy[b].armorleft -= damage;
+								enemy[b].ehealth -= damage;
 								JE_setupExplosion(tempShotX, tempShotY, 0, 0, false, false);
 							}
 							else
 							{
-								JE_doSP(tempShotX + 6, tempShotY + 6, damage / 2 + 3, damage / 4 + 2, temp2);
+								JE_doSP(tempShotX + 6, tempShotY + 6, damage / 200 + 3, damage / 400 + 2, filter);
 							}
 						}
 
 						soundQueue[5] = S_ENEMY_HIT;
 
-						if ((armorleft - damage <= enemy[b].edlevel) &&
+						if ((orig_health - damage <= (int)enemy[b].edlevel * 100) &&
 						    ((!enemy[b].edamaged) ^ (enemy[b].edani < 0)))
 						{
 
@@ -1645,8 +1633,8 @@ level_loop:
 
 										enemy[temp3].aniwhenfire = 0;
 
-										if (enemy[temp3].armorleft > (unsigned char)enemy[temp3].edlevel)
-											enemy[temp3].armorleft = enemy[temp3].edlevel;
+										if (enemy[temp3].ehealth > (Uint32)enemy[temp3].edlevel * 100)
+											enemy[temp3].ehealth = (Uint32)enemy[temp3].edlevel * 100;
 
 										tempX = enemy[temp3].ex + enemy[temp3].mapoffset;
 										tempY = enemy[temp3].ey;
@@ -1757,20 +1745,23 @@ level_loop:
 						}
 					}
 
-					if (infiniteShot)
+					if (infiniteShot && shrapnel > 0)
+						b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, shrapnel, playerNum);
+
+					if (!infiniteShot && zinglon_player == 0xFF)
 					{
-						damage += 250;
-					}
-					else if (zinglon_player == 0xFF)
-					{
-						if (damage <= armorleft)
+						if (damage <= orig_health)
 						{
+							if (shrapnel > 0)
+								b = player_shot_create(0, SHOT_MISC, tempShotX, tempShotY, shrapnel, playerNum);
+
 							shotAvail[z] = 0;
 							goto draw_player_shot_loop_end;
 						}
 						else
 						{
-							playerShotData[z].shotDmg -= armorleft;
+							playerShotData[z].shotDmg -= orig_health;
+							damage = playerShotData[z].shotDmg;
 						}
 					}
 				}
@@ -2056,7 +2047,7 @@ draw_player_shot_loop_end:
 			{
 				enemy[b-1].enemydie = 990 + (mt_rand() % 3) + 1;
 				enemy[b-1].eyc -= backMove3;
-				enemy[b-1].armorleft = 4;
+				enemy[b-1].ehealth = 360;
 			}
 			armorShipDelay = 500;
 		}
@@ -3190,118 +3181,55 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shape
 
 	enemy->filter = 0x00;
 
-	if (enemyDat[eDatI].value > 1 && enemyDat[eDatI].value < 10000)
+	enemy->evalue = enemyDat[eDatI].value;
+	if (DIP.rankAffectsScore && enemy->evalue > 1 && enemy->evalue < 10000)
 	{
-		int tempValue = enemyDat[eDatI].value;
-		if (DIP.rankAffectsScore)
+		switch (difficultyLevel)
 		{
-			switch (difficultyLevel)
-			{
-			case -1:
-			case 0:
-				tempValue = enemyDat[eDatI].value * 0.75f;
-				break;
-			case 1:
-			case 2:
-				tempValue = enemyDat[eDatI].value;
-				break;
-			case 3:
-				tempValue = enemyDat[eDatI].value * 1.125f;
-				break;
-			case 4:
-				tempValue = enemyDat[eDatI].value * 1.5f;
-				break;
-			case 5:
-				tempValue = enemyDat[eDatI].value * 2;
-				break;
-			case 6:
-				tempValue = enemyDat[eDatI].value * 2.5f;
-				break;
+			default: break;
+			case 3:  enemy->evalue = enemyDat[eDatI].value * 1.125f; break;
+			case 4:  enemy->evalue = enemyDat[eDatI].value * 1.5f;   break;
+			case 5:  enemy->evalue = enemyDat[eDatI].value * 2;      break;
+			case 6:  enemy->evalue = enemyDat[eDatI].value * 2.5f;   break;
 			case 7:
-			case 8:
-				tempValue = enemyDat[eDatI].value * 4;
-				break;
+			case 8:  enemy->evalue = enemyDat[eDatI].value * 4;      break;
 			case 9:
-			case 10:
-				tempValue = enemyDat[eDatI].value * 8;
-				break;
-			}
-			if (tempValue > 9000)
-				tempValue = 9000;
+			case 10: enemy->evalue = enemyDat[eDatI].value * 8;      break;
 		}
-		enemy->evalue = tempValue;
-	}
-	else
-	{
-		enemy->evalue = enemyDat[eDatI].value;
+		if (enemy->evalue > 9000)
+			enemy->evalue = 9000;
 	}
 
-	int tempArmor = 1;
 	if (enemyDat[eDatI].armor > 0)
 	{
 		if (enemyDat[eDatI].armor != 255)
 		{
+			int tempArmor = enemyDat[eDatI].armor * 100;
 			switch (difficultyLevel)
 			{
-			case 1:  tempArmor = enemyDat[eDatI].armor * 0.75f + 1; break;
-			default: tempArmor = enemyDat[eDatI].armor;          break;
-			case 4:  tempArmor = enemyDat[eDatI].armor * 1.125f; break;
-			case 5:  tempArmor = enemyDat[eDatI].armor * 1.5f;   break;
-			case 6:  tempArmor = enemyDat[eDatI].armor * 1.8f;   break;
-			case 7:  tempArmor = enemyDat[eDatI].armor * 2.25f;  break;
-			case 8:  tempArmor = enemyDat[eDatI].armor * 3;      break;
-			case 9:  tempArmor = enemyDat[eDatI].armor * 4;      break;
-			case 10: tempArmor = enemyDat[eDatI].armor * 8;      break;
-/*			case -1:
-			case 0:
-				tempArmor = enemyDat[eDatI].armor * 0.5f + 1;
-				break;
-			case 1:
-				tempArmor = enemyDat[eDatI].armor * 0.75f + 1;
-				break;
-			case 2:
-				tempArmor = enemyDat[eDatI].armor;
-				break;
-			case 3:
-				tempArmor = enemyDat[eDatI].armor * 1.2f;
-				break;
-			case 4:
-				tempArmor = enemyDat[eDatI].armor * 1.5f;
-				break;
-			case 5:
-				tempArmor = enemyDat[eDatI].armor * 1.8f;
-				break;
-			case 6:
-				tempArmor = enemyDat[eDatI].armor * 2;
-				break;
-			case 7:
-				tempArmor = enemyDat[eDatI].armor * 3;
-				break;
-			case 8:
-				tempArmor = enemyDat[eDatI].armor * 4;
-				break;
-			case 9:
-			case 10:
-				tempArmor = enemyDat[eDatI].armor * 8;
-				break; */
+				default: break;
+				case 4:  tempArmor *= 1.1f;   break;
+				case 5:  tempArmor *= 1.2f;   break;
+				case 6:  tempArmor *= 1.3f;   break;
+				case 7:  tempArmor *= 1.5f;   break;
+				case 8:  tempArmor *= 1.7f;   break;
+				case 9:  tempArmor *= 1.8f;   break;
+				case 10: tempArmor *= 2;      break;
 			}
 
 			// Episode 4 was designed for players already loaded up in full game mode,
 			// so tone down the armor values a little bit
 			if (episodeNum == 4)
-				tempArmor = tempArmor * 0.667f + 1;
+				tempArmor *= 0.9f;
 
-			if (tempArmor > 254)
-			{
-				tempArmor = 254;
-			}
+			if (tempArmor >= ENEMY_INVULNERABLE)
+				tempArmor = ENEMY_INVULNERABLE - 1;
+			enemy->ehealth = tempArmor;
 		}
 		else
 		{
-			tempArmor = 255;
+			enemy->ehealth = ENEMY_INVULNERABLE;
 		}
-
-		enemy->armorleft = tempArmor;
 
 		avail = 0;
 		enemy->scoreitem = false;
@@ -3309,7 +3237,7 @@ uint JE_makeEnemy( struct JE_SingleEnemyType *enemy, Uint16 eDatI, JE_byte shape
 	else
 	{
 		avail = 2;
-		enemy->armorleft = 255;
+		enemy->ehealth = ENEMY_INVULNERABLE;
 		// Bugfix (original game): Make sure scoreitem is always set
 		enemy->scoreitem = (enemy->evalue != 0);
 	}
@@ -3879,15 +3807,13 @@ void JE_eventSystem( void )
 		break;
 
 	case 25: /* Enemy Global Damage change */
-		event_name("enemy_global_health_change");
+	case 47: // This game, I swear...
+		event_name("enemy_global_health_change_legacy");
+		int newarmor = (eventRec[eventLoc-1].eventdat == 255) ? ENEMY_INVULNERABLE : eventRec[eventLoc-1].eventdat * 100;
 		for (temp = 0; temp < 100; temp++)
 		{
 			if (eventRec[eventLoc-1].eventdat4 == 0 || enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
-			{
-				// formerly galaga:
-				//	enemy[temp].armorleft = roundf(eventRec[eventLoc-1].eventdat * (difficultyLevel / 2));
-				enemy[temp].armorleft = eventRec[eventLoc-1].eventdat;
-			}
+				enemy[temp].ehealth = newarmor;
 		}
 		break;
 
@@ -4087,15 +4013,6 @@ void JE_eventSystem( void )
 		if (eventRec[eventLoc-1].eventdat3 != 0)
 			damageRate = eventRec[eventLoc-1].eventdat3;
 		ARC_RankLevelAdjusts(eventRec[eventLoc-1].eventdat);
-		break;
-
-	case 47: /* Enemy Global AccelRev */
-		event_name("enemy_global_accelrev");
-		for (temp = 0; temp < 100; temp++)
-		{
-			if (eventRec[eventLoc-1].eventdat4 == 0 || enemy[temp].linknum == eventRec[eventLoc-1].eventdat4)
-				enemy[temp].armorleft = eventRec[eventLoc-1].eventdat;
-		}
 		break;
 
 	case 48: /* Background 2 Cannot be Transparent */
@@ -4400,6 +4317,7 @@ void JE_eventSystem( void )
 		event_name("set_boss_bar");
 		boss_bar[0].link_num = eventRec[eventLoc-1].eventdat;
 		boss_bar[1].link_num = eventRec[eventLoc-1].eventdat2;
+		boss_bar[0].color = boss_bar[1].color = 6;
 		break;
 
 	case 80:  // skip events if in 2-player mode
@@ -4576,29 +4494,27 @@ void JE_barX( JE_word x1, JE_word y1, JE_word x2, JE_word y2, JE_byte col )
 void draw_boss_bar( void )
 {
 	JE_boolean timerActive = (levelTimer || (hurryUpTimer < 995));
+	unsigned int bars = 0;
 
 	for (unsigned int b = 0; b < COUNTOF(boss_bar); b++)
 	{
 		if (boss_bar[b].link_num == 0)
 			continue;
+		++bars;
 
-		unsigned int armor = 256;  // higher than armor max
-
+		unsigned int worst_health = ENEMY_INVULNERABLE+1;  // higher than armor max
 		for (unsigned int e = 0; e < COUNTOF(enemy); e++)  // find most damaged
 		{
 			if (enemyAvail[e] != 1 && enemy[e].linknum == boss_bar[b].link_num)
-				if (enemy[e].armorleft < armor)
-					armor = enemy[e].armorleft;
+				if (enemy[e].ehealth < worst_health)
+					worst_health = enemy[e].ehealth;
 		}
 
-		if (armor > 255 || armor == 0)  // boss dead?
+		if (worst_health == ENEMY_INVULNERABLE+1 || worst_health == 0)  // boss dead?
 			boss_bar[b].link_num = 0;
 		else
-			boss_bar[b].armor = (armor == 255) ? 254 : armor;  // 255 would make the bar too long
+			boss_bar[b].armor = worst_health / 100;
 	}
-
-	unsigned int bars = (boss_bar[0].link_num != 0 ? 1 : 0)
-	                  + (boss_bar[1].link_num != 0 ? 1 : 0);
 
 	// if only one bar left, make it the first one
 	if (bars == 1 && boss_bar[0].link_num == 0)
@@ -4611,16 +4527,14 @@ void draw_boss_bar( void )
 	{
 		unsigned int x = 157, y = 12;
 		if (timerActive) // level timer and boss bar would overlap
-		{
-			//x = 250;
-			//y = (b == 0) ? 7 : 17;
 			y = 26;
-		}
 		if (bars == 2)
 			x = (b == 0) ? 127 : 187;
 
+		if (boss_bar[b].armor > 254)
+			boss_bar[b].armor = 254;
 		JE_barX(x - 25, y, x + 25, y + 5, 115);
-		JE_barX(x - (boss_bar[b].armor / 10), y, x + (boss_bar[b].armor + 5) / 10, y+5, 118 + boss_bar[b].color);
+		JE_barX(x - (boss_bar[b].armor / 10), y, x + (boss_bar[b].armor + 5) / 10, y + 5, 118 + boss_bar[b].color);			
 
 		if (boss_bar[b].color > 0)
 			boss_bar[b].color--;

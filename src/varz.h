@@ -20,10 +20,10 @@
 
 #include <stdbool.h>
 
-#define SA 7
-
 // instant kill damage
 #define DKILL 255
+
+#define ENEMY_INVULNERABLE 1000000
 
 // max dragonwing charge
 #define MAXCHARGE 5
@@ -33,20 +33,6 @@
 #define PWPN_TURRET_SMALL    2
 #define PWPN_NORTSPARKS      3
 #define PWPN_ASTEROID_KILLER 4
-
-enum
-{
-	SA_NONE = 0,
-	SA_NORTSHIPZ = 7,
-	
-	// only used for code entry
-	SA_DESTRUCT = 8,
-	SA_ENGAGE = 9,
-	
-	// only used in pItems[P_SUPERARCADE]
-	SA_SUPERTYRIAN = 254,
-	SA_ARCADE = 255
-};
 
 #define ENEMY_SHOT_MAX  60 /* 60*/
 
@@ -64,7 +50,6 @@ struct JE_SingleEnemyType
 	JE_shortint exca, eyca; /* RANDOM ACCELERATION */
 	JE_shortint excc, eycc; /* FIXED ACCELERATION WAITTIME */
 	JE_shortint exccw, eyccw;
-	JE_byte     armorleft;
 	JE_byte     eshotwait[3], eshotmultipos[3]; /* [1..3] */
 	JE_byte     enemycycle;
 	JE_byte     ani;
@@ -117,7 +102,7 @@ struct JE_SingleEnemyType
 	JE_byte     fill[3]; /* [1..3] */
 
 	// ARC extras (not in data files)
-	JE_byte     armoreffectiveness; // 1: normal damage, 2: half damage
+	Uint32      ehealth; // replaces armorleft, armor * 100
 	JE_byte     playertotarget; // In two-player games, who to target
 };
 

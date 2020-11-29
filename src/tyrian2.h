@@ -26,8 +26,8 @@ void intro_logos( void );
 
 typedef struct
 {
+	Uint32 armor;
 	Uint8 link_num;
-	Uint8 armor;
 	Uint8 color;
 }
 boss_bar_t;
