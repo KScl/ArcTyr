@@ -46,8 +46,10 @@
 		"BigExplosionShrapnel":{ // 87 Giant explosion graphic
 			"Delay":8,
 			"Sound":41,
+			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":{"Special":34},"AttackPower":20,"Duration":4,"X":-40,"Y":-30,"MoveX":{"FollowX":0},"MoveY":{"FollowY":0}}
+				{"Sprite":{"Special":34},"AttackPower":{"Infinite":true,"Damage":12.8},"Duration":1,"X":-40,"Y":-30},
+				{"Sprite":{"Special":34},"AttackPower":{"Infinite":true},"Duration":4,"X":-40,"Y":-30}
 			]
 		},
 
