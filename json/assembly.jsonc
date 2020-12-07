@@ -29,19 +29,21 @@
 		"./Enemies/ExtraEnemies.jsonc"
 	],
 	"Info":{
-		"ShipOrder":[ // Order of ships in Ship Select
-			"SilverShip",
-			"DragonWing",
-			"Stalker",
-			"Talon",
-			"Maelstrom",
-			"UShip",
-			"SuperCarrot",
-			{"Tyrian2000":"RedDragon"},
-			{"Tyrian2000":"PeteZoomer"},
-			"Magma",
-			{"Secret":"Randomizer"},
-			{"Secret":"NortShip"}
-		]
+		"ShipsTop":     [null, "SilverShip",  "Talon",     "Stalker", "DragonWing", null],
+		"ShipsBottom":  ["?",  "SuperCarrot", "Maelstrom", "UShip",   "Magma",      "?" ],
+		"ShipsContinue":["?", "SilverShip", "DragonWing", "Talon", "Stalker", "SuperCarrot", "Maelstrom", "UShip", "Magma"],
+		"SecretCodes":{
+			"NortShip":["Up","Up","Down","Down","Left","Right","Left","Right","Sidekick","Fire"],
+			"Randomizer":["Right","Fire","Down","Left","Fire","Down"]
+		},
+
+		"2KShipsTop":     ["RedDragon", "SilverShip",  "Talon",     "Stalker", "DragonWing", "PeteZoomer"],
+		"2KShipsBottom":  ["?",         "SuperCarrot", "Maelstrom", "UShip",   "Magma",      "?"         ],
+		"2KShipsContinue":["?", "SilverShip", "DragonWing", "Talon", "Stalker", "SuperCarrot", "Maelstrom", "UShip", "Magma", "RedDragon", "PeteZoomer"],
+		"2KSecretCodes":{
+			//"RumBottle":["Up","Up","Down","Down","Left","Right","Left","Right","Sidekick","Fire"],
+			"NortShip":["Up","Up","Down","Down","Left","Right","Left","Right","Sidekick","Fire"],
+			"Randomizer":["Right","Fire","Down","Left","Fire","Down"]
+		}
 	}
 }

@@ -125,7 +125,6 @@ typedef struct
 	
 	bool is_dragonwing; // requires a bunch of special cases
 	bool is_nortship; // same as above
-	bool is_secret; // locks out high scores
 	uint lives;
 	
 	// calculatable
@@ -241,6 +240,7 @@ static inline bool all_players_alive( void )
 }
 
 void PL_Init( Player *this_player, uint ship, bool continuing );
+void PL_RandomSelect ( Player *this_player );
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port );
 

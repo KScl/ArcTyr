@@ -134,9 +134,9 @@ def canonicalize_list(structure, length, function = None):
 		raise ElementError('Element has the wrong length (expected %d, got %d)' % (length, len(structure)))
 	return [function(i) for i in structure] if function is not None else structure
 
-def ensure_list_length(target, length):
+def ensure_list_length(target, length, filler = 0):
 	temp = target.copy()
-	temp.extend([0] * length)
+	temp.extend([filler] * length)
 	return temp[:length]
 
 class ByteString:
@@ -203,6 +203,8 @@ def find_shot_id(name, is_complex = False):
 			find_shot_id._list[key] = i
 			i += 1
 
+	if name is None:
+		return 0 # Assume None references the "None" item
 	if type(name) is int:
 		return name # Assume an int is a valid reference
 	if name not in TyrianData.Shots.keys():
@@ -220,6 +222,8 @@ def find_ship_id(name, is_complex = False):
 			find_ship_id._list[key] = i
 			i += 1
 
+	if name is None:
+		return 0 # Assume None references the "None" item
 	if type(name) is int:
 		return name # Assume an int is a valid reference
 	if name not in TyrianData.Ships.keys():
@@ -237,6 +241,8 @@ def find_port_id(name, is_complex = False):
 			find_port_id._list[key] = i
 			i += 1
 
+	if name is None:
+		return 0 # Assume None references the "None" item
 	if type(name) is int:
 		return name # Assume an int is a valid reference
 	if name not in TyrianData.Ports.keys():
@@ -254,6 +260,8 @@ def find_special_id(name, is_complex = False):
 			find_special_id._list[key] = i
 			i += 1
 
+	if name is None:
+		return 0 # Assume None references the "None" item
 	if type(name) is int:
 		return name # Assume an int is a valid reference
 	if name not in TyrianData.Specials.keys():
@@ -271,6 +279,8 @@ def find_option_id(name, is_complex = False):
 			find_option_id._list[key] = i
 			i += 1
 
+	if name is None:
+		return 0 # Assume None references the "None" item
 	if type(name) is int:
 		return name # Assume an int is a valid reference
 	if name not in TyrianData.Options.keys():
@@ -371,22 +381,30 @@ def iter_ships():
 
 	yield (len(TyrianData.Ships) - 1).to_bytes(1, signed=False, byteorder='little')
 
-	# Ship Select order
-	_currentStruct = 'Info:ShipOrder'
-	shiporder = TyrianData.Info['ShipOrder']
-	s = ByteString()
-	s.AppendUint8(len(shiporder))
-	for ship_name in shiporder:
-		try:
-			ship = resolve_complex_element(ship_name, {
-				'Tyrian2000': lambda x: find_ship_id(x, is_complex=True) | 0x40, # Prevents T2K ships in non-T2K
-				'Secret': lambda x: find_ship_id(x, is_complex=True) | 0x80 }) # Hidden, code-only
-		except ComplexElementError:
-			ship = find_ship_id(ship_name)
-		finally:
-			s.AppendUint8(ship)
-	yield s
-	yield [59]
+	# Ship Select
+	for prefix in ['', '2K']:
+		s = ByteString()
+		for suffix in ['ShipsTop', 'ShipsBottom', 'ShipsContinue']:
+			fullname = "%s%s" % (prefix, suffix)
+			_currentStruct = "Info:%s" % fullname
+			shiplist = TyrianData.Info[fullname]
+
+			s.AppendUint8(len(shiplist))
+			for ship_name in shiplist:
+				s.AppendUint8(0xFF if ship_name == '?' else find_ship_id(ship_name))
+
+		fullname = "%sSecretCodes" % prefix
+		s.AppendUint8(len(TyrianData.Info[fullname]))
+		for ship_id in TyrianData.Info[fullname]:
+			_currentStruct = "Info:%s:%s" % (fullname, ship_id)
+			shipcode = [resolve_complex_element(i, {'Up': 1, 'Down': 2, 'Left': 4, 'Right': 8, 'Fire': 16, 'Sidekick': 32})
+			            for i in TyrianData.Info[fullname][ship_id]]
+			shipcode = ensure_list_length(shipcode, 16, 0xFF)
+			s.AppendUint8(find_ship_id(ship_id))
+			[s.AppendUint8(i) for i in shipcode]
+
+		yield s
+		yield [59]
 
 	for ship_id in TyrianData.Ships:
 		_currentStruct = 'Ships:%s' % ship_id

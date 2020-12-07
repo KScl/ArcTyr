@@ -42,11 +42,11 @@ size_t       num_ships  = 0;
 JE_ShipType *ships      = NULL; // dynamically allocated
 
 // Ship selection organization
-JE_byte shiporder_nosecret;
-JE_byte shiporder_count;
-JE_byte shiporder[16];         // [index] -> ship#
-JE_byte reverse_shiporder[16]; // [ship#] -> index
+JE_byte num_ship_select[3];
+JE_byte ship_select[3][MAX_SHIP_SELECT]; // [row][index] -- top, bottom, continue screen
 
+JE_byte num_secret_ship_codes;
+ship_select_code_t secret_ship_codes[8];
 
 //
 // Loading individual player item data files
@@ -199,30 +199,40 @@ static void _loadShips( const char *dataFile )
 	memset(ships, 0, shipSize);
 
 	// Order of display on Ship Select
-	efread(&shiporder_count, sizeof(JE_byte), 1, f);
-	memset(shiporder, 0, sizeof(shiporder));
-	memset(reverse_shiporder, 0xFF, sizeof(reverse_shiporder));
-
-	for (i = 0; i < shiporder_count; ++i)
+	if (tyrian2000detected) // Skip first version of structure in T2K mode
 	{
-		efread(&shiporder[i], sizeof(JE_byte), 1, f);
-		if ((shiporder[i] & 0x40) && !tyrian2000detected)
-		{ // T2000 only ship?
-			--i;
-			--shiporder_count;
-			continue;
-		}
-		if (!(shiporder[i] & 0x80))
-			++shiporder_nosecret;
-		shiporder[i] &= 0x3F;
-		reverse_shiporder[shiporder[i]] = i;
+		do
+			efread(&tmp_b, sizeof(JE_byte), 1, f);
+		while (tmp_b != ';');
+	}
+
+	memset(ship_select, 0, sizeof(ship_select));
+	for (i = 0; i < 3; ++i)
+	{
+		efread(&num_ship_select[i], sizeof(JE_byte), 1, f);
+		efread(&ship_select[i], sizeof(JE_byte), num_ship_select[i], f);
+	}
+
+	memset(secret_ship_codes, 0xFF, sizeof(secret_ship_codes));
+	efread(&num_secret_ship_codes, sizeof(JE_byte), 1, f);
+	for (i = 0; i < num_secret_ship_codes; ++i)
+	{
+		efread(&secret_ship_codes[i].ship, sizeof(JE_byte), 1, f);
+		efread(&secret_ship_codes[i].code, sizeof(JE_byte), 16, f);
 	}
 
 	efread(&tmp_b, sizeof(JE_byte), 1, f);
 	if (tmp_b != ';')
 	{
-		fprintf(stderr, "error: ships array is bad at <shiporder>: got %d\n", tmp_b);
+		fprintf(stderr, "error: ships array is bad at <ship select>: got %d\n", tmp_b);
 		JE_tyrianHalt(1);
+	}
+
+	if (!tyrian2000detected) // Skip second version of structure in regular mode
+	{
+		do
+			efread(&tmp_b, sizeof(JE_byte), 1, f);
+		while (tmp_b != ';');
 	}
 
 	for (i = 0; i < num_ships + 1; ++i)
@@ -257,6 +267,43 @@ static void _loadShips( const char *dataFile )
 			fprintf(stderr, "error: ships array is bad at %zu: got %d\n", i, tmp_b);
 			JE_tyrianHalt(1);
 		}
+	}
+
+	// populate the fields related to ship_select inside each ship
+	for (i = 0; i < num_ship_select[0]; ++i)
+	{
+		if (ship_select[0][i] == 0xFF)
+			tmp_b = 0;
+		else if (ship_select[0][i] == 0x00)
+			continue;
+		else
+			tmp_b = ship_select[0][i];
+		ships[tmp_b].locationinmenu.present = true;
+		ships[tmp_b].locationinmenu.x = i;
+		ships[tmp_b].locationinmenu.y = 0;
+	}
+	for (i = 0; i < num_ship_select[1]; ++i)
+	{
+		if (ship_select[1][i] == 0xFF)
+			tmp_b = 0;
+		else if (ship_select[1][i] == 0x00)
+			continue;
+		else
+			tmp_b = ship_select[1][i];
+		ships[tmp_b].locationinmenu.present = true;
+		ships[tmp_b].locationinmenu.x = i;
+		ships[tmp_b].locationinmenu.y = 1;
+	}
+	for (i = 0; i < num_ship_select[2]; ++i)
+	{
+		if (ship_select[2][i] == 0xFF)
+			tmp_b = 0;
+		else if (ship_select[2][i] == 0x00)
+			continue;
+		else
+			tmp_b = ship_select[2][i];
+		ships[tmp_b].locationingame.present = true;
+		ships[tmp_b].locationingame.x = i;
 	}
 }
 

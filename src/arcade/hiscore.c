@@ -39,14 +39,14 @@ HighScoreEntry highScores[20] = {
 
 JE_boolean HighScore_Leading( Player *pl )
 {
-	return (!pl->is_secret && pl->cash >= highScores[0].cash);
+	Player *otherPl = PL_OtherPlayer(pl);
+	if (otherPl->player_status > STATUS_NONE && otherPl->cash > pl->cash)
+		return false;
+	return (pl->cash >= highScores[0].cash);
 }
 
 JE_boolean HighScore_InsertName( Player *pl )
 {
-	if (pl->is_secret)
-		return false;
-
 	for (int i = 0; i < 20; ++i)
 	{
 		if (pl->cash >= highScores[i].cash)

@@ -111,9 +111,8 @@ struct {
 Uint8 new_demo_num = 0;
 
 // Options
-static JE_byte opt_ship[2] = {255, 254};
+static JE_byte opt_ship[2] = {1, 255};
 static JE_byte opt_shield[2] = {255, 255};
-static JE_byte opt_lives[2] = {3, 3};
 static JE_byte opt_weapon[2] = {255, 255};
 static JE_byte opt_power[2] = {255, 255};
 static JE_byte opt_level = 255;
@@ -155,17 +154,17 @@ void DEV_RecordDemoInit( void )
 
 		for (p = 0; p < 2; ++p)
 		{
-			uint shipNum = shiporder[opt_ship[p]];
+			uint shipNum = ship_select[SHIP_SELECT_CONTINUE][opt_ship[p]];
 
-			if (opt_ship[p] == 254)
+			if (opt_ship[p] == 255)
 				strcpy(tmpBuf.l, "No Player");
-			else if (opt_ship[p] == 255)
+			else if (shipNum == 255) // just use the random select ID that the main game uses, now
 				strcpy(tmpBuf.l, "Random");
 			else
 				sprintf(tmpBuf.l, "%s", JE_trim(ships[shipNum].name));
 			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 60, tmpBuf.l, 15, (onOption[p] == 0 ? 4 : 0), FULL_SHADE);
 
-			if (opt_ship[p] == 254)
+			if (opt_ship[p] == 255)
 				continue;
 
 			if (opt_shield[p] == 255)
@@ -174,22 +173,19 @@ void DEV_RecordDemoInit( void )
 				sprintf(tmpBuf.l, "Shield Level %d", opt_shield[p] + 1);
 			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 70, tmpBuf.l, 15, (onOption[p] == 1 ? 4 : 0), FULL_SHADE);
 
-			sprintf(tmpBuf.l, "%d Lives", opt_lives[p]);
-			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 80, tmpBuf.l, 15, (onOption[p] == 2 ? 4 : 0), FULL_SHADE);
-
 			if (opt_weapon[p] == 255)
 				strcpy(tmpBuf.l, "Random Weapon");
-			else if (opt_ship[p] < 128)
+			else if (shipNum != 255)
 				sprintf(tmpBuf.l, "%s", JE_trim(weaponPort[ships[shipNum].port_weapons[opt_weapon[p]]].name));
 			else
 				sprintf(tmpBuf.l, "Weapon %d", opt_weapon[p] + 1);
-			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 90, tmpBuf.l, 15, (onOption[p] == 3 ? 4 : 0), FULL_SHADE);
+			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 80, tmpBuf.l, 15, (onOption[p] == 2 ? 4 : 0), FULL_SHADE);
 
 			if (opt_power[p] == 255)
 				strcpy(tmpBuf.l, "Power Random");
 			else
 				sprintf(tmpBuf.l, "Power %d", opt_power[p] + 1);
-			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 100, tmpBuf.l, 15, (onOption[p] == 4 ? 4 : 0), FULL_SHADE);
+			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT) - 60 + 120 * p, 90, tmpBuf.l, 15, (onOption[p] == 3 ? 4 : 0), FULL_SHADE);
 
 		}
 
@@ -197,13 +193,13 @@ void DEV_RecordDemoInit( void )
 			strcpy(tmpBuf.l, "Random Level");
 		else
 			sprintf(tmpBuf.l, "Episode %d: %s", official_levels[opt_level].ep, official_levels[opt_level].name);
-		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 115, tmpBuf.l, 15, (onOption[0] == 5 ? 4 : 0), FULL_SHADE);
+		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 110, tmpBuf.l, 15, (onOption[0] == 4 ? 4 : 0), FULL_SHADE);
 
 		sprintf(tmpBuf.l, "%s", difficultyNameB[opt_difficulty + 1]);
-		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 125, tmpBuf.l, 15, (onOption[0] == 6 ? 4 : 0), FULL_SHADE);
+		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 120, tmpBuf.l, 15, (onOption[0] == 5 ? 4 : 0), FULL_SHADE);
 
 		sprintf(tmpBuf.l, "%02d:%02d", opt_timer / 60, opt_timer % 60);
-		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 135, tmpBuf.l, 15, (onOption[0] == 7 ? 4 : 0), FULL_SHADE);
+		JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 130, tmpBuf.l, 15, (onOption[0] == 6 ? 4 : 0), FULL_SHADE);
 
 		if (new_demo_num != 0)
 		{
@@ -237,7 +233,7 @@ void DEV_RecordDemoInit( void )
 			switch (button++)
 			{
 			case INPUT_P2_UP:
-				if (opt_ship[1] == 254)
+				if (opt_ship[1] == 255)
 					break;
 
 				p = 1;
@@ -245,19 +241,19 @@ void DEV_RecordDemoInit( void )
 			case INPUT_P1_UP:
 				JE_playSampleNum(S_CURSOR);
 				if (--onOption[p] == 255)
-					onOption[p] = (p == 1) ? 4 : 7;
+					onOption[p] = (p == 1) ? 3 : 6;
 				break;
 
 			case INPUT_P2_DOWN:
-				if (opt_ship[1] == 254)
+				if (opt_ship[1] == 255)
 					break;
 
 				p = 1;
 				// fall through
 				case INPUT_P1_DOWN:
 				JE_playSampleNum(S_CURSOR);
-				if ((p == 0 && ++onOption[p] > 7)
-				 || (p == 1 && ++onOption[p] > 4))
+				if ((p == 0 && ++onOption[p] > 6)
+				 || (p == 1 && ++onOption[p] > 3))
 					onOption[p] = 0;
 				break;
 
@@ -268,37 +264,33 @@ void DEV_RecordDemoInit( void )
 				switch(onOption[p])
 				{
 				case 0:
-					if (--opt_ship[p] == 253)
-						opt_ship[p] = shiporder_nosecret - 1;
+					if (--opt_ship[p] == 254)
+						opt_ship[p] = num_ship_select[2] - 1;
 					break;
 				case 1:
 					if (--opt_shield[p] == 254)
 						opt_shield[p] = 9;
 					break;
 				case 2:
-					if (--opt_lives[p] == 0)
-						opt_lives[p] = 11;
-					break;
-				case 3:
 					if (--opt_weapon[p] == 254)
 						opt_weapon[p] = 4;
 					break;
-				case 4:
+				case 3:
 					if (--opt_power[p] == 254)
 						opt_power[p] = 10;
 					break;
-				case 5:
+				case 4:
 					do 
 					{
 						if (--opt_level == 254)
 							opt_level = COUNTOF(official_levels) - 1;
 					} while (opt_level != 255 && !episodeAvail[official_levels[opt_level].ep - 1]);
 					break;
-				case 6:
+				case 5:
 					if (--opt_difficulty == 0)
 						opt_difficulty = 9;
 					break;
-				case 7:
+				case 6:
 					if ((opt_timer -= 5) < 15)
 						opt_timer = 120;
 					break;
@@ -313,26 +305,22 @@ void DEV_RecordDemoInit( void )
 				switch(onOption[p])
 				{
 				case 0:
-					if (++opt_ship[p] == shiporder_nosecret)
-						opt_ship[p] = 254;
+					if (++opt_ship[p] == num_ship_select[2])
+						opt_ship[p] = 255;
 					break;
 				case 1:
 					if (++opt_shield[p] == 10)
 						opt_shield[p] = 255;
 					break;
 				case 2:
-					if (++opt_lives[p] == 12)
-						opt_lives[p] = 1;
-					break;
-				case 3:
 					if (++opt_weapon[p] == 5)
 						opt_weapon[p] = 255;
 					break;
-				case 4:
+				case 3:
 					if (++opt_power[p] == 11)
 						opt_power[p] = 255;
 					break;
-				case 5:
+				case 4:
 					do
 					{
 						if (++opt_level == COUNTOF(official_levels))
@@ -340,11 +328,11 @@ void DEV_RecordDemoInit( void )
 					}
 					while (opt_level != 255 && !episodeAvail[official_levels[opt_level].ep - 1]);
 					break;
-				case 6:
+				case 5:
 					if (++opt_difficulty == 10)
 						opt_difficulty = 1;
 					break;
-				case 7:
+				case 6:
 					if ((opt_timer += 5) > 120)
 						opt_timer = 15;
 					break;
@@ -354,7 +342,7 @@ void DEV_RecordDemoInit( void )
 
 			case INPUT_P1_FIRE:
 			case INPUT_P2_FIRE:
-				if (opt_ship[0] == opt_ship[1] && opt_ship[0] != 255)
+				if (opt_ship[0] == opt_ship[1] && ship_select[SHIP_SELECT_CONTINUE][opt_ship[0]] != 255)
 				{
 					JE_playSampleNum(S_CLINK);
 					break;
@@ -369,14 +357,13 @@ void DEV_RecordDemoInit( void )
 			case INPUT_P1_MODE:
 				switch(onOption[p])
 				{
-				case 0: opt_ship[p] = (p == 0 ? 255 : 254); break;
+				case 0: opt_ship[p] = (p == 0 ? 1 : 255); break;
 				case 1: opt_shield[p] = 255; break;
-				case 2: opt_lives[p] = 3; break;
-				case 3: opt_weapon[p] = 255; break;
-				case 4: opt_power[p] = 255; break;
-				case 5: opt_level = 255; break;
-				case 6: opt_difficulty = 3; break;
-				case 7: opt_timer = 60; break;
+				case 2: opt_weapon[p] = 255; break;
+				case 3: opt_power[p] = 255; break;
+				case 4: opt_level = 255; break;
+				case 5: opt_difficulty = 3; break;
+				case 6: opt_timer = 60; break;
 				}
 				JE_playSampleNum(S_SPRING);
 				break;
@@ -401,12 +388,11 @@ void DEV_RecordDemoInit( void )
 	Episode_init(official_levels[opt_level].ep);
 	mainLevel = official_levels[opt_level].lev;
 
-	if (opt_ship[0] != 254)
+	if (opt_ship[0] != 255)
 	{
-		if (opt_ship[0] == 255)
-			opt_ship[0] = mt_rand() % shiporder_nosecret;
-		player[0].items.ship = shiporder[opt_ship[0]];
+		player[0].items.ship = ship_select[SHIP_SELECT_CONTINUE][opt_ship[0]];
 		PL_Init(&player[0], player[0].items.ship, true);
+		// pl_init handles random
 
 		if (opt_weapon[0] == 255)
 			opt_weapon[0] = mt_rand() % 5;
@@ -421,18 +407,13 @@ void DEV_RecordDemoInit( void )
 			opt_shield[0] = mt_rand() % 10;
 		player[0].items.shield = opt_shield[0] + 1;
 
-		player[0].lives = opt_lives[0];
+		player[0].lives = 1;
 	}
-	if (opt_ship[1] != 254)
+	if (opt_ship[1] != 255)
 	{
-		if (opt_ship[1] == 255)
-		{
-			do
-				opt_ship[1] = mt_rand() % shiporder_nosecret;
-			while (opt_ship[0] == opt_ship[1]);
-		}
-		player[1].items.ship = shiporder[opt_ship[1]];
+		player[1].items.ship = ship_select[SHIP_SELECT_CONTINUE][opt_ship[1]];
 		PL_Init(&player[1], player[1].items.ship, true);
+		// pl_init handles random
 
 		if (opt_weapon[1] == 255)
 			opt_weapon[1] = mt_rand() % 5;
@@ -447,7 +428,7 @@ void DEV_RecordDemoInit( void )
 			opt_shield[1] = mt_rand() % 10;
 		player[1].items.shield = opt_shield[1] + 1;
 
-		player[1].lives = opt_lives[1];
+		player[1].lives = 1;
 	}
 
 	demoDifficulty = opt_difficulty;

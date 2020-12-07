@@ -21,6 +21,13 @@ Player player[2];
 
 void PL_Init( Player *this_player, uint ship, bool continuing )
 {
+	// Catch on init just in case, so we don't try to read out of bounds
+	if (ship == 0xFF)
+	{
+		PL_RandomSelect(this_player);
+		ship = this_player->items.ship;
+	}
+
 	// unrolled
 	this_player->items.weapon[0] = ships[ship].port_weapons[0];
 	this_player->items.weapon[1] = ships[ship].port_weapons[1];
@@ -55,11 +62,23 @@ void PL_Init( Player *this_player, uint ship, bool continuing )
 
 	this_player->is_dragonwing = (ships[ship].shipgraphic == 0);
 	this_player->is_nortship   = (ships[ship].shipgraphic == 1);
-	this_player->is_secret     = (reverse_shiporder[ship] >= shiporder_nosecret);
 
 	this_player->player_status = STATUS_INGAME;
 	this_player->cash = 0;
 	this_player->cashForNextLife = 0;
+}
+
+void PL_RandomSelect ( Player *this_player )
+{
+	// 75% chance of requiring a ship to be on the ship select screen to be selected
+	// This allows rarely selecting secret ships via random
+	bool require_presence = ((mt_rand() % 64) < 48);
+
+	do
+		this_player->items.ship = (mt_rand() % num_ships) + 1;
+	while (player[0].items.ship == player[1].items.ship
+		|| (require_presence && !ships[this_player->items.ship].locationinmenu.present)
+		|| (!tyrian2000detected && ships[this_player->items.ship].shipgraphic > 1000));
 }
 
 JE_boolean PL_ShotRepeat( Player *this_player, uint port )

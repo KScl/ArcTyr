@@ -283,7 +283,7 @@ static void I_fuzzInputs( void )
 					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0x3000) ? false : true;
 					break;
 				case STATUS_SELECT:
-					button_pressed[INPUT_P1_RIGHT + i] = true;
+					// Input fuzzers auto start on "random", we just press fire whenever we feel like it
 					button_pressed[INPUT_P1_FIRE + i] = (rnd & 0xF) ? false : true;
 					break;
 				default:
@@ -555,7 +555,7 @@ bool I_inputForMenu(uint *i, uint stop)
 	return false;
 }
 
-bool I_waitOnInputForMenu( uint start, uint stop, uint wait )
+bool I_waitOnInputForMenu(uint start, uint stop, uint wait)
 {
 	uint button;
 
@@ -574,6 +574,62 @@ bool I_waitOnInputForMenu( uint start, uint stop, uint wait )
 	}
 
 	return false;
+}
+
+static JE_byte _code_input_count[2] = {0, 0};
+static JE_byte _code_input_progress[2][16];
+
+void I_initCodeInput(uint pNum)
+{
+	pNum -= 1;
+	_code_input_count[pNum] = 0;
+	memset(_code_input_progress[pNum], 0xFF, sizeof(JE_byte) * 16);
+}
+
+// returns NULL if no code / in progress
+// returns pointer to code array if code input just ended
+JE_byte* I_checkForCodeInput(uint pNum, JE_byte* out_len)
+{
+	static JE_byte code_out_buf[16];
+	*out_len = 0;
+
+	pNum -= 1;
+	// Check for codes if special mode button is held
+	if (button_time_held[INPUT_P1_MODE + (7 * pNum)] >= 1)
+	{
+		uint i, target = INPUT_P1_SKICK + (7 * pNum);
+		if (_code_input_count[pNum] < 16)
+		{
+			JE_byte to_append = 1;
+
+			for (i = INPUT_P1_UP + (7 * pNum); i <= target; ++i)
+			{ // Find inputs just made and add to code progress
+				if (button_time_held[i] == 1)
+				{
+					_code_input_progress[pNum][_code_input_count[pNum]++] = to_append;
+					break; // Only append one input per frame
+				}
+				to_append <<= 1;
+			}			
+		}
+		for (i = INPUT_P1_UP + (7 * pNum); i <= target; ++i)
+		{ // Suppress all inputs, too
+			if (button_time_held[i] >= 1)
+				button_time_held[i] = 2;
+		}
+		return NULL;
+	}
+
+	// No input is being made (or a zero input code was made)
+	if (_code_input_count[pNum] == 0)
+		return NULL;
+
+	// Just released, return code
+	memset(code_out_buf, 0xFF, sizeof(JE_byte) * 16);
+	memcpy(code_out_buf, _code_input_progress[pNum], sizeof(JE_byte) * _code_input_count[pNum]);	
+	*out_len = _code_input_count[pNum];
+	_code_input_count[pNum] = 0;
+	return code_out_buf;
 }
 
 bool hasRequestedToSkip = false;

@@ -258,8 +258,8 @@ void JE_initPlayerData( void )
 	memset(&player[1].cur_item, 0, sizeof(player[1].cur_item));
 
 
-	player[0].items.ship = shiporder[0];
-	player[1].items.ship = shiporder[1];
+	player[0].items.ship = 1;
+	player[1].items.ship = 2;
 	player[0].items.shield = player[1].items.shield = 1;
 
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
@@ -274,8 +274,6 @@ void JE_initPlayerData( void )
 		player[p].armor = 1;
 		player[p].lives = 1;
 	}
-
-	mainLevel = FIRST_LEVEL;
 }
 
 void JE_gammaCorrect_func( JE_byte *col, JE_real r )

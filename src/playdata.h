@@ -124,6 +124,18 @@ typedef struct
 
 	JE_byte     numTwiddles;
 	JE_byte     twiddles[10][8];
+
+	// automatically populated with info related to ship_select
+	struct
+	{
+		bool present;
+		JE_byte x, y;
+	} locationinmenu;
+	struct
+	{
+		bool present;
+		JE_byte x;
+	} locationingame;
 } JE_ShipType; /* [0..shipnum] */
 
 extern JE_ShipType       *ships; // dynamically allocated
@@ -138,10 +150,20 @@ extern const JE_byte shield_power[SHIELD_NUM + 1];
 
 // Extra data
 // Ship selection order
-extern JE_byte shiporder_nosecret;
-extern JE_byte shiporder_count;
-extern JE_byte shiporder[16];
-extern JE_byte reverse_shiporder[16];
+#define MAX_SHIP_SELECT 16
+typedef struct
+{
+	JE_byte ship;
+	JE_byte code[16];
+} ship_select_code_t;
+
+#define SHIP_SELECT_TOP 0
+#define SHIP_SELECT_BOTTOM 1
+#define SHIP_SELECT_CONTINUE 2
+extern JE_byte ship_select[3][MAX_SHIP_SELECT]; // [row][index] -- top, bottom, continue screen
+extern JE_byte num_ship_select[3];
+extern ship_select_code_t secret_ship_codes[8];
+extern JE_byte num_secret_ship_codes;
 
 void PlayData_load( void );
 void PlayData_free( void );

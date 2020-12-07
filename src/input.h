@@ -28,6 +28,7 @@ enum {
 	INPUT_P1_FIRE,
 	INPUT_P1_SKICK,
 	INPUT_P1_MODE,
+
 	INPUT_P2_UP,
 	INPUT_P2_DOWN,
 	INPUT_P2_LEFT,
@@ -88,6 +89,9 @@ void I_assignInput( Player *pl, uint pNum );
 bool I_inputMade(uint i);
 bool I_inputForMenu( uint *i, uint stop );
 bool I_waitOnInputForMenu( uint start, uint stop, uint wait );
+
+void I_initCodeInput(uint pNum);
+JE_byte* I_checkForCodeInput(uint pNum, JE_byte* out_len); // secret codes
 
 extern bool hasRequestedToSkip;
 void I_checkStatus( void );

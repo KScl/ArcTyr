@@ -38,7 +38,7 @@
 char episode_name[6][31];
 
 static const JE_shortint _timeShipX[] = {
-	 0,  0,  0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 
+	 0,  0,  0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
 	30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50, 50, 50, 50, 50, 50, 50,
 	50, 50, 50, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22,
 	20, 18, 16, 14, 12, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -54,8 +54,17 @@ static inline void _menuMirrorText( SDL_Surface * screen, int x, int y, int p, c
 		draw_font_hv_shadow(screen, 320 - x, y, s, normal_font, right_aligned, 15, -4, false, 2);
 }
 
-static void _drawShipGraphic( int x, int y, uint sGr, int facing )
+static void _drawShipGraphic( int x, int y, JE_byte shipnum, int facing )
 {
+	if (shipnum == 0)
+		return; // Empty slot
+	if (shipnum == 0xFF)
+	{
+		draw_font_hv_shadow(VGAScreen, x, y + 7, "?", normal_font, centered,  15, -2, false, 2);
+		return; // TODO random slot
+	}
+
+	uint sGr = ships[shipnum].shipgraphic;
 	if (sGr == 0) // Dragonwing
 	{
 		blit_sprite2x2(VGAScreen, x - 24, y, shipShapes, 13 + (facing * 2));
@@ -108,35 +117,47 @@ static void _drawPlayerStatusText( JE_byte p )
 static void Menu_selectShip( void )
 {
 	bool fade_in = true;
-
-	// Nortship secret unlock
-	JE_byte max_ship_select = shiporder_nosecret, rightloops = 7;
-	JE_byte ship_select[2] = {0, 1};
 	bool twoP = (player[0].player_status == player[1].player_status);
 
-	const int xIncrease = 320 / (shiporder_nosecret + 1);
+	const int xIncrease[2] = {300 / (num_ship_select[0]), 300 / (num_ship_select[1])};
+	JE_byte ss_x[2] = {1, 4};
+	JE_byte ss_y[2] = {0, 0};
+
+	// Ship display
 	size_t shipXofs = 1, lastXofs = 0;
 	int shipAngle;
+	JE_byte random_appearance[3] = {1, 1}; // currently displayed random ship (not used for selection)
 
 	uint nTimer, tTimer = SDL_GetTicks() + 20999;
 
 	JE_loadPCX(arcdata_dir(), "select.pcx");
+	JE_dString(VGAScreen, JE_fontCenter("Select Ship", FONT_SHAPES), 20, "Select Ship", FONT_SHAPES);
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+
+	// Enable secret code input
+	JE_byte code_length;
+	JE_byte *tmp_code_buf;
+	I_initCodeInput(1); // player 1
+	I_initCodeInput(2); // player 2
+
+#ifdef ENABLE_DEVTOOLS
+	// Start on random select for fuzzed inputs
+	if (inputFuzzing)
+	{
+		ss_x[0] = 0;
+		ss_x[1] = 5;
+		ss_y[0] = ss_y[1] = 1;
+	}
+#endif
+
+	player[0].items.ship = ship_select[ss_y[0]][ss_x[0]];
+	player[1].items.ship = ship_select[ss_y[1]][ss_x[1]];
 
 	for (; ; )
 	{
 		setjasondelay(2);
 
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
-		JE_dString(VGAScreen, JE_fontCenter("Select Ship", FONT_SHAPES), 20, "Select Ship", FONT_SHAPES);
-
-#ifdef ENABLE_DEVTOOLS
-		if (mainLevel != FIRST_LEVEL)
-		{
-			sprintf(tmpBuf.l, "DEBUG: Starting at ID %hu", mainLevel);
-			JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 36, tmpBuf.l, 15, 3, FULL_SHADE);
-		}
-#endif
 
 		lastXofs = shipXofs;
 		if (++shipXofs >= sizeof(_timeShipX))
@@ -151,38 +172,53 @@ static void Menu_selectShip( void )
 				continue;
 			}
 
-			int x = -20 + xIncrease * (ship_select[p] + 1);
-			int y = 50 + (ship_select[p] & 1) * 40;
+			int x = 10 + (ss_x[p] * xIncrease[0]);
+			int y = 44 + (ss_y[p] * 40);
+			uint ship_id = player[p].items.ship;
 
-			strcpy(tmpBuf.l, JE_trim(ships[shiporder[ship_select[p]]].name));
-
-			if (ship_select[p] >= shiporder_nosecret) // On the Nortship
+			if (player[p].items.ship == 0xFF)
 			{
-				fill_rectangle_xy(VGAScreen,   0, y,  19, y + 40, _playerColor[p] +5);
-				fill_rectangle_xy(VGAScreen, 300, y, 319, y + 40, _playerColor[p] +5);
+				strcpy(tmpBuf.l, "Random Select?");
+				ship_id = random_appearance[p];
 			}
 			else
-				fill_rectangle_xy(VGAScreen, x, y, x + 39, y + 40, _playerColor[p] +5);
+				strcpy(tmpBuf.l, JE_trim(ships[ship_id].name));
+
+			fill_rectangle_xy(VGAScreen, x, y, x + (xIncrease[0] - 1), y + 39, _playerColor[p] +5);
 			if (p == 0)
+			{
 				JE_textShade(VGAScreen, x + 1, y + 1, "1P", _playerHue[p], 6, FULL_SHADE);
+				_drawShipGraphic(50  + _timeShipX[shipXofs], 160, ship_id, shipAngle);
+			}
 			else
-				JE_textShade(VGAScreen, x + 30, y + 34, "2P", _playerHue[p], 6, FULL_SHADE);
+			{
+				JE_textShade(VGAScreen, x + (xIncrease[0] - 10), y + 34, "2P", _playerHue[p], 6, FULL_SHADE);
+				_drawShipGraphic(270 - _timeShipX[shipXofs], 160, ship_id, -shipAngle);
+			}
 
 			_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.l);
-
-			if (p == 0)
-				_drawShipGraphic(50  + _timeShipX[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, shipAngle);
-			else
-				_drawShipGraphic(270 - _timeShipX[shipXofs], 160, ships[shiporder[ship_select[p]]].shipgraphic, -shipAngle);
-
 			if (player[p].player_status == STATUS_INGAME)
 				_menuMirrorText(VGAScreen, 136, 182, p, "OK");
 		}
-		for (int i = 1; i <= shiporder_nosecret; ++i)
+
+		// Draw both rows of ships
+		for (int section = SHIP_SELECT_TOP; section <= SHIP_SELECT_BOTTOM; ++section)
 		{
-			int x = xIncrease * i;
-			int y = 54 + ((i & 1) ? 0 : 40);
-			_drawShipGraphic(x, y, ships[shiporder[i - 1]].shipgraphic, 0);
+			int x = 10 + (xIncrease[section] / 2);
+			int y = 50 + (section * 40);
+			for (int i = 0; i < num_ship_select[section]; ++i)
+			{
+				uint ship_id = ship_select[section][i];
+				if (ship_id == 0xFF)
+				{
+					if (ss_x[0] == i && ss_y[0] == section && player[0].items.ship != 0xFF)
+						ship_id = player[0].items.ship;
+					else if (ss_x[1] == i && ss_y[1] == section && player[1].items.ship != 0xFF)
+						ship_id = player[1].items.ship;
+				}
+				_drawShipGraphic(x, y, ship_id, 0);
+				x += xIncrease[section];
+			}
 		}
 
 		nTimer = tTimer - SDL_GetTicks();
@@ -209,94 +245,105 @@ static void Menu_selectShip( void )
 
 		I_checkButtons();
 
-		// Timer expired?
-		if (!nTimer)
+		// Various always-execute player actions
+		for (int i = 0; i < 2; ++i)
 		{
-			for (int i = 0; i < 2; ++i)
+			if (player[i].player_status != STATUS_SELECT)
+				continue;
+
+			if (!nTimer) // Timer expired?
 			{
-				if (player[i].player_status == STATUS_SELECT)
-					player[i].player_status = STATUS_INGAME;
+				player[i].player_status = STATUS_INGAME;
+				JE_playSampleNum(S_SELECT);
+				continue;
 			}
-			JE_playSampleNum(S_SELECT);
+
+			// Reroll random ships
+			if ((shipXofs & 3) == 3)
+			{
+				JE_byte old_rand = random_appearance[i];
+				do
+					random_appearance[i] = (mt_rand() % num_ships) + 1;
+				while (random_appearance[i] == old_rand
+					|| (!tyrian2000detected && ships[random_appearance[i]].shipgraphic > 1000));
+			}
+
+			tmp_code_buf = I_checkForCodeInput(i + 1, &code_length);
+			if (player[i].items.ship == 0xFF && tmp_code_buf != NULL)
+			{
+				for (int code_i = 0; code_i < num_secret_ship_codes; ++code_i)
+				{
+					if (player[(i == 1) ? 0 : 1].items.ship == secret_ship_codes[code_i].ship)
+						continue; // You can't BOTH use the same secret ship...
+					if (!memcmp(tmp_code_buf, secret_ship_codes[code_i].code, sizeof(JE_byte) * 16))
+					{
+						player[i].items.ship = secret_ship_codes[code_i].ship;
+						JE_playSampleNumOnChannel(S_POWERUP, 1);
+						break;
+					}
+				}
+			}
 		}
 
 		uint button = 0;
 		while (I_inputForMenu(&button, INPUT_P2_FIRE))
 		{
-			uint p = 0;
+			uint p = (button >= INPUT_P2_UP) ? 1 : 0;
 			switch (button++)
 			{
-#ifdef ENABLE_DEVTOOLS
-			case INPUT_P1_UP:
-			case INPUT_P2_UP:
-				if (!inputFuzzing)
-					mainLevel--;
-				JE_playSampleNum(S_CURSOR);
-				break;
-			case INPUT_P1_DOWN:
-			case INPUT_P2_DOWN:
-				if (!inputFuzzing)
-					mainLevel++;
-				JE_playSampleNum(S_CURSOR);
-				break;
-#endif
-
 			case INPUT_P2_FIRE:
-				p = 1;
-				// fall through
 			case INPUT_P1_FIRE:
 				if (player[p].player_status == STATUS_SELECT)
 				{
 					JE_playSampleNum(S_SELECT);
 					player[p].player_status = STATUS_INGAME;
-					break;
 				}
 				else if (player[p].player_status != STATUS_INGAME && ARC_CoinStart(&player[p]))
 				{
 					JE_playSampleNum(S_SELECT);
-					player[p].player_status = STATUS_SELECT;
 					twoP = true;
-					if (ship_select[0] == ship_select[1])
-						ship_select[p]++;
+					if (ss_x[0] == ss_x[1] && ss_y[0] == ss_y[1])
+						ss_y[p] = (ss_y[p] == 1) ? 0 : 1;
+					player[p].player_status = STATUS_SELECT;
+					player[p].items.ship = ship_select[ss_y[p]][ss_x[p]];
 				}
 				break;
 
 			case INPUT_P2_LEFT:
-				p = 1;
-				// fall through
 			case INPUT_P1_LEFT:
 				if (player[p].player_status != STATUS_SELECT)
 					break;
-
-				JE_playSampleNum(S_CURSOR);
-				rightloops = 7; // Nortship locking
 				do
 				{
-					if (--ship_select[p] == 255)
-						ship_select[p] = max_ship_select - 1;
-				} while (twoP && ship_select[0] == ship_select[1]);
+					if (--ss_x[p] == 255)
+						ss_x[p] = num_ship_select[ss_y[p]] - 1;
+				} while (ship_select[ss_y[p]][ss_x[p]] == 0 || (twoP && ss_y[0] == ss_y[1] && ss_x[0] == ss_x[1]));
+				player[p].items.ship = ship_select[ss_y[p]][ss_x[p]];
+				JE_playSampleNum(S_CURSOR);
 				break;
 			case INPUT_P2_RIGHT:
-				p = 1;
-				// fall through
 			case INPUT_P1_RIGHT:
 				if (player[p].player_status != STATUS_SELECT)
 					break;
-
-				JE_playSampleNum(S_CURSOR);
 				do
 				{
-					if (++ship_select[p] >= max_ship_select)
-					{
-						if (max_ship_select == shiporder_nosecret && !(--rightloops))
-						{
-							JE_playSampleNumOnChannel(S_POWERUP, 1);
-							max_ship_select = shiporder_count;
-						}
-						else
-							ship_select[p] = 0;
-					}
-				} while (twoP && ship_select[0] == ship_select[1]);
+					if (++ss_x[p] >= num_ship_select[ss_y[p]])
+						ss_x[p] = 0;
+				} while (ship_select[ss_y[p]][ss_x[p]] == 0 || (twoP && ss_y[0] == ss_y[1] && ss_x[0] == ss_x[1]));
+				player[p].items.ship = ship_select[ss_y[p]][ss_x[p]];
+				JE_playSampleNum(S_CURSOR);
+				break;
+			case INPUT_P2_UP:
+			case INPUT_P2_DOWN:
+			case INPUT_P1_UP:
+			case INPUT_P1_DOWN:
+				if (player[p].player_status != STATUS_SELECT)
+					break;
+				do
+					ss_y[p] = (ss_y[p] == 1) ? 0 : 1;
+				while (ship_select[ss_y[p]][ss_x[p]] == 0 || (twoP && ss_y[0] == ss_y[1] && ss_x[0] == ss_x[1]));
+				player[p].items.ship = ship_select[ss_y[p]][ss_x[p]];
+				JE_playSampleNum(S_CURSOR);
 				break;
 
 			default:
@@ -304,15 +351,24 @@ static void Menu_selectShip( void )
 			}
 		}
 
+		// Behavior for selecting random
+		for (int i = 0; i < 2; ++i)
+		{
+			if (player[i].player_status == STATUS_INGAME && player[i].items.ship == 0xFF)
+			{
+				PL_RandomSelect(&player[i]);
+				if (ships[player[i].items.ship].locationinmenu.present)
+				{
+					ss_x[i] = ships[player[i].items.ship].locationinmenu.x;
+					ss_y[i] = ships[player[i].items.ship].locationinmenu.y;
+				}
+			}
+		}
+
 		// All players ingame are ready?
 		if (player[0].player_status != STATUS_SELECT && player[1].player_status != STATUS_SELECT)
 		{
 			fade_black(10);
-			for (int i = 0; i < 2; ++i)
-			{
-				if (player[i].player_status == STATUS_INGAME)
-					player[i].items.ship = shiporder[ship_select[i]];
-			}
 			return;
 		}
 	}
@@ -340,6 +396,8 @@ static void Menu_selectEpisode( void )
 
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
 
+	mainLevel = FIRST_LEVEL;
+
 	for (; ; )
 	{
 		setjasondelay(2);
@@ -359,6 +417,15 @@ static void Menu_selectEpisode( void )
 		for (int i = 1; i <= episode_max; i++)
 		{
 			JE_outTextAdjust(VGAScreen, 20, y, episode_name[i], 15, -4 + (i == episode ? 2 : 0) - (!episodeAvail[i - 1] ? 4 : 0), SMALL_FONT_SHAPES, true);
+
+#ifdef ENABLE_DEVTOOLS
+			if (i == episode && mainLevel != FIRST_LEVEL)
+			{
+				sprintf(tmpBuf.l, "... starting from section ~%hu~", mainLevel);
+				JE_textShade(VGAScreen, 20, y + 8, tmpBuf.l, 15, 0, FULL_SHADE);
+			}
+#endif
+
 			y += (episode_max == 5) ? 18 : 24;
 		}
 
@@ -401,6 +468,32 @@ static void Menu_selectEpisode( void )
 		{
 			switch (button++)
 			{
+#ifdef ENABLE_DEVTOOLS
+			case INPUT_P1_RIGHT:
+				if (in_control == 2)
+					break;
+				goto episode_cursor_right;
+			case INPUT_P2_RIGHT:
+				if (in_control == 1)
+					break;
+			episode_cursor_right:
+				mainLevel++;
+				JE_playSampleNum(S_CURSOR);
+				break;
+
+			case INPUT_P1_LEFT:
+				if (in_control == 2)
+					break;
+				goto episode_cursor_left;
+			case INPUT_P2_LEFT:
+				if (in_control == 1)
+					break;
+			episode_cursor_left:
+				mainLevel--;
+				JE_playSampleNum(S_CURSOR);
+				break;
+#endif
+
 			case INPUT_P1_FIRE:
 				if (player[0].player_status != STATUS_SELECT && ARC_CoinStart(&player[0]))
 				{
@@ -434,6 +527,9 @@ static void Menu_selectEpisode( void )
 						episode = episode_max;
 				} while (!episodeAvail[episode - 1]);
 				JE_playSampleNum(S_CURSOR);
+#ifdef ENABLE_DEVTOOLS
+				mainLevel = FIRST_LEVEL;
+#endif
 				break;
 			case INPUT_P1_DOWN:
 				if (in_control == 2)
@@ -449,6 +545,9 @@ static void Menu_selectEpisode( void )
 						episode = 1;
 				} while (!episodeAvail[episode - 1]);
 				JE_playSampleNum(S_CURSOR);
+#ifdef ENABLE_DEVTOOLS
+				mainLevel = FIRST_LEVEL;
+#endif
 				break;
 
 			default:

@@ -255,7 +255,7 @@ void ARC_DISP_InGameDisplay( uint pNum )
 
 	sprintf(tmpBuf.s, "%lu", player[pNum - 1].cash);
 	x = (pNum == 2) ? 264 - JE_textWidth(tmpBuf.s, TINY_FONT) : 58;
-	JE_textShade(VGAScreen, x, 13, tmpBuf.s, HighScore_Leading(player) ? 15 : 2, 4, FULL_SHADE);
+	JE_textShade(VGAScreen, x, 13, tmpBuf.s, HighScore_Leading(&player[pNum - 1]) ? 15 : 2, 4, FULL_SHADE);
 }
 
 void ARC_DISP_HighScoreEntry( uint pNum )
@@ -332,23 +332,33 @@ void ARC_DISP_ContinueEntry( uint pNum )
 
 void ARC_DISP_MidGameSelect( uint pNum )
 {
-	uint sGr = ships[player[pNum - 1].items.ship].shipgraphic;
-	if (sGr == 0) // Dragonwing
+	uint ship_id = player[pNum - 1].items.ship;
+	if (ship_id == 0xFF)
 	{
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 13);
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 51);
+		JE_outTextAdjust(VGAScreen, 8 + ((pNum == 2) ? 265 : 29), 8, "?", 15, -2, SMALL_FONT_SHAPES, true);
+		strcpy(tmpBuf.l, "Random Select?");
 	}
-	else if (sGr == 1) // Nortship
+	else
 	{
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 318);
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 320);
-	}
-	else if (sGr >= 1000) // T2000
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapesT2K, sGr - 1000);
-	else		
-		blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapes, sGr);
+		uint sGr = ships[ship_id].shipgraphic;
+		if (sGr == 0) // Dragonwing
+		{
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 13);
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 51);
+		}
+		else if (sGr == 1) // Nortship
+		{
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 241 : 29, 1, shipShapes, 318);
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 53, 1, shipShapes, 320);
+		}
+		else if (sGr >= 1000) // T2000
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapesT2K, sGr - 1000);
+		else		
+			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapes, sGr);
 
-	strcpy(tmpBuf.l, JE_trim(ships[player[pNum - 1].items.ship].name));
+		strcpy(tmpBuf.l, JE_trim(ships[player[pNum - 1].items.ship].name));
+	}
+
 	x = (pNum == 2) ? (264 - JE_textWidth(tmpBuf.l, TINY_FONT)) : 58;
 	JE_textShade(VGAScreen, x, 20, tmpBuf.l, 2, 6, FULL_SHADE);
 
@@ -390,20 +400,33 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 	// SHIP SELECTION
 	//
 	case STATUS_SELECT:
+		I_initCodeInput((pl == &player[0]) ? 1 : 2);
 		pl->arc.timer = 20;
 
-		// if continuing: quickly find what our current ship is and preselect it if possible
-		pl->arc.cursor = 0xFF;
+#ifdef ENABLE_DEVTOOLS
+		// Start input fuzzers on random select.
+		if (inputFuzzing)
+		{
+			pl->arc.cursor = ships[0].locationingame.x;
+			pl->items.ship = 0xFF;
+		}
+		else
+#endif
+		// if continuing: set cursor to current ship, or onto random if that ship isn't normally selectable
 		if (pl->player_status == STATUS_CONTINUE)
-			pl->arc.cursor = reverse_shiporder[pl->items.ship];
-
-		// if we didn't do that (or it failed?): select the first ship (or the second, if the first is in use)
-		if (pl->arc.cursor == 0xFF)
+		{
+			if (ships[pl->items.ship].locationingame.present)
+				pl->arc.cursor = ships[pl->items.ship].locationingame.x;
+			else
+				pl->arc.cursor = ships[0].locationingame.x; // "None" ship holds location of a random select
+		}
+		// if not: select the first ship (or the second, if the first is in use)
+		else
 		{
 			Player *otherPl = PL_OtherPlayer(pl);
-			pl->items.ship = shiporder[(pl->arc.cursor = 0)];
-			if (otherPl->player_status > STATUS_NONE && otherPl->items.ship == shiporder[0])
-				pl->items.ship = shiporder[(pl->arc.cursor = 1)];	
+			pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][(pl->arc.cursor = 1)];
+			if (otherPl->player_status > STATUS_NONE && otherPl->items.ship == ship_select[SHIP_SELECT_CONTINUE][1])
+				pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][(pl->arc.cursor = 2)];	
 		}
 		break;
 
@@ -457,8 +480,15 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 {
 	Player *otherPl = PL_OtherPlayer(pl);
 
+	// for code input on ship select
+	JE_byte code_length;
+	JE_byte *tmp_code_buf = NULL;
+
 	// due to using menu input, this only tracks
 	// buttons PRESSED or REPEATED
+	if (pl->player_status == STATUS_SELECT)
+		tmp_code_buf = I_checkForCodeInput(pNum, &code_length);
+
 	bool buttons[NUM_BUTTONS] = {false};
 	uint start = (pNum == 1) ? INPUT_P1_UP : INPUT_P2_UP;
 	uint b = start;
@@ -609,6 +639,23 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				--pl->arc.timer;
 				pl->arc.timerFrac = 0;
 			}
+
+			// code input?
+			if (pl->items.ship == 0xFF && tmp_code_buf != NULL)
+			{
+				for (int code_i = 0; code_i < num_secret_ship_codes; ++code_i)
+				{
+					if (otherPl->items.ship == secret_ship_codes[code_i].ship)
+						continue; // You can't BOTH use the same secret ship...
+					if (!memcmp(tmp_code_buf, secret_ship_codes[code_i].code, sizeof(JE_byte) * 16))
+					{
+						pl->items.ship = secret_ship_codes[code_i].ship;
+						JE_playSampleNumOnChannel(S_POWERUP, SFXPRIORITY+7);
+						break;
+					}
+				}
+			}
+
 			if (pl->arc.timer == 65535 || buttons[BUTTON_FIRE])
 			{
 				JE_playSampleNumOnChannel(S_SELECT, SFXPRIORITY+7);
@@ -646,8 +693,8 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				do
 				{
 					if (--pl->arc.cursor == 255)
-						pl->arc.cursor = shiporder_nosecret - 1;
-					pl->items.ship = shiporder[pl->arc.cursor];
+						pl->arc.cursor = num_ship_select[SHIP_SELECT_CONTINUE] - 1;
+					pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][pl->arc.cursor];
 				}
 				while (otherPl->player_status > STATUS_NONE && player[0].items.ship == player[1].items.ship);
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
@@ -656,9 +703,9 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 			{
 				do
 				{
-					if (++pl->arc.cursor >= shiporder_nosecret)
+					if (++pl->arc.cursor >= num_ship_select[SHIP_SELECT_CONTINUE])
 						pl->arc.cursor = 0;
-					pl->items.ship = shiporder[pl->arc.cursor];					
+					pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][pl->arc.cursor];					
 				}
 				while (otherPl->player_status > STATUS_NONE && player[0].items.ship == player[1].items.ship);
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
