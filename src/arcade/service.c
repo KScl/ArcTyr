@@ -296,31 +296,78 @@ void SRVF_Jukebox( void )
 
 void SRV_ArcadeMenu( void )
 {
+	static const char *powerLossNames[] = {"None", "Minimal", "Minor", "Standard", "Harsh", "Harshest"};
+
 	SRVH_DispHeader("Difficulty Settings");
 
-	if (DIP.difficultyMax < DIP.startingDifficulty)
-		DIP.difficultyMax = DIP.startingDifficulty;
-
-	SRVH_DispValue(difficultyNameB[DIP.startingDifficulty + 1]);
-	SRVH_AdjustableByte("Difficulty", false, &DIP.startingDifficulty, 1, 9);
-
-	if (!(DIP.rankUp % 8))
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", DIP.rankUp / 8);
-	else if (DIP.rankUp > 8)
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu %hu/8", DIP.rankUp / 8, DIP.rankUp % 8);
+	if (DIP.gameLevel == 0)
+		strncpy(tmpBuf.s, "Custom", sizeof(tmpBuf.s));
 	else
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu/8", DIP.rankUp);
-
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "LEVEL-%d", DIP.gameLevel);
 	SRVH_DispValue(tmpBuf.s);
-	SRVH_AdjustableByte("Increase Per Level", false, &DIP.rankUp, 0, 16);
+	SRVH_AdjustableByte("Game Level", false, &DIP.gameLevel, 0, 8);
 
-	SRVH_DispValue(difficultyNameB[DIP.difficultyMax + 1]);
-	SRVH_AdjustableByte("Max Difficulty", false, &DIP.difficultyMax, DIP.startingDifficulty, 9);
+	if (selectionType != __DISPLAY)
+		ArcTyr_setGameLevelSettings();
 
-	optionY += 16;
+	if (DIP.gameLevel != 0)
+	{
+		optionY += 8;
+		SRVH_DispFadedValue(difficultyNameB[DIP.startingDifficulty + 1]);
+		SRVH_DispFadedLabel("Difficulty");
 
-	SRVH_DispValue(__YesNo[DIP.rankAffectsScore]);
-	SRVH_AdjustableByte("Scale Score", false, &DIP.rankAffectsScore, 0, 1);
+		SRVH_DispFadedValue(difficultyNameB[DIP.difficultyMax + 1]);
+		SRVH_DispFadedLabel("Difficulty Cap");
+
+		if (!(DIP.rankUp % 8))
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", DIP.rankUp / 8);
+		else if (DIP.rankUp > 8)
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu %hu/8", DIP.rankUp / 8, DIP.rankUp % 8);
+		else
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu/8", DIP.rankUp);
+		SRVH_DispFadedValue(tmpBuf.s);
+		SRVH_DispFadedLabel("Increase Per Level");
+
+		optionY += 8;
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", (JE_word)DIP.powerStart);
+		SRVH_DispFadedValue(tmpBuf.s);
+		SRVH_DispFadedLabel("Power - First Credit");
+
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", (JE_word)DIP.powerContinue);
+		SRVH_DispFadedValue(tmpBuf.s);
+		SRVH_DispFadedLabel("Power - Continues");
+
+		SRVH_DispFadedValue(powerLossNames[DIP.powerLoss]);
+		SRVH_DispFadedLabel("Death Penalty");
+	}
+	else
+	{
+		optionY += 8;
+		SRVH_DispValue(difficultyNameB[DIP.startingDifficulty + 1]);
+		SRVH_AdjustableByte("Difficulty", false, &DIP.startingDifficulty, 1, 9);
+
+		SRVH_DispValue(difficultyNameB[DIP.difficultyMax + 1]);
+		SRVH_AdjustableByte("Difficulty Cap", false, &DIP.difficultyMax, DIP.startingDifficulty, 9);
+
+		if (DIP.difficultyMax < DIP.startingDifficulty)
+			DIP.difficultyMax = DIP.startingDifficulty;
+
+		if (!(DIP.rankUp % 8))
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", DIP.rankUp / 8);
+		else if (DIP.rankUp > 8)
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu %hu/8", DIP.rankUp / 8, DIP.rankUp % 8);
+		else
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu/8", DIP.rankUp);
+		SRVH_DispValue(tmpBuf.s);
+		SRVH_AdjustableByte("Increase Per Level", false, &DIP.rankUp, 0, 16);
+
+		optionY += 8;
+		SRVH_AdjustableByte("Power - First Credit", true, &DIP.powerStart, 1, 11);
+		SRVH_AdjustableByte("Power - Continues", true, &DIP.powerContinue, 1, 11);
+
+		SRVH_DispValue(powerLossNames[DIP.powerLoss]);
+		SRVH_AdjustableByte("Death Penalty", false, &DIP.powerLoss, 0, 5);
+	}
 
 	optionY = 176;
 	SRVH_Back("Back");	
@@ -344,18 +391,13 @@ void SRV_MoneyMenu( void )
 	else
 		SRVH_AdjustableByte("Credits to Continue", true, &DIP.coinsToContinue, 1, DIP.coinsToStart);
 
-	optionY += 12;
+	optionY += 16;
+	SRVH_AdjustableByte("Lives - First Credit", true, &DIP.livesStart, 1, 11);
+	SRVH_AdjustableByte("Lives - Continues", true, &DIP.livesContinue, 1, 11);
 
-	SRVH_AdjustableByte("Lives - first credit", true, &DIP.livesStart, 1, 11);
-	SRVH_AdjustableByte("Lives - continues", true, &DIP.livesContinue, 1, 11);
-
-	SRVH_AdjustableByte("Power - first credit", true, &DIP.powerStart, 1, 11);
-	SRVH_AdjustableByte("Power - continues", true, &DIP.powerContinue, 1, 11);
-
-	optionY += 12;
-	static const char *powerLossNames[] = {"None", "Minimal", "Minor", "Standard", "Harsh", "Harshest"};
-	SRVH_DispValue(powerLossNames[DIP.powerLoss]);
-	SRVH_AdjustableByte("Death Penalty", false, &DIP.powerLoss, 0, 5);
+	optionY += 16;
+	SRVH_DispValue(__YesNo[DIP.rankAffectsScore]);
+	SRVH_AdjustableByte("Scale Score with Rank", false, &DIP.rankAffectsScore, 0, 1);
 
 	optionY = 176;
 	SRVH_Back("Back");	
@@ -365,12 +407,20 @@ void SRV_AudiovisualMenu( void )
 {
 	SRVH_DispHeader("Audiovisual Settings");
 	if (selectionType == __DISPLAY)
+	{
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%d%%", (int)(tyrMusicVolume / 2.55f));
 		JE_barDrawShadow(VGAScreen, 186, optionY, 1, 174, tyrMusicVolume / 12, 3, 13);
-	SRVH_AdjustableWord("Music Volume", false, &tyrMusicVolume, 0, 255, 12);
+		SRVH_DispValue(tmpBuf.s);
+	}
+	SRVH_AdjustableWord("Music Volume", false, &tyrMusicVolume, 0, 255, 3);
 
 	if (selectionType == __DISPLAY)
+	{
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%d%%", (int)(fxVolume / 2.55f));
 		JE_barDrawShadow(VGAScreen, 186, optionY, 1, 174, fxVolume / 12, 3, 13);
-	SRVH_AdjustableWord("SFX Volume", false, &fxVolume, 0, 255, 12);
+		SRVH_DispValue(tmpBuf.s);
+	}
+	SRVH_AdjustableWord("SFX Volume", false, &fxVolume, 0, 255, 3);
 
 	SRVH_DispValue(detailLevel[processorType-1]);
 	SRVH_AdjustableByte("Detail Level", false, &processorType, 1, 6);

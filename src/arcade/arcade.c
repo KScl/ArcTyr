@@ -33,9 +33,10 @@
 //
 
 const DipSwitches DIP_Default = {
-	3, 2, 6, 0, 
-	2, 3, 3, 3, 3, 3,
-	2,
+	5,
+	3, 6, 2, 3, 4, 3,
+	1, 1, 2, 2, 0,
+	1,
 	0
 };
 DipSwitches DIP;

@@ -110,6 +110,26 @@ const char *get_user_directory( void )
 	return user_dir;
 }
 
+void ArcTyr_setGameLevelSettings( void )
+{
+	static const int startDifficulty[] = {1, 2, 2, 2, 3, 3, 3, 3};
+	static const int maxDifficulty[]   = {3, 4, 5, 6, 6, 7, 8, 8};
+	static const int rankPerStage[]    = {1, 1, 2, 2, 2, 2, 2, 3};
+	static const int powerPenalty[]    = {0, 1, 2, 2, 3, 3, 3, 5};
+	static const int startPower[]      = {4, 4, 4, 3, 3, 3, 2, 1};
+	static const int continuePower[]   = {6, 5, 4, 4, 4, 3, 3, 1};
+
+	if (DIP.gameLevel == 0)
+		return;
+
+	DIP.startingDifficulty = startDifficulty[DIP.gameLevel - 1];
+	DIP.difficultyMax = maxDifficulty[DIP.gameLevel - 1];
+	DIP.rankUp = rankPerStage[DIP.gameLevel - 1];
+	DIP.powerLoss = powerPenalty[DIP.gameLevel - 1];
+	DIP.powerStart = startPower[DIP.gameLevel - 1];
+	DIP.powerContinue = continuePower[DIP.gameLevel - 1];
+}
+
 bool ArcTyr_loadConfig( void )
 {
 	uint dummy;
@@ -189,19 +209,23 @@ bool ArcTyr_loadConfig( void )
 
 	if ((sec = config_find_section(&tav_config, "dip_switches", NULL)) != NULL)
 	{
-		get_byte_minmax(DIP.startingDifficulty, "starting_difficulty", 1, 10);
-		get_byte_max(DIP.rankUp, "rank_up", 16);
-		get_byte_minmax(DIP.difficultyMax, "difficulty_max", 1, 10);
-		get_byte_max(DIP.rankAffectsScore, "rank_affects_score", 1);
+		get_byte_max(DIP.gameLevel, "game_level", 8);
+		if (DIP.gameLevel == 0)
+		{
+			get_byte_minmax(DIP.startingDifficulty, "starting_difficulty", 1, 10);
+			get_byte_minmax(DIP.difficultyMax, "difficulty_max", 1, 10);
+			get_byte_max(DIP.rankUp, "rank_up", 16);
+			get_byte_minmax(DIP.powerStart, "power_start", 1, 11);
+			get_byte_minmax(DIP.powerContinue, "power_continue", 1, 11);
+			get_byte_max(DIP.powerLoss, "power_loss", 5);
+		}
+		ArcTyr_setGameLevelSettings();
 
 		get_byte_max(DIP.coinsToStart, "coins_to_start", 8);
 		get_byte_max(DIP.coinsToContinue, "coins_to_continue", 8);
-
 		get_byte_minmax(DIP.livesStart, "lives_start", 1, 11);
 		get_byte_minmax(DIP.livesContinue, "lives_continue", 1, 11);
-		get_byte_minmax(DIP.powerStart, "power_start", 1, 11);
-		get_byte_minmax(DIP.powerContinue, "power_continue", 1, 11);
-		get_byte_max(DIP.powerLoss, "power_loss", 5);
+			get_byte_max(DIP.rankAffectsScore, "rank_affects_score", 1);
 
 		get_byte_max(DIP.attractSound, "attract_sound", 2);
 
@@ -239,19 +263,19 @@ bool ArcTyr_saveConfig( void )
 
 	if ((sec = config_find_or_add_section(&tav_config, "dip_switches", NULL)) != NULL)
 	{
+		config_set_uint_option(sec, "game_level", DIP.gameLevel);
 		config_set_uint_option(sec, "starting_difficulty", DIP.startingDifficulty);
 		config_set_uint_option(sec, "rank_up", DIP.rankUp);
 		config_set_uint_option(sec, "difficulty_max", DIP.difficultyMax);
-		config_set_uint_option(sec, "rank_affects_score", DIP.rankAffectsScore);
-
-		config_set_uint_option(sec, "coins_to_start", DIP.coinsToStart);
-		config_set_uint_option(sec, "coins_to_continue", DIP.coinsToContinue);
-
-		config_set_uint_option(sec, "lives_start", DIP.livesStart);
-		config_set_uint_option(sec, "lives_continue", DIP.livesContinue);
 		config_set_uint_option(sec, "power_start", DIP.powerStart);
 		config_set_uint_option(sec, "power_continue", DIP.powerContinue);
 		config_set_uint_option(sec, "power_loss", DIP.powerLoss);
+
+		config_set_uint_option(sec, "coins_to_start", DIP.coinsToStart);
+		config_set_uint_option(sec, "coins_to_continue", DIP.coinsToContinue);
+		config_set_uint_option(sec, "lives_start", DIP.livesStart);
+		config_set_uint_option(sec, "lives_continue", DIP.livesContinue);
+		config_set_uint_option(sec, "rank_affects_score", DIP.rankAffectsScore);
 
 		config_set_uint_option(sec, "attract_sound", DIP.attractSound);
 

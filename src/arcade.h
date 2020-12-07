@@ -21,18 +21,22 @@
 //
 
 typedef struct {
+	// 0: Custom
+	// 1-8: Forcibly sets the five game difficulty options to "standard" options
+	JE_byte gameLevel;
+
 	JE_byte startingDifficulty;
-	JE_byte rankUp;
 	JE_byte difficultyMax;
-	JE_byte rankAffectsScore;
+	JE_byte rankUp;
+	JE_byte powerStart;
+	JE_byte powerContinue;
+	JE_byte powerLoss;
 
 	JE_byte coinsToStart;
 	JE_byte coinsToContinue;
 	JE_byte livesStart;
 	JE_byte livesContinue;
-	JE_byte powerStart;
-	JE_byte powerContinue;
-	JE_byte powerLoss;
+	JE_byte rankAffectsScore;
 
 	JE_byte attractSound;
 
