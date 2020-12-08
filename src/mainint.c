@@ -274,6 +274,8 @@ void JE_initPlayerData( void )
 		player[p].armor = 1;
 		player[p].lives = 1;
 	}
+
+	mainLevel = FIRST_LEVEL;
 }
 
 void JE_gammaCorrect_func( JE_byte *col, JE_real r )
