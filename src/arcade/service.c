@@ -26,6 +26,7 @@
 #include "../tyrian2.h"
 #include "../varz.h"
 #include "../video.h"
+#include "../video/scaler.h"
 
 
 JE_boolean inServiceMenu = false;
@@ -252,14 +253,45 @@ static bool SRVH_ConfirmationAction( const char *name )
 	else
 	{
 		if (resetConfirm)
-		{
-			memcpy(&DIP, &DIP_Default, sizeof(DIP));
 			JE_playSampleNumOnChannel(S_POWERUP, SFXPRIORITY+5);
-		}
 		SRVH_Back("");
 		return (resetConfirm == 1);
 	}
 	return false;
+}
+
+static void SRVH_ScalerAdjust( void )
+{
+	if (selectionType != __DISPLAY && *menuOption == numOptions)
+	{
+		uint temp_scaler = scaler;
+		uint adjust_val = (selectionType == __DEC) ? -1 : 1;
+		do
+		{
+			temp_scaler += adjust_val;
+			if (temp_scaler > scalers_count)
+			{
+				if (selectionType == __SELECT)
+					temp_scaler = 0;
+				else
+				{
+					JE_playSampleNum(S_CLINK);
+					goto scaler_fail;
+				}
+			}
+		} while (!can_init_scaler(temp_scaler, fullscreen_enabled));
+
+		if (!init_scaler(temp_scaler, fullscreen_enabled) &&   // try new scaler
+			!init_scaler(scaler, fullscreen_enabled))          // revert on fail
+		{
+			exit(EXIT_FAILURE);
+		}
+		set_palette(colors, 0, 255); // for switching between 8 bpp scalers
+	}
+	scaler_fail:
+	SRVH_DispValue(scalers[scaler].name);
+	SRVH_DispLabel("Scaler");
+	++numOptions;
 }
 
 //
@@ -422,14 +454,19 @@ void SRV_AudiovisualMenu( void )
 	}
 	SRVH_AdjustableWord("SFX Volume", false, &fxVolume, 0, 255, 3);
 
-	SRVH_DispValue(detailLevel[processorType-1]);
-	SRVH_AdjustableByte("Detail Level", false, &processorType, 1, 6);
-
-	optionY += 16;
-
 	static const char *attSound[] = {"No", "For 5 Minutes", "Yes"};
 	SRVH_DispValue(attSound[DIP.attractSound]);
 	SRVH_AdjustableByte("Attract Sound", false, &DIP.attractSound, 0, 2);
+
+	optionY += 16;
+
+	SRVH_DispValue(detailLevel[processorType-1]);
+	SRVH_AdjustableByte("Detail Level", false, &processorType, 1, 6);
+
+	SRVH_ScalerAdjust();
+
+	SRVH_DispFadedValue(__YesNo[fullscreen_enabled]);
+	SRVH_DispFadedLabel("Fullscreen");
 
 	if (selectionType != __DISPLAY)
 	{

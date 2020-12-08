@@ -65,8 +65,6 @@ typedef float  JE_real;
 
 extern const char *opentyrian_str, *opentyrian_version, *opentyrian_date, *opentyrian_time;
 
-void opentyrian_menu( void );
-
 extern JE_byte isInGame;
 
 // T2000
