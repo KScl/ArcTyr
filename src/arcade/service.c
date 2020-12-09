@@ -702,6 +702,7 @@ void SRV_Buttons( void )
 
 // ======================
 
+/*
 void SRV_GameplayAudits( void )
 {
 	SRVH_DispHeader("Gameplay Audits");
@@ -736,6 +737,7 @@ void SRV_Audits( void )
 	optionY = 176;
 	SRVH_Back("Back");
 }
+*/
 
 // ======================
 
@@ -744,7 +746,7 @@ void SRV_MainMenu( void )
 	SRVH_DispHeader("Service Menu");
 	SRVH_SubMenu("Game Settings", SRV_Settings);
 	SRVH_SubMenu("Button Config", SRV_Buttons);
-	SRVH_SubMenu("Audits", SRV_Audits);
+	SRVH_DispFadedOption("Audits");
 	optionY = 128;
 	SRVH_Back("Exit Service Menu");	
 	optionY = 160;
