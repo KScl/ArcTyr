@@ -661,9 +661,9 @@ enemy_still_exists:
 					if (enemy[i].launchspecial != 0)
 					{
 						/*Type  1 : Must be inline with player*/
-						if (abs(enemy[i].ey - player[0].y) <= 5)
+						if (PL_Alive(0) && abs(enemy[i].ey - player[0].y) <= 5)
 							enemy[i].playertotarget = 0;
-						else if (abs(enemy[i].ey - player[1].y) <= 5)
+						else if (PL_Alive(1) && abs(enemy[i].ey - player[1].y) <= 5)
 							enemy[i].playertotarget = 1;
 						else
 							goto draw_enemy_end;

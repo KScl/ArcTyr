@@ -873,10 +873,13 @@ void ARC_Timers( void )
 
 void ARC_DeathSprayWeapons( Player *this_player )
 {
-	const JE_byte loseOnDeath[] = {0, 2, 4, 5, 7, 11};
+	// Controls movement of sprayed powerups
 	const JE_integer sys[5] = {-16, -8, -8, 0, 0};
 	const JE_integer sxcs[5] = {0, -1, 1, -2, 2};
-	uint i, powerItemNo, numToSpray;
+
+	const JE_byte sprayOnDeath[] = { 0, 1, 3, 3, 5,  5}; // Number of powerups dropped
+	const JE_byte loseOnDeath[]  = { 0, 2, 4, 5, 7, 11}; // Deduction upon death
+	const JE_byte minimumPower[] = {11, 7, 5, 3, 1,  1}; // The minimum power level deduction can take you to
 
 	if (normalBonusLevelCurrent || bonusLevelCurrent)
 		return; // don't spray in bonus stages (they end on any death)
@@ -884,15 +887,35 @@ void ARC_DeathSprayWeapons( Player *this_player )
 	// Any death that matters cuts rank
 	ARC_RankCut();
 
-	powerItemNo = 30011 + this_player->port_mode;
-	numToSpray = (this_player->items.power_level >= DIP.powerLoss) ? DIP.powerLoss : this_player->items.power_level - 1;
+	if (this_player->lives != 1 && this_player->items.power_level <= minimumPower[DIP.powerLoss])
+		return; // If we're below minimum power level, do nothing, player keeps all levels
 
-	if (this_player->items.power_level > loseOnDeath[DIP.powerLoss])
-		this_player->items.power_level -= loseOnDeath[DIP.powerLoss];
-	else
+	uint powerItemNo = 30011 + this_player->port_mode;
+	uint numToSpray;
+	if (this_player->lives == 1) // Game over imminent
+	{
+		// Always reduce the player to 1 power level and drop as many powerups as possible
+		// This makes continuing a little less painful
+		numToSpray = (this_player->items.power_level >= 6) ? 5 : this_player->items.power_level - 1;
 		this_player->items.power_level = 1;
+	}
+	else
+	{
+		numToSpray = sprayOnDeath[DIP.powerLoss];
+		if (this_player->items.power_level - numToSpray < minimumPower[DIP.powerLoss])
+		{
+			numToSpray = this_player->items.power_level - minimumPower[DIP.powerLoss];
+			this_player->items.power_level = minimumPower[DIP.powerLoss];
+		}
+		else
+		{
+			this_player->items.power_level -= loseOnDeath[DIP.powerLoss];
+			if (this_player->items.power_level < minimumPower[DIP.powerLoss])
+				this_player->items.power_level = minimumPower[DIP.powerLoss];
+		}
+	}
 
-	for (i = 0; i < numToSpray; ++i)
+	for (uint i = 0; i < numToSpray; ++i)
 	{
 		b = JE_newEnemy(100, 999, 0);
 		if (b == 0)

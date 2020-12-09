@@ -6,7 +6,7 @@
 			"Sound":2,
 			"Filter":0,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"MoveY":8}
+				{"Sprite":153,"AttackPower":1.5,"MoveY":8}
 			]
 		},
 		"T507":{ // 507 Banana Blast Lv.2
@@ -16,8 +16,8 @@
 			"Filter":0,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-2,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":2,"MoveY":8}
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-2,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":2,"MoveY":8}
 			]
 		},
 		"T508":{ // 508 Banana Blast Lv.3
@@ -27,10 +27,10 @@
 			"Filter":0,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":1,"MoveY":8}
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":1,"MoveY":8}
 			]
 		},
 		"T509":{ // 509 Banana Blast Lv.4
@@ -40,12 +40,12 @@
 			"Filter":0,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-4,"MoveY":5},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":4,"MoveY":5},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":1,"MoveY":8}
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-4,"MoveY":5},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":4,"MoveY":5},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":1,"MoveY":8}
 			]
 		},
 		"T510":{ // 510 Banana Blast Lv.5
@@ -55,12 +55,12 @@
 			"Filter":0,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":-1,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveX":1,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"MoveY":9}
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":-1,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveX":1,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"MoveY":9}
 			]
 		},
 		"T511":{ // 511 Banana Blast Lv.6
@@ -70,14 +70,14 @@
 			"Filter":0,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		},
 		"T512":{ // 512 Banana Blast Lv.7
@@ -87,14 +87,14 @@
 			"Filter":0,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		},
 		"T513":{ // 513 Banana Blast Lv.8
@@ -104,14 +104,14 @@
 			"Filter":0,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		},
 		"T514":{ // 514 Banana Blast Lv.9
@@ -121,14 +121,14 @@
 			"Filter":0,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		},
 		"T515":{ // 515 Banana Blast Lv.10
@@ -138,14 +138,14 @@
 			"Filter":0,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		},
 		"T516":{ // 516 Banana Blast Lv.11
@@ -155,14 +155,14 @@
 			"Filter":0,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveY":9},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-1,"MoveY":8},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-2,"MoveY":7},
-				{"Sprite":153,"AttackPower":1.25,"X":6,"MoveX":3,"MoveY":6},
-				{"Sprite":153,"AttackPower":1.25,"X":-6,"MoveX":-3,"MoveY":6}
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveY":9},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-1,"MoveY":8},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-2,"MoveY":7},
+				{"Sprite":153,"AttackPower":1.5,"X":6,"MoveX":3,"MoveY":6},
+				{"Sprite":153,"AttackPower":1.5,"X":-6,"MoveX":-3,"MoveY":6}
 			]
 		}
 	},
