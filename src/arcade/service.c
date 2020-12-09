@@ -53,79 +53,70 @@ JE_byte resetConfirm = 255;
 
 static const char *__YesNo[] = {"No", "Yes"};
 
+#define STANDARD_LIGHT -4 + (*menuOption == numOptions ? 2 : 0)
+#define FADED_LIGHT    -7
+
 static void SRVH_DispHeader( const char *name )
 {
 	if (selectionType == __DISPLAY)
 		JE_dString(VGAScreen, JE_fontCenter(name, FONT_SHAPES), 12, name, FONT_SHAPES);
 }
 
-static void SRVH_DispFadedOption( const char *name )
+static inline void SRVH_DispFadedOption( const char *name )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			JE_fontCenter(name, SMALL_FONT_SHAPES), optionY, 
-			name, 15, -7, 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, JE_fontCenter(name, SMALL_FONT_SHAPES), optionY,
+			name, 15, FADED_LIGHT, SMALL_FONT_SHAPES, true);
 		optionY += 16;
 	}
 }
 
-static void SRVH_DispOption( const char *name )
+static inline void SRVH_DispOption( const char *name )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			JE_fontCenter(name, SMALL_FONT_SHAPES), optionY, 
-			name, 15, -4 + (*menuOption == numOptions ? 2 : 0), 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, JE_fontCenter(name, SMALL_FONT_SHAPES), optionY, 
+			name, 15, STANDARD_LIGHT, SMALL_FONT_SHAPES, true);
 		optionY += 16;
 	}
 }
 
-static void SRVH_DispFadedLabel( const char *name )
+static inline void SRVH_DispFadedLabel( const char *name )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			50, optionY, 
-			name, 15, -7, 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, 50, optionY,
+			name, 15, FADED_LIGHT, SMALL_FONT_SHAPES, true);
 		optionY += 16;
 	}
 }
 
-static void SRVH_DispLabel( const char *name )
+static inline void SRVH_DispLabel( const char *name )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			50, optionY, 
-			name, 15, -4 + (*menuOption == numOptions ? 2 : 0), 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, 50, optionY,
+			name, 15, STANDARD_LIGHT, SMALL_FONT_SHAPES, true);
 		optionY += 16;
 	}
 }
 
-static void SRVH_DispFadedValue( const char *value )
+static inline void SRVH_DispFadedValue( const char *value )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
-			value, 15, -7, 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
+			value, 15, FADED_LIGHT, SMALL_FONT_SHAPES, true);
 	}
 }
 
-static void SRVH_DispValue( const char *value )
+static inline void SRVH_DispValue( const char *value )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 
-			270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
-			value, 15, -4 + (*menuOption == numOptions ? 2 : 0), 
-			SMALL_FONT_SHAPES, true);
+		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
+			value, 15, STANDARD_LIGHT, SMALL_FONT_SHAPES, true);
 	}
 }
 
@@ -553,14 +544,8 @@ static void SRV_ButtonAssignmentSubMenu( void )
 		sprintf(tmpBuf.s, "Input %d", i + 1);
 		if (lockOut || (i == 0 && curAssignmentNum >= INPUT_SERVICE_HOTDEBUG))
 		{
-			if (selectionType == __DISPLAY)
-			{
-				JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(c, SMALL_FONT_SHAPES), optionY, c, 15, -7, 
-					SMALL_FONT_SHAPES, true);
-				JE_outTextAdjust(VGAScreen, 50, optionY, tmpBuf.s, 15, -7, 
-					SMALL_FONT_SHAPES, true);
-				optionY += 16;
-			}
+			SRVH_DispFadedValue(c);
+			SRVH_DispFadedLabel(tmpBuf.s);
 			continue;
 		}
 		else

@@ -13,7 +13,7 @@
 			"Sound":26,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":226,"AttackPower":1,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveY":8},
 				{"Sprite":225,"AttackPower":1,"MoveX":4,"MoveY":8},
 				{"Sprite":225,"AttackPower":1,"MoveX":-4,"MoveY":8}
 			]
@@ -24,8 +24,8 @@
 			"PiecesPerFire":3,
 			"Pieces":[
 				{"Sprite":227,"AttackPower":2,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":6,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-6,"MoveY":8}
+				{"Sprite":226,"AttackPower":1.5,"MoveX":6,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-6,"MoveY":8}
 			]
 		},
 		"T834":{ // 834 -- NEW Protron Shield AimedLv.3
@@ -33,11 +33,11 @@
 			"Sound":26,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":582,"AttackPower":3,"Duration":{"SetAni":5},"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":8,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-8,"MoveY":8}
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":8,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-8,"MoveY":8}
 			]
 		},
 		"T835":{ // 835 -- NEW Protron Shield AimedLv.4
@@ -45,8 +45,8 @@
 			"Sound":26,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":582,"AttackPower":3,"Duration":{"SetAni":5},"MoveX":2,"MoveY":8},
-				{"Sprite":582,"AttackPower":3,"Duration":{"SetAni":5},"MoveX":-2,"MoveY":8},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":2,"MoveY":8},
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveX":-2,"MoveY":8},
 				{"Sprite":227,"AttackPower":2,"MoveX":6,"MoveY":8},
 				{"Sprite":227,"AttackPower":2,"MoveX":-6,"MoveY":8}
 			]
@@ -56,10 +56,10 @@
 			"Sound":26,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":582,"AttackPower":3,"Duration":{"SetAni":5},"MoveY":8},
-				{"Sprite":226,"AttackPower":3,"MoveX":4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":8,"MoveY":8}
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":8,"MoveY":8}
 			]
 		},
 		"T837":{ // 837 -- NEW Protron Shield AimedLv.6
@@ -67,11 +67,11 @@
 			"Sound":26,
 			"PiecesPerFire":5,
 			"Pieces":[
-				{"Sprite":582,"AttackPower":3,"Duration":{"SetAni":5},"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-4,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":8,"MoveY":8},
-				{"Sprite":226,"AttackPower":1,"MoveX":-8,"MoveY":8}
+				{"Sprite":582,"AttackPower":4,"Duration":{"SetAni":5},"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-4,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":8,"MoveY":8},
+				{"Sprite":226,"AttackPower":1.5,"MoveX":-8,"MoveY":8}
 			]
 		}
 	},

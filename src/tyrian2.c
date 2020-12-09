@@ -474,8 +474,9 @@ enemy_still_exists:
 							case 5: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 2); break;
 							case 6:
 							case 7: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] * 2) / 3; break;
-							case 8: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 3); break;
-							case 9: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 4); break;
+							case 8:
+							case 9: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 3); break;
+							case 10: enemy[i].eshotwait[j-1] = (enemy[i].freq[j-1] / 4); break;
 						}
 						if (enemy[i].eshotwait[j-1] == 0)
 							enemy[i].eshotwait[j-1] = 1;
@@ -617,9 +618,17 @@ enemy_still_exists:
 									int aim = ewpn->aim;
 
 									/*DIF*/
-									if (difficultyLevel > 2)
+									switch (difficultyLevel)
 									{
-										aim += difficultyLevel - 2;
+										default: break;
+										case 3: aim += 1; break;
+										case 4: /*  += 2 */
+										case 5: aim += 2; break;
+										case 6: aim += 3; break;
+										case 7: aim += 4; break;
+										case 8: aim += 5; break;
+										case 9: /*  +  6 */
+										case 10: aim += 6; break;
 									}
 
 									JE_word target_x = player[target_p].x;
