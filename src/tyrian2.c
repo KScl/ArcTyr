@@ -268,6 +268,14 @@ void JE_drawEnemy( int enemyOffset ) // actually does a whole lot more than just
 	{
 		if (enemyAvail[i] != 1)
 		{
+			// note: moved up here to always execute, for consistent behavior
+			if (enemy[i].iced)
+			{
+				--enemy[i].iced;
+				if (enemy[i].enemyground != 0)
+					enemy[i].filter = 0x08;
+			}
+
 			enemy[i].mapoffset = tempMapXOfs;
 
 			if (enemy[i].xaccel && enemy[i].xaccel - 89u > mt_rand() % 11)
@@ -450,14 +458,7 @@ enemy_still_exists:
 			enemyOnScreen++;
 
 			if (enemy[i].iced)
-			{
-				enemy[i].iced--;
-				if (enemy[i].enemyground != 0)
-				{
-					enemy[i].filter = 0x09;
-				}
 				goto draw_enemy_end;
-			}
 
 			for (int j = 3; j > 0; j--)
 			{
