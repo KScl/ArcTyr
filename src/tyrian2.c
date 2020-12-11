@@ -2959,6 +2959,7 @@ void intro_logos( void )
 
 void JE_displayText( void )
 {
+	Uint64 endTime = 0;
 	hasRequestedToSkip = false;
 
 	/* Display Warning Text */
@@ -2967,45 +2968,22 @@ void JE_displayText( void )
 	{
 		tempY = 2;
 	}
+
 	for (temp = 0; temp < levelWarningLines; temp++)
 	{
-		if (true /* !ESCPressed */)
-		{
-			JE_outCharGlow(10, tempY, levelWarningText[temp]);
-
-			tempY += 10;
-		}
+		JE_outCharGlow(10, tempY, levelWarningText[temp]);
+		tempY += 10;
 	}
 
-	if (!hasRequestedToSkip)
-	{
-		frameCountMax = 6;
-		temp = 1;
-	} else {
-		temp = 0;
-	}
-
-	textGlowFont = TINY_FONT;
-	tempW = 184;
-	if (warningRed)
-	{
-		tempW = 7 * 16 + 6;
-	}
-
-	JE_outCharGlow(JE_fontCenter("Press Fire...", TINY_FONT), tempW, "Press Fire...");
-
+	endTime = SDL_GetTicks() + 8000;
 	do
 	{
 		if (levelWarningDisplay)
-		{
 			JE_updateWarning(VGAScreen);
-		}
 
 		setjasondelay(1);
-
 		wait_delay();
-
-	} while (!I_checkSkipScene() && !(hasRequestedToSkip && temp == 1));
+	} while (!I_checkSkipScene() && !(SDL_GetTicks() > endTime));
 	levelWarningDisplay = false;
 }
 
