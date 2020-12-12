@@ -58,7 +58,6 @@ JE_byte    superArcadePowerUp;
 
 JE_real linkGunDirec;
 
-JE_byte secretHint;
 JE_byte background3over;
 JE_byte background2over;
 JE_byte gammaCorrection;

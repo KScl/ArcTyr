@@ -18,6 +18,7 @@ class TyrianData:
 	Specials = collections.OrderedDict({'__None__': {'Name': 'None'}})
 	Enemies = collections.OrderedDict()
 	Info = collections.OrderedDict()
+	Hints = collections.OrderedDict()
 
 def parse_shots(data):
 	TyrianData.Shots.update(data)
@@ -46,6 +47,9 @@ def parse_enemies(data):
 def parse_info(data):
 	TyrianData.Info.update(data)
 
+def parse_hint(data):
+	TyrianData.Hints.update(data)
+
 def parse_import(data):
 	global files, files_unparsed
 	diffdata = [f for f in data if f not in files]
@@ -68,7 +72,8 @@ parsing = {"Shots": parse_shots,
            "Enemies": parse_enemies,
            "Info": parse_info,
            "Import": parse_import,
-           "Output": parse_output}
+           "Output": parse_output,
+           "Hints": parse_hint}
 
 def read_json(filename):
 	print("Now reading", filename, "...")
@@ -142,6 +147,12 @@ def ensure_list_length(target, length, filler = 0):
 class ByteString:
 	def __init__(self):
 		self.__s = bytearray()
+
+	def AppendVariableString(self, s, max_length=255):
+		if len(s) > max_length:
+			raise ElementError('String too long')
+		self.__s.append(len(s))
+		self.__s.extend([ord(i) for i in s])
 
 	def AppendString(self, s, length):
 		if len(s) > length:
@@ -738,6 +749,35 @@ def iter_enemies():
 	# End iteration
 	yield len(TyrianData.Enemies)
 
+def iter_hints():
+	global _currentStruct
+	special_hints = {
+		"Episode1": 0xF1,
+		"Episode2": 0xF2,
+		"Episode3": 0xF3,
+		"Episode4": 0xF4,
+		"Episode5": 0xF5
+	}
+
+	count = 0
+	for hint_ref in TyrianData.Hints:
+		count += len(TyrianData.Hints[hint_ref])
+	yield count.to_bytes(1, signed=False, byteorder='little')
+
+	for hint_ref in TyrianData.Hints:
+		_currentStruct = 'Hints:%s' % hint_ref
+		hint_pointer = special_hints[hint_ref] if hint_ref in special_hints.keys() else find_ship_id(hint_ref)
+
+		for hint in TyrianData.Hints[hint_ref]:
+			hint = ensure_list_length(hint, 7, "")
+
+			s = ByteString()
+			s.AppendUint8(hint_pointer)
+			[s.AppendVariableString(i, 60) for i in hint]
+			yield s
+			yield [59]
+	yield count
+
 def write_iterator(filename, iteration):
 	count = 0
 	f = open(os.path.join(output_path, filename), 'wb')
@@ -771,11 +811,12 @@ while len(files_unparsed) > 0:
 
 output_path = os.path.normpath(output_path)
 
-write_iterator('arcshot.dta', iter_shots())
-write_iterator('arcship.dta', iter_ships())
-write_iterator('arcport.dta', iter_ports())
-write_iterator('arcspec.dta', iter_specials())
-write_iterator('arcopt.dta', iter_options())
-write_iterator('enemies.dta', iter_enemies())
+write_iterator('shots.arcd', iter_shots())
+write_iterator('ships.arcd', iter_ships())
+write_iterator('ports.arcd', iter_ports())
+write_iterator('specials.arcd', iter_specials())
+write_iterator('options.arcd', iter_options())
+write_iterator('enemies.arcd', iter_enemies())
+write_iterator('hints.arcd', iter_hints())
 
 print('...OK')

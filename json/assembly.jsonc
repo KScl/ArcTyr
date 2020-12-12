@@ -4,6 +4,9 @@
 		// Needs to be loaded first, hardcoded data (at least for now)
 		"./Common.jsonc",
 
+		// Game hints, etc.
+		"./Hints.jsonc",
+
 		// Unsorted data.
 		"./Extra/shots.jsonc",
 		"./Extra/special.jsonc",

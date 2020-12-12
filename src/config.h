@@ -49,7 +49,6 @@ extern JE_boolean twoPlayerLinked;
 extern JE_byte SAPowerupBag[5];
 extern JE_byte superArcadePowerUp;
 extern JE_real linkGunDirec;
-extern JE_byte secretHint;
 extern JE_byte background3over;
 extern JE_byte background2over;
 extern JE_byte gammaCorrection;

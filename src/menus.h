@@ -17,6 +17,9 @@
 
 extern char episode_name[6][31];
 
+void Menu_newEpisode( void );
+void Menu_episodeInterlude( bool silent );
+
 bool Menu_titleScreen( void );
 void Menu_hotDebugScreen( void );
 

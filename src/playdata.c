@@ -41,6 +41,10 @@ JE_SpecialType *special      = NULL; // dynamically allocated
 size_t       num_ships  = 0;
 JE_ShipType *ships      = NULL; // dynamically allocated
 
+// Hints
+size_t num_hints;
+hint_type_t *hints; // dynamically allocated
+
 // Ship selection organization
 JE_byte num_ship_select[3];
 JE_byte ship_select[3][MAX_SHIP_SELECT]; // [row][index] -- top, bottom, continue screen
@@ -351,7 +355,7 @@ static void _loadOptions( const char *dataFile )
 	}
 }
 
-void _loadStaticEnemies( const char *dataFile )
+static void _loadStaticEnemies( const char *dataFile )
 {
 	JE_byte tmp_b;
 	FILE *f = dir_fopen_die(arcdata_dir(), dataFile, "rb");
@@ -397,32 +401,75 @@ void _loadStaticEnemies( const char *dataFile )
 	}
 }
 
+static void _loadHints( const char *dataFile )
+{
+	FILE *f = NULL;
+	size_t hintSize;
+	JE_byte tmp_b;
+
+	f = dir_fopen_die(arcdata_dir(), dataFile, "rb");
+
+	efread(&num_hints, sizeof(JE_byte), 1, f);
+	hintSize = sizeof(hint_type_t) * (num_hints);
+	hints = realloc(hints, hintSize);
+	memset(hints, 0, hintSize);
+
+	for (size_t i = 0; i < num_hints; ++i)
+	{
+		efread(&hints[i].reference, sizeof(JE_byte), 1, f);
+		for (size_t j = 0; j < 7; ++j)
+		{
+			// size actually is relevant
+			efread(&tmp_b, sizeof(JE_byte), 1, f);
+			if (tmp_b > 60)
+			{
+				fprintf(stderr, "error: hints array is bad at %zu-%zu: got length of %d\n", i, j, tmp_b);
+				JE_tyrianHalt(1);
+			}
+			efread(&hints[i].text[j], 1, tmp_b, f);
+			hints[i].text[j][tmp_b] = '\0';
+		}
+		efread(&tmp_b, sizeof(JE_byte), 1, f);
+		if (tmp_b != ';')
+		{
+			fprintf(stderr, "error: hints array is bad at %zu: got %d\n", i, tmp_b);
+			JE_tyrianHalt(1);
+		}
+	}
+}
+
 void PlayData_load( void )
 {
 	// Unlike the original game, these are loaded once on startup and never again
 	ARC_IdentifyPrint("");
 
-	_loadPWeapons("arcshot.dta");
-	sprintf(tmpBuf.l, "arcshot.dta: load OK (%zu items)", num_pWeapons);
+	_loadPWeapons("shots.arcd");
+	sprintf(tmpBuf.l, "shots.arcd: load OK (%zu items)", num_pWeapons);
 	ARC_IdentifyPrint(tmpBuf.l);
 
-	_loadPorts("arcport.dta");
-	sprintf(tmpBuf.l, "arcport.dta: load OK (%zu items)", num_ports);
+	_loadPorts("ports.arcd");
+	sprintf(tmpBuf.l, "ports.arcd: load OK (%zu items)", num_ports);
 	ARC_IdentifyPrint(tmpBuf.l);
 
-	_loadSpecials("arcspec.dta");
-	sprintf(tmpBuf.l, "arcspec.dta: load OK (%zu items)", num_specials);
+	_loadSpecials("specials.arcd");
+	sprintf(tmpBuf.l, "specials.arcd: load OK (%zu items)", num_specials);
 	ARC_IdentifyPrint(tmpBuf.l);
 
-	_loadShips("arcship.dta");
-	sprintf(tmpBuf.l, "arcship.dta: load OK (%zu items)", num_ships);
+	_loadShips("ships.arcd");
+	sprintf(tmpBuf.l, "ships.arcd: load OK (%zu items)", num_ships);
 	ARC_IdentifyPrint(tmpBuf.l);
 
-	_loadOptions("arcopt.dta");
-	sprintf(tmpBuf.l, "arcopt.dta: load OK (%zu items)", num_options);
+	_loadOptions("options.arcd");
+	sprintf(tmpBuf.l, "options.arcd: load OK (%zu items)", num_options);
 	ARC_IdentifyPrint(tmpBuf.l);
 
-	_loadStaticEnemies("enemies.dta");
+	_loadStaticEnemies("enemies.arcd");
+	sprintf(tmpBuf.l, "enemies.arcd: load OK (%zu items)", (size_t)100);
+	ARC_IdentifyPrint(tmpBuf.l);
+
+	_loadHints("hints.arcd");
+	sprintf(tmpBuf.l, "hints.arcd: load OK (%zu items)", num_hints);
+	ARC_IdentifyPrint(tmpBuf.l);
 }
 
 void PlayData_free( void )

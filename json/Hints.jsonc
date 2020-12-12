@@ -1,0 +1,183 @@
+{
+	"Hints":{
+		"SuperCarrot":[
+			[
+				"~Icebreaker~ (Down, Left, Up, Right, Down+Sidekick)",
+				"",
+				"Create an ice cube sidekick that will trail you until fired.",
+				"When it hits an enemy, it explodes into shards of ice which",
+				"freeze the surroundings for a while.",
+				"",
+				"* Costs ~4~ units of shield."
+			],
+			[
+				"~Orange Shield~ (Special Mode B)",
+				"",
+				"Though it may not look like much, the Orange Shield packs",
+				"an extremely strong punch if you're willing to get up close",
+				"and personal with your enemies."
+			],
+			[
+				"~HotDog Blast~ (Up, Down+Fire)",
+				"",
+				"Fires a blast of supercharged hot dogs straight ahead,",
+				"which deal much more damage than standard hot dog fare.",
+				"",
+				"",
+				"* Costs ~1/2~ unit of armor."
+			]
+		],
+		"DragonWing":[
+			[
+				"~Plasma Storm~ (DLRULRD+S)",
+				"",
+				"Bringing shields up to their maximum level enables creating",
+				"the ultimate sidekick.",
+				"",
+				"",
+				"* Costs ~14~ units of shield."
+			],
+			[
+				"~DragonWing Options~ (DLDL+S, DRDR+S)",
+				"",
+				"The DragonWing can expend power from its main guns and turn",
+				"them into permanent sidekicks for extra offensive power.",
+				"What's created depends on what weapon is currently in use.",
+				"",
+				"* Costs ~1~ power level."
+			],
+			[
+				"~Linking~",
+				"",
+				"When linked with another ship, the DragonWing shares its",
+				"shield and armor with them. It takes BOTH ship's shields",
+				"being drained before either takes damage to armor."
+			]
+		],
+		"Magma":[
+			[
+				"~Mag-Malice's Secret Power~",
+				"",
+				"Mag-Malice's short ranged weapons, such as the Starblast,",
+				"are extremely powerful to make up for the inherent danger",
+				"posed by using them, given Mag-Malice's low armor rating.",
+				"With higher risk comes greater rewards."
+			],
+			[
+				"~Exhaust Shot~ (Special Mode A)",
+				"",
+				"Though it requires getting in front of enemies to utilize",
+				"effectively, and the range is short, the superheated plasma",
+				"fired from this special deals extremely high amounts of",
+				"damage, even decimating some enemies instantly."
+			]
+		],
+		"Episode1":[
+			[
+				"From ~TYRIAN~ to ~HOLES~",
+				"",
+				"If it moves, destroy it. If not, it doesn't matter.",
+				"",
+				"You'll know if you're on the right track by the time",
+				"you approach the platforms."
+			],
+			[
+				"From ~TYRIAN~ to ~SOH JIN~",
+				"",
+				"Pacifism is key, at least for a little while."
+			],
+			[
+				"~WINDY~",
+				"",
+				"There are question mark blocks in a couple of",
+				"hard-to-reach locations. Perhaps they're hiding something",
+				"truly extraordinary?"
+			],
+			[
+				"Finding ~WINDY~",
+				"",
+				"WINDY is the last level in a chain of three secret levels.",
+				"A nice, relaxing(?) break from dealing with",
+				"mines and asteroids."
+			],
+			[
+				"~TYRIAN~",
+				"",
+				"The very first U-Ship you come across is hiding something."
+			],
+			[
+				"~ASTEROID2~",
+				"",
+				"The very first tank you come across is hiding something,",
+				"and only by waiting can you discover what it is."
+			]
+		],
+		"Episode2":[
+			[
+				"~GEM WAR~",
+				"",
+				"The faster you destroy the gem ships hanging around at the",
+				"top of the screen, the better reward you'll get from them."
+			],
+			[
+				"~MISTAKES~",
+				"",
+				"The path you take through this level depends on what enemies",
+				"you shoot down. Leave some enemies alive at key points and",
+				"you might get a better reward."
+			],
+			[
+				"~MISTAKES~",
+				"",
+				"Wasn't there a path that caused a softlock? I wonder what",
+				"would happen if you stumbled across it now..."
+			],
+			[
+				"~AST. CITY~",
+				"",
+				"You can save SuperBombs and carry them onto another level,",
+				"if you feel so inclined."
+			],
+			[
+				"From ~GYGES~ to ~GEM WAR~",
+				"",
+				"There are three ships that have a unique look, that don't",
+				"attack you. You need to shoot all of them down."
+			]
+		],
+		"Episode3":[
+			[
+				"~STARGATE~",
+				"",
+				"Two of the spikes flying towards you can be destroyed.",
+				"Each one carries two 5,000 point gems."
+			],
+			[
+				"~Secret Levels~",
+				"",
+				"Two secret levels in Episode 3 are in the exact same place.",
+				"With good timing, you might be able to predict which one",
+				"you'll go to."
+			],
+			[
+				"~BONUS~",
+				"",
+				"In every section where a solid row of ships blocks the top",
+				"of the screen, various ships will fly around above them.",
+				"The first such ship in each section always contains",
+				"a shield powerup."
+			]
+		],
+		"Episode4":[
+			[
+				"~Saving Ixmucane~",
+				"",
+				"On one hand, you need to stop the planet from turning into",
+				"a sun. On the other hand, you need to stop it from turning",
+				"into an ice cube as well.",
+				"",
+				"If you can successfully do both, you'll be greatly rewarded."
+			]
+		]
+	}
+}

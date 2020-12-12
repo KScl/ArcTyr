@@ -136,6 +136,7 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 	JE_integer maxloc, loc, z;
 	JE_shortint glowcol[60]; /* [1..60] */
 	JE_shortint glowcolc[60]; /* [1..60] */
+	JE_shortint glowcolmax[60]; /* [1..60] */
 	JE_word textloc[60]; /* [1..60] */
 	JE_byte bank;
 
@@ -159,9 +160,12 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 		{
 			glowcol[z] = -8;
 			glowcolc[z] = 1;
+			glowcolmax[z] = 0;
 		}
 
 		loc = x;
+
+		JE_shortint cur_max = 0;
 		for (z = 0; z < maxloc; z++)
 		{
 			textloc[z] = loc;
@@ -170,8 +174,13 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 
 			if (s[z] == ' ')
 				loc += 6;
+			else if (s[z] == '~')
+				cur_max = (cur_max == 4) ? 0 : 4;
 			else if (sprite_id != -1)
+			{
 				loc += sprite(TINY_FONT, sprite_id)->width + 1;
+				glowcolmax[z] = cur_max;
+			}
 		}
 
 		for (loc = 0; (unsigned)loc < strlen(s) + 28; loc++)
@@ -195,6 +204,8 @@ void JE_outCharGlow( JE_word x, JE_word y, const char *s )
 							glowcol[z] += glowcolc[z];
 							if (glowcol[z] > 9)
 								glowcolc[z] = -1;
+							if (glowcolc[z] == -1 && glowcol[z] < glowcolmax[z])
+								glowcol[z] = glowcolmax[z];
 						}
 					}
 				}
@@ -264,8 +275,6 @@ void JE_initPlayerData( void )
 
 	player[0].last_opt_given = player[0].last_opt_fired = 0;
 	player[1].last_opt_given = player[1].last_opt_fired = 0;
-
-	secretHint = (mt_rand() % 3) + 1;
 
 	for (uint p = 0; p < COUNTOF(player); ++p)
 	{
@@ -688,8 +697,7 @@ void JE_endLevelAni( void )
 	// ---
 
 	// Bonuses (currently hardcoded)
-	//printf("%d %d\n", episodeNum, mainLevel);
-
+	// Saving Ixmucane: 100,000 pts.
 	if (episodeNum == 4 && mainLevel == 32 && !allPlayersGone && !(levelTimer && levelTimerCountdown <= 0))
 	{
 		strcpy(tempStr, "Bonus for saving Ixmucane.");
@@ -699,22 +707,6 @@ void JE_endLevelAni( void )
 		if (player[1].player_status == STATUS_INGAME)
 			JE_saveTextGlow(270 - JE_textWidth("100000", SMALL_FONT_SHAPES), 135, "100000");
 		award_bonus_points(100000);
-
-		JE_drawTextGlow(VGAScreenSeg);
-	}
-	else if ((episodeNum == 1 && mainLevel == 42)
-		|| (episodeNum == 2 && mainLevel == 13)
-		|| (episodeNum == 3 && initialDifficulty <= 2 && mainLevel == 16)
-		|| (episodeNum == 3 && initialDifficulty > 2 && mainLevel == 13)
-		|| (episodeNum == 4 && mainLevel == 37))
-	{
-		strcpy(tempStr, "Episode completion bonus.");
-		JE_saveTextGlow(JE_fontCenter(tempStr, SMALL_FONT_SHAPES), 120, tempStr);
-		if (player[0].player_status == STATUS_INGAME)
-			JE_saveTextGlow(50, 135, "10000");
-		if (player[1].player_status == STATUS_INGAME)
-			JE_saveTextGlow(270 - JE_textWidth("10000", SMALL_FONT_SHAPES), 135, "10000");
-		award_bonus_points(10000);
 
 		JE_drawTextGlow(VGAScreenSeg);
 	}

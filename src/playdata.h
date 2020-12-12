@@ -148,6 +148,18 @@ extern size_t num_ships;
 extern const size_t num_shields;
 extern const JE_byte shield_power[SHIELD_NUM + 1];
 
+//
+// Hints
+//
+typedef struct
+{
+	JE_byte reference; // What ship (or episode) is the hint referencing?
+	char text[7][61];
+} hint_type_t;
+
+extern hint_type_t *hints;
+extern size_t num_hints;
+
 // Extra data
 // Ship selection order
 #define MAX_SHIP_SELECT 16

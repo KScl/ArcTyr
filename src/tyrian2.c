@@ -2433,50 +2433,8 @@ static bool read_episode_sections( void )
 				break;
 
 			case 'Q': // Episode end
-				play_song(SONG_EPISODEEND);
-
 				fade_black(15);
-				JE_clr256(VGAScreen);
-				memcpy(colors, palettes[6-1], sizeof(colors));
-				fade_palette(colors, 15, 0, 255);
-				JE_loadPCX(arcdata_dir(), "select.pcx");
-
-				temp = secretHint + (mt_rand() % 3) * 3;
-
-				JE_byte plrs = PL_WhosInGame();
-				levelWarningLines = 0;
-				if (plrs & 1)
-				{
-					snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
-						"%s %lu", miscText[40], player[0].cash);
-				}
-				if (plrs & 2)
-				{
-					snprintf(levelWarningText[levelWarningLines++], sizeof(*levelWarningText),
-						"%s %lu", miscText[40], player[1].cash);
-				}
-				strcpy(levelWarningText[levelWarningLines++], "");
-
-				for (int i = 0; i < temp - 1; i++)
-				{
-					do
-						read_encrypted_pascal_string(s, sizeof(s), ep_f);
-					while (s[0] != '#');
-				}
-
-				do
-				{
-					read_encrypted_pascal_string(s, sizeof(s), ep_f);
-					strcpy(levelWarningText[levelWarningLines], s);
-					levelWarningLines++;
-				}
-				while (s[0] != '#');
-				levelWarningLines--;
-
-				frameCountMax = 4;
-				JE_displayText();
-
-				fade_black(15);
+				Menu_episodeInterlude(false);
 
 				// If out of episodes, play the credits and leave.
 				if (!Episode_next())
@@ -2487,25 +2445,8 @@ static bool read_episode_sections( void )
 				}
 				else
 				{
-					play_song(SONG_NEXTEPISODE);
-
-					JE_clr256(VGAScreen);
-					memcpy(colors, palettes[6-1], sizeof(colors));
-
-					JE_dString(VGAScreen, JE_fontCenter(episode_name[episodeNum], SMALL_FONT_SHAPES), 130, episode_name[episodeNum], SMALL_FONT_SHAPES);
-					JE_dString(VGAScreen, JE_fontCenter(miscText[5-1], SMALL_FONT_SHAPES), 185, miscText[5-1], SMALL_FONT_SHAPES);
-
-					JE_showVGA();
-					fade_palette(colors, 15, 0, 255);
-
-					do
-					{
-						SDL_Delay(16);
-					} while (!I_checkSkipScene());
-
-					fade_black(15);
-
 					mainLevel = FIRST_LEVEL;
+					Menu_newEpisode();
 					fclose(ep_f); // Time to leave this episode behind us
 					return read_episode_sections(); // And go to the new one
 				}
@@ -2963,11 +2904,7 @@ void JE_displayText( void )
 	hasRequestedToSkip = false;
 
 	/* Display Warning Text */
-	tempY = 55;
-	if (warningRed)
-	{
-		tempY = 2;
-	}
+	tempY = (warningRed) ? 2 : 55;
 
 	for (temp = 0; temp < levelWarningLines; temp++)
 	{

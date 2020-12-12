@@ -37,14 +37,51 @@
 
 char episode_name[6][31];
 
-static const JE_shortint _timeShipX[] = {
-	 0,  0,  0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
-	30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50, 50, 50, 50, 50, 50, 50,
-	50, 50, 50, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22,
-	20, 18, 16, 14, 12, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0,  0,  0,  0,  0,  0,  0,  0,
-};
-static const JE_byte _playerHue[2]   = {9,      7     };
-static const JE_byte _playerColor[2] = {9 << 4, 7 << 4};
+
+//
+// Standard menu stuff (timer, etc.)
+//
+
+static Uint64 _endTime = 0;
+static bool _outOfTime = true;
+static bool _fadeIn = true;
+
+static void _enterMenuBehaviors( int seconds )
+{
+	_endTime = (seconds * 1000) + 999;
+	_endTime += SDL_GetTicks();
+
+	_outOfTime = false;
+	_fadeIn = true;
+}
+
+static void _regularMenuBehaviors( void )
+{
+	// Check and draw timer
+	Uint64 t = SDL_GetTicks();
+	if (t > _endTime)
+	{
+		t = 0;
+		_outOfTime = true;
+	}
+	else
+		t = _endTime - t;
+
+	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%lu", t / 1000);
+	JE_outTextAdjust(VGAScreen, JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES),
+		136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true);
+
+	// Fade in
+	if (_fadeIn)
+	{
+		fade_palette(colors, 10, 0, 255);
+		_fadeIn = false;
+	}
+
+	// Progress arc timer (might be unnecessary now?)
+	++arcTextTimer;
+	arcTextTimer %= 200;
+}
 
 static inline void _menuMirrorText( SDL_Surface * screen, int x, int y, int p, const char *s )
 {
@@ -86,7 +123,15 @@ static void _drawShipGraphic( int x, int y, JE_byte shipnum, int facing )
 
 static void _drawPlayerStatusText( JE_byte p )
 {
-	JE_word curCoins;
+	if (player[p].player_status == STATUS_INGAME)
+	{
+		strcpy(tmpBuf.l, JE_trim(ships[player[p].items.ship].name));
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%lu", player[p].cash);
+		_drawShipGraphic((p == 1) ? 270 : 50, 160, player[p].items.ship, 0);
+		_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.l);
+		_menuMirrorText(VGAScreen, 12, 152, p, tmpBuf.s);
+		return;
+	}
 	if (player[p].player_status == STATUS_SELECT)
 	{
 		_menuMirrorText(VGAScreen, 12, 136, p, "Wait For");
@@ -94,8 +139,7 @@ static void _drawPlayerStatusText( JE_byte p )
 		return;
 	}
 
-	curCoins = ARC_GetCoins();
-
+	JE_word curCoins = ARC_GetCoins();
 	strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
 	_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.s);
 
@@ -109,50 +153,85 @@ static void _drawPlayerStatusText( JE_byte p )
 	_menuMirrorText(VGAScreen, 12, 152, p, tmpBuf.s);
 }
 
-// ----------
-// Game Menus
-// ----------
 
-// Only referenced from title screen
+//
+// Ship selection
+//
+
+static const JE_shortint _timeShipX[] = {
+	 0,  0,  0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
+	30, 32, 34, 36, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50, 50, 50, 50, 50, 50, 50,
+	50, 50, 50, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22,
+	20, 18, 16, 14, 12, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0,  0,  0,  0,  0,  0,  0,  0,
+};
+static const JE_byte _playerHue[2]   = {9,      7     };
+static const JE_byte _playerColor[2] = {9 << 4, 7 << 4};
+
+// Only referenced from title screen and new episode screen
 static void Menu_selectShip( void )
 {
-	bool fade_in = true;
-	bool twoP = (player[0].player_status == player[1].player_status);
+	bool twoP = (player[0].player_status > STATUS_NONE && player[1].player_status > STATUS_NONE);
+	bool selectionMade[2] = {false, false};
 
 	const int xIncrease[2] = {300 / (num_ship_select[0]), 300 / (num_ship_select[1])};
 	JE_byte ss_x[2] = {1, 4};
 	JE_byte ss_y[2] = {0, 0};
+
+	// Secret code input
+	JE_byte code_length;
+	JE_byte *tmp_code_buf;
 
 	// Ship display
 	size_t shipXofs = 1, lastXofs = 0;
 	int shipAngle;
 	JE_byte random_appearance[3] = {1, 1}; // currently displayed random ship (not used for selection)
 
-	uint nTimer, tTimer = SDL_GetTicks() + 20999;
-
 	JE_loadPCX(arcdata_dir(), "select.pcx");
-	JE_dString(VGAScreen, JE_fontCenter("Select Ship", FONT_SHAPES), 20, "Select Ship", FONT_SHAPES);
+	JE_dString(VGAScreen, JE_fontCenter("Select Ship", FONT_SHAPES), 16, "Select Ship", FONT_SHAPES);
 	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
 
-	// Enable secret code input
-	JE_byte code_length;
-	JE_byte *tmp_code_buf;
-	I_initCodeInput(1); // player 1
-	I_initCodeInput(2); // player 2
+	// If entering from mid-game (next episode screen), set cursor appropriately
+	// If not, set player ship appropriately
+	for (int i = 0; i < 2; ++i)
+	{
+		if (player[i].player_status == STATUS_INGAME)
+		{
+			selectionMade[i] = true;
+			if (ships[player[i].items.ship].locationinmenu.present)
+			{	
+				ss_x[i] = ships[player[i].items.ship].locationinmenu.x;
+				ss_y[i] = ships[player[i].items.ship].locationinmenu.y;
+			}
+			else
+			{
+				ss_x[i] = (i == 0) ? 0 : ships[0].locationinmenu.x;
+				ss_y[i] = ships[0].locationinmenu.y;
+			}
+		}
+		else
+		{
+			// Enable secret codes
+			I_initCodeInput(i + 1);
 
 #ifdef ENABLE_DEVTOOLS
-	// Start on random select for fuzzed inputs
-	if (inputFuzzing)
-	{
-		ss_x[0] = 0;
-		ss_x[1] = 5;
-		ss_y[0] = ss_y[1] = 1;
-	}
+			// Start on random with input fuzzing
+			if (inputFuzzing)
+			{
+				ss_x[i] = (i == 0) ? 0 : ships[0].locationinmenu.x;
+				ss_y[i] = ships[0].locationinmenu.y;
+			}
 #endif
 
-	player[0].items.ship = ship_select[ss_y[0]][ss_x[0]];
-	player[1].items.ship = ship_select[ss_y[1]][ss_x[1]];
+			player[i].items.ship = ship_select[ss_y[i]][ss_x[i]];
 
+			// In case P1 selected the ship P2's cursor starts on, or vice versa,
+			// and then we return to this screen later
+			if (player[0].items.ship == player[1].items.ship)
+				player[i].items.ship = ship_select[(ss_y[i] = 1)][ss_x[i]];
+		}
+	}
+
+	_enterMenuBehaviors(20);
 	for (; ; )
 	{
 		setjasondelay(2);
@@ -209,7 +288,7 @@ static void Menu_selectShip( void )
 			for (int i = 0; i < num_ship_select[section]; ++i)
 			{
 				uint ship_id = ship_select[section][i];
-				if (ship_id == 0xFF)
+				if (ship_id == 0xFF) // If random, don't display random if player's ship *isn't* random
 				{
 					if (ss_x[0] == i && ss_y[0] == section && player[0].items.ship != 0xFF)
 						ship_id = player[0].items.ship;
@@ -221,24 +300,7 @@ static void Menu_selectShip( void )
 			}
 		}
 
-		nTimer = tTimer - SDL_GetTicks();
-		if (nTimer > 21000)
-			nTimer = 0;
-
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%d", nTimer / 1000);
-		JE_outTextAdjust(VGAScreen, 
-			JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES), 136, 
-			tmpBuf.s, 15, -4, 
-			SMALL_FONT_SHAPES, true);
-
-		if (fade_in)
-		{
-			fade_palette(colors, 10, 0, 255);
-			fade_in = false;
-		}
-
-		++arcTextTimer;
-		arcTextTimer %= 200;
+		_regularMenuBehaviors();
 
 		JE_showVGA();
 		wait_delay();
@@ -251,10 +313,9 @@ static void Menu_selectShip( void )
 			if (player[i].player_status != STATUS_SELECT)
 				continue;
 
-			if (!nTimer) // Timer expired?
+			if (_outOfTime) // Timer expired?
 			{
-				player[i].player_status = STATUS_INGAME;
-				JE_playSampleNum(S_SELECT);
+				selectionMade[i] = true;
 				continue;
 			}
 
@@ -294,14 +355,12 @@ static void Menu_selectShip( void )
 			case INPUT_P2_FIRE:
 			case INPUT_P1_FIRE:
 				if (player[p].player_status == STATUS_SELECT)
-				{
-					JE_playSampleNum(S_SELECT);
-					player[p].player_status = STATUS_INGAME;
-				}
+					selectionMade[p] = true;
 				else if (player[p].player_status != STATUS_INGAME && ARC_CoinStart(&player[p]))
 				{
 					JE_playSampleNum(S_SELECT);
 					twoP = true;
+					// If the other player's over the ship we'd start on, then move the cursor to the other row
 					if (ss_x[0] == ss_x[1] && ss_y[0] == ss_y[1])
 						ss_y[p] = (ss_y[p] == 1) ? 0 : 1;
 					player[p].player_status = STATUS_SELECT;
@@ -351,69 +410,76 @@ static void Menu_selectShip( void )
 			}
 		}
 
-		// Behavior for selecting random
+		// Behavior for selecting a ship
+		// Moved down here to keep everything together
 		for (int i = 0; i < 2; ++i)
 		{
-			if (player[i].player_status == STATUS_INGAME && player[i].items.ship == 0xFF)
+			if (selectionMade[i] && player[i].player_status != STATUS_INGAME)
 			{
-				PL_RandomSelect(&player[i]);
-				if (ships[player[i].items.ship].locationinmenu.present)
+				// Selected random: Move the cursor into the proper location if possible
+				if (player[i].items.ship == 0xFF)
 				{
-					ss_x[i] = ships[player[i].items.ship].locationinmenu.x;
-					ss_y[i] = ships[player[i].items.ship].locationinmenu.y;
+					PL_RandomSelect(&player[i]);
+					if (ships[player[i].items.ship].locationinmenu.present)
+					{
+						ss_x[i] = ships[player[i].items.ship].locationinmenu.x;
+						ss_y[i] = ships[player[i].items.ship].locationinmenu.y;
+					}
 				}
+				// Init player data
+				PL_Init(&player[i], player[i].items.ship, false); // sets STATUS_INGAME
+				JE_playSampleNum(S_SELECT);
 			}
 		}
 
 		// All players ingame are ready?
 		if (player[0].player_status != STATUS_SELECT && player[1].player_status != STATUS_SELECT)
-		{
-			fade_black(10);
-			return;
-		}
+			break;
 	}
+	fade_black(10);
 }
+
+//
+// Episode related menus
+//
 
 // Only referenced from title screen
 static void Menu_selectEpisode( void )
 {
 	bool selection_made = false;
-	JE_byte in_control = (player[0].player_status == STATUS_SELECT) ? 1 : 2;
-	uint nTimer, tTimer = SDL_GetTicks() + 20999;
-
-	// In case music was stopped.
-	play_song(SONG_TITLE);
-
-	JE_loadPCX(arcdata_dir(), "select.pcx");
-	JE_dString(VGAScreen, JE_fontCenter(episode_name[0], FONT_SHAPES), 20, episode_name[0], FONT_SHAPES);
+	JE_byte in_control = (player[0].player_status == STATUS_SELECT) ? 0 : 1;
 
 	int episode = 1, episode_max = EPISODE_AVAILABLE;
 
 	if (!episodeAvail[4]) // If episode 5 isn't available, don't show it.
 		--episode_max;
 
-	bool fade_in = true;
-
-	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
-
 	mainLevel = FIRST_LEVEL;
 
-	for (; ; )
+	JE_loadPCX(arcdata_dir(), "select.pcx");
+	JE_dString(VGAScreen, JE_fontCenter(episode_name[0], FONT_SHAPES), 16, episode_name[0], FONT_SHAPES);
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+
+	// In case the music was stopped, this will restart it.
+	play_song(SONG_TITLE);
+
+	_enterMenuBehaviors(20);
+	while (!selection_made)
 	{
 		setjasondelay(2);
 
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 
-		for (int p = 0; p < 2; ++p)
+		for (int i = 0; i < 2; ++i)
 		{
-			if (player[p].player_status != STATUS_SELECT || (p + 1) != in_control)
+			if (player[i].player_status != STATUS_SELECT || i != in_control)
 			{
-				_drawPlayerStatusText(p);
+				_drawPlayerStatusText(i);
 				continue;
 			}
 		}
 
-		int y = 44;
+		int y = 42;
 		for (int i = 1; i <= episode_max; i++)
 		{
 			JE_outTextAdjust(VGAScreen, 20, y, episode_name[i], 15, -4 + (i == episode ? 2 : 0) - (!episodeAvail[i - 1] ? 4 : 0), SMALL_FONT_SHAPES, true);
@@ -429,33 +495,12 @@ static void Menu_selectEpisode( void )
 			y += (episode_max == 5) ? 18 : 24;
 		}
 
-		nTimer = tTimer - SDL_GetTicks();
-		if (nTimer > 21000)
-			nTimer = 0;
-
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%d", nTimer / 1000);
-		JE_outTextAdjust(VGAScreen, 
-			JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES), 136, 
-			tmpBuf.s, 15, -4, 
-			SMALL_FONT_SHAPES, true);
-
-		if (fade_in)
-		{
-			fade_palette(colors, 10, 0, 255);
-			fade_in = false;
-		}
-
-		++arcTextTimer;
-		arcTextTimer %= 200;
+		_regularMenuBehaviors();
 
 		JE_showVGA();
 		wait_delay();
 
 		I_checkButtons();
-
-		// Timer expired?
-		if (!nTimer)
-			selection_made = true;
 
 		uint button = 0;
 
@@ -464,63 +509,46 @@ static void Menu_selectEpisode( void )
 			selection_made = true;
 		else
 #endif
-		while (I_inputForMenu(&button, INPUT_P2_FIRE))
+		if (_outOfTime) // Timer expired?
+			selection_made = true;
+		else while (I_inputForMenu(&button, INPUT_P2_FIRE))
 		{
+			JE_byte p = (button >= INPUT_P2_UP) ? 1 : 0;
 			switch (button++)
 			{
 #ifdef ENABLE_DEVTOOLS
 			case INPUT_P1_RIGHT:
-				if (in_control == 2)
-					break;
-				goto episode_cursor_right;
 			case INPUT_P2_RIGHT:
-				if (in_control == 1)
+				if (in_control != p)
 					break;
-			episode_cursor_right:
 				mainLevel++;
 				JE_playSampleNum(S_CURSOR);
 				break;
 
 			case INPUT_P1_LEFT:
-				if (in_control == 2)
-					break;
-				goto episode_cursor_left;
 			case INPUT_P2_LEFT:
-				if (in_control == 1)
+				if (in_control != p)
 					break;
-			episode_cursor_left:
 				mainLevel--;
 				JE_playSampleNum(S_CURSOR);
 				break;
 #endif
 
 			case INPUT_P1_FIRE:
-				if (player[0].player_status != STATUS_SELECT && ARC_CoinStart(&player[0]))
-				{
-					JE_playSampleNum(S_SELECT);
-					player[0].player_status = STATUS_SELECT;
-				}
-				else if (in_control == 1)
-					selection_made = true;
-				break;
 			case INPUT_P2_FIRE:
-				if (player[1].player_status != STATUS_SELECT && ARC_CoinStart(&player[1]))
+				if (player[p].player_status != STATUS_SELECT && ARC_CoinStart(&player[p]))
 				{
 					JE_playSampleNum(S_SELECT);
-					player[1].player_status = STATUS_SELECT;
+					player[p].player_status = STATUS_SELECT;
 				}
-				else if (in_control == 2)
+				else if (in_control == p)
 					selection_made = true;
 				break;
 
 			case INPUT_P1_UP:
-				if (in_control == 2)
-					break;
-				goto episode_cursor_up;
 			case INPUT_P2_UP:
-				if (in_control == 1)
+				if (in_control != p)
 					break;
-			episode_cursor_up:
 				do
 				{
 					if (--episode < 1)
@@ -532,13 +560,9 @@ static void Menu_selectEpisode( void )
 #endif
 				break;
 			case INPUT_P1_DOWN:
-				if (in_control == 2)
-					break;
-				goto episode_cursor_down;
 			case INPUT_P2_DOWN:
-				if (in_control == 1)
+				if (in_control != p)
 					break;
-			episode_cursor_down:
 				do
 				{
 					if (++episode > episode_max)
@@ -554,20 +578,260 @@ static void Menu_selectEpisode( void )
 				break;
 			}
 		}
+	}
 
-		if (selection_made)
+	if (!episodeAvail[episode - 1])
+		episode = 1;
+	JE_playSampleNum(S_SELECT);
+	fade_black(10);
+
+	Episode_init(episode);
+	initial_episode_num = episodeNum;
+}
+
+// Shown on episode change
+void Menu_newEpisode( void )
+{
+	int episode_max = EPISODE_AVAILABLE;
+	if (!episodeAvail[4]) // If episode 5 isn't available, don't show it.
+		--episode_max;
+
+	play_song(SONG_NEXTEPISODE);
+
+	JE_loadPCX(arcdata_dir(), "select.pcx");
+	JE_dString(VGAScreen, JE_fontCenter("Next Episode", FONT_SHAPES), 16, "Next Episode", FONT_SHAPES);
+	for (int i = 1, y = 42; i <= episode_max; i++)
+	{
+		JE_outTextAdjust(VGAScreen, 20, y, episode_name[i], 15, -4 + (episodeNum == i ? 2 : -4), SMALL_FONT_SHAPES, true);
+		y += (episode_max == 5) ? 18 : 24;
+	}
+
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+
+	mainLevel = FIRST_LEVEL;
+
+	_enterMenuBehaviors(10);
+	for (; ; )
+	{
+		setjasondelay(2);
+
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+		for (int p = 0; p < 2; ++p)
 		{
-			if (!episodeAvail[episode - 1])
-				episode = 1;
-			JE_playSampleNum(S_SELECT);
-			fade_black(10);
+			if (player[p].player_status != STATUS_SELECT)
+				_drawPlayerStatusText(p);
+		}
 
-			Episode_init(episode);
-			initial_episode_num = episodeNum;
-			return;
+		_regularMenuBehaviors();
+
+		JE_showVGA();
+		wait_delay();
+
+		I_checkButtons();
+
+		if (player[0].player_status == STATUS_NONE && I_inputMade(INPUT_P1_FIRE) && ARC_CoinStart(&player[0]))
+		{
+			player[0].player_status = STATUS_SELECT;
+			break;
+		}
+		else if (player[1].player_status == STATUS_NONE && I_inputMade(INPUT_P2_FIRE) && ARC_CoinStart(&player[1]))
+		{
+			player[1].player_status = STATUS_SELECT;
+			break;
+		}
+		else if (_outOfTime 
+		 || (player[0].player_status == STATUS_INGAME && I_inputMade(INPUT_P1_FIRE))
+		 || (player[1].player_status == STATUS_INGAME && I_inputMade(INPUT_P2_FIRE)))
+			break;
+	}
+	JE_playSampleNum(S_SELECT);
+
+	// If someone joined *now*, open the select ship screen.
+	if (player[0].player_status == STATUS_SELECT || player[1].player_status == STATUS_SELECT)
+	{
+		fade_black(10);
+		Menu_selectShip();
+	}
+	fade_black(15);
+}
+
+
+//
+// End episode interlude
+//
+
+void Menu_episodeInterlude( bool silent )
+{
+	Uint64 endTime;
+
+	if (!silent) // ep4 should let the previous sad music continue
+		play_song(SONG_EPISODEEND);
+	endTime = SDL_GetTicks() + 4300; // Note: Synced with music
+
+	hasRequestedToSkip = false;
+
+	setjasondelay2(6);
+	frameCountMax = 2;
+
+	JE_loadPCX(arcdata_dir(), "select.pcx");
+	memcpy(colors, palettes[0], sizeof(colors)); // Force normal palette without weird 254th color nonsense
+	JE_dString(VGAScreen, JE_fontCenter("Episode Complete", FONT_SHAPES), 16, "Episode Complete", FONT_SHAPES);
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+
+	for (int p = 0; p < 2; ++p)
+	{
+		if (player[p].player_status == STATUS_INGAME)
+			_drawPlayerStatusText(p);
+		else
+			_menuMirrorText(VGAScreen, 12, 136, p, "Please Wait");
+	}
+
+	fade_palette(colors, 10, 0, 255);
+
+	textGlowFont = SMALL_FONT_SHAPES;
+	int num_bonuses = (episodeNum == 5 || !episodeAvail[episodeNum]) ? 2 : 1;
+	for (int bonus = 1; bonus <= num_bonuses; ++bonus)
+	{
+		// This is hackish, but: We only want to undo the area where the player's score is
+		memcpy((unsigned char*)VGAScreen->pixels + (VGAScreen->pitch * 130),
+		       (unsigned char*)VGAScreen2->pixels + (VGAScreen->pitch * 130),
+		       VGAScreen->pitch * 60);
+
+		int y = 10 + (40 * bonus);
+		if (bonus == 1)
+			JE_saveTextGlow(JE_fontCenter("Episode completion bonus.", SMALL_FONT_SHAPES), y, "Episode completion bonus.");
+		else
+			JE_saveTextGlow(JE_fontCenter("Bonus for remaining lives.", SMALL_FONT_SHAPES), y, "Bonus for remaining lives.");
+
+		for (int p = 0; p < 2; ++p)
+		{
+			if (player[p].player_status != STATUS_INGAME)
+			{
+				_menuMirrorText(VGAScreen, 12, 136, p, "Please Wait");
+				continue;
+			}
+
+			int bonus_value = (bonus == 1) ? 10000 : 10000 * player[p].lives;
+			player[p].cash += bonus_value;
+
+			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%d", bonus_value);
+			int x = (p == 0) ? 50 : 270 - JE_textWidth(tmpBuf.s, SMALL_FONT_SHAPES);
+
+			JE_saveTextGlow(x, y + 15, tmpBuf.s);
+			_drawPlayerStatusText(p);
+		}
+		JE_drawTextGlow(VGAScreenSeg);
+	}
+
+	do
+	{
+		setjasondelay(2);
+		JE_showVGA();
+		wait_delay();
+
+		if (I_checkSkipScene())
+		{
+			JE_playSampleNum(S_SELECT);
+			break;
+		}
+	} while (!(SDL_GetTicks() > endTime));
+
+	// Second section -- hint for ship twiddles, or generic episode hint
+	hasRequestedToSkip = false;
+	memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+	for (int p = 0; p < 2; ++p)
+	{
+		if (player[p].player_status == STATUS_INGAME)
+			_drawPlayerStatusText(p);
+		else
+			_menuMirrorText(VGAScreen, 12, 136, p, "Please Wait");
+	}
+
+	// Choose a hint; go through all hints, find ones applicable to us, and keep tally.
+	// Then randomly choose a number between 0 and the number of good hints, and go through again.
+	int goodHints = 0;
+	int hintsToSkip = 0;
+	int chosenHint = 0;
+	for (size_t i = 0; i < num_hints; ++i)
+	{
+		if (hints[i].reference == 0xF0 + episodeNum)
+			++goodHints;
+		else if ((player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
+		      || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
+		{
+			// Ship hints are more likely.
+			goodHints += 4;
 		}
 	}
+	if (goodHints == 0) // If NOTHING fits, pick anything at random.
+		chosenHint = mt_rand() % num_hints;
+	else
+	{
+		hintsToSkip = mt_rand() % goodHints;
+		for (size_t i = 0; i < num_hints; ++i)
+		{
+			if (hints[i].reference == 0xF0 + episodeNum)
+			{
+				if (--hintsToSkip < 0)
+				{
+					chosenHint = i;
+					break;
+				}
+			}
+			else if ((player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
+			      || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
+			{
+				// Ship hints are more likely.
+				if ((hintsToSkip -= 4) < 0)
+				{
+					chosenHint = i;
+					break;
+				}
+			}
+		}
+	}
+
+	// Now display the hint!
+	if (hints[chosenHint].reference >= 0xF0)
+	{
+		JE_saveTextGlow(JE_fontCenter(episode_name[hints[chosenHint].reference - 0xF0], SMALL_FONT_SHAPES),
+			38, episode_name[hints[chosenHint].reference - 0xF0]);
+	}
+	else
+	{
+		strcpy(tmpBuf.l, JE_trim(ships[hints[chosenHint].reference].name));
+		JE_saveTextGlow(JE_fontCenter(tmpBuf.l, SMALL_FONT_SHAPES), 38, tmpBuf.l);
+	}
+	JE_saveTextGlow(JE_fontCenter("Secret Hint", SMALL_FONT_SHAPES), 50, "Secret Hint");
+	JE_drawTextGlow(VGAScreenSeg);
+	useLastBank = true;
+	warningRed = false;
+
+	tempY = 57;
+	for (int i = 0; i < 7; i++)
+		JE_outCharGlow(10, (tempY += 9), hints[chosenHint].text[i]);
+
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+	_enterMenuBehaviors(10);
+	_fadeIn = false;	
+	do
+	{
+		setjasondelay(2);
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
+
+		_regularMenuBehaviors();
+		JE_showVGA();
+		wait_delay();
+	} while (!I_checkSkipScene() && !_outOfTime);
+	JE_playSampleNum(S_SELECT);
+	fade_black(10);
 }
+
+//
+// Title screen
+//
 
 bool Menu_titleScreen( void )
 {
@@ -698,6 +962,10 @@ bool Menu_titleScreen( void )
 		{
 			JE_playSampleNum(S_SELECT);
 			fade_black(10);
+
+			// Don't draw the header for menu stuff anymore.
+			// All the relevant information is shown already.
+			skip_header_draw = true;
 			Menu_selectEpisode();
 			Menu_selectShip();
 
@@ -705,12 +973,6 @@ bool Menu_titleScreen( void )
 			currentRank = 0;
 			initialDifficulty = difficultyLevel = DIP.startingDifficulty;
 			gameLoaded = true;
-
-			for (int pNum = 0; pNum < 2; ++pNum)
-			{
-				if (player[pNum].player_status == STATUS_INGAME)
-					PL_Init(&player[pNum], player[pNum].items.ship, false);
-			}
 		}
 
 		if (oldCoins != curCoins)
