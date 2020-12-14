@@ -26,6 +26,7 @@
 
 JE_boolean goToWeaponCreator = false;
 JE_byte shutdownCode = 0;
+JE_boolean isFirstRun = false;
 
 void JE_paramCheck( int argc, char *argv[] )
 {
@@ -44,6 +45,7 @@ void JE_paramCheck( int argc, char *argv[] )
 		{ 'e', 'e', "shot-edit",         false },
 		{ 'r', 'r', "record",            false },
 		{ 'f', 'f', "fuzz",              false },
+		{ 'F', 'F', "first-run",         false },
 		
 		{ 0, 0, NULL, false}
 	};
@@ -122,6 +124,11 @@ void JE_paramCheck( int argc, char *argv[] )
 		case 'f':
 		{
 			inputFuzzing = true;
+			break;
+		}
+		case 'F':
+		{
+			isFirstRun = true;
 			break;
 		}
 		default:

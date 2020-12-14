@@ -17,6 +17,7 @@
 
 extern JE_byte shutdownCode;
 extern JE_boolean goToWeaponCreator;
+extern JE_boolean isFirstRun;
 
 void JE_paramCheck( int argc, char *argv[] );
 

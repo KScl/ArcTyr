@@ -83,7 +83,8 @@ int main( int argc, char *argv[] )
 		return -1;
 	}
 
-	ArcTyr_loadConfig();
+	if (!ArcTyr_loadConfig())
+		isFirstRun = true;
 
 	JE_paramCheck(argc, argv);
 

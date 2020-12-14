@@ -10,6 +10,8 @@
 /// \file  arcade.c
 /// \brief Arcade specific functions and data, DIP switches, etc
 
+#include "service.h"
+
 #include "../arcade.h"
 #include "../config.h"
 #include "../fonthand.h"
@@ -18,6 +20,7 @@
 #include "../nortsong.h"
 #include "../opentyr.h"
 #include "../palette.h"
+#include "../params.h"
 #include "../picload.h"
 #include "../playdata.h"
 #include "../player.h"
@@ -37,7 +40,7 @@ const DipSwitches DIP_Default = {
 	3, 6, 2, 3, 4, 3,
 	1, 1, 2, 2, 0,
 	1,
-	0
+	0, 0, 0
 };
 DipSwitches DIP;
 
@@ -45,7 +48,7 @@ static JE_word coins = 0;
 
 JE_boolean skipIdentify = false;
 static bool inIdentify = false;
-static int identifyStrY = 31;
+static int identifyStrY = 22;
 
 bool attractAudioAllowed = true;
 
@@ -80,11 +83,10 @@ void ARC_Identify( void )
 	JE_loadPic(VGAScreen, 2, true);
 
 	JE_textShade(VGAScreen, 4, 4, "This is...", 8, 2, FULL_SHADE);
-	JE_textShade(VGAScreen, JE_fontCenter("-- ArcTyr --", TINY_FONT), 4, "~-- ArcTyr --~", 8, 2, FULL_SHADE);
-	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "Based on OpenTyrian, rev. %s", opentyrian_version);
-	JE_textShade(VGAScreen, 4, 13, tmpBuf.l, 8, 2, FULL_SHADE);
+	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "~-- ArcTyr v.%s --~", opentyrian_version);
+	JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 4,tmpBuf.l, 8, 2, FULL_SHADE);
 	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "Compiled: %s %s", opentyrian_date, opentyrian_time);
-	JE_textShade(VGAScreen, 4, 22, tmpBuf.l, 8, 2, FULL_SHADE);
+	JE_textShade(VGAScreen, 4, 13, tmpBuf.l, 8, 2, FULL_SHADE);
 
 	JE_showVGA();
 
@@ -99,9 +101,17 @@ void ARC_IdentifyEnd( void )
 		SDL_Delay(1);
 	}
 	inIdentify = false;
+
+	// Note: Don't bother calling the method that longjmps.
+	// It's a waste of time, we're already in the same place that it'll return to after exiting.
+	if (isFirstRun || !DIP.skipServiceOnStartup)
+	{
+		ARC_Service();
+		stop_song();
+	}
+
 	fade_black(10);
 	intro_logos();
-	skip_header_draw = false;
 }
 
 void ARC_InsertCoin( void )
@@ -170,10 +180,7 @@ void ARC_NextIdleScreen( void )
 	else // play intro logos instead
 	{
 		demoThisTime = false; // we didn't do the demo this time, so...
-
-		skip_header_draw = true;
 		intro_logos();
-		skip_header_draw = false;
 	}
 }
 

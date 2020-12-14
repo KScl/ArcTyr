@@ -484,13 +484,11 @@ static void Menu_selectEpisode( void )
 		{
 			JE_outTextAdjust(VGAScreen, 20, y, episode_name[i], 15, -4 + (i == episode ? 2 : 0) - (!episodeAvail[i - 1] ? 4 : 0), SMALL_FONT_SHAPES, true);
 
-#ifdef ENABLE_DEVTOOLS
 			if (i == episode && mainLevel != FIRST_LEVEL)
 			{
 				sprintf(tmpBuf.l, "... starting from section ~%hu~", mainLevel);
 				JE_textShade(VGAScreen, 20, y + 8, tmpBuf.l, 15, 0, FULL_SHADE);
 			}
-#endif
 
 			y += (episode_max == 5) ? 18 : 24;
 		}
@@ -516,10 +514,9 @@ static void Menu_selectEpisode( void )
 			JE_byte p = (button >= INPUT_P2_UP) ? 1 : 0;
 			switch (button++)
 			{
-#ifdef ENABLE_DEVTOOLS
 			case INPUT_P1_RIGHT:
 			case INPUT_P2_RIGHT:
-				if (in_control != p)
+				if (!DIP.enableMidEpisodeStart || in_control != p)
 					break;
 				mainLevel++;
 				JE_playSampleNum(S_CURSOR);
@@ -527,12 +524,11 @@ static void Menu_selectEpisode( void )
 
 			case INPUT_P1_LEFT:
 			case INPUT_P2_LEFT:
-				if (in_control != p)
+				if (!DIP.enableMidEpisodeStart || in_control != p)
 					break;
 				mainLevel--;
 				JE_playSampleNum(S_CURSOR);
 				break;
-#endif
 
 			case INPUT_P1_FIRE:
 			case INPUT_P2_FIRE:
@@ -555,9 +551,7 @@ static void Menu_selectEpisode( void )
 						episode = episode_max;
 				} while (!episodeAvail[episode - 1]);
 				JE_playSampleNum(S_CURSOR);
-#ifdef ENABLE_DEVTOOLS
 				mainLevel = FIRST_LEVEL;
-#endif
 				break;
 			case INPUT_P1_DOWN:
 			case INPUT_P2_DOWN:
@@ -569,9 +563,7 @@ static void Menu_selectEpisode( void )
 						episode = 1;
 				} while (!episodeAvail[episode - 1]);
 				JE_playSampleNum(S_CURSOR);
-#ifdef ENABLE_DEVTOOLS
 				mainLevel = FIRST_LEVEL;
-#endif
 				break;
 
 			default:

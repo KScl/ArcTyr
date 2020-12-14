@@ -393,7 +393,7 @@ void SRV_ArcadeMenu( void )
 	}
 
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 void SRV_MoneyMenu( void )
@@ -421,6 +421,25 @@ void SRV_MoneyMenu( void )
 	optionY += 16;
 	SRVH_DispValue(__YesNo[DIP.rankAffectsScore]);
 	SRVH_AdjustableByte("Scale Score with Rank", false, &DIP.rankAffectsScore, 0, 1);
+
+	optionY = 176;
+	SRVH_Back("Back");
+}
+
+void SRV_CabinetMenu( void )
+{
+	SRVH_DispHeader("Cabinet Settings");
+
+	static const char *bootOption[] = {"Show", "Skip"};
+	SRVH_DispValue(bootOption[DIP.skipServiceOnStartup]);
+	SRVH_AdjustableByte("Service on Startup", false, &DIP.skipServiceOnStartup, 0, 1);
+	optionY += 32;
+
+	SRVH_DispValue(__YesNo[DIP.enableFullDebugMenus]);
+	SRVH_AdjustableByte("Ingame Debug Menu", false, &DIP.enableFullDebugMenus, 0, 1);
+
+	SRVH_DispValue(__YesNo[DIP.enableMidEpisodeStart]);
+	SRVH_AdjustableByte("Start Mid Episode", false, &DIP.enableMidEpisodeStart, 0, 1);
 
 	optionY = 176;
 	SRVH_Back("Back");	
@@ -476,6 +495,7 @@ void SRV_ResetSettings( void )
 	SRVH_DispFadedOption("Difficulty Settings");
 	SRVH_DispFadedOption("Coin Settings");
 	SRVH_DispFadedOption("Audiovisual Settings");
+	SRVH_DispFadedOption("Cabinet Settings");
 	optionY = 128;
 	if (SRVH_ConfirmationAction("Reset to Defaults"))
 	{
@@ -493,10 +513,11 @@ void SRV_Settings( void )
 	SRVH_SubMenu("Difficulty Settings", SRV_ArcadeMenu);
 	SRVH_SubMenu("Coin Settings", SRV_MoneyMenu);
 	SRVH_SubMenu("Audiovisual Settings", SRV_AudiovisualMenu);
+	SRVH_SubMenu("Cabinet Settings", SRV_CabinetMenu);
 	optionY = 128;
 	SRVH_SubMenu("Reset to Defaults", SRV_ResetSettings);
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 // ======================
@@ -742,6 +763,35 @@ void SRV_MainMenu( void )
 		SRVH_FunctionCall("Shutdown System", SRVF_Shutdown);
 }
 
+void SRV_FirstRunMenu( void )
+{
+	static const char *firstRunMessage[] = {
+		"This appears to be your first time playing ArcTyr.",
+		"",
+		"Keep in mind that ArcTyr is designed to mimic a",
+		"theoretical arcade version of Tyrian. As such, most",
+		"options and settings are located in this Service Menu.",
+		"",
+		"This menu can be opened at any time by pressing ~F10~,",
+		"but doing so will end any game in progress.",
+		"Alternatively, pressing ~Escape~ will pause the game",
+		"and allow you to quickly change volume settings.",
+		"",
+		"For added realism, you can also set ArcTyr up to",
+		"boot straight into gameplay, if you're so inclined."
+	};
+
+	if (selectionType == __DISPLAY)
+	{
+		SRVH_DispHeader("Welcome to ArcTyr");
+		for (uint i = 0; i < COUNTOF(firstRunMessage); ++i)
+			JE_textShade(VGAScreen, 32, 38 + (i * 10), firstRunMessage[i], 15, 1, FULL_SHADE);
+	}
+
+	optionY = 176;
+	SRVH_Back("OK");
+}
+
 // ======================
 
 //
@@ -773,11 +823,18 @@ void ARC_Service( void )
 
 	play_song(SONG_MAPVIEW);
 	fade_black(10);
-	//JE_loadPic(VGAScreen, 2, false);
 
 	menuDeepness = 0;
 	menuNest[0] = SRV_MainMenu;
 	menuOption = &ourOptions[0];
+
+	if (isFirstRun)
+	{
+		menuDeepness = 1;
+		menuNest[1] = SRV_FirstRunMenu;
+		menuOption = &ourOptions[1];
+		isFirstRun = false;
+	}
 
 	ourFadeIn = true;
 	while (menuDeepness != 0xFF)

@@ -41,6 +41,8 @@ typedef struct {
 	JE_byte attractSound;
 
 	JE_byte enableFullDebugMenus;
+	JE_byte skipServiceOnStartup;
+	JE_byte enableMidEpisodeStart;
 } DipSwitches;
 
 const DipSwitches DIP_Default;

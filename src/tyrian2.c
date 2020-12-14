@@ -2873,6 +2873,8 @@ void JE_loadMap( void )
 
 void intro_logos( void )
 {
+	skip_header_draw = true;
+
 	SDL_FillRect(VGAScreen, NULL, 0);
 
 	fade_white(50);

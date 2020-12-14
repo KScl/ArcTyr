@@ -167,11 +167,13 @@ bool ArcTyr_loadConfig( void )
 	ConfigSection *sec;
 
 #define get_byte_max(opt, n, max) \
+	dummy = 0x100;\
 	config_get_uint_option(sec, n, &dummy); \
 	if (dummy <= max) \
 		opt = (JE_byte)(dummy & 0xFF);
 
 #define get_byte_minmax(opt, n, min, max) \
+	dummy = 0x100;\
 	config_get_uint_option(sec, n, &dummy); \
 	if (dummy >= min && dummy <= max) \
 		opt = (JE_byte)(dummy & 0xFF);
@@ -229,6 +231,8 @@ bool ArcTyr_loadConfig( void )
 		get_byte_max(DIP.attractSound, "attract_sound", 2);
 
 		get_byte_max(DIP.enableFullDebugMenus, "enable_full_debug_menus", 1);
+		get_byte_max(DIP.skipServiceOnStartup, "skip_service_on_startup", 1);
+		get_byte_max(DIP.enableMidEpisodeStart, "enable_mid_episode_start", 1);
 	}
 
 #undef get_byte_max
@@ -279,6 +283,8 @@ bool ArcTyr_saveConfig( void )
 		config_set_uint_option(sec, "attract_sound", DIP.attractSound);
 
 		config_set_uint_option(sec, "enable_full_debug_menus", DIP.enableFullDebugMenus);
+		config_set_uint_option(sec, "skip_service_on_startup", DIP.skipServiceOnStartup);
+		config_set_uint_option(sec, "enable_mid_episode_start", DIP.enableMidEpisodeStart);
 	}
 
 	I_saveConfigAssignments(&tav_config);
