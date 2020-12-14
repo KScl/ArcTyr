@@ -83,9 +83,9 @@ void ARC_Identify( void )
 	JE_loadPic(VGAScreen, 2, true);
 
 	JE_textShade(VGAScreen, 4, 4, "This is...", 8, 2, FULL_SHADE);
-	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "~-- ArcTyr v.%s --~", opentyrian_version);
+	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "~-- %s %s --~", program_name, program_version_short);
 	JE_textShade(VGAScreen, JE_fontCenter(tmpBuf.l, TINY_FONT), 4,tmpBuf.l, 8, 2, FULL_SHADE);
-	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "Compiled: %s %s", opentyrian_date, opentyrian_time);
+	snprintf(tmpBuf.l, sizeof(tmpBuf.l), "Compiled: %s %s", program_date, program_time);
 	JE_textShade(VGAScreen, 4, 13, tmpBuf.l, 8, 2, FULL_SHADE);
 
 	JE_showVGA();

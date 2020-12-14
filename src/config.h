@@ -58,8 +58,6 @@ extern JE_boolean pentiumMode;
 extern JE_byte gameSpeed;
 extern JE_byte processorType;
 
-extern Config opentyrian_config;
-
 void ArcTyr_setGameLevelSettings( void );
 bool ArcTyr_loadConfig( void );
 bool ArcTyr_saveConfig( void );

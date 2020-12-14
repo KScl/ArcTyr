@@ -28,6 +28,7 @@
 #include "sprite.h"
 #include "tyrian2.h"
 #include "varz.h"
+#include "version.h"
 #include "vga256d.h"
 #include "video.h"
 #include "video/scaler.h"
@@ -49,10 +50,12 @@
 #include <string.h>
 #include <time.h>
 
-const char *opentyrian_str = "ArcTyr",
-           *opentyrian_version = "unknown", // TODO replace with git
-           *opentyrian_date = __DATE__,
-           *opentyrian_time = __TIME__;
+const char *program_name = "ArcTyr";
+const char *program_date = __DATE__;
+const char *program_time = __TIME__;
+
+const char *program_version_short = GIT_REV_SHORT;
+const char *program_version_full = GIT_REV_FULL;
 
 TempStringBuffer tmpBuf = {"", ""};
 
@@ -68,7 +71,7 @@ int main( int argc, char *argv[] )
 	// This should never happen, but until the game is loaded, be "in" a service menu
 	inServiceMenu = true;
 
-	printf("\nThis is... >> %s %s <<\n\n", opentyrian_str, opentyrian_version);
+	printf("\nThis is... >> %s %s <<\n\n", program_name, program_version_full);
 
 	printf("Copyright          (C) 2007-2020  The OpenTyrian Development Team\n");
 	printf("Portions copyright (C) 2019-2020  Kaito Sinclaire\n\n");

@@ -46,11 +46,17 @@ DEPS := $(SRCS:src/%.c=obj/%.d)
 
 ###
 
-HG_REV := $(shell hg id -ib 2>/dev/null && \
-                  touch src/hg_revision.h)
-ifneq ($(HG_REV), )
-    EXTRA_CPPFLAGS += -DHG_REV='"$(HG_REV)"'
+GIT_REV_SHORT := $(shell git describe --tags --abbrev=0 2>/dev/null && \
+                   touch src/version.h)
+GIT_REV_FULL := $(shell (git describe --tags --dirty || git rev-parse --short HEAD) 2>/dev/null)
+ifneq ($(GIT_REV_SHORT), )
+    EXTRA_CPPFLAGS += -DGIT_REV_SHORT='"$(GIT_REV_SHORT)"'
 endif
+ifneq ($(GIT_REV_FULL), )
+    EXTRA_CPPFLAGS += -DGIT_REV_FULL='"$(GIT_REV_FULL)"'
+endif
+
+###
 
 CPPFLAGS := -DNDEBUG
 CFLAGS := -pedantic
@@ -116,10 +122,12 @@ clean :
 	rm -f $(TARGET)
 
 $(TARGET) : $(OBJS)
-	$(CC) $(ALL_CFLAGS) $(ALL_LDFLAGS) -o $@ $^ $(ALL_LDLIBS)
+	@echo "Linking: $@"
+	@$(CC) $(ALL_CFLAGS) $(ALL_LDFLAGS) -o $@ $^ $(ALL_LDLIBS)
 
 -include $(DEPS)
 
 obj/%.o : src/%.c
+	@echo "Compiling: $<"
 	@mkdir -p "$(dir $@)"
-	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o $@ $<
+	@$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o $@ $<

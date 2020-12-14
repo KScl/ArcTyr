@@ -14,7 +14,6 @@
 #define OPENTYR_H
 
 #define ENABLE_DEVTOOLS
-#undef WITH_NETWORK
 
 // snprintf truncation is intended; ignore warnings about it occurring
 #if __GNUC__ >= 7
@@ -63,7 +62,8 @@ typedef float  JE_real;
 
 #define TYRIAN_VERSION "2.1"
 
-extern const char *opentyrian_str, *opentyrian_version, *opentyrian_date, *opentyrian_time;
+extern const char *program_name, *program_date, *program_time;
+extern const char *program_version_short, *program_version_full;
 
 extern JE_byte isInGame;
 
