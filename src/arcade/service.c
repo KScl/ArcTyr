@@ -76,7 +76,7 @@ static inline void SRVH_DispOption( const char *name )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, JE_fontCenter(name, SMALL_FONT_SHAPES), optionY, 
+		JE_outTextAdjust(VGAScreen, JE_fontCenter(name, SMALL_FONT_SHAPES), optionY,
 			name, 15, STANDARD_LIGHT, SMALL_FONT_SHAPES, true);
 		optionY += 16;
 	}
@@ -106,7 +106,7 @@ static inline void SRVH_DispFadedValue( const char *value )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
+		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY,
 			value, 15, FADED_LIGHT, SMALL_FONT_SHAPES, true);
 	}
 }
@@ -115,7 +115,7 @@ static inline void SRVH_DispValue( const char *value )
 {
 	if (selectionType == __DISPLAY)
 	{
-		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY, 
+		JE_outTextAdjust(VGAScreen, 270 - JE_textWidth(value, SMALL_FONT_SHAPES), optionY,
 			value, 15, STANDARD_LIGHT, SMALL_FONT_SHAPES, true);
 	}
 }
@@ -180,7 +180,7 @@ static void SRVH_AdjustableByte( const char *name, JE_boolean showValue, JE_byte
 		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", (JE_word)*toAdjust);
 		SRVH_DispValue(tmpBuf.s);
 	}
-	SRVH_DispLabel(name);		
+	SRVH_DispLabel(name);
 	++numOptions;
 }
 
@@ -222,7 +222,7 @@ static void SRVH_AdjustableWord( const char *name, JE_boolean showValue, JE_word
 		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%hu", *toAdjust);
 		SRVH_DispValue(tmpBuf.s);
 	}
-	SRVH_DispLabel(name);		
+	SRVH_DispLabel(name);
 	++numOptions;
 }
 
@@ -442,7 +442,7 @@ void SRV_CabinetMenu( void )
 	SRVH_AdjustableByte("Start Mid Episode", false, &DIP.enableMidEpisodeStart, 0, 1);
 
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 void SRV_AudiovisualMenu( void )
@@ -486,7 +486,7 @@ void SRV_AudiovisualMenu( void )
 
 	optionY = 160;
 	SRVH_FunctionCall("Sound Test / Jukebox", SRVF_Jukebox);
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 void SRV_ResetSettings( void )
@@ -581,7 +581,7 @@ static void SRV_ButtonAssignmentSubMenu( void )
 				return;
 			}
 			SRVH_DispValue(c);
-			SRVH_DispLabel(tmpBuf.s);			
+			SRVH_DispLabel(tmpBuf.s);
 		}
 
 		++numOptions;
@@ -597,7 +597,7 @@ static void SRV_ButtonAssignmentSubMenu( void )
 	}
 
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 static void SRVH_PlayerButtonSubMenu( const char *name , void (*newFunc)( void ) , JE_byte num )
@@ -662,7 +662,7 @@ void SRV_PlayerButtons( void )
 	optionY += 12;
 	SRVH_ButtonAssignmentOption("Insert Coin", 14 + buttonsPlayerNum);
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 void SRV_ServiceButtons( void )
@@ -673,7 +673,7 @@ void SRV_ServiceButtons( void )
 	SRVH_ButtonAssignmentOption("Open In-Game Settings", 16);
 	SRVH_ButtonAssignmentOption("Enter Service Menu", 18);
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 void SRV_ResetInputs( void )
@@ -703,7 +703,7 @@ void SRV_Buttons( void )
 	optionY = 128;
 	SRVH_SubMenu("Reset to Defaults", SRV_ResetInputs);
 	optionY = 176;
-	SRVH_Back("Back");	
+	SRVH_Back("Back");
 }
 
 // ======================
@@ -754,7 +754,7 @@ void SRV_MainMenu( void )
 	SRVH_SubMenu("Button Config", SRV_Buttons);
 	SRVH_DispFadedOption("Audits");
 	optionY = 128;
-	SRVH_Back("Exit Service Menu");	
+	SRVH_Back("Exit Service Menu");
 	optionY = 160;
 	SRVH_FunctionCall("Quit to Desktop", SRVF_Close);
 	if (shutdownCode == 0)

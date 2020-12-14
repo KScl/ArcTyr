@@ -245,7 +245,7 @@ inline static void blit_enemy( SDL_Surface *surface, unsigned int i, signed int 
 		enemy[i].sprite2s = (Sprite2_array *)1;
 		return;
 	}
-	
+
 	const int x = enemy[i].ex + x_offset + tempMapXOfs,
 	          y = enemy[i].ey + y_offset;
 	const unsigned int index = enemy[i].egr[enemy[i].enemycycle - 1] + sprite_offset;
@@ -505,21 +505,21 @@ enemy_still_exists:
 									attractivity = 4 - (abs(player[p].x - enX) + abs(player[p].y - enY)) / 100;
 									player[p].x_velocity += (player[p].x > enX) ? -attractivity : attractivity;
 								}
-							} 
+							}
 							break;
 						case 253: /* Left ShortRange Magnet */
 							for (int p = 0; p < 2; ++p)
 							{
 								if (PL_Alive(p) && abs(player[p].x + 25 - 14 - enX) < 24 && abs(player[p].y - enY) < 28)
 									player[p].x_velocity += 2;
-							} 
+							}
 							break;
 						case 254: /* Left ShortRange Magnet */
 							for (int p = 0; p < 2; ++p)
 							{
 								if (PL_Alive(p) && abs(player[p].x + 25 - 14 - enX) < 24 && abs(player[p].y - enY) < 28)
 									player[p].x_velocity -= 2;
-							} 
+							}
 							break;
 						case 255: /* Magneto RePulse!! */
 							if (difficultyLevel != 1) /*DIF*/
@@ -862,11 +862,11 @@ start_level_first:
 			player[i].old_x[j] = player[i].x - (19 - j);
 			player[i].old_y[j] = player[i].y - 18;
 		}
-		
+
 		player[i].last_x_shot_move = player[i].x;
 		player[i].last_y_shot_move = player[i].y;
 	}
-	
+
 	JE_loadPCX(arcdata_dir(), "newhud.pcx");
 	JE_outText(VGAScreen, 268, 189, levelName, 12, 4);
 
@@ -1518,7 +1518,7 @@ level_loop:
 			damage = playerShotData[z].shotDmg;
 			shrapnel = playerShotData[z].shrapnel;
 			infiniteShot = playerShotData[z].infinite;
-			doIced = playerShotData[z].ice * 10;			
+			doIced = playerShotData[z].ice * 10;
 		}
 
 		for (b = 0; b < 100; b++)
@@ -1710,7 +1710,7 @@ level_loop:
 
 											// Bugfix (original game): Don't set scoreitem here
 											// JE_makeEnemy already does a good enough job of that
-											// All we do by setting it here is ruin it and mess up stuff 
+											// All we do by setting it here is ruin it and mess up stuff
 											//if (enemy[b-1].evalue != 0)
 											//	enemy[b-1].scoreitem = true;
 											//else
@@ -1795,11 +1795,11 @@ draw_player_shot_loop_end:
 		player[i].last_x_shot_move = player[i].x;
 		player[i].last_y_shot_move = player[i].y;
 	}
-	
+
 	/*=================================*/
 	/*=======Collisions Detection======*/
 	/*=================================*/
-	
+
 	for (uint i = 0; i < 2; ++i)
 		if (PL_Alive(i) && !endLevel)
 			JE_playerCollide(&player[i], i + 1);
@@ -2667,7 +2667,7 @@ static bool read_episode_sections( void )
 		} while (onSection == mainLevel);
 	}
 
-	fclose(ep_f); // if quitting in any way, 
+	fclose(ep_f); // if quitting in any way,
 	return false; // go back to title screen
 }
 
@@ -3399,7 +3399,7 @@ void JE_eventSystem( void )
 				eventRec[eventLoc-1].eventdat3 > 0 ? eventRec[eventLoc-1].eventdat3 : 0,
 				eventRec[eventLoc-1].eventdat4 > 0 ? eventRec[eventLoc-1].eventdat4 : 0,
 			};
-			
+
 			for (unsigned int i = 0; i < COUNTOF(newEnemyShapeTables); ++i)
 			{
 				if (enemyShapeTables[i] != newEnemyShapeTables[i])
@@ -3985,7 +3985,7 @@ void JE_eventSystem( void )
 		eventRec[eventLoc-1].eventdat = backupData1;
 		eventRec[eventLoc-1].eventdat3 = backupData3;
 		eventRec[eventLoc-1].eventdat6 = backupData6;
-		break;		
+		break;
 	}
 
 	case 53:
@@ -4056,7 +4056,7 @@ void JE_eventSystem( void )
 				}
 
 				enemyAvail[temp] = 1;
-			}			
+			}
 		}
 		break;
 
@@ -4269,7 +4269,7 @@ void JE_eventSystem( void )
 	case 82: /*Give SPECIAL WEAPON*/
 		event_name("give_special_weapon");
 		// Note: This is currently commented out because of HOLES.
-/*	
+/*
 		player[0].items.special[player[0].special_mode] = eventRec[eventLoc-1].eventdat;
 		player[1].items.special[player[1].special_mode] = eventRec[eventLoc-1].eventdat;
 		PL_SwitchSpecial(&player[0], player[0].special_mode, false);
@@ -4466,7 +4466,7 @@ void draw_boss_bar( void )
 		if (boss_bar[b].armor > 254)
 			boss_bar[b].armor = 254;
 		JE_barX(x - 25, y, x + 25, y + 5, 115);
-		JE_barX(x - (boss_bar[b].armor / 10), y, x + (boss_bar[b].armor + 5) / 10, y + 5, 118 + boss_bar[b].color);			
+		JE_barX(x - (boss_bar[b].armor / 10), y, x + (boss_bar[b].armor + 5) / 10, y + 5, 118 + boss_bar[b].color);
 
 		if (boss_bar[b].color > 0)
 			boss_bar[b].color--;

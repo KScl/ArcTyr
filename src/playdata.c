@@ -138,7 +138,7 @@ static void _loadPorts( const char *dataFile )
 		efread(&tmp_b,                     sizeof(JE_byte), 1, f);
 		efread(&weaponPort[i].normalOp,    sizeof(JE_word), 11, f);
 		if (tmp_b == 2)
-		{			
+		{
 			efread(&weaponPort[i].chargeOp,    sizeof(JE_word), 5, f);
 			efread(&weaponPort[i].aimedOp,     sizeof(JE_word), 6, f);
 			efread(&weaponPort[i].dwSidekick,  sizeof(JE_byte), 3, f);
@@ -241,7 +241,7 @@ static void _loadShips( const char *dataFile )
 
 	for (i = 0; i < num_ships + 1; ++i)
 	{
-		fseek(f, 1, SEEK_CUR); 
+		fseek(f, 1, SEEK_CUR);
 		efread(&ships[i].name,           1, 30, f);
 		ships[i].name[30] = '\0';
 		//printf("%s\n", ships[i].name);
@@ -326,7 +326,7 @@ static void _loadOptions( const char *dataFile )
 
 	for (size_t i = 0; i < num_options + 1; ++i)
 	{
-		fseek(f, 1, SEEK_CUR); 
+		fseek(f, 1, SEEK_CUR);
 		efread(&options[i].name,        1, 30, f);
 		options[i].name[30] = '\0';
 

@@ -219,7 +219,7 @@ void ARC_DISP_NoPlayerInSlot( uint pNum )
 			strcpy(tmpBuf.s, "Free Play");
 		else if (DIP.coinsToStart == 1)
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu", coins);
-		else		
+		else
 			snprintf(tmpBuf.s, sizeof(tmpBuf.s), "Credits %hu/%hu", coins, (JE_word)DIP.coinsToStart);
 	}
 
@@ -360,7 +360,7 @@ void ARC_DISP_MidGameSelect( uint pNum )
 		}
 		else if (sGr >= 1000) // T2000
 			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapesT2K, sGr - 1000);
-		else		
+		else
 			blit_sprite2x2(VGAScreen, (pNum == 2) ? 265 : 29, 1, shipShapes, sGr);
 
 		strcpy(tmpBuf.l, JE_trim(ships[player[pNum - 1].items.ship].name));
@@ -433,7 +433,7 @@ void ARC_SetPlayerStatus( Player *pl, int status )
 			Player *otherPl = PL_OtherPlayer(pl);
 			pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][(pl->arc.cursor = 1)];
 			if (otherPl->player_status > STATUS_NONE && otherPl->items.ship == ship_select[SHIP_SELECT_CONTINUE][1])
-				pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][(pl->arc.cursor = 2)];	
+				pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][(pl->arc.cursor = 2)];
 		}
 		break;
 
@@ -712,7 +712,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 				{
 					if (++pl->arc.cursor >= num_ship_select[SHIP_SELECT_CONTINUE])
 						pl->arc.cursor = 0;
-					pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][pl->arc.cursor];					
+					pl->items.ship = ship_select[SHIP_SELECT_CONTINUE][pl->arc.cursor];
 				}
 				while (otherPl->player_status > STATUS_NONE && player[0].items.ship == player[1].items.ship);
 				JE_playSampleNumOnChannel(S_CURSOR, SFXPRIORITY+7);
@@ -803,7 +803,7 @@ void ARC_ScoreLife( Player *this_player )
 			JE_playSampleNumOnChannel(S_SOUL_OF_ZINGLON, SFXPRIORITY+7);
 
 			if (this_player->lives < 11)
-				++(this_player->lives);			
+				++(this_player->lives);
 		}
 
 		switch (this_player->cashForNextLife)

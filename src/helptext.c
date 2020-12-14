@@ -35,7 +35,7 @@ void decrypt_pascal_string( char *s, int len )
 	{
 		for (int i = len - 1; i > 0; --i)
 			s[i] ^= crypt_key[i % sizeof(crypt_key)] ^ s[i - 1];
-		s[0] ^= crypt_key[0];		
+		s[0] ^= crypt_key[0];
 	}
 }
 
@@ -71,7 +71,7 @@ void skip_strings_until_blank( FILE *f )
 }
 
 void JE_loadHelpText( void )
-{	
+{
 	FILE *f = dir_fopen_die(data_dir(), "tyrian.hdt", "rb");
 	efread(&globalDataLoc, sizeof(JE_longint), 1, f);
 

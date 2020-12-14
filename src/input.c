@@ -198,7 +198,7 @@ bool I_loadConfigAssignments( Config *config )
 		opt = config_get_option(sec, assignment_names[aNum]);
 		if (opt == NULL)
 			continue;
-		
+
 		foreach_option_i_value(i, value, opt)
 		{
 			if (i >= 4)
@@ -237,12 +237,12 @@ bool I_saveConfigAssignments( Config *config )
 		{
 			if (button_assignments[aNum][i].type == IT_NONE)
 				break;
-			
+
 			if (!(opt = config_add_value(opt, I_getButtonCode(aNum, i))))
 				return false;
 		}
 	}
-	
+
 	return true;
 }
 
@@ -385,7 +385,7 @@ void I_KEY_init( void )
 #else
 		fprintf(stderr, "ArcTyr was compiled without devtools.\n");
 		JE_tyrianHalt(5);
-#endif		
+#endif
 	}
 
 	// No builtin key repeat
@@ -411,7 +411,7 @@ static void I_KEY_events( void )
 					printf("*** Emergency halt ***\n");
 					JE_tyrianHalt(1);
 				}
-				
+
 				if ((ev.key.keysym.mod & KMOD_ALT) && ev.key.keysym.sym == SDLK_RETURN)
 				{
 					printf("*** Fullscreen toggle ***\n");
@@ -610,7 +610,7 @@ JE_byte* I_checkForCodeInput(uint pNum, JE_byte* out_len)
 					break; // Only append one input per frame
 				}
 				to_append <<= 1;
-			}			
+			}
 		}
 		for (i = INPUT_P1_UP + (7 * pNum); i <= target; ++i)
 		{ // Suppress all inputs, too
@@ -626,7 +626,7 @@ JE_byte* I_checkForCodeInput(uint pNum, JE_byte* out_len)
 
 	// Just released, return code
 	memset(code_out_buf, 0xFF, sizeof(JE_byte) * 16);
-	memcpy(code_out_buf, _code_input_progress[pNum], sizeof(JE_byte) * _code_input_count[pNum]);	
+	memcpy(code_out_buf, _code_input_progress[pNum], sizeof(JE_byte) * _code_input_count[pNum]);
 	*out_len = _code_input_count[pNum];
 	_code_input_count[pNum] = 0;
 	return code_out_buf;

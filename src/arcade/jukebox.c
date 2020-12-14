@@ -193,12 +193,12 @@ Palette vga_palette =
 	{  0,   0,   0}, {  0,   0,   0}, {  0,   0,   0}, {  0,   0,   0}
 };
 
-// 
+//
 // Starlib
 // Previously in its own file, merged with the jukebox because this is its only use
 //
 
-typedef struct 
+typedef struct
 {
 	JE_integer spX, spY, spZ;
 	JE_integer lastX, lastY;
@@ -220,7 +220,7 @@ static JE_real nsp, nspVarInc, nspVarVarInc;
 static JE_word nsp2;
 static JE_shortint nspVar2Inc;
 
-static int tempX, tempY; 
+static int tempX, tempY;
 
 static void JE_newStar( JE_integer *newX, JE_integer *newY, JE_integer *newZ )
 {
@@ -436,8 +436,8 @@ static void JE_starlib_main( void )
 			//if (grayB)
 			//{
 			//	tempCol = tempZ >> 1;
-			//} 
-			//else 
+			//}
+			//else
 			//{
 			tempCol = pColor+((tempZ >> 4) & 31);
 			//}
@@ -485,7 +485,7 @@ void jukebox( void )
 
 	bool trigger_quit = false,  // true when user wants to quit
 	     quitting = false;  // true while quitting
-	
+
 	Uint8 fx_num = 0;
 
 	int palette_fade_steps = 15;
@@ -528,7 +528,7 @@ void jukebox( void )
 			draw_font_hv(VGAScreen, 160, 181, "Service button exits.", small_font, centered,      1, -6);
 			draw_font_hv(VGAScreen, 159, 180, "Service button exits.", small_font, centered,      1, -6);
 			draw_font_hv(VGAScreen, 161, 180, "Service button exits.", small_font, centered,      1, -6);
-			draw_font_hv(VGAScreen, 160, 180, "Service button exits.", small_font, centered,      1, brightness);		
+			draw_font_hv(VGAScreen, 160, 180, "Service button exits.", small_font, centered,      1, brightness);
 		}
 
 		draw_font_hv(VGAScreen, 315, 179, "SFX :P2",               small_font, right_aligned, 1, -6);
@@ -545,7 +545,7 @@ void jukebox( void )
 
 		if (palette_fade_steps > 0)
 			step_fade_palette(diff, palette_fade_steps--, 0, 255);
-		
+
 		JE_showVGA();
 		wait_delay();
 
@@ -590,18 +590,18 @@ void jukebox( void )
 				break;
 			}
 		}
-		
+
 		// user wants to quit, start fade-out
 		if (trigger_quit && !quitting)
 		{
 			palette_fade_steps = 15;
-			
+
 			SDL_Color black = { 0, 0, 0 };
 			init_step_fade_solid(diff, black, 0, 255);
-			
+
 			quitting = true;
 		}
-		
+
 		// if fade-out finished, we can finally quit
 		if (quitting && palette_fade_steps == 0)
 			break;
