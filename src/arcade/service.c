@@ -303,13 +303,10 @@ void SRVF_Shutdown( void )
 
 void SRVF_Jukebox( void )
 {
-	//memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
-
 	fade_black(10);
 	jukebox();
 
 	// return from Jukebox
-	//memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 	ourFadeIn = true;
 }
 
@@ -836,6 +833,9 @@ void ARC_Service( void )
 		isFirstRun = false;
 	}
 
+	JE_loadPic(VGAScreen, 2, false);
+	memcpy(VGAScreen2->pixels, VGAScreen->pixels, VGAScreen->pitch * VGAScreen->h);
+	
 	ourFadeIn = true;
 	while (menuDeepness != 0xFF)
 	{
@@ -851,8 +851,7 @@ void ARC_Service( void )
 			//redraw = true;
 		}
 
-		JE_loadPic(VGAScreen, 2, false);
-
+		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 		selectionType = __DISPLAY;
 		menuNest[menuDeepness]();
 
