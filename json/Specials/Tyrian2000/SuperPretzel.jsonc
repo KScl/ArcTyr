@@ -6,16 +6,17 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":610},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":611},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":629},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":5},
-				{"Sprite":{"Tyrian2000":630},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":5}
+				{"Sprite":610,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":5},
+				{"Sprite":611,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":5},
+				{"Sprite":629,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":5},
+				{"Sprite":630,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":5}
 			]
 		}
 	},
 	"Specials":{
 		"SpecialSuperPretzel":{
 			"Name":"SuperPretzel",
+			"Requirements":"Tyrian2000", // Uses sprites only extant in Tyrian 2000
 			"Graphic":"Unknown",
 			"SpecialType":"FireOnce",
 			"ShotType":"GiantPretzelSpecial",

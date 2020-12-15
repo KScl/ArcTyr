@@ -5,8 +5,8 @@
 			"AnimFrames":7,
 			"Sound":28,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":5}
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":5}
 			]
 		},
 		"PretzelPeople2":{ // T2K: 2-2
@@ -14,9 +14,9 @@
 			"AnimFrames":7,
 			"Sound":28,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4}
 			]
 		},
 		"PretzelPeople3":{ // T2K: 2-3
@@ -24,11 +24,11 @@
 			"AnimFrames":7,
 			"Sound":28,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":5}
 			]
 		},
 		"PretzelPeople4":{ // T2K: 2-4
@@ -36,13 +36,13 @@
 			"AnimFrames":7,
 			"Sound":28,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople5":{ // T2K: 2-5
@@ -50,14 +50,14 @@
 			"AnimFrames":7,
 			"Sound":28,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople6":{ // T2K: 2-6
@@ -66,14 +66,14 @@
 			"Sound":28,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople7":{ // T2K: 2-7
@@ -82,14 +82,14 @@
 			"Sound":28,
 			"PiecesPerFire":3,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople8":{ // T2K: 2-8
@@ -98,14 +98,14 @@
 			"Sound":28,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople9":{ // T2K: 2-9
@@ -114,14 +114,14 @@
 			"Sound":28,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople10":{ // T2K: 2-10
@@ -131,14 +131,14 @@
 			"Sound":28,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		},
 		"PretzelPeople11":{ // T2K: 2-11
@@ -148,20 +148,21 @@
 			"Sound":28,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":-4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveY":-5},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":3,"MoveY":4},
-				{"Sprite":{"Tyrian2000":663},"AttackPower":3,"MoveX":-3,"MoveY":-4}
+				{"Sprite":663,"AttackPower":3,"MoveX":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":5},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":-4},
+				{"Sprite":663,"AttackPower":3,"MoveY":5},
+				{"Sprite":663,"AttackPower":3,"MoveY":-5},
+				{"Sprite":663,"AttackPower":3,"MoveX":3,"MoveY":4},
+				{"Sprite":663,"AttackPower":3,"MoveX":-3,"MoveY":-4}
 			]
 		}
 	},
 	"Ports":{
 		"PretzelPeople":{
 			"Name":"People Pretzels",
+			"Requirements":"Tyrian2000", // Uses sprites only extant in Tyrian 2000
 			"NormalShots":[
 				"PretzelPeople1",
 				"PretzelPeople2",

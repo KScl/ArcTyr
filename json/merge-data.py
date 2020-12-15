@@ -349,8 +349,7 @@ def iter_shots():
 				'SetAni': lambda x: 100 + x if 1 <= x <= 20 else invalid('Out of range') })
 			piece['Sprite'] = resolve_complex_element(piece['Sprite'], {
 				'Special': lambda x: 60000 + x,
-				'ArcTyr': lambda x: x,
-				'Tyrian2000': lambda x: x })
+				'ArcTyr': lambda x: x }) # Will possibly be used in the future
 			piece['MoveX'] = resolve_complex_element(piece['MoveX'], {
 				'FollowShip': 101,
 				'FollowX': lambda x: 120 + x if -7 <= x <= 7 else invalid('Out of range') })

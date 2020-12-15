@@ -5,7 +5,7 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"MoveY":5}
+				{"Sprite":625,"AttackPower":2,"MoveY":5}
 			]
 		},
 		"DragonFlame2":{ // T2K: 2-14
@@ -13,8 +13,8 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":-3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":3,"MoveY":5}
+				{"Sprite":625,"AttackPower":2,"X":-3,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":3,"MoveY":5}
 			]
 		},
 		"DragonFlame3":{ // T2K: 2-15
@@ -22,12 +22,12 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":-3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":3,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":-1,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":1,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":-2,"MoveY":5},
-				{"Sprite":{"Tyrian2000":625},"AttackPower":2,"X":2,"MoveY":5}
+				{"Sprite":625,"AttackPower":2,"X":-3,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":3,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":-1,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":1,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":-2,"MoveY":5},
+				{"Sprite":625,"AttackPower":2,"X":2,"MoveY":5}
 			]
 		},
 		"DragonFlame4":{ // T2K: 2-16
@@ -35,7 +35,7 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":626},"AttackPower":3,"MoveY":7}
+				{"Sprite":626,"AttackPower":3,"MoveY":7}
 			]
 		},
 		"DragonFlame5":{ // T2K: 2-17
@@ -43,8 +43,8 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":626},"AttackPower":2,"X":-3,"MoveY":7},
-				{"Sprite":{"Tyrian2000":626},"AttackPower":2,"X":3,"MoveY":7}
+				{"Sprite":626,"AttackPower":2,"X":-3,"MoveY":7},
+				{"Sprite":626,"AttackPower":2,"X":3,"MoveY":7}
 			]
 		},
 		"DragonFlame6":{ // T2K: 2-18
@@ -53,7 +53,7 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"MoveY":8}
+				{"Sprite":623,"AttackPower":5,"MoveY":8}
 			]
 		},
 		"DragonFlame7":{ // T2K: 2-19
@@ -62,8 +62,8 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":-5,"MoveY":8},
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":5,"MoveY":8}
+				{"Sprite":623,"AttackPower":5,"X":-5,"MoveY":8},
+				{"Sprite":623,"AttackPower":5,"X":5,"MoveY":8}
 			]
 		},
 		"DragonFlame8":{ // T2K: 2-20
@@ -72,10 +72,10 @@
 			"Sound":28,
 			"Filter":112,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":-2,"MoveY":8},
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":8,"MoveY":8},
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":-8,"MoveY":8},
-				{"Sprite":{"Tyrian2000":623},"AttackPower":5,"X":2,"MoveY":8}
+				{"Sprite":623,"AttackPower":5,"X":-2,"MoveY":8},
+				{"Sprite":623,"AttackPower":5,"X":8,"MoveY":8},
+				{"Sprite":623,"AttackPower":5,"X":-8,"MoveY":8},
+				{"Sprite":623,"AttackPower":5,"X":2,"MoveY":8}
 			]
 		},
 		"DragonFlame9":{ // T2K: 2-21
@@ -85,14 +85,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":555},"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":517},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":574},"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":536},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":555},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":517},"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":574},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":536},"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":7,"MoveY":9}
+				{"Sprite":555,"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":-7,"MoveY":9},
+				{"Sprite":517,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-7,"MoveY":9},
+				{"Sprite":574,"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":7,"MoveY":9},
+				{"Sprite":536,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":7,"MoveY":9},
+				{"Sprite":555,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-7,"MoveY":9},
+				{"Sprite":517,"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":-7,"MoveY":9},
+				{"Sprite":574,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":7,"MoveY":9},
+				{"Sprite":536,"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":7,"MoveY":9}
 			]
 		},
 		"DragonFlame10":{ // T2K: 2-22
@@ -102,14 +102,14 @@
 			"Filter":112,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":555},"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":517},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":574},"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":536},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":555},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":517},"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":-7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":574},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":7,"MoveY":9},
-				{"Sprite":{"Tyrian2000":536},"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":7,"MoveY":9}
+				{"Sprite":555,"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":-7,"MoveY":9},
+				{"Sprite":517,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-7,"MoveY":9},
+				{"Sprite":574,"AttackPower":{"Infinite":true,"Damage":1},"X":-8,"Y":7,"MoveY":9},
+				{"Sprite":536,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":7,"MoveY":9},
+				{"Sprite":555,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-7,"MoveY":9},
+				{"Sprite":517,"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":-7,"MoveY":9},
+				{"Sprite":574,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":7,"MoveY":9},
+				{"Sprite":536,"AttackPower":{"Infinite":true,"Damage":1},"X":8,"Y":7,"MoveY":9}
 			]
 		},
 		"DragonFlame11":{ // T2K: 2-23
@@ -118,20 +118,21 @@
 			"Filter":112,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":509},"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":-7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":510},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":511},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":512},"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":-7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":528},"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":529},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":530},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":10},
-				{"Sprite":{"Tyrian2000":531},"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":7,"MoveY":10}
+				{"Sprite":509,"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":-7,"MoveY":10},
+				{"Sprite":510,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":10},
+				{"Sprite":511,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":10},
+				{"Sprite":512,"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":-7,"MoveY":10},
+				{"Sprite":528,"AttackPower":{"Infinite":true,"Damage":1},"X":-18,"Y":7,"MoveY":10},
+				{"Sprite":529,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":7,"MoveY":10},
+				{"Sprite":530,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":7,"MoveY":10},
+				{"Sprite":531,"AttackPower":{"Infinite":true,"Damage":1},"X":18,"Y":7,"MoveY":10}
 			]
 		}
 	},
 	"Ports":{
 		"RedDragonFlame":{
 			"Name":"Dragon Flame",
+			"Requirements":"Tyrian2000", // Uses sprites only extant in Tyrian 2000
 			"NormalShots":[
 				"DragonFlame1",
 				"DragonFlame2",

@@ -5,8 +5,8 @@
 			"Sound":31,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"Y":-7,"MoveY":12},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"Y":7,"MoveY":12}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"Y":-7,"MoveY":12},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"Y":7,"MoveY":12}
 			]
 		},
 		"T2KNeedleLaser2":{ // T2K: 1-782
@@ -14,8 +14,8 @@
 			"Sound":31,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"Y":-7,"MoveY":14},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true},"Y":7,"MoveY":14}
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"Y":-7,"MoveY":14},
+				{"Sprite":190,"AttackPower":{"Infinite":true},"Y":7,"MoveY":14}
 			]
 		},
 		"T2KNeedleLaser3":{ // T2K: 1-783
@@ -23,10 +23,10 @@
 			"Sound":31,
 			"PiecesPerFire":2,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-5,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-5,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":5,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":5,"Y":7,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-5,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-5,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":5,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":5,"Y":7,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser4":{ // T2K: 1-784
@@ -34,10 +34,10 @@
 			"Sound":31,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser5":{ // T2K: 1-785
@@ -45,10 +45,10 @@
 			"Sound":31,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser6":{ // T2K: 1-786
@@ -56,14 +56,14 @@
 			"Sound":31,
 			"PiecesPerFire":4,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-6,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-6,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":6,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":6,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser7":{ // T2K: 1-787
@@ -71,12 +71,12 @@
 			"Sound":31,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"Y":11,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"Y":11,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser8":{ // T2K: 1-788
@@ -84,12 +84,12 @@
 			"Sound":31,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true,"Damage":1},"Y":11,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true,"Damage":1},"Y":11,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser9":{ // T2K: 1-789
@@ -97,12 +97,12 @@
 			"Sound":31,
 			"PiecesPerFire":6,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"Y":11,"MoveY":16}
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":-7,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true,"Damage":1},"X":-9,"Y":7,"MoveY":16},
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":-7,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true,"Damage":1},"X":9,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"Y":-3,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"Y":11,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser10":{ // T2K: 1-790
@@ -110,14 +110,14 @@
 			"Sound":31,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-11,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":11,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":-4,"Y":11,"MoveY":16},
-				{"Sprite":{"Tyrian2000":185},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":186},"AttackPower":{"Infinite":true},"X":4,"Y":11,"MoveY":16}
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-11,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":-7,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":11,"Y":7,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-3,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":-4,"Y":11,"MoveY":16},
+				{"Sprite":185,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-3,"MoveY":16},
+				{"Sprite":186,"AttackPower":{"Infinite":true},"X":4,"Y":11,"MoveY":16}
 			]
 		},
 		"T2KNeedleLaser11":{ // T2K: 1-791
@@ -125,20 +125,21 @@
 			"Sound":31,
 			"PiecesPerFire":8,
 			"Pieces":[
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":-7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":7,"MoveY":16},
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true},"X":-4,"Y":11,"MoveY":16},
-				{"Sprite":{"Tyrian2000":189},"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-3,"MoveY":16},
-				{"Sprite":{"Tyrian2000":190},"AttackPower":{"Infinite":true},"X":4,"Y":11,"MoveY":16}
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":-7,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true,"Damage":1},"X":-11,"Y":7,"MoveY":16},
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":-7,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true,"Damage":1},"X":11,"Y":7,"MoveY":16},
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":-4,"Y":-3,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true},"X":-4,"Y":11,"MoveY":16},
+				{"Sprite":189,"AttackPower":{"Infinite":true,"Damage":1},"X":4,"Y":-3,"MoveY":16},
+				{"Sprite":190,"AttackPower":{"Infinite":true},"X":4,"Y":11,"MoveY":16}
 			]
 		}
 	},
 	"Ports":{
 		"T2KNeedleLaser":{
 			"Name":"Retro Needle Laser",
+			"Requirements":"Tyrian2000", // Uses sprites only extant in Tyrian 2000
 			"NormalShots":[
 				"T2KNeedleLaser1",
 				"T2KNeedleLaser2",
