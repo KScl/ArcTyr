@@ -919,9 +919,13 @@ void ARC_Service( void )
 				selectionType = __SELECT;
 				numOptions = 0;
 				menuNest[menuDeepness]();
-				break;
+
+				// break out of while loop to prevent possible crashes
+				goto no_more_inputs;
 			}
 		}
+		no_more_inputs:
+		;
 	}
 	fade_black(10);
 
