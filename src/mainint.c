@@ -1057,15 +1057,17 @@ redo:
 			if (twoPlayerLinkReady)
 			{
 				twoPlayerLinked = true;
-				twoPlayerLinkReady = false;	
-				JE_playSampleNumOnChannel(S_CLINK, SFXPRIORITY+4);	
+				twoPlayerLinkReady = false;
+				if (!play_demo || attractAudioAllowed)
+					JE_playSampleNumOnChannel(S_CLINK, SFXPRIORITY+4);	
 				linkGunDirec = M_PI;
 				this_player->shot_multi_pos[SHOT_DRAGONWING_AIMED] = 0;
 			}
 			else if (twoPlayerLinked)
 			{
 				twoPlayerLinked = false;
-				JE_playSampleNumOnChannel(S_SPRING, SFXPRIORITY+4);				
+				if (!play_demo || attractAudioAllowed)
+					JE_playSampleNumOnChannel(S_SPRING, SFXPRIORITY+4);				
 			}
 		}
 
