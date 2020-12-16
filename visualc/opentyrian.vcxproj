@@ -55,16 +55,15 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SDLBaseDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(WITH_NETWORK)'=='true'">$(SDLnetBaseDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TARGET_WIN32;_CRT_SECURE_NO_WARNINGS;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(WITH_NETWORK)'=='true'">WITH_NETWORK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(GIT_REV_SHORT)'!=''">GIT_REV_SHORT="$(GIT_REV_SHORT)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(GIT_REV_FULL)'!=''">GIT_REV_FULL="$(GIT_REV_FULL)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(TYRIAN_DIR)'!=''">TYRIAN_DIR=$(TYRIAN_DIR);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(WITH_NETWORK)'=='true'">SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -96,7 +95,6 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SDLBaseDir)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WITH_NETWORK)'=='true'">$(SDLnetBaseDir)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
@@ -104,14 +102,25 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SDLBaseDir)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WITH_NETWORK)'=='true'">$(SDLnetBaseDir)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\*.c" />
+    <ClCompile Include="..\src\arcade\*.c" />
+    <ClCompile Include="..\src\dev\*.c" />
+    <ClCompile Include="..\src\lib\*.c" />
+    <ClCompile Include="..\src\mod\*.c" />
+    <ClCompile Include="..\src\video\*.c" />
+    <ClCompile Include="..\src\video\scalers\*.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\*.h" />
+    <ClInclude Include="..\src\arcade\*.h" />
+    <ClInclude Include="..\src\dev\*.h" />
+    <ClInclude Include="..\src\lib\*.h" />
+    <ClInclude Include="..\src\mod\*.h" />
+    <ClInclude Include="..\src\video\*.h" />
+    <ClInclude Include="..\src\video\scalers\*.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
@@ -119,13 +128,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ItemGroup Condition="'$(Platform)'=='Win32'">
     <Dependency Include="$(SDLBaseDir)\lib\x86\*.dll" />
-    <Dependency Condition="$(WITH_NETWORK)=='true'" Include="$(SDLnetBaseDir)\lib\x86\*.dll" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='x64'">
     <Dependency Include="$(SDLBaseDir)\lib\x64\*.dll" />
-    <Dependency Condition="$(WITH_NETWORK)=='true'" Include="$(SDLnetBaseDir)\lib\x64\*.dll" />
   </ItemGroup>
   <PropertyGroup>
+    <ReadOnlyProject>true</ReadOnlyProject>
     <BuildDependsOn>CopyPropsTemplates;EnsureSDLExists;$(BuildDependsOn)</BuildDependsOn>
   </PropertyGroup>
   <Target Name="CopyPropsTemplates">
@@ -134,7 +142,6 @@
   </Target>
   <Target Name="EnsureSDLExists">
     <Error Condition="!Exists($(SDLBaseDir))" Text="Set 'SDLBaseDir' in 'sdl_paths.props' to the directory where SDL is located." />
-    <Error Condition="'$(WITH_NETWORK)'=='true' AND !Exists($(SDLnetBaseDir))" Text="Set 'SDLnetBaseDir' in 'sdl_paths.props' to the directory where SDL_net is located." />
   </Target>
   <Target Name="CopyDependencies" AfterTargets="Build">
     <Copy SourceFiles="@(Dependency)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
