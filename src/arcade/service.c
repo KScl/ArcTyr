@@ -799,7 +799,7 @@ void (*SRVMenuCurrent)( void ) = SRV_MainMenu;
 jmp_buf service_buffer;
 
 // Service entry point
-__attribute__((noreturn)) void ARC_EnterService( void )
+FUNCNORETURN void ARC_EnterService( void )
 {
 	VGAScreen = VGAScreenSeg;
 	longjmp(service_buffer, 42069);

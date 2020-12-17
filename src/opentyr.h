@@ -13,12 +13,9 @@
 #ifndef OPENTYR_H
 #define OPENTYR_H
 
-#define ENABLE_DEVTOOLS
+#include "compiler.h"
 
-// snprintf truncation is intended; ignore warnings about it occurring
-#if __GNUC__ >= 7
-#pragma GCC diagnostic ignored "-Wformat-truncation"
-#endif
+#define ENABLE_DEVTOOLS
 
 #include "SDL_types.h"
 #include <math.h>
@@ -74,7 +71,7 @@ extern bool tyrian2000detected;
 
 #define STUB() do { printf("stubbed: %s\n", __func__); } while (false)
 
-__attribute__((noreturn)) void JE_tyrianHalt( JE_byte code ); /* This ends the game */
+FUNCNORETURN void JE_tyrianHalt( JE_byte code ); /* This ends the game */
 
 #endif /* OPENTYR_H */
 

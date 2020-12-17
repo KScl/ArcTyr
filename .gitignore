@@ -9,10 +9,25 @@
 !lower-script.sh
 
 # Ignore binaries.
-opentyrian
-arctyr
-*.exe
+/opentyrian
+/arctyr
+/SDL.dll
+/SDL2.dll
+/arctyr-*.exe
+/arctyr-*.ilk
+/arctyr-*.pdb
+/arctyr-*.iobj
+/arctyr-*.ipdb
 /obj/
+
+# Ignore MSVC data.
+/visualc/.vs/
+/visualc/*.props
+/visualc/*.user
+
+# Ignore runtime output from Windows.
+/stderr.txt
+/stdout.txt
 
 # Ignore other local work in progress things.
 /scraps/

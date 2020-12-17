@@ -45,8 +45,8 @@ typedef struct {
 	JE_byte enableMidEpisodeStart;
 } DipSwitches;
 
-const DipSwitches DIP_Default;
-DipSwitches DIP;
+extern const DipSwitches DIP_Default;
+extern DipSwitches DIP;
 
 extern bool attractAudioAllowed;
 

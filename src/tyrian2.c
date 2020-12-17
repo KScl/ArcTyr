@@ -1489,7 +1489,7 @@ level_loop:
 	{
 		bool is_special = false;
 		int tempShotX = 0, tempShotY = 0;
-		JE_word tempX2, tempY2;
+		JE_word tempX2 = 0, tempY2 = 0;
 		JE_byte filter, doIced, playerNum;
 		JE_integer damage;
 		JE_word shrapnel;

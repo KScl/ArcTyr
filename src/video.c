@@ -95,6 +95,12 @@ void init_video( void )
 	if (SDL_WasInit(SDL_INIT_VIDEO))
 		return;
 
+#ifdef TARGET_WIN32
+	// the default video driver for SDL1 chugs horribly on modern windows
+	// so we force directx as an alternative that works smoothly
+	SDL_putenv("SDL_VIDEODRIVER=directx");
+#endif
+
 	if (SDL_InitSubSystem(SDL_INIT_VIDEO) == -1)
 	{
 		fprintf(stderr, "error: failed to initialize SDL video: %s\n", SDL_GetError());
@@ -158,7 +164,7 @@ bool init_scaler( unsigned int new_scaler, bool fullscreen )
 	
 	if (bpp == 0)
 		return false;
-	
+
 	SDL_Surface *const surface = SDL_SetVideoMode(w, h, bpp, flags);
 	
 	if (surface == NULL)

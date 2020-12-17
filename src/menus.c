@@ -67,7 +67,7 @@ static void _regularMenuBehaviors( void )
 	else
 		t = _endTime - t;
 
-	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%lu", t / 1000);
+	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%llu", t / 1000);
 	JE_outTextAdjust(VGAScreen, JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES),
 		136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true);
 

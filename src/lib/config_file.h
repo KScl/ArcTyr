@@ -25,6 +25,8 @@
 #ifndef CONFIG_FILE_H
 #define CONFIG_FILE_H
 
+#include "../compiler.h"
+
 #include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -584,7 +586,7 @@ static inline unsigned int config_get_value_count( const ConfigOption *option )
  */
 #define foreach_remove_option_value() \
 	{ \
-		__attribute__((noreturn)) extern void config_oom( void ); \
+		FUNCNORETURN extern void config_oom( void ); \
 		unsigned int _value_i = _value - _values_begin; \
 		if (config_remove_value(_option, _value_i) == NULL) \
 			config_oom(); \

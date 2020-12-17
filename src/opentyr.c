@@ -194,7 +194,7 @@ int main( int argc, char *argv[] )
 	return 0;
 }
 
-__attribute__((noreturn)) void JE_tyrianHalt( JE_byte code )
+FUNCNORETURN void JE_tyrianHalt( JE_byte code )
 {
 	printf("Halting...\n");
 	ArcTyr_saveConfig();

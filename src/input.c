@@ -335,7 +335,10 @@ void I_JOY_init( void )
 	SDL_JoystickEventState(SDL_IGNORE);
 
 	num_joysticks = SDL_NumJoysticks();
-	joy_handles = malloc(num_joysticks * sizeof(SDL_Joystick*));
+	if (num_joysticks > 0)
+		joy_handles = malloc(num_joysticks * sizeof(SDL_Joystick*));
+	if (!joy_handles)
+		num_joysticks = 0;
 
 	for (int j = 0; j < num_joysticks; j++)
 	{

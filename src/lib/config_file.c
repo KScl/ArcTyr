@@ -22,6 +22,7 @@
  * \date 2015
  * \copyright GNU General Public License v2+ or Mozilla Public License 2.0
  */
+
 #include "config_file.h"
 
 #include <assert.h>
@@ -34,9 +35,9 @@
 #define udecsizeof(t) ((CHAR_BIT * sizeof(t) / 3) + 1)
 #define sdecsizeof(t) (udecsizeof(t) + 1)
 
-__attribute__((noreturn)) extern void config_oom( void );
+FUNCNORETURN extern void config_oom( void );
 
-__attribute__((noreturn)) void config_oom( void )
+FUNCNORETURN void config_oom( void )
 {
 	fprintf(stderr, "out of memory\n");
 	exit(EXIT_FAILURE);

@@ -823,9 +823,9 @@ void JE_inGameDisplays( void )
 		if (timer % 1000 < 500)
 			JE_textShade(VGAScreen, JE_fontCenter(":", TINY_FONT), 4, ":", 5, 6, FULL_SHADE);
 		timer /= 1000;
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%02lu", timer / 60);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%02llu", timer / 60);
 		JE_textShade(VGAScreen, 159-JE_textWidth(tmpBuf.s, TINY_FONT), 4, tmpBuf.s, 5, 6, FULL_SHADE);
-		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%02lu", timer % 60);
+		snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%02llu", timer % 60);
 		JE_textShade(VGAScreen, 161, 4, tmpBuf.s, 5, 6, FULL_SHADE);
 	}
 

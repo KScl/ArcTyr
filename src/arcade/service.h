@@ -18,13 +18,13 @@
 #include <setjmp.h>
 
 // Service menu
-JE_boolean inServiceMenu;
+extern JE_boolean inServiceMenu;
 
 void ARC_Service( void );
 
 // Entering service menu uses a longjmp, since there's no single "main" loop
-jmp_buf service_buffer;
+extern jmp_buf service_buffer;
 
-__attribute__((noreturn)) void ARC_EnterService( void );
+FUNCNORETURN void ARC_EnterService( void );
 
 #endif
