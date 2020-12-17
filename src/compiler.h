@@ -23,7 +23,7 @@
 // ---
 // End MSVC section
 // ---
-#elif defined(__GNUC__) || defined
+#elif defined(__GNUC__)
 // ---
 // GCC specific defines
 // ---
