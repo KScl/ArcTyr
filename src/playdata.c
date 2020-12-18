@@ -417,6 +417,7 @@ static void _loadHints( const char *dataFile )
 	for (size_t i = 0; i < num_hints; ++i)
 	{
 		efread(&hints[i].reference, sizeof(JE_byte), 1, f);
+		efread(&hints[i].weight, sizeof(JE_byte), 1, f);
 		for (size_t j = 0; j < 7; ++j)
 		{
 			// size actually is relevant

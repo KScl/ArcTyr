@@ -766,12 +766,15 @@ def iter_hints():
 	for hint_ref in TyrianData.Hints:
 		_currentStruct = 'Hints:%s' % hint_ref
 		hint_pointer = special_hints[hint_ref] if hint_ref in special_hints.keys() else find_ship_id(hint_ref)
+		hint_weight = 200 / len(TyrianData.Hints[hint_ref])
+		# hint_weight = hint_weight / 2 if hint_pointer > 0xF0 else hint_weight
 
 		for hint in TyrianData.Hints[hint_ref]:
 			hint = ensure_list_length(hint, 7, "")
 
 			s = ByteString()
 			s.AppendUint8(hint_pointer)
+			s.AppendUint8(int(hint_weight))
 			[s.AppendVariableString(i, 60) for i in hint]
 			yield s
 			yield [59]

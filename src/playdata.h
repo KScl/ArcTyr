@@ -154,6 +154,7 @@ extern const JE_byte shield_power[SHIELD_NUM + 1];
 typedef struct
 {
 	JE_byte reference; // What ship (or episode) is the hint referencing?
+	JE_byte weight; // How likely is the hint to show up?
 	char text[7][61];
 } hint_type_t;
 

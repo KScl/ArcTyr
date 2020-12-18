@@ -67,7 +67,7 @@ static void _regularMenuBehaviors( void )
 	else
 		t = _endTime - t;
 
-	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%llu", t / 1000);
+	snprintf(tmpBuf.s, sizeof(tmpBuf.s), "%u", (Uint32)(t / 1000));
 	JE_outTextAdjust(VGAScreen, JE_fontCenter(tmpBuf.s, SMALL_FONT_SHAPES),
 		136, tmpBuf.s, 15, -4, SMALL_FONT_SHAPES, true);
 
@@ -743,40 +743,29 @@ void Menu_episodeInterlude( bool silent )
 
 	// Choose a hint; go through all hints, find ones applicable to us, and keep tally.
 	// Then randomly choose a number between 0 and the number of good hints, and go through again.
-	int goodHints = 0;
-	int hintsToSkip = 0;
-	int chosenHint = 0;
+	int hintWeight = 0, chosenHint = 0;
 	for (size_t i = 0; i < num_hints; ++i)
 	{
-		if (hints[i].reference == 0xF0 + episodeNum)
-			++goodHints;
-		else if ((player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
-		      || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
+		if ((hints[i].reference == 0xF0 + episodeNum)
+		 || (player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
+		 || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
 		{
-			// Ship hints are more likely.
-			goodHints += 4;
+			hintWeight += hints[i].weight;
 		}
 	}
-	if (goodHints == 0) // If NOTHING fits, pick anything at random.
+
+	if (hintWeight == 0) // If NOTHING fits, pick anything at random.
 		chosenHint = mt_rand() % num_hints;
 	else
 	{
-		hintsToSkip = mt_rand() % goodHints;
+		int rawHintVal = mt_rand() % hintWeight;
 		for (size_t i = 0; i < num_hints; ++i)
 		{
-			if (hints[i].reference == 0xF0 + episodeNum)
+			if ((hints[i].reference == 0xF0 + episodeNum)
+			 || (player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
+			 || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
 			{
-				if (--hintsToSkip < 0)
-				{
-					chosenHint = i;
-					break;
-				}
-			}
-			else if ((player[0].player_status == STATUS_INGAME && hints[i].reference == player[0].items.ship)
-			      || (player[1].player_status == STATUS_INGAME && hints[i].reference == player[1].items.ship))
-			{
-				// Ship hints are more likely.
-				if ((hintsToSkip -= 4) < 0)
+				if ((rawHintVal -= hints[i].weight) < 0)
 				{
 					chosenHint = i;
 					break;
