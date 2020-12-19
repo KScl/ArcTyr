@@ -39,7 +39,7 @@ typedef JE_byte JE_EditorItemAvailType[100]; /* [1..100] */
 
 extern JE_boolean smoothies[9];
 extern JE_byte starShowVGASpecialCode;
-extern JE_shortint difficultyLevel, oldDifficultyLevel, initialDifficulty;
+extern JE_shortint difficultyLevel, initialDifficulty;
 
 extern char levelName[11];
 extern JE_byte mainLevel, nextLevel;

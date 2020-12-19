@@ -218,6 +218,7 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 	Player *this_player = &player[playerNum - 1];
 
 	this_player->specials.next_repeat = 0;
+	globalFlare = 0;
 
 	switch (special[specialType].stype)
 	{
@@ -268,17 +269,34 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 				}
 			}
 			break;
+
+		case 51: // twiddle invuln
+			this_player->invulnerable_ticks = twiddlePower * 10;
+			break;
+		case 52: // special invuln
+			b = player_shot_create(0, shot_i, this_player->x, this_player->y, special[specialType].wpn, playerNum);
+			this_player->shot_repeat[shot_i] = 250;
+			this_player->invulnerable_ticks = 100;
+			break;
+		case 53: // self heal
+			this_player->armor += twiddlePower / 4 + 1;
+
+			soundQueue[3] = S_POWERUP;
+			break;
+
 		/*Flare*/
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-		case 16:
-		case 23:
-		case 24:
+		case 201:
+		case 202:
+		case 203:
+		case 204:
+			globalFlare = playerNum;
+			// fall through
+		case 101:
+		case 102:
+		case 103:
+		case 104:
+		case 151:
+		case 152:
 			this_player->shot_repeat[SHOT_SPECIAL2] = 0;
 
 			uint powerMult = this_player->items.power_level;
@@ -290,95 +308,77 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			this_player->specials.flare_control = 0;
 			this_player->specials.next_repeat = 200;
 
-			globalFlare = 0;
 			globalFlareFilter = -99;
 
 			switch (special[specialType].stype)
 			{
-				case 5: // flare (GLOBAL)
-					globalFlare = playerNum;
+				case 201: // flare (GLOBAL)
 					globalFlareFilter = 7;
 					this_player->specials.flare_freq = 2;
 					this_player->specials.flare_time = 50;
 					break;
-				case 6: // sandstorm (GLOBAL)
-					globalFlare = playerNum;
+				case 202: // sandstorm (GLOBAL)
 					globalFlareFilter = 1;
 					this_player->specials.flare_freq = 7;
 					this_player->specials.flare_time = 200 + 25 * powerMult;
 					break;
-				case 7: // Minefield (GLOBAL)
-					globalFlare = playerNum;
+				case 203: // Minefield (GLOBAL)
 					globalFlareFilter = 3;
-					this_player->specials.flare_freq = 3;
-					this_player->specials.flare_time = 50 + 10 * powerMult;
+					this_player->specials.flare_freq = 6;
+					this_player->specials.flare_time = 50;
 					this_player->specials.zinglon = 50;
 					soundQueue[7] = S_SOUL_OF_ZINGLON;
 					break;
-				case 8: // Blade field (non global)
-					this_player->specials.flare_freq = 7;
-					this_player->specials.flare_time = 10 + powerMult;
-					break;
-				case 9: // Fire multiple (non global)
-					this_player->specials.flare_time = 8 + 2 * powerMult;
-					this_player->specials.flare_link = true;
-					this_player->specials.next_repeat = special[specialType].pwr;
-					break;
-				case 10: // protron disperse (non global)
-					this_player->specials.flare_time = 14 + 4 * powerMult;
-					this_player->specials.flare_link = true;
-					this_player->specials.next_repeat = 15;
-					break;
-				case 11: // nortship's astral special (GLOBAL)
-					globalFlare = playerNum;
+				case 204: // nortship's astral special (GLOBAL)
 					astralDuration = 20 + 10 * powerMult;
 					this_player->specials.flare_freq = special[specialType].pwr;
 					this_player->specials.flare_time = 10 + 10 * powerMult;
 					break;
-				case 16: // mass spray microbombs everywhere like a fool (non global)
+				case 101: // Fire multiple (non global)
+					this_player->specials.flare_time = 8 + 2 * powerMult;
+					this_player->specials.flare_link = true;
+					this_player->specials.next_repeat = special[specialType].pwr;
+					break;
+				case 102: // protron disperse (non global)
+					this_player->specials.flare_time = 14 + 4 * powerMult;
+					this_player->specials.flare_link = true;
+					this_player->specials.next_repeat = 15;
+					break;
+				case 103: // Blade field (non global)
+					this_player->specials.flare_freq = 7;
+					this_player->specials.flare_time = 10 + powerMult;
+					break;
+				case 104: // mass spray microbombs everywhere like a fool (non global)
 					this_player->specials.flare_time = (twiddlePower ? twiddlePower : 4) * 16 + 8;
 					this_player->specials.flare_link = true;
 					this_player->specials.flare_spray = true;
 					break;
-				case 23: // Fire multiple while sidekick held (non global)
+				case 151: // Fire multiple while sidekick held (non global)
 					this_player->specials.flare_time = special[specialType].extradata;
 					this_player->specials.flare_link = true;
 					this_player->specials.flare_control = BUTTON_SKICK;
 					break;
-				case 24: // Fire multiple while fire held (non global)
+				case 152: // Fire multiple while fire held (non global)
 					this_player->specials.flare_time = special[specialType].extradata;
 					this_player->specials.flare_link = true;
 					this_player->specials.flare_control = BUTTON_FIRE;
 					break;
 			}
 			break;
-		case 20: // twiddle invuln
-			this_player->invulnerable_ticks = twiddlePower * 10;
-			break;
-		case 12: // special invuln
-			b = player_shot_create(0, shot_i, this_player->x, this_player->y, special[specialType].wpn, playerNum);
-			this_player->shot_repeat[shot_i] = 250;
-			this_player->invulnerable_ticks = 100;
-			break;
-		case 13: // self heal
-			this_player->armor += twiddlePower / 4 + 1;
 
-			soundQueue[3] = S_POWERUP;
-			break;
-
-		case 22:  // spawn random sidekick with ammo
+		case 255:  // spawn random sidekick with ammo
 			do
 				special[specialType].extradata = (mt_rand() % num_options) + 1;
 			while (options[special[specialType].extradata].ammo == 0);
 			// fall through
-		case 19:  // spawn sidekick (alternate sides)
+		case 251:  // spawn sidekick (alternate sides)
 			soundQueue[3] = S_POWERUP;
 			PL_SwitchOption(this_player, ALTERNATE_SIDES, special[specialType].extradata, true);
 			if (shot_i == SHOT_SPECIAL)
 				this_player->shot_repeat[SHOT_SPECIAL] = 255;
 			break;
 
-		case 21:; // spawn sidekick from weapon
+		case 252:; // spawn sidekick from weapon
 			JE_byte whichOpt = 
 				(this_player->items.power_level >= 8) ? 2 :
 				((this_player->items.power_level >= 4) ? 1 : 0);
@@ -396,12 +396,9 @@ void JE_specialComplete( JE_byte playerNum, JE_byte specialType, uint shot_i, JE
 			PL_SwitchOption(this_player, special[specialType].extradata, spOption, true);
 			break;
 
-		// old specials with removed behavior
-		case 14: // other player heal
-		case 17: // spawn left or right sidekick
-		case 18: // spawn right sidekick
+		default:
+			printf("warning: unknown special type %hu\n", special[specialType].stype);
 			break;
-
 	}
 
 	if (shot_i == SHOT_SPECIAL)

@@ -789,8 +789,6 @@ start_level:
 		//wait_noinput(true, true, true);
 	}
 
-	difficultyLevel = oldDifficultyLevel;   /*Return difficulty to normal*/
-
 	if (!play_demo && !record_demo)
 	{
 		if ((!all_players_dead() || normalBonusLevelCurrent || bonusLevelCurrent) && !playerEndLevel)
@@ -838,35 +836,6 @@ start_level_first:
 	if (can_play_audio())
 		fade_song();
 
-	for (uint i = 0; i < COUNTOF(player); ++i)
-		player[i].is_alive = true;
-
-	oldDifficultyLevel = difficultyLevel;
-	if (episodeNum == EPISODE_AVAILABLE)
-		difficultyLevel--;
-	if (difficultyLevel < 1)
-		difficultyLevel = 1;
-
-	player[0].x = 100;
-	player[0].y = 180;
-
-	player[1].x = 190;
-	player[1].y = 180;
-
-	assert(COUNTOF(player->old_x) == COUNTOF(player->old_y));
-
-	for (uint i = 0; i < COUNTOF(player); ++i)
-	{
-		for (uint j = 0; j < COUNTOF(player->old_x); ++j)
-		{
-			player[i].old_x[j] = player[i].x - (19 - j);
-			player[i].old_y[j] = player[i].y - 18;
-		}
-
-		player[i].last_x_shot_move = player[i].x;
-		player[i].last_y_shot_move = player[i].y;
-	}
-
 	JE_loadPCX(arcdata_dir(), "newhud.pcx");
 	JE_outText(VGAScreen, 268, 189, levelName, 12, 4);
 
@@ -912,29 +881,7 @@ start_level_first:
 
 	/* Setup player ship graphics */
 	JE_getShipInfo();
-
-	for (uint i = 0; i < COUNTOF(player); ++i)
-	{
-		player[i].x_velocity = 0;
-		player[i].y_velocity = 0;
-		player[i].x_friction_ticks = 0;
-		player[i].y_friction_ticks = 0;
-
-		player[i].invulnerable_ticks = 100;
-
-		memset(player[i].shot_repeat, 1, sizeof(player[i].shot_repeat));
-		memset(player[i].shot_multi_pos, 0, sizeof(player[i].shot_multi_pos));
-		memset(player[i].buttons, 0, sizeof(player[i].buttons));
-
-		// Special data all wiped
-		memset(&player[i].specials, 0, sizeof(player[i].specials));
-		memset(&player[i].twiddle, 0, sizeof(player[i].twiddle));
-
-		// Don't fire special if holding fire at start
-		player[i].shot_repeat[SHOT_SPECIAL] = 2;
-		player[i].hud_ready_timer = 0;
-		player[i].hud_repeat_start = 1;
-	}
+	PL_SetUpForNewLevel();
 
 	globalFlare = 0;
 	globalFlareFilter = -99;
@@ -1001,14 +948,6 @@ start_level_first:
 	/* Initial Text */
 	JE_drawTextWindow(miscText[20]);
 
-	/* Setup Armor/Shield Data */
-	for (uint i = 0; i < COUNTOF(player); ++i)
-	{
-		player[i].shield_wait = 1;
-		player[i].shield      = shield_power[player[i].items.shield];
-		player[i].shield_max  = player[i].shield * 2;
-	}
-
 	JE_drawShield();
 	JE_drawArmor();
 
@@ -1051,16 +990,6 @@ start_level_first:
 	astralDuration = 0;
 
 	init_saweapon_bag();
-
-	for (uint i = 0; i < COUNTOF(player); ++i)
-	{
-		player[i].exploding_ticks = 0;
-
-		player[i].satRotate = 0.0f;
-		player[i].attachMove = 0;
-		player[i].attachLinked = true;
-		player[i].attachReturn = false;
-	}
 
 	memset(enemyAvail,       1, sizeof(enemyAvail));
 	for (uint i = 0; i < COUNTOF(enemyShotAvail); i++)

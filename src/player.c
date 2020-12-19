@@ -434,6 +434,61 @@ void PL_Twiddle( Player *this_player )
 	}
 }
 
+void PL_SetUpForNewLevel( void )
+{
+	assert(COUNTOF(player->old_x) == COUNTOF(player->old_y));
+
+	player[0].x = 100;
+	player[0].y = 180;
+
+	player[1].x = 190;
+	player[1].y = 180;
+
+	for (uint i = 0; i < COUNTOF(player); ++i)
+	{
+		for (uint j = 0; j < COUNTOF(player->old_x); ++j)
+		{
+			player[i].old_x[j] = player[i].x - (19 - j);
+			player[i].old_y[j] = player[i].y - 18;
+		}
+
+		player[i].last_x_shot_move = player[i].x;
+		player[i].last_y_shot_move = player[i].y;
+
+		player[i].x_velocity       = player[i].y_velocity       = 0;
+		player[i].x_friction_ticks = player[i].y_friction_ticks = 0;
+
+		player[i].invulnerable_ticks = 100;
+
+		memset(player[i].shot_repeat,    1, sizeof(player[i].shot_repeat));
+		memset(player[i].shot_multi_pos, 0, sizeof(player[i].shot_multi_pos));
+		memset(player[i].buttons,        0, sizeof(player[i].buttons));
+
+		// Don't fire special if holding fire at start
+		player[i].shot_repeat[SHOT_SPECIAL] = 2;
+		player[i].hud_ready_timer  = 0;
+		player[i].hud_repeat_start = 1;
+
+		// Special data all wiped
+		memset(&player[i].specials, 0, sizeof(player[i].specials));
+		memset(&player[i].twiddle,  0, sizeof(player[i].twiddle));
+
+		// Setup Armor/Shield Data
+		player[i].shield_wait = 1;
+		player[i].shield      = shield_power[player[i].items.shield];
+		player[i].shield_max  = player[i].shield * 2;
+
+		// Sidekick data
+		player[i].satRotate = 0.0f;
+		player[i].attachMove = 0;
+		player[i].attachLinked = true;
+		player[i].attachReturn = false;
+
+		player[i].is_alive = true;
+		player[i].exploding_ticks = 0;
+	}
+}
+
 //
 // Randomizer nonsense
 //

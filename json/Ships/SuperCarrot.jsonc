@@ -64,5 +64,34 @@
 				["Down", "Left", "Up", "Right", "Down+Sidekick", {"Special":"TwiddleCreateIceCube"}]
 			]
 		}
+	},
+	"Hints":{
+		"SuperCarrot":[
+			[
+				"~Icebreaker~ (Down, Left, Up, Right, Down+Sidekick)",
+				"",
+				"Create an ice cube sidekick that will trail you until fired.",
+				"When it hits an enemy, it explodes into shards of ice which",
+				"freeze the surroundings for a while.",
+				"",
+				"* Costs ~4~ units of shield."
+			],
+			[
+				"~Orange Shield~ (Special Mode B)",
+				"",
+				"Though it may not look like much, the Orange Shield packs",
+				"an extremely strong punch if you're willing to get up close",
+				"and personal with your enemies."
+			],
+			[
+				"~HotDog Blast~ (Up, Down+Fire)",
+				"",
+				"Fires a blast of supercharged hot dogs straight ahead,",
+				"which deal much more damage than standard hot dog fare.",
+				"",
+				"",
+				"* Costs ~1/2~ unit of armor."
+			]
+		]
 	}
 }

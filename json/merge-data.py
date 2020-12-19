@@ -556,25 +556,27 @@ def iter_specials():
 			'Repulsor': 2,
 			'Zinglon': 3,
 			'Attractor': 4,
-			'Flare': 5,
-			'Sandstorm': 6,
-			'FlareZinglon': 7,
-			'FireMultipleRandomX': 8,
-			'FireMultiple': 9,
-			'FireMultipleLong': 10,
-			'AstralFlare': 11,
-			'InvulnerabilityShield': 12,
-			'Heal': 13,
-			'HealOtherPlayer': 14,
-			'MassSpray': 16,
-			'SpawnOption': 17,
-			'SpawnRightOption': 18,
-			'SpawnOptionAlternate': 19,
-			'Invulnerability': 20,
-			'SpawnOptionFromWeapon': 21,
-			'SpawnRandomAmmoOption': 22,
-			'FireWhileSidekickHeld': 23,
-			'FireWhileFireHeld': 24 })
+
+			'Invulnerability': 51,
+			'InvulnerabilityShield': 52,
+			'Heal': 53,
+
+			'FireMultiple': 101,
+			'FireMultipleLong': 102,
+			'FireMultipleRandomX': 103,
+			'MassSpray': 104,
+
+			'FireWhileSidekickHeld': 151,
+			'FireWhileFireHeld': 152,
+
+			'Flare': 201,
+			'Sandstorm': 202,
+			'FlareZinglon': 203,
+			'AstralFlare': 204,
+
+			'SpawnOptionAlternate': 251,
+			'SpawnOptionFromWeapon': 252,
+			'SpawnRandomAmmoOption': 255 })
 		spec['ShotType'] = find_shot_id(spec['ShotType'])
 
 		s = ByteString()

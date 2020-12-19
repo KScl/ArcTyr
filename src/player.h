@@ -253,6 +253,8 @@ JE_byte PL_PlayerDamage( Player *this_player, JE_byte damage_amt );
 
 void PL_Twiddle( Player *this_player );
 
+void PL_SetUpForNewLevel( void );
+
 void PL_RandomRollSpecials( Player *this_player );
 void PL_RandomRollWeapons( Player *this_player );
 

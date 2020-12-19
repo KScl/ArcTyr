@@ -28,5 +28,25 @@
 				["Left", "Right", "Down+Fire", {"Special":"S39"}]
 			]
 		}
+	},
+	"Hints":{
+		"Magma":[
+			[
+				"~Mag-Malice's Secret Power~",
+				"",
+				"Mag-Malice's short ranged weapons, such as the Starblast,",
+				"are extremely powerful to make up for the inherent danger",
+				"posed by using them, given Mag-Malice's low armor rating.",
+				"With higher risk comes greater rewards."
+			],
+			[
+				"~Exhaust Shot~ (Special Mode A)",
+				"",
+				"Though it requires getting in front of enemies to utilize",
+				"effectively, and the range is short, the superheated plasma",
+				"fired from this special deals extremely high amounts of",
+				"damage, even decimating some enemies instantly."
+			]
+		]
 	}
 }

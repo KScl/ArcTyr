@@ -40,8 +40,8 @@ JE_boolean smoothies[9] = /* [1..9] */
 JE_byte starShowVGASpecialCode;
 
 /* Difficulty */
-JE_shortint difficultyLevel, oldDifficultyLevel,
-            initialDifficulty;  // can only get highscore on initial episode
+JE_shortint difficultyLevel;
+JE_shortint initialDifficulty; // controls path through levels, etc.
 
 /* Level Data */
 char    levelName[11]; /* string [10] */

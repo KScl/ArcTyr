@@ -62,5 +62,34 @@
 				["Up", "Right", "Down", "Up", "Left", "Down+Sidekick", {"Special":"TwiddleCreate8Way"}]
 			]
 		}
+	},
+	"Hints":{
+		"DragonWing":[
+			[
+				"~Plasma Storm~ (DLRULRD+S)",
+				"",
+				"Bringing shields up to their maximum level enables creating",
+				"the ultimate sidekick.",
+				"",
+				"",
+				"* Costs ~14~ units of shield."
+			],
+			[
+				"~DragonWing Options~ (DLDL+S, DRDR+S)",
+				"",
+				"The DragonWing can expend power from its main guns and turn",
+				"them into permanent sidekicks for extra offensive power.",
+				"What's created depends on what weapon is currently in use.",
+				"",
+				"* Costs ~1~ power level."
+			],
+			[
+				"~Linking~",
+				"",
+				"When linked with another ship, the DragonWing shares its",
+				"shield and armor with them. It takes BOTH ship's shields",
+				"being drained before either takes damage to armor."
+			]
+		]
 	}
 }
