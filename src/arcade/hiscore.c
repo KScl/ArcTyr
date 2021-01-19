@@ -10,11 +10,13 @@
 /// \file  arcade/hiscore.c
 /// \brief High score tables and screens, saving, etc
 
-#include "../arcade.h"
+#include "hiscore.h"
+
 #include "../opentyr.h"
 #include "../player.h"
 
-HighScoreEntry highScores[20] = {
+static JE_boolean displayScreenNext = false;
+static HighScoreEntry highScores[NUM_HIGH_SCORE_ENTRIES] = {
 	{"Trent    ", 100000, 4, false},
 	{"Dougan   ",  90000, 7, false},
 	{"Transon  ",  80000, 6, false},
@@ -37,26 +39,19 @@ HighScoreEntry highScores[20] = {
 	{"Devan    ",   1000, 2, false},
 };
 
-JE_boolean HighScore_Leading( Player *pl )
-{
-	Player *otherPl = PL_OtherPlayer(pl);
-	if (otherPl->player_status > STATUS_NONE && otherPl->cash > pl->cash)
-		return false;
-	return (pl->cash >= highScores[0].cash);
-}
-
 JE_boolean HighScore_InsertName( Player *pl )
 {
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < NUM_HIGH_SCORE_ENTRIES; ++i)
 	{
 		if (pl->cash >= highScores[i].cash)
 		{
 			// Shift down high scores if necessary
-			if (i < 19)
-				memmove(&highScores[i+1], &highScores[i], sizeof(HighScoreEntry) * (19 - i));
+			if (i < NUM_HIGH_SCORE_ENTRIES - 1)
+				memmove(&highScores[i+1], &highScores[i], sizeof(HighScoreEntry) * ((NUM_HIGH_SCORE_ENTRIES - 1) - i));
 			snprintf(highScores[i].name, sizeof(highScores[i].name), "Unknown");
 			highScores[i].cash = pl->cash;
 			highScores[i].isNew = true;
+			displayScreenNext = true;
 
 			pl->arc.hsPos = i;
 			{
@@ -68,4 +63,46 @@ JE_boolean HighScore_InsertName( Player *pl )
 		}
 	}
 	return false;
+}
+
+void HighScore_UpdateName( Player *pl )
+{
+	if (pl->arc.hsPos < 0 && pl->arc.hsPos >= NUM_HIGH_SCORE_ENTRIES)
+		memcpy(highScores[pl->arc.hsPos].name, pl->arc.hsName, sizeof(pl->arc.hsName));
+}
+
+
+//
+// Ingame Functions
+//
+
+JE_boolean HighScore_Leading( Player *pl )
+{
+	Player *otherPl = PL_OtherPlayer(pl);
+	if (otherPl->player_status > STATUS_NONE && otherPl->cash > pl->cash)
+		return false;
+	return (pl->cash >= highScores[0].cash);
+}
+
+
+//
+// High Score Screen
+//
+
+void HighScore_Screen( void )
+{
+	
+}
+
+// Used to determine whether to show high score screen after credits/game over
+JE_boolean HighScore_ShouldShow( void )
+{
+	return displayScreenNext;
+}
+
+void HighScore_ClearNewFlag( void )
+{
+	for (int i = 0; i < NUM_HIGH_SCORE_ENTRIES; ++i)
+		highScores[i].isNew = false;
+	displayScreenNext = false;
 }

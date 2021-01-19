@@ -10,6 +10,7 @@
 /// \file  episodes.c
 /// \brief Loading and navigating the game's episodes
 
+#include "arcade.h"
 #include "episodes.h"
 #include "file.h"
 #include "opentyr.h"
@@ -152,23 +153,6 @@ static void _loadEnemyData( void )
 	fclose(f);
 }
 
-static unsigned int _getNextEpisode( void )
-{
-	unsigned int newEpisode = episodeNum;
-	
-	while (true)
-	{
-		if (++newEpisode > EPISODE_MAX)
-			return 1;
-
-		if (episodeAvail[newEpisode-1] || newEpisode == episodeNum)
-			break;
-	}
-	
-	return newEpisode;
-}
-
-
 void Episode_init( JE_byte newEpisode )
 {
 	if (newEpisode == episodeNum)
@@ -194,11 +178,25 @@ void Episode_scan( void )
 	}
 }
 
+unsigned int Episode_getNext( void )
+{
+	// Single Episode Mode
+	if (!DIP.allowMultipleEpisodes)
+		return 0;
+
+	unsigned int newEpisode = episodeNum;
+	while (++newEpisode <= EPISODE_MAX)
+	{
+		if (episodeAvail[newEpisode-1])
+			return newEpisode;
+	}
+	return 0;
+}
+
 bool Episode_next( void )
 {
-	unsigned int newEpisode = _getNextEpisode();
-
-	if (newEpisode == 1)
+	unsigned int newEpisode = Episode_getNext();
+	if (newEpisode == 0)
 		return false;
 
 	if (newEpisode != episodeNum)

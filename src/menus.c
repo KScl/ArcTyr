@@ -140,7 +140,7 @@ static void _drawPlayerStatusText( JE_byte p )
 	}
 
 	JE_word curCoins = ARC_GetCoins();
-	strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
+	strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Start" : "Insert Coin");
 	_menuMirrorText(VGAScreen, 12, 136, p, tmpBuf.s);
 
 	if (DIP.coinsToStart == 0)
@@ -682,7 +682,7 @@ void Menu_episodeInterlude( bool silent )
 	fade_palette(colors, 10, 0, 255);
 
 	textGlowFont = SMALL_FONT_SHAPES;
-	int num_bonuses = (episodeNum == 5 || !episodeAvail[episodeNum]) ? 2 : 1;
+	int num_bonuses = (Episode_getNext() == 0) ? 2 : 1;
 	for (int bonus = 1; bonus <= num_bonuses; ++bonus)
 	{
 		// This is hackish, but: We only want to undo the area where the player's score is
@@ -882,7 +882,7 @@ bool Menu_titleScreen( void )
 
 		curCoins = ARC_GetCoins();
 
-		strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
+		strcpy(tmpBuf.s, (curCoins >= DIP.coinsToStart) ? "Press Start" : "Insert Coin");
 		draw_font_hv(VGAScreen, x - 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y + 1, tmpBuf.s, normal_font, centered, 15, -10);
 		draw_font_hv(VGAScreen, x + 1, y - 1, tmpBuf.s, normal_font, centered, 15, -10);

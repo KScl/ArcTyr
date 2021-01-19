@@ -233,6 +233,7 @@ bool ArcTyr_loadConfig( void )
 		get_byte_max(DIP.enableFullDebugMenus, "enable_full_debug_menus", 1);
 		get_byte_max(DIP.skipServiceOnStartup, "skip_service_on_startup", 1);
 		get_byte_max(DIP.enableMidEpisodeStart, "enable_mid_episode_start", 1);
+		get_byte_max(DIP.allowMultipleEpisodes, "allow_multiple_episodes", 1);
 	}
 
 #undef get_byte_max
@@ -285,6 +286,7 @@ bool ArcTyr_saveConfig( void )
 		config_set_uint_option(sec, "enable_full_debug_menus", DIP.enableFullDebugMenus);
 		config_set_uint_option(sec, "skip_service_on_startup", DIP.skipServiceOnStartup);
 		config_set_uint_option(sec, "enable_mid_episode_start", DIP.enableMidEpisodeStart);
+		config_set_uint_option(sec, "allow_multiple_episodes", DIP.allowMultipleEpisodes);
 	}
 
 	I_saveConfigAssignments(&tav_config);

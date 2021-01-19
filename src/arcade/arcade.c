@@ -10,6 +10,7 @@
 /// \file  arcade.c
 /// \brief Arcade specific functions and data, DIP switches, etc
 
+#include "hiscore.h"
 #include "service.h"
 
 #include "../arcade.h"
@@ -40,7 +41,7 @@ const DipSwitches DIP_Default = {
 	3, 6, 2, 3, 4, 3,
 	1, 1, 2, 2, 0,
 	1,
-	0, 0, 0
+	0, 0, 0, 0
 };
 DipSwitches DIP;
 
@@ -211,7 +212,7 @@ void ARC_DISP_NoPlayerInSlot( uint pNum )
 	}
 	else if (arcTextTimer >= 100)
 	{
-		strcpy(tmpBuf.s, (coins >= DIP.coinsToStart) ? "Press Fire" : "Insert Coin");
+		strcpy(tmpBuf.s, (coins >= DIP.coinsToStart) ? "Press Start" : "Insert Coin");
 	}
 	else
 	{
@@ -516,8 +517,7 @@ void ARC_HandlePlayerStatus( Player *pl, uint pNum )
 			else if (pl->arc.timer > 60000)
 			{
 				// Assign name to score
-				if (pl->arc.hsPos >= 0 && pl->arc.hsPos < 20)
-					memcpy(highScores[pl->arc.hsPos].name, pl->arc.hsName, sizeof(pl->arc.hsName));
+				HighScore_UpdateName(pl);
 				ARC_SetPlayerStatus(pl, STATUS_CONTINUE);
 				break;
 			}

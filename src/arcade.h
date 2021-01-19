@@ -43,6 +43,7 @@ typedef struct {
 	JE_byte enableFullDebugMenus;
 	JE_byte skipServiceOnStartup;
 	JE_byte enableMidEpisodeStart;
+	JE_byte allowMultipleEpisodes;
 } DipSwitches;
 
 extern const DipSwitches DIP_Default;
@@ -59,18 +60,6 @@ void ARC_InsertCoin( void );
 JE_boolean ARC_CoinStart( Player *pl );
 JE_word ARC_GetCoins( void );
 void ARC_NextIdleScreen( void );
-
-//
-
-typedef struct {
-	char name[10];
-	uint cash, ship;
-	JE_boolean isNew;
-} HighScoreEntry;
-
-HighScoreEntry highScores[20];
-JE_boolean HighScore_Leading( Player *pl );
-JE_boolean HighScore_InsertName( Player *pl );
 
 //
 // Visual displays

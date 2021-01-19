@@ -88,6 +88,8 @@ extern JE_EnemyWeaponType eWeapons[256]; // fixed -- the first 256 shots in epis
 
 void Episode_init( JE_byte newEpisode );
 void Episode_scan( void );
+
+unsigned int Episode_getNext( void );
 bool Episode_next( void );
 
 #endif /* EPISODES_H */

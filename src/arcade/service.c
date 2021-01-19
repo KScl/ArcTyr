@@ -314,7 +314,40 @@ void SRVF_Jukebox( void )
 // Service Menus
 //
 
-void SRV_ArcadeMenu( void )
+void SRV_CabinetMenu( void )
+{
+	SRVH_DispHeader("Cabinet Settings");
+
+	if (DIP.coinsToContinue > DIP.coinsToStart || (DIP.coinsToContinue == 0 && DIP.coinsToStart != 0))
+		DIP.coinsToContinue = DIP.coinsToStart;
+
+	static const char *bootOption[] = {"Show", "Skip"};
+	SRVH_DispValue(bootOption[DIP.skipServiceOnStartup]);
+	SRVH_AdjustableByte("Service on Startup", false, &DIP.skipServiceOnStartup, 0, 1);
+
+	static const char *modeOption[] = {"One Episode", "Full Game"};
+	SRVH_DispValue(modeOption[DIP.allowMultipleEpisodes]);
+	SRVH_AdjustableByte("Game Mode", false, &DIP.allowMultipleEpisodes, 0, 1);
+	optionY += 16;
+
+	if (DIP.coinsToStart == 0)
+		SRVH_DispValue("Free Play");
+	SRVH_AdjustableByte("Credits to Start", (DIP.coinsToStart > 0) ? true : false, &DIP.coinsToStart, 0, 8);
+	if (DIP.coinsToStart == 0)
+	{
+		SRVH_DispFadedValue("Free Play");
+		SRVH_DispFadedLabel("Credits to Continue");
+	}
+	else
+		SRVH_AdjustableByte("Credits to Continue", true, &DIP.coinsToContinue, 1, DIP.coinsToStart);
+
+	optionY += 16;
+
+	optionY = 176;
+	SRVH_Back("Back");
+}
+
+void SRV_DifficultyMenu( void )
 {
 	static const char *powerLossNames[] = {"None", "Minimal", "Minor", "Standard", "Harsh", "Harshest"};
 
@@ -393,25 +426,10 @@ void SRV_ArcadeMenu( void )
 	SRVH_Back("Back");
 }
 
-void SRV_MoneyMenu( void )
+void SRV_GameSettingsMenu( void )
 {
-	SRVH_DispHeader("Coin Settings");
+	SRVH_DispHeader("Other Game Settings");
 
-	if (DIP.coinsToContinue > DIP.coinsToStart || (DIP.coinsToContinue == 0 && DIP.coinsToStart != 0))
-		DIP.coinsToContinue = DIP.coinsToStart;
-
-	if (DIP.coinsToStart == 0)
-		SRVH_DispValue("Free Play");
-	SRVH_AdjustableByte("Credits to Start", (DIP.coinsToStart > 0) ? true : false, &DIP.coinsToStart, 0, 8);
-	if (DIP.coinsToStart == 0)
-	{
-		SRVH_DispFadedValue("Free Play");
-		SRVH_DispFadedLabel("Credits to Continue");
-	}
-	else
-		SRVH_AdjustableByte("Credits to Continue", true, &DIP.coinsToContinue, 1, DIP.coinsToStart);
-
-	optionY += 16;
 	SRVH_AdjustableByte("Lives - First Credit", true, &DIP.livesStart, 1, 11);
 	SRVH_AdjustableByte("Lives - Continues", true, &DIP.livesContinue, 1, 11);
 
@@ -419,18 +437,7 @@ void SRV_MoneyMenu( void )
 	SRVH_DispValue(__YesNo[DIP.rankAffectsScore]);
 	SRVH_AdjustableByte("Scale Score with Rank", false, &DIP.rankAffectsScore, 0, 1);
 
-	optionY = 176;
-	SRVH_Back("Back");
-}
-
-void SRV_CabinetMenu( void )
-{
-	SRVH_DispHeader("Cabinet Settings");
-
-	static const char *bootOption[] = {"Show", "Skip"};
-	SRVH_DispValue(bootOption[DIP.skipServiceOnStartup]);
-	SRVH_AdjustableByte("Service on Startup", false, &DIP.skipServiceOnStartup, 0, 1);
-	optionY += 32;
+	optionY += 16;
 
 	SRVH_DispValue(__YesNo[DIP.enableFullDebugMenus]);
 	SRVH_AdjustableByte("Ingame Debug Menu", false, &DIP.enableFullDebugMenus, 0, 1);
@@ -489,10 +496,10 @@ void SRV_AudiovisualMenu( void )
 void SRV_ResetSettings( void )
 {
 	SRVH_DispHeader("Game Settings");
-	SRVH_DispFadedOption("Difficulty Settings");
-	SRVH_DispFadedOption("Coin Settings");
-	SRVH_DispFadedOption("Audiovisual Settings");
 	SRVH_DispFadedOption("Cabinet Settings");
+	SRVH_DispFadedOption("Difficulty Settings");
+	SRVH_DispFadedOption("Other Game Settings");
+	SRVH_DispFadedOption("Audiovisual Settings");
 	optionY = 128;
 	if (SRVH_ConfirmationAction("Reset to Defaults"))
 	{
@@ -507,10 +514,10 @@ void SRV_Settings( void )
 	resetConfirm = 255;
 
 	SRVH_DispHeader("Game Settings");
-	SRVH_SubMenu("Difficulty Settings", SRV_ArcadeMenu);
-	SRVH_SubMenu("Coin Settings", SRV_MoneyMenu);
-	SRVH_SubMenu("Audiovisual Settings", SRV_AudiovisualMenu);
 	SRVH_SubMenu("Cabinet Settings", SRV_CabinetMenu);
+	SRVH_SubMenu("Difficulty Settings", SRV_DifficultyMenu);
+	SRVH_SubMenu("Other Game Settings", SRV_GameSettingsMenu);
+	SRVH_SubMenu("Audiovisual Settings", SRV_AudiovisualMenu);
 	optionY = 128;
 	SRVH_SubMenu("Reset to Defaults", SRV_ResetSettings);
 	optionY = 176;
