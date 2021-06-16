@@ -68,6 +68,8 @@ CFLAGS += -O2
 LDFLAGS := 
 LDLIBS := 
 
+CFLAGS += -no-pie -fno-pie
+
 SDL_CPPFLAGS := $(shell $(PKG_CONFIG) sdl --cflags)
 SDL_LDFLAGS := $(shell $(PKG_CONFIG) sdl --libs-only-L --libs-only-other)
 SDL_LDLIBS := $(shell $(PKG_CONFIG) sdl --libs-only-l)

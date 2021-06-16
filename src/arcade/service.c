@@ -330,6 +330,9 @@ void SRV_CabinetMenu( void )
 	SRVH_AdjustableByte("Game Mode", false, &DIP.allowMultipleEpisodes, 0, 1);
 	optionY += 16;
 
+	if (selectionType != __DISPLAY)
+		ArcTyr_setGameLevelSettings();
+
 	if (DIP.coinsToStart == 0)
 		SRVH_DispValue("Free Play");
 	SRVH_AdjustableByte("Credits to Start", (DIP.coinsToStart > 0) ? true : false, &DIP.coinsToStart, 0, 8);

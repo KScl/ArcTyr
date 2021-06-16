@@ -114,19 +114,25 @@ void ArcTyr_setGameLevelSettings( void )
 	static const int startDifficulty[] = {1, 2, 2, 2, 3, 3, 3, 3};
 	static const int maxDifficulty[]   = {3, 4, 5, 6, 6, 7, 8, 8};
 	static const int rankPerStage[]    = {1, 1, 2, 2, 2, 2, 2, 3};
+	static const int rankPerStageAlt[] = {2, 2, 3, 3, 3, 4, 4, 5};
 	static const int powerPenalty[]    = {0, 1, 2, 2, 3, 3, 3, 5};
 	static const int startPower[]      = {4, 4, 4, 3, 3, 3, 2, 1};
 	static const int continuePower[]   = {6, 5, 4, 4, 4, 3, 3, 1};
 
 	if (DIP.gameLevel == 0)
 		return;
+	int level = DIP.gameLevel - 1;
 
-	DIP.startingDifficulty = startDifficulty[DIP.gameLevel - 1];
-	DIP.difficultyMax = maxDifficulty[DIP.gameLevel - 1];
-	DIP.rankUp = rankPerStage[DIP.gameLevel - 1];
-	DIP.powerLoss = powerPenalty[DIP.gameLevel - 1];
-	DIP.powerStart = startPower[DIP.gameLevel - 1];
-	DIP.powerContinue = continuePower[DIP.gameLevel - 1];
+	DIP.startingDifficulty = startDifficulty[level];
+	DIP.difficultyMax = maxDifficulty[level];
+	DIP.powerLoss = powerPenalty[level];
+	DIP.powerStart = startPower[level];
+	DIP.powerContinue = continuePower[level];
+
+	if (DIP.allowMultipleEpisodes)
+		DIP.rankUp = rankPerStage[level];
+	else
+		DIP.rankUp = rankPerStageAlt[level];
 }
 
 bool ArcTyr_loadConfig( void )

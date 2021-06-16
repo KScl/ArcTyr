@@ -561,11 +561,11 @@ void jukebox( void )
 
 			case INPUT_P2_UP:
 			case INPUT_P2_LEFT:
-				do { --fx_num; } while (fx_num > SAMPLE_COUNT || !digiFx[fx_num]);
+				do { --fx_num; } while (fx_num >= SAMPLE_COUNT || !digiFx[fx_num]);
 				break;
 			case INPUT_P2_RIGHT:
 			case INPUT_P2_DOWN:
-				do { ++fx_num; } while (fx_num > SAMPLE_COUNT || !digiFx[fx_num]);
+				do { ++fx_num; } while (fx_num >= SAMPLE_COUNT || !digiFx[fx_num]);
 				break;
 			case INPUT_P2_FIRE:
 				JE_playSampleNum(fx_num + 1);
