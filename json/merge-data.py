@@ -55,7 +55,8 @@ def parse_import(data):
 	diffdata = [f for f in data if f not in files]
 	files.extend(diffdata)
 	files_unparsed = files_unparsed + diffdata
-	print(" * %d additional file%s to load." % (len(diffdata), "" if len(diffdata) == 1 else "s"))
+	if len(diffdata):
+		print(" * %d additional file%s to load." % (len(diffdata), "" if len(diffdata) == 1 else "s"))
 
 def parse_output(data):
 	global output_path
@@ -808,10 +809,18 @@ files = arguments.file
 files_unparsed = arguments.file
 output_path = arguments.output
 
+# Change working directory to location of the assembly script
+orig_workdir = os.getcwd()
+os.chdir(os.path.dirname(files[0]))
+files[0] = os.path.basename(files[0])
+
 # This list is modified by read_json,
 # so iterating over it normally is out of the question
 while len(files_unparsed) > 0:
 	read_json(files_unparsed.pop(0))
+
+# Change working directory back for purposes of output
+os.chdir(orig_workdir)
 
 output_path = os.path.normpath(output_path)
 
