@@ -38,6 +38,8 @@ gamesdir ?= $(datadir)/games
 
 ###
 
+ARCDATA = arcdata
+
 TARGET := arctyr
 
 SRCS := $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c)
@@ -90,7 +92,7 @@ ALL_LDLIBS = -lm \
 ###
 
 .PHONY : all
-all : $(TARGET)
+all : $(TARGET) $(ARCDATA)
 
 .PHONY : debug
 debug : CPPFLAGS += -UNDEBUG
@@ -133,3 +135,12 @@ obj/%.o : src/%.c
 	@echo "Compiling: $<"
 	@mkdir -p "$(dir $@)"
 	@$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o $@ $<
+
+###
+
+$(ARCDATA) :
+	@echo "Creating $@"
+	@mkdir -p tmp_dir
+	@unzip -uoj -d tmp_dir uc_arcdata.zip
+	@python3 json/merge-data.py --output tmp_dir json/assembly.jsonc
+	@mv -f tmp_dir $(ARCDATA)
